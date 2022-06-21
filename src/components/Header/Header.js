@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const Header = (props) => {
   return (
-    <Wrapper>
+    <Wrapper id="header">
       <Container>
         <RightDiv>
           <img></img>
@@ -123,6 +123,7 @@ const BritiSpan = styled.span`
   background-color: ${props => props.theme.HeadIconBgColor};
   padding: 12px 17px;
   border-radius: 15px;
+  border: ${props => props.theme.DirectIconBorder};
   img {
     content: url(${props => props.theme.BritiIcon});
   }
@@ -133,6 +134,8 @@ const FeatherSpan = styled.div`
   padding: 12px 15px 12px 10px;
   border-radius: 15px;
   position: relative;
+  border: ${props => props.theme.DirectIconBorder};
+
   span {
     background-color:${props => props.theme.InformBgColor};
     position: absolute;

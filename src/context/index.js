@@ -5,7 +5,11 @@ import {
   Resp_icon_dark_img, 
   Briti_icon_dark_img, 
   Feather_icon_dark_img, 
-  Search_icon_dark_img
+  Search_icon_dark_img,
+  Right_icon_dark_img,
+  Left_icon_dark_img,
+  Flag_icon_dark_img,
+  Swap_icon_dark_img
 } from "../assets/images";
 
 import { 
@@ -13,7 +17,11 @@ import {
   Resp_icon_day_img, 
   Briti_icon_day_img, 
   Feather_icon_day_img, 
-  Search_icon_day_img
+  Search_icon_day_img,
+  Right_icon_day_img,
+  Left_icon_day_img,
+  Flag_icon_day_img,
+  Swap_icon_day_img
 } from "../assets/images";
 
 export const DarkMode = {
@@ -31,7 +39,21 @@ export const DarkMode = {
   InformBgColor: '#00ce71',
   ThemeColor: '#00ce71',
   HeaderButtom: '#00ce71',
-  GameConsoleImg: GameConsoleImg
+  GameConsoleImg: GameConsoleImg,
+  RightDirectIconImg: Right_icon_dark_img,
+  LeftDirectIconImg: Left_icon_dark_img,
+  DirectIconBgColor: '#35373b',
+  DirectIconBorder: 'none',
+  ScrollTraker: '#37383D',
+  ScrollBar: 'white',
+  FlagIcon: Flag_icon_dark_img,
+
+  SwapIcon: Swap_icon_dark_img,
+  SwapFrontBgColor: 'white',
+  SwapFrontColor: '#343b48',
+  SwapBackBgColor: '#646971',
+  SwapBackColor: 'white',
+  SwapBorder: '#292C33',
 }
 
 export const DayMode = {
@@ -50,4 +72,18 @@ export const DayMode = {
   ThemeColor: '#00ce71',
   HeaderButtom: '#00ce71',
   GameConsoleImg: GameConsoleImg,
+  RightDirectIconImg: Right_icon_day_img,
+  LeftDirectIconImg: Left_icon_day_img,
+  DirectIconBgColor: 'white',
+  DirectIconBorder: '1px solid lightgrey',
+  ScrollTraker: '#37383D',
+  ScrollBar: 'white',
+  FlagIcon: Flag_icon_day_img,
+  
+  SwapIcon: Swap_icon_day_img,
+  SwapFrontBgColor: '#343B48',
+  SwapFrontColor: 'white',
+  SwapBackBgColor: 'white',
+  SwapBackColor: '#343b48',
+  SwapBorder: '#292C33',
 }

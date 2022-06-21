@@ -9,3 +9,28 @@ p {
   margin: 0;
   padding: 0;
 }
+
+@font-face {
+  font-family: 'Rajdhani-Bold';
+  src: url('./assets/fonts//Rajdhani-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Rajdhani-Light';
+  src: url('./assets/fonts//Rajdhani-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Rajdhani-Medium';
+  src: url('./assets/fonts//Rajdhani-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Rajdhani-Regular';
+  src: url('./assets/fonts//Rajdhani-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Rajdhani-Regular';
+  src: url('./assets/fonts//Rajdhani-Regular.ttf');
+}
