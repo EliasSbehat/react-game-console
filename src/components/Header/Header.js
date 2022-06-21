@@ -1,36 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import { 
-  Resp_icon_dark_img, 
-  Logo_img,
-  Search_icon_dark_img,
-  Briti_icon_dark_img,
-  Feather_icon_dark_img,
-  AvatarImg,
-} from "../../assets/images";
-const Header = () => {
+
+const Header = (props) => {
   return (
     <Wrapper>
       <Container>
         <RightDiv>
-          <img src={Resp_icon_dark_img}></img>
-          <img src={Logo_img}></img>
+          <img></img>
+          <img onClick={() => props.modeChange()}></img>
         </RightDiv>
         <LeftDiv>
           <SearchInput placeholder="Search" type="text" resflag={0}></SearchInput>
-          <BritiSpan><img src={Briti_icon_dark_img}></img></BritiSpan>
-          <FeatherSpan><img src={Feather_icon_dark_img}></img><span>2</span></FeatherSpan>
-          <AvatarSpan><img src={AvatarImg}></img></AvatarSpan>
+          <BritiSpan><img></img></BritiSpan>
+          <FeatherSpan><img></img><span>2</span></FeatherSpan>
+          <AvatarSpan><img></img></AvatarSpan>
         </LeftDiv>
       </Container>
       <ResponContainer>
         <TopDiv>
-          <img src={Resp_icon_dark_img}></img>
-          <img src={Logo_img}></img>
-          <FeatherSpan><img src={Feather_icon_dark_img}></img><span>2</span></FeatherSpan>
+          <img></img>
+          <img onClick={() => props.modeChange()}></img>
+          <FeatherSpan><img></img><span>2</span></FeatherSpan>
         </TopDiv>
         <BotDiv>
-          <SearchInput placeholder="Search" type="text" resflag={1}></SearchInput>
+        <SearchInput placeholder="Search" type="text" resflag={1}></SearchInput>
         </BotDiv>
       </ResponContainer>
     </Wrapper>
@@ -47,8 +40,9 @@ const ResponContainer = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #292c33;
+  background-color: ${props => props.theme.bgColor};
   padding: 17px 0;
+  border-bottom: 3px solid ${props => props.theme.HeaderButtom};
 `
 
 const TopDiv = styled.div`
@@ -56,6 +50,12 @@ const TopDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 30px;
+  & > img:nth-child(1) {
+    content: url(${props => props.theme.ResponIcon});
+  }
+  & img:nth-child(2) {
+    content: url(${props => props.theme.Logo});
+  }
 `
 
 const BotDiv = styled.div`
@@ -69,7 +69,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #292c33;
+  background-color: ${props => props.theme.bgColor};
   padding: 17px 0;
   @media screen and (max-width: 800px) {
     display: none;
@@ -84,6 +84,14 @@ const RightDiv = styled.div`
   img {
     margin-left: 30px;
   }
+
+  & img:nth-child(1) {
+    content: url(${props => props.theme.ResponIcon});
+  }
+
+  & img:nth-child(2) {
+    content: url(${props => props.theme.Logo});
+  }
 `
 
 const LeftDiv = styled.div`
@@ -96,34 +104,37 @@ const LeftDiv = styled.div`
 `
 
 const SearchInput = styled.input`
-  background-color:rgba(255, 255, 255, 0.15000000596046448);
-  background-image: url(${Search_icon_dark_img});
+  background-color: ${props => props.theme.SearchBgColor};
+  background-image: url(${props => props.theme.SearchIcon});
+  width: ${props => props.resflag === 0 ? '300px':'85%'};
+  border: 0;
   background-repeat: no-repeat;
   background-position: calc(100% - 20px) center;
   padding: 16px;
-  color: white;
-  border: 0;
+  color: ${props => props.theme.color};
   border-radius: 20px;
   padding-right: 50px;
-  width: ${props => props.resflag === 0 ? '300px':'85%'};
   &:focus {
     outline: none;
   }
 `
 
 const BritiSpan = styled.span`
-  background-color:rgba(255, 255, 255, 0.10000000149011612);
+  background-color: ${props => props.theme.HeadIconBgColor};
   padding: 12px 17px;
   border-radius: 15px;
+  img {
+    content: url(${props => props.theme.BritiIcon});
+  }
 `;
 
 const FeatherSpan = styled.div`
-  background-color:rgba(255, 255, 255, 0.10000000149011612);
+  background-color:${props => props.theme.HeadIconBgColor};
   padding: 12px 15px 12px 10px;
   border-radius: 15px;
   position: relative;
   span {
-    background-color:#00ce71;
+    background-color:${props => props.theme.InformBgColor};
     position: absolute;
     width: 23px;
     height: 23px;
@@ -135,10 +146,17 @@ const FeatherSpan = styled.div`
     top: -10px;
     right: -10px;
   }
+
+  img {
+    content: url(${props => props.theme.FeatherIcon});
+  }
 `
 
 const AvatarSpan = styled.span`
   border-radius: 15px;
+  img {
+    content: url(${props => props.theme.Avatar});
+  }
 `
 
 
