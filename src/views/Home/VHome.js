@@ -46,7 +46,7 @@ const Wrapper = styled.div`
 `
 const MainDiv = styled.div`
   display: flex;
-  height: calc(100vh - 129px);
+  height: calc(100vh - 92px);
 `
 
 export default VHome;

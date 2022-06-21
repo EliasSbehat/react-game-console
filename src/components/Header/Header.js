@@ -41,7 +41,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${props => props.theme.bgColor};
-  padding: 17px 0;
   border-bottom: 3px solid ${props => props.theme.HeaderButtom};
 `
 

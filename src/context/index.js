@@ -1,3 +1,5 @@
+import { ModelImg, TestImg, TextImg } from "../assets/images";
+
 import { 
   AvatarImg, 
   GameConsoleImg, 
@@ -9,7 +11,8 @@ import {
   Right_icon_dark_img,
   Left_icon_dark_img,
   Flag_icon_dark_img,
-  Swap_icon_dark_img
+  Swap_icon_dark_img,
+  AtcIconImg
 } from "../assets/images";
 
 import { 
@@ -21,7 +24,7 @@ import {
   Right_icon_day_img,
   Left_icon_day_img,
   Flag_icon_day_img,
-  Swap_icon_day_img
+  Swap_icon_day_img,
 } from "../assets/images";
 
 export const DarkMode = {
@@ -53,7 +56,8 @@ export const DarkMode = {
   SwapFrontColor: '#343b48',
   SwapBackBgColor: '#646971',
   SwapBackColor: 'white',
-  SwapBorder: '#292C33',
+  SwapBorder: '1px solid #292C33',
+  AtcIcon: AtcIconImg,
 }
 
 export const DayMode = {
@@ -83,7 +87,13 @@ export const DayMode = {
   SwapIcon: Swap_icon_day_img,
   SwapFrontBgColor: '#343B48',
   SwapFrontColor: 'white',
-  SwapBackBgColor: 'white',
+SwapBackBgColor: 'white',
   SwapBackColor: '#343b48',
-  SwapBorder: '#292C33',
+  SwapBorder: '1px solid #292C33',
+  AtcIcon: AtcIconImg,
+}
+
+export const Assets = {
+  ModelImg: ModelImg,
+  TestImg: TestImg
 }

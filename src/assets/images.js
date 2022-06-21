@@ -22,8 +22,20 @@ import swap_icon_day from './images/swap-icon-day.png';
 
 import avatar from './images/avatar.png';
 import game_console from './images/game-console.png';
+import atc_icon from './images/atc-icon.png';
+
+
+import model from './images/model.png';
+import test from './images/assets/1-DESIGN/Design_Blue_Chrome.png';
+export const ModelImg = model;
+export const TestImg = test;
+
+
+
+
 export const AvatarImg = avatar;
 export const GameConsoleImg = game_console;
+export const AtcIconImg = atc_icon;
 
 export const Resp_icon_dark_img = resp_icon_dark;
 export const Briti_icon_dark_img = briti_icon_dark;
