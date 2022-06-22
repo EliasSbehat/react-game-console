@@ -1,9 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
 import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const Tools = () => {
+  const [snapIndex, setSnapIndex] = React.useState(1);
   return (
     <Wrapper>
       <TopDiv>
@@ -13,19 +18,31 @@ const Tools = () => {
         </div>
         <SwiperProcessor>
           <div>
-            <progress id="file" max="100" value="10"> 70% </progress>
-            Step 1 / 10
+            <progress id="file" max={3} value={snapIndex}> 70% </progress>
+            Step {snapIndex} / 3
           </div>
-          <span>
+          <span className="prev">
             <img></img>
           </span>
-          <span>
+          <span className="next">
             <img></img>
           </span>
         </SwiperProcessor>
       </TopDiv>
       <MediumDiv>
-        <Swiper>
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          spaceBetween={50}
+          navigation = {{
+            nextEl: '.next',
+            prevEl: '.prev',
+          }}
+          scrollbar={{ draggable: true }}
+          onSlideChange={(event) => {
+            setSnapIndex(event.snapIndex + 1);
+          }}
+          onSwiper={(swiper) => console.log(swiper)}
+        >
           <SwiperSlide>
             <Selector>
               <SelectItem> 1 </SelectItem>
@@ -68,7 +85,6 @@ const Tools = () => {
               <SelectItem> 1 </SelectItem>
             </Selector>
           </SwiperSlide>
-
           <SwiperSlide>
             <Selector>
               <SelectItem> 1 </SelectItem>
