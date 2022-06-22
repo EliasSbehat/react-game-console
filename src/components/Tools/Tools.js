@@ -44,7 +44,28 @@ const Tools = () => {
           onSwiper={(swiper) => console.log(swiper)}
         >
           <SwiperSlide>
-            <Selector>
+            <Selector >
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
               <SelectItem> 1 </SelectItem>
               <SelectItem> 1 </SelectItem>
               <SelectItem> 1 </SelectItem>
@@ -111,6 +132,9 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   padding: 0 10px;
   border-left: 3px solid ${props => props.theme.ThemeColor};
+  @media screen and (max-width: 800px) {
+    /* display: none; */
+  }
 `
 const TopDiv = styled.div`
   display: flex;
@@ -128,6 +152,14 @@ const TopDiv = styled.div`
     img {
       content: url(${props => props.theme.GameConsoleImg});
     }
+    @media screen and (max-width: 1194px) {
+      width: 100%;
+      justify-content: start;
+    }
+  }
+
+  @media screen and (max-width: 1194px) {
+    flex-direction: column;
   }
 `
 
@@ -166,16 +198,17 @@ const SwiperProcessor = styled.div`
 const MediumDiv = styled.div`
   display: flex;
   justify-content: center;
-  height: 400px;
+  height: calc(100vh - 95px - 77px)
 `
 
 const Selector = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   display: flex;
-  justify-content: start;
-  align-content: flex-start;
   flex-wrap: wrap;
-  gap: 30px;
+  padding: 20px;
+  gap: 10px;
+  justify-content: center;
+  align-content: flex-start;
   overflow-y: auto;
   height: 100%;
   ::-webkit-scrollbar {

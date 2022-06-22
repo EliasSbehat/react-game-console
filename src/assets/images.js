@@ -26,12 +26,7 @@ import atc_icon from './images/atc-icon.png';
 
 
 import model from './images/model.png';
-import test from './images/assets/1-DESIGN/Design_Blue_Chrome.png';
 export const ModelImg = model;
-export const TestImg = test;
-
-
-
 
 export const AvatarImg = avatar;
 export const GameConsoleImg = game_console;

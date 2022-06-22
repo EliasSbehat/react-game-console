@@ -46,7 +46,11 @@ const Wrapper = styled.div`
 `
 const MainDiv = styled.div`
   display: flex;
-  height: calc(100vh - 92px);
+  height: calc(100vh - 95px);
+  /* @media screen and (max-width: 800px) {
+    flex-direction: column;
+    justify-content: space-between;
+  } */
 `
 
 export default VHome;

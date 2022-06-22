@@ -1,4 +1,4 @@
-import { ModelImg, TestImg, TextImg } from "../assets/images";
+import { ModelImg } from "../assets/images";
 
 import { 
   AvatarImg, 
@@ -83,11 +83,10 @@ export const DayMode = {
   ScrollTraker: '#37383D',
   ScrollBar: 'white',
   FlagIcon: Flag_icon_day_img,
-  
   SwapIcon: Swap_icon_day_img,
   SwapFrontBgColor: '#343B48',
   SwapFrontColor: 'white',
-SwapBackBgColor: 'white',
+  SwapBackBgColor: 'white',
   SwapBackColor: '#343b48',
   SwapBorder: '1px solid #292C33',
   AtcIcon: AtcIconImg,
@@ -95,5 +94,4 @@ SwapBackBgColor: 'white',
 
 export const Assets = {
   ModelImg: ModelImg,
-  TestImg: TestImg
 }
