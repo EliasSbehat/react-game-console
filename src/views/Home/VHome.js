@@ -32,8 +32,8 @@ const VHome = () => {
         <Wrapper>
           <Header modeChange={modeChange} flag='1'></Header>
           <MainDiv pl={h_header}>
-            <Tools></Tools>
             <ViewArea />
+            <Tools></Tools>
           </MainDiv>
         </Wrapper>
       </>

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const Tools = () => {
   return (
@@ -23,40 +25,66 @@ const Tools = () => {
         </SwiperProcessor>
       </TopDiv>
       <MediumDiv>
-        <Selector>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-          <SelectItem> 1 </SelectItem>
-        </Selector>
+        <Swiper>
+          <SwiperSlide>
+            <Selector>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+            </Selector>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <Selector>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+            </Selector>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <Selector>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+              <SelectItem> 1 </SelectItem>
+            </Selector>
+          </SwiperSlide>
+        </Swiper>
       </MediumDiv>
     </Wrapper>
   )
@@ -66,7 +94,7 @@ const Wrapper = styled.div`
   width: 30%;
   background-color: ${props => props.theme.ToolBgColor};
   padding: 0 10px;
-  border-right: 3px solid ${props => props.theme.ThemeColor};
+  border-left: 3px solid ${props => props.theme.ThemeColor};
 `
 const TopDiv = styled.div`
   display: flex;
@@ -128,11 +156,12 @@ const MediumDiv = styled.div`
 const Selector = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: start;
+  align-content: flex-start;
   flex-wrap: wrap;
   gap: 30px;
-  overflow-y: scroll;
+  overflow-y: auto;
+  height: 100%;
   ::-webkit-scrollbar {
     width: 3px;
   }
