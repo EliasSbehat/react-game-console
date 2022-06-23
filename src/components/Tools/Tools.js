@@ -5,17 +5,37 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
 import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
+import { Dpad } from "../../assets/images/main_assets/3-Dpad/DpadImage";
+import { ThumbL } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
+import { ThumbR } from "../../assets/images/main_assets/5-THUMBSTICK R/ThumbR";
+import { StartBtn } from "../../assets/images/main_assets/6-START BACK/StartBtn";
 
 import AppContext from "../../context/context";
 import "swiper/css";
 
 const Tools = () => {
 
-  const Assets = [Design, Abxy];
+  const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
+  const [AbxytabSelect, AbxySetTabSelect] = React.useState(0);
+  const [DpadtabSelect, DpadSetTabSelect] = React.useState(0);
+  const [ThumbLtabSelect, ThumbLSetTabSelect] = React.useState(0);
+  const [ThumbRtabSelect, ThumbRSetTabSelect] = React.useState(0);
+  const [StartBtntabSelect, StartBtnSetTabSelect] = React.useState(0);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  
 
+  const Assets = [Design, Abxy, Dpad, ThumbL, ThumbR, StartBtn];
   const myContext = React.useContext(AppContext);
-  const [tabSelect, SetTabSelect] = React.useState([0, 0]);
   const [snapIndex, setSnapIndex] = React.useState(0);
+
+
   return (
     <Wrapper>
       <TopDiv>
@@ -37,25 +57,6 @@ const Tools = () => {
             </span>
           </SwiperProcessor>
         </div>
-        <div>
-          {
-            Assets[snapIndex].steps.map((item, index) => (
-              <TapItem key={ index } keys={index} active={tabSelect[snapIndex]} onClick = {() => {
-                let temp = tabSelect;
-                temp[snapIndex] = index;
-                SetTabSelect(temp);
-              }}>
-                <span>
-                  {item.name}
-                </span>
-                <span>
-                  {item.price}
-                </span>
-                <div></div>
-              </TapItem>
-            ))
-          }
-        </div>
       </TopDiv>
       <MediumDiv>
         <Swiper
@@ -71,38 +72,178 @@ const Tools = () => {
           }}
           onSwiper={(swiper) => console.log('--')}
         >
-
-          <SwiperSlide style={SwiperSildeStyle}>
+          {/* 
+             ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+             ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+             ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+             ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+             ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+             ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+          */}
+            <SwiperSlide>
+              <TopItems>
+                {
+                  Design.steps.map((item, index) => (
+                    <TapItem key={ index } keys={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
+                      <span>
+                        {item.name}
+                      </span>
+                      <span>
+                        {item.price}
+                      </span>
+                      <div></div>
+                    </TapItem>
+                  ))
+                }
+              </TopItems>
+              <Selector>
+                {
+                  Design.items[DesigntabSelect].map((item, index) => (
+                    <SelectItem bgImg={item.selet} onClick={() => myContext.setDesign([DesigntabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
+          {/*
+              █████╗ ██████╗ ██╗  ██╗██╗   ██╗
+              ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
+              ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
+              ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
+              ██║  ██║██████╔╝██╔╝ ██╗   ██║   
+              ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+          */}
+          <SwiperSlide>
+            <TopItems>
+              {
+                Abxy.steps.map((item, index) => (
+                  <TapItem key={ index } keys={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
+                    <span>
+                      {item.name}
+                    </span>
+                    <span>
+                      {item.price}
+                    </span>
+                    <div></div>
+                  </TapItem>
+                ))
+              }
+            </TopItems>
             <Selector>
               {
-                Design.items[tabSelect[snapIndex]].map((item, index) => (
-                  <SelectItem bgImg={item.selet} onClick={() => myContext.setDesign([tabSelect[snapIndex], index])}></SelectItem>
+                Abxy.items[AbxytabSelect].map((item, index) => (
+                  <SelectItem bgImg={item.selet} onClick={() => myContext.setAbxy([AbxytabSelect, index])}></SelectItem>
+                ))
+              }
+            </Selector>
+          </SwiperSlide>
+          
+          {/*
+              ██████╗ ██████╗  █████╗ ██████╗ 
+              ██╔══██╗██╔══██╗██╔══██╗██╔══██╗
+              ██║  ██║██████╔╝███████║██║  ██║
+              ██║  ██║██╔═══╝ ██╔══██║██║  ██║
+              ██████╔╝██║     ██║  ██║██████╔╝
+              ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
+          */}
+
+          <SwiperSlide>
+            <TopItems>
+              {
+                Dpad.steps.map((item, index) => (
+                  <TapItem key={ index } keys={index} active={DpadtabSelect} onClick = {() => DpadSetTabSelect(index)}>
+                    <span>
+                      {item.name}
+                    </span>
+                    <span>
+                      {item.price}
+                    </span>
+                    <div></div>
+                  </TapItem>
+                ))
+              }
+            </TopItems>
+            <Selector>
+              {
+                Dpad.items[DpadtabSelect].map((item, index) => (
+                  <SelectItem bgImg={item.selet} onClick={() => myContext.setDpad([DpadtabSelect, index])}></SelectItem>
                 ))
               }
             </Selector>
           </SwiperSlide>
 
-          <SwiperSlide style={SwiperSildeStyle}>
+          {/*
+            ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██╗     
+            ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██║     
+               ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██║     
+               ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██║     
+               ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
+               ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
+          */}
+          <SwiperSlide>
             <Selector>
               {
-                Abxy.items[tabSelect[snapIndex]].map((item, index) => (
-                  <SelectItem bgImg={item.selet} onClick={() => myContext.setAbxy([tabSelect[snapIndex], index])}></SelectItem>
+                ThumbL.items[ThumbLtabSelect].map((item, index) => (
+                  <SelectItem bgImg={item.selet} onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}></SelectItem>
                 ))
               }
             </Selector>
           </SwiperSlide>
 
+          {/**
+           * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
+             ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██╔══██╗
+                ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██████╔╝
+                ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██╔══██╗
+                ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
+                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
+           */}
+            <SwiperSlide>
+              <Selector>
+                {
+                  ThumbR.items[ThumbRtabSelect].map((item, index) => (
+                    <SelectItem bgImg={item.selet} onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
+
+            {/**
+             * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+               ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+               ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
+               ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
+               ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
+               ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
+             */}
+             <SwiperSlide>
+            <TopItems>
+              {
+                StartBtn.steps.map((item, index) => (
+                  <TapItem key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
+                    <span>
+                      {item.name}
+                    </span>
+                    <span>
+                      {item.price}
+                    </span>
+                    <div></div>
+                  </TapItem>
+                ))
+              }
+            </TopItems>
+            <Selector>
+              {
+                StartBtn.items[StartBtntabSelect].map((item, index) => (
+                  <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}></SelectItem>
+                ))
+              }
+            </Selector>
+          </SwiperSlide>
         </Swiper>
       </MediumDiv>
     </Wrapper>
   )
 }
-
-const SwiperSildeStyle = {
-  display: "flex",
-  justifyContent: "center",
-}
-
 const Wrapper = styled.div`
   width: 30%;
   background-color: ${props => props.theme.ToolBgColor};
@@ -139,14 +280,13 @@ const TopDiv = styled.div`
       flex-direction: column;
     }
   }
-
-  & > div:nth-child(2) {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 10px;
-  }
 `
+const TopItems = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`
+
 
 const TapItem = styled.div`
   display: flex;

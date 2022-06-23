@@ -33,7 +33,7 @@ import d_2_6s from './2/6s.png';
 import d_2_7s from './2/7s.png';
 
 
-export const Abxy = {
+export const Dpad = {
   flag: 0,
   steps: [
     {
@@ -45,7 +45,6 @@ export const Abxy = {
       price: 4.99
     }
   ],
-
   items: [
     [
       { name: 'Sakura Pink', image: d_1_1, selet: d_1_1s },

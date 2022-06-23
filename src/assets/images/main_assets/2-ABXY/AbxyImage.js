@@ -47,7 +47,6 @@ export const Abxy = {
       price: 4.99
     }
   ],
-
   items: [
     [
       { name: 'Sakura Pink', image: a_1_1, selet: a_1_1s },

@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { Assets } from "../../theme/index";
 import AppContext from "../../context/context";
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
+import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
+import { Dpad } from "../../assets/images/main_assets/3-Dpad/DpadImage";
+import { ThumbL } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
+import { ThumbR } from "../../assets/images/main_assets/5-THUMBSTICK R/ThumbR";
+import { StartBtn } from "../../assets/images/main_assets/6-START BACK/StartBtn";
+
 const ViewArea = () => {
   const myContext = React.useContext(AppContext);
   return (
@@ -27,14 +33,105 @@ const ViewArea = () => {
       <Viewer>
         <div id="viewer">
           <img src={Assets.ModelImg}></img>
+
+          {/* 
+             ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+             ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+             ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+             ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+             ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+             ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+          */}
           {
             myContext.design !== null ? (() => {
               return (
                 Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div class="lds-dual-ring"></div>
               )
             })() : (() => {
+
             })()
           }
+
+
+          {/*
+              █████╗ ██████╗ ██╗  ██╗██╗   ██╗
+              ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
+              ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
+              ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
+              ██║  ██║██████╔╝██╔╝ ██╗   ██║   
+              ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+          */}
+          {
+            myContext.abxy !== null ? (() => {
+              return (
+                Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div class="lds-dual-ring"></div>
+              )
+            })() : (() => {
+            })()
+          }
+          {/*
+              ██████╗ ██████╗  █████╗ ██████╗ 
+              ██╔══██╗██╔══██╗██╔══██╗██╔══██╗
+              ██║  ██║██████╔╝███████║██║  ██║
+              ██║  ██║██╔═══╝ ██╔══██║██║  ██║
+              ██████╔╝██║     ██║  ██║██████╔╝
+              ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
+          */}
+          {
+            myContext.dpad !== null ? (() => {
+              return (
+                Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div class="lds-dual-ring"></div>
+              )
+            })() : (() => {
+            })()
+          }
+          {/**
+           * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██╗     
+             ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██║     
+                ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██║     
+                ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██║     
+                ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
+                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
+           */}
+           {
+              myContext.thumbstickL !== null ? (() => {
+                return (
+                  ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div class="lds-dual-ring"></div>
+                )
+              })() : (() => {})()
+            }
+
+            {/**
+             * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
+               ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██╔══██╗
+                  ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██████╔╝
+                  ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██╔══██╗
+                  ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
+                  ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
+             */}
+             {
+              myContext.thumbstickR !== null ? (() => {
+                return (
+                  ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div class="lds-dual-ring"></div>
+                )
+              })() : (() => {})()
+            }
+
+            {/**
+             * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+               ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+               ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
+               ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
+               ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
+               ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
+             */}
+             {
+              myContext.startBtn !== null ? (() => {
+                return (
+                  StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div class="lds-dual-ring"></div>
+                )
+              })() : (() => {})()
+             }
         </div>
       </Viewer>
       <LocalFooter>

@@ -14,7 +14,7 @@ const VHome = () => {
   const [dpad, setDpad] = React.useState(null);
   const [thumbstickL, setThumbstickL] = React.useState(null);
   const [thumbstickR, setThumbstickR] = React.useState(null);
-  const [touchpad, setTouchPad] = React.useState(null);
+  const [startBtn, setStartBtn] = React.useState(null);
   
   const imageSetting = {
     design: design,
@@ -27,8 +27,8 @@ const VHome = () => {
     setThumbstickL,
     thumbstickR,
     setThumbstickR,
-    touchpad,
-    setTouchPad
+    startBtn,
+    setStartBtn
   }
   
   // Check height of components
