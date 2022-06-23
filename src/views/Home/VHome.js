@@ -66,10 +66,10 @@ const VHome = () => {
         <>
           <Wrapper>
               <Header modeChange={modeChange} flag='1'></Header>
-            <MainDiv pl={h_header}>
-              <ViewArea />
-              <Tools></Tools>
-            </MainDiv>
+              <MainDiv pl={h_header}>
+                <ViewArea />
+                <Tools></Tools>
+              </MainDiv>
           </Wrapper>
         </>
       </AppContext.Provider>

@@ -15,10 +15,9 @@ import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
 import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 
 const ViewArea = () => {
+  const [sideflag, setSideflag] = React.useState(true);
   const myContext = React.useContext(AppContext);
-  
   const printRef = React.useRef();
-
   const handleDownloadImage = async () => {
     const element = printRef.current;
     const canvas = await html2canvas(element);
@@ -45,14 +44,14 @@ const ViewArea = () => {
       <LocalHeader>
         <div>
           <span>
-            PLay Station 5 Controller
+            Play Station 5 Controller
           </span>
         </div>
         <div>
           <div>
-            <span> Front </span>
-            <span> Back </span>
-            <span>
+            <span onClick={() => setSideflag(true)}> Front </span>
+            <span onClick={() => setSideflag(false)}> Back </span>
+            <span onClick={() => setSideflag(!sideflag)}>
               <img></img>
             </span>
           </div>
@@ -61,168 +60,173 @@ const ViewArea = () => {
     </LocalHeader>
       <Viewer>
         <div id="viewer">
-          <img src={Assets.ModelImg} ref={printRef}></img>
-          {/* 
-             ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-             ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
-             ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
-             ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
-             ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
-             ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-          */}
-          {
-            myContext.design !== null ? (() => {
-              return (
-                Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div class="lds-dual-ring"></div>
-              )
-            })() : (() => {
-
-            })()
-          }
-
-
-          {/*
-              █████╗ ██████╗ ██╗  ██╗██╗   ██╗
-              ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
-              ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
-              ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
-              ██║  ██║██████╔╝██╔╝ ██╗   ██║   
-              ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
-          */}
-          {
-            myContext.abxy !== null ? (() => {
-              return (
-                Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div class="lds-dual-ring"></div>
-              )
-            })() : (() => {
-            })()
-          }
-          {/*
-              ██████╗ ██████╗  █████╗ ██████╗ 
-              ██╔══██╗██╔══██╗██╔══██╗██╔══██╗
-              ██║  ██║██████╔╝███████║██║  ██║
-              ██║  ██║██╔═══╝ ██╔══██║██║  ██║
-              ██████╔╝██║     ██║  ██║██████╔╝
-              ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
-          */}
-          {
-            myContext.dpad !== null ? (() => {
-              return (
-                Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div class="lds-dual-ring"></div>
-              )
-            })() : (() => {
-            })()
-          }
-          {/**
-           * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██╗     
-             ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██║     
-                ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██║     
-                ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██║     
-                ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
-                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
-           */}
-           {
-              myContext.thumbstickL !== null ? (() => {
+          <div>
+            <img src={Assets.ModelImg} ref={printRef} ></img>
+            {/* 
+              ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+              ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+              ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+              ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+              ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+              ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+            */}
+            {
+              myContext.design !== null ? (() => {
                 return (
-                  ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div class="lds-dual-ring"></div>
                 )
-              })() : (() => {})()
+              })() : (() => {
+
+              })()
             }
 
-            {/**
-             * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
-               ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██╔══██╗
-                  ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██████╔╝
-                  ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██╔══██╗
-                  ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
-                  ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
-             */}
-             {
-              myContext.thumbstickR !== null ? (() => {
+
+            {/*
+                █████╗ ██████╗ ██╗  ██╗██╗   ██╗
+                ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
+                ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
+                ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
+                ██║  ██║██████╔╝██╔╝ ██╗   ██║   
+                ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+            */}
+            {
+              myContext.abxy !== null ? (() => {
                 return (
-                  ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div class="lds-dual-ring"></div>
                 )
-              })() : (() => {})()
+              })() : (() => {
+              })()
             }
-
+            {/*
+                ██████╗ ██████╗  █████╗ ██████╗ 
+                ██╔══██╗██╔══██╗██╔══██╗██╔══██╗
+                ██║  ██║██████╔╝███████║██║  ██║
+                ██║  ██║██╔═══╝ ██╔══██║██║  ██║
+                ██████╔╝██║     ██║  ██║██████╔╝
+                ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
+            */}
+            {
+              myContext.dpad !== null ? (() => {
+                return (
+                  Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div class="lds-dual-ring"></div>
+                )
+              })() : (() => {
+              })()
+            }
             {/**
-             * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
-               ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
-               ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
-               ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
-               ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
-               ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
-             */}
-             {
-                myContext.startBtn !== null ? (() => {
+             * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██╗     
+               ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██║     
+                  ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██║     
+                  ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██║     
+                  ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
+                  ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
+            */}
+            {
+                myContext.thumbstickL !== null ? (() => {
                   return (
-                    StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div class="lds-dual-ring"></div>
                   )
                 })() : (() => {})()
               }
 
-              {
-                /**
-                 * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
-                   ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗
-                      ██║   ██║   ██║██║   ██║██║     ███████║██████╔╝███████║██║  ██║
-                      ██║   ██║   ██║██║   ██║██║     ██╔══██║██╔═══╝ ██╔══██║██║  ██║
-                      ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
-                      ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
-                */
-              }
-              {
-                myContext.touchpad !== null ? (() => {
-                  return (
-                    Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div class="lds-dual-ring"></div>
-                  )
-                })() : (() => {})()
-              }
               {/**
-               *████████╗██████╗ ██╗███╗   ███╗
-                ╚══██╔══╝██╔══██╗██║████╗ ████║
-                   ██║   ██████╔╝██║██╔████╔██║
-                   ██║   ██╔══██╗██║██║╚██╔╝██║
-                   ██║   ██║  ██║██║██║ ╚═╝ ██║
-                   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+               * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
+                 ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██╔══██╗
+                    ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██████╔╝
+                    ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██╔══██╗
+                    ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
+                    ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
               */}
               {
-                myContext.trim !== null ? (() => {
+                myContext.thumbstickR !== null ? (() => {
                   return (
-                    Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div class="lds-dual-ring"></div>
                   )
                 })() : (() => {})()
               }
+
               {/**
-               * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
-                 ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
-                    ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
-                    ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
-                    ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
-                    ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+               * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+                 ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+                ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
+                ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
+                ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
+                ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
               */}
               {
-                myContext.trigger !== null ? (() => {
-                  return (
-                    Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div class="lds-dual-ring"></div>
-                  )
-                })() : (() => {})()
-              }
-              {/**
-               * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-                 ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
-                 ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
-                 ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
-                 ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
-                 ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-              */}
-              {
-                myContext.rearDesign !== null ? (() => {
-                  return (
-                    RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div class="lds-dual-ring"></div>
-                  )
-                })() : (() => {})()
-              }
+                  myContext.startBtn !== null ? (() => {
+                    return (
+                      StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    )
+                  })() : (() => {})()
+                }
+
+                {
+                  /**
+                   * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
+                     ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗
+                        ██║   ██║   ██║██║   ██║██║     ███████║██████╔╝███████║██║  ██║
+                        ██║   ██║   ██║██║   ██║██║     ██╔══██║██╔═══╝ ██╔══██║██║  ██║
+                        ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
+                        ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
+                  */
+                }
+                {
+                  myContext.touchpad !== null ? (() => {
+                    return (
+                      Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    )
+                  })() : (() => {})()
+                }
+                {/**
+                 *████████╗██████╗ ██╗███╗   ███╗
+                  ╚══██╔══╝██╔══██╗██║████╗ ████║
+                    ██║   ██████╔╝██║██╔████╔██║
+                    ██║   ██╔══██╗██║██║╚██╔╝██║
+                    ██║   ██║  ██║██║██║ ╚═╝ ██║
+                    ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+                */}
+                {
+                  myContext.trim !== null ? (() => {
+                    return (
+                      Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    )
+                  })() : (() => {})()
+                }
+                {/**
+                 * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
+                   ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+                      ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+                      ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+                      ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
+                      ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+                */}
+                {
+                  myContext.trigger !== null ? (() => {
+                    return (
+                      Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    )
+                  })() : (() => {})()
+                }
+                {/**
+                 * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                   ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                  ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+                  ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+                  ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+                  ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                */}
+                {
+                  myContext.rearDesign !== null ? (() => {
+                    return (
+                      RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div class="lds-dual-ring"></div>
+                    )
+                  })() : (() => {})()
+                }
+          </div>
+          <div>
+            <h1>Hello</h1>
+          </div>
         </div>
       </Viewer>
       <LocalFooter>
@@ -334,15 +338,18 @@ const Viewer = styled.div`
   display: flex;
   justify-content: center;
   #viewer {
-    width: 1024px;
-    height: 768px;
-    position: relative;
-    width: auto;
-    background-color: blue;
-    img {
-      position: absolute;
-      left: center;
-      width: 70%;
+    width: 100%;
+    height: 100%;
+    & > div:nth-child(1) {
+      min-width: 100%;
+      min-height: 100%;
+      position: relative;
+      width: auto;
+      img {
+        position: absolute;
+        width: 90%;
+        left: 5px;
+      }
     }
   }
 `
