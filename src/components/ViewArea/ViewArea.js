@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import html2canvas from 'html2canvas';
 import { Assets } from "../../theme/index";
 import AppContext from "../../context/context";
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
@@ -8,9 +9,37 @@ import { Dpad } from "../../assets/images/main_assets/3-Dpad/DpadImage";
 import { ThumbL } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
 import { ThumbR } from "../../assets/images/main_assets/5-THUMBSTICK R/ThumbR";
 import { StartBtn } from "../../assets/images/main_assets/6-START BACK/StartBtn";
+import { Touchpad } from "../../assets/images/main_assets/7-TOUCHPAD/Touchpad";
+import { Trim } from "../../assets/images/main_assets/8-TRIM/Trims";
+import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
+import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 
 const ViewArea = () => {
   const myContext = React.useContext(AppContext);
+  
+  const printRef = React.useRef();
+
+  const handleDownloadImage = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element);
+
+    const data = canvas.toDataURL('image/jpg');
+    const link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+      link.href = data;
+      link.download = 'image.jpg';
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } else {
+      window.open(data);
+    }
+  };
+  React.useEffect(() => {
+    // handleDownloadImage();
+  }, [])
   return (
     <Wrapper>
       <LocalHeader>
@@ -32,8 +61,7 @@ const ViewArea = () => {
     </LocalHeader>
       <Viewer>
         <div id="viewer">
-          <img src={Assets.ModelImg}></img>
-
+          <img src={Assets.ModelImg} ref={printRef}></img>
           {/* 
              ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
              ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
@@ -126,12 +154,75 @@ const ViewArea = () => {
                ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
              {
-              myContext.startBtn !== null ? (() => {
-                return (
-                  StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div class="lds-dual-ring"></div>
-                )
-              })() : (() => {})()
-             }
+                myContext.startBtn !== null ? (() => {
+                  return (
+                    StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  )
+                })() : (() => {})()
+              }
+
+              {
+                /**
+                 * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
+                   ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗
+                      ██║   ██║   ██║██║   ██║██║     ███████║██████╔╝███████║██║  ██║
+                      ██║   ██║   ██║██║   ██║██║     ██╔══██║██╔═══╝ ██╔══██║██║  ██║
+                      ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
+                      ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
+                */
+              }
+              {
+                myContext.touchpad !== null ? (() => {
+                  return (
+                    Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  )
+                })() : (() => {})()
+              }
+              {/**
+               *████████╗██████╗ ██╗███╗   ███╗
+                ╚══██╔══╝██╔══██╗██║████╗ ████║
+                   ██║   ██████╔╝██║██╔████╔██║
+                   ██║   ██╔══██╗██║██║╚██╔╝██║
+                   ██║   ██║  ██║██║██║ ╚═╝ ██║
+                   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+              */}
+              {
+                myContext.trim !== null ? (() => {
+                  return (
+                    Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  )
+                })() : (() => {})()
+              }
+              {/**
+               * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
+                 ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+                    ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+                    ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+                    ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
+                    ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+              */}
+              {
+                myContext.trigger !== null ? (() => {
+                  return (
+                    Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  )
+                })() : (() => {})()
+              }
+              {/**
+               * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                 ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                 ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+                 ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+                 ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+                 ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+              */}
+              {
+                myContext.rearDesign !== null ? (() => {
+                  return (
+                    RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div class="lds-dual-ring"></div>
+                  )
+                })() : (() => {})()
+              }
         </div>
       </Viewer>
       <LocalFooter>
@@ -243,9 +334,11 @@ const Viewer = styled.div`
   display: flex;
   justify-content: center;
   #viewer {
+    width: 1024px;
+    height: 768px;
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: auto;
+    background-color: blue;
     img {
       position: absolute;
       left: center;

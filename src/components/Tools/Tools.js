@@ -9,6 +9,10 @@ import { Dpad } from "../../assets/images/main_assets/3-Dpad/DpadImage";
 import { ThumbL } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
 import { ThumbR } from "../../assets/images/main_assets/5-THUMBSTICK R/ThumbR";
 import { StartBtn } from "../../assets/images/main_assets/6-START BACK/StartBtn";
+import { Touchpad } from "../../assets/images/main_assets/7-TOUCHPAD/Touchpad";
+import { Trim } from "../../assets/images/main_assets/8-TRIM/Trims";
+import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
+import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 
 import AppContext from "../../context/context";
 import "swiper/css";
@@ -21,17 +25,13 @@ const Tools = () => {
   const [ThumbLtabSelect, ThumbLSetTabSelect] = React.useState(0);
   const [ThumbRtabSelect, ThumbRSetTabSelect] = React.useState(0);
   const [StartBtntabSelect, StartBtnSetTabSelect] = React.useState(0);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  // const [tabSelect, SetTabSelect] = React.useState([0, 0]);
-  
+  const [TouchpadtabSelect, TouchpadSetTabSelect] = React.useState(0);
+  const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
+  const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
+  const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
 
-  const Assets = [Design, Abxy, Dpad, ThumbL, ThumbR, StartBtn];
+
+  const Assets = [Design, Abxy, Dpad, ThumbL, ThumbR, StartBtn, Touchpad, Trim, Trigger, RearDesign];
   const myContext = React.useContext(AppContext);
   const [snapIndex, setSnapIndex] = React.useState(0);
 
@@ -84,7 +84,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Design.steps.map((item, index) => (
-                    <TapItem key={ index } keys={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
+                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -116,7 +116,7 @@ const Tools = () => {
             <TopItems>
               {
                 Abxy.steps.map((item, index) => (
-                  <TapItem key={ index } keys={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
+                  <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
                     <span>
                       {item.name}
                     </span>
@@ -216,29 +216,143 @@ const Tools = () => {
                ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
              <SwiperSlide>
-            <TopItems>
-              {
-                StartBtn.steps.map((item, index) => (
-                  <TapItem key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
-                    <span>
-                      {item.name}
-                    </span>
-                    <span>
-                      {item.price}
-                    </span>
-                    <div></div>
-                  </TapItem>
-                ))
-              }
-            </TopItems>
-            <Selector>
-              {
-                StartBtn.items[StartBtntabSelect].map((item, index) => (
-                  <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}></SelectItem>
-                ))
-              }
-            </Selector>
-          </SwiperSlide>
+              <TopItems>
+                {
+                  StartBtn.steps.map((item, index) => (
+                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
+                      <span>
+                        {item.name}
+                      </span>
+                      <span>
+                        {item.price}
+                      </span>
+                      <div></div>
+                    </TapItem>
+                  ))
+                }
+              </TopItems>
+              <Selector>
+                {
+                  StartBtn.items[StartBtntabSelect].map((item, index) => (
+                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
+
+            {/**
+             * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
+               ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗
+                  ██║   ██║   ██║██║   ██║██║     ███████║██████╔╝███████║██║  ██║
+                  ██║   ██║   ██║██║   ██║██║     ██╔══██║██╔═══╝ ██╔══██║██║  ██║
+                  ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
+                  ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
+            */}
+            <SwiperSlide>
+              <TopItems>
+                {
+                  Touchpad.steps.map((item, index) => (
+                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
+                      <span>
+                        {item.name}
+                      </span>
+                      <span>
+                        {item.price}
+                      </span>
+                      <div></div>
+                    </TapItem>
+                  ))
+                }
+              </TopItems>
+              <Selector>
+                {
+                  Touchpad.items[TouchpadtabSelect].map((item, index) => (
+                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
+            {/**
+             * ████████╗██████╗ ██╗███╗   ███╗
+               ╚══██╔══╝██╔══██╗██║████╗ ████║
+                  ██║   ██████╔╝██║██╔████╔██║
+                  ██║   ██╔══██╗██║██║╚██╔╝██║
+                  ██║   ██║  ██║██║██║ ╚═╝ ██║
+                  ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+             */}
+             <SwiperSlide>
+              <Selector>
+                {
+                  Trim.items[TrimtabSelect].map((item, index) => (
+                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setTrim([TrimtabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
+            {/**
+             * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
+               ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+                  ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+                  ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+                  ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
+                  ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+            */}
+            <SwiperSlide>
+              <TopItems>
+                {
+                  Trigger.steps.map((item, index) => (
+                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
+                      <span>
+                        {item.name}
+                      </span>
+                      <span>
+                        {item.price}
+                      </span>
+                      <div></div>
+                    </TapItem>
+                  ))
+                }
+              </TopItems>
+              <Selector>
+                {
+                  Trigger.items[TriggertabSelect].map((item, index) => (
+                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setTrigger([TriggertabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
+            {/**
+             * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+               ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+               ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+               ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+               ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+               ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+            */}
+            <SwiperSlide>
+              <TopItems>
+                {/* {
+                  Trigger.steps.map((item, index) => (
+                    <TapItem key={ index } keys={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
+                      <span>
+                        {item.name}
+                      </span>
+                      <span>
+                        {item.price}
+                      </span>
+                      <div></div>
+                    </TapItem>
+                  ))
+                } */}
+              </TopItems>
+              <Selector>
+                {
+                  RearDesign.items[RearDesigntabSelect].map((item, index) => (
+                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}></SelectItem>
+                  ))
+                }
+              </Selector>
+            </SwiperSlide>
         </Swiper>
       </MediumDiv>
     </Wrapper>
@@ -292,12 +406,12 @@ const TapItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: calc(65% / ${props => props.w});
   background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
   color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
   border-radius: 5px;
   font-family: 'Rajdhani-Medium';
   position: relative;
-  width: max-content;
   padding: 10px 10px;
   cursor: pointer;
   & > span:nth-child(1) {
@@ -333,6 +447,7 @@ const SwiperProcessor = styled.div`
     img {
       content: url(${props => props.theme.LeftDirectIconImg});
     }
+    cursor: pointer;
   }
   & > span:nth-child(3) {
     padding: 5px 12px;
@@ -342,6 +457,7 @@ const SwiperProcessor = styled.div`
     img {
       content: url(${props => props.theme.RightDirectIconImg});
     }
+    cursor: pointer;
   }
 `
 
