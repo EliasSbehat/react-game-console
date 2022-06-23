@@ -4,13 +4,35 @@ import { ThemeProvider } from "styled-components";
 import Header from "../../components/Header/Header";
 import Tools from "../../components/Tools/Tools";
 import ViewArea from "../../components/ViewArea/ViewArea";
+import AppContext from "../../context/context";
 
-import { DarkMode, DayMode } from "../../context";
+import { DarkMode, DayMode } from "../../theme";
 
 const VHome = () => {
-
+  const [design, setDesign] = React.useState(null);
+  const [abxy, setAbxy] = React.useState(null);
+  const [dpad, setDpad] = React.useState(null);
+  const [thumbstickL, setThumbstickL] = React.useState(null);
+  const [thumbstickR, setThumbstickR] = React.useState(null);
+  const [touchpad, setTouchPad] = React.useState(null);
+  
+  const imageSetting = {
+    design: design,
+    setDesign,
+    abxy,
+    setAbxy,
+    dpad,
+    setDpad,
+    thumbstickL,
+    setThumbstickL,
+    thumbstickR,
+    setThumbstickR,
+    touchpad,
+    setTouchPad
+  }
+  
+  // Check height of components
   const [h_header, getHeader] = React.useState(0);
-
   React.useEffect(() => {
     getHeader(document.getElementById('header').clientHeight + 3);
   }, [])
@@ -28,15 +50,17 @@ const VHome = () => {
   }
   return (
     <ThemeProvider theme={theme}>
-      <>
-        <Wrapper>
-          <Header modeChange={modeChange} flag='1'></Header>
-          <MainDiv pl={h_header}>
-            <ViewArea />
-            <Tools></Tools>
-          </MainDiv>
-        </Wrapper>
-      </>
+      <AppContext.Provider value={imageSetting}>
+        <>
+          <Wrapper>
+              <Header modeChange={modeChange} flag='1'></Header>
+            <MainDiv pl={h_header}>
+              <ViewArea />
+              <Tools></Tools>
+            </MainDiv>
+          </Wrapper>
+        </>
+      </AppContext.Provider>
     </ThemeProvider>
   )
 }
@@ -46,7 +70,7 @@ const Wrapper = styled.div`
 `
 const MainDiv = styled.div`
   display: flex;
-  height: calc(100vh - 95px);
+  height: calc(100vh - 90px);
   /* @media screen and (max-width: 800px) {
     flex-direction: column;
     justify-content: space-between;

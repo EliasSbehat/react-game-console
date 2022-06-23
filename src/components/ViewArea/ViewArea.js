@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-
-import { Assets } from "../../context/index";
-
-
+import { Assets } from "../../theme/index";
+import AppContext from "../../context/context";
+import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
 const ViewArea = () => {
+  const myContext = React.useContext(AppContext);
   return (
     <Wrapper>
       <LocalHeader>
@@ -12,7 +12,6 @@ const ViewArea = () => {
           <span>
             PLay Station 5 Controller
           </span>
-          <img></img>
         </div>
         <div>
           <div>
@@ -28,6 +27,14 @@ const ViewArea = () => {
       <Viewer>
         <div id="viewer">
           <img src={Assets.ModelImg}></img>
+          {
+            myContext.design !== null ? (() => {
+              return (
+                Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div class="lds-dual-ring"></div>
+              )
+            })() : (() => {
+            })()
+          }
         </div>
       </Viewer>
       <LocalFooter>

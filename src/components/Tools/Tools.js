@@ -3,31 +3,59 @@ import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
+import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
+import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
+
+import AppContext from "../../context/context";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 const Tools = () => {
-  const [snapIndex, setSnapIndex] = React.useState(1);
+
+  const Assets = [Design, Abxy];
+
+  const myContext = React.useContext(AppContext);
+  const [tabSelect, SetTabSelect] = React.useState([0, 0]);
+  const [snapIndex, setSnapIndex] = React.useState(0);
   return (
     <Wrapper>
       <TopDiv>
         <div>
-          <img></img>
-          Design
-        </div>
-        <SwiperProcessor>
           <div>
-            <progress id="file" max={3} value={snapIndex}> 70% </progress>
-            Step {snapIndex} / 3
+            <img></img>
+            Design
           </div>
-          <span className="prev">
-            <img></img>
-          </span>
-          <span className="next">
-            <img></img>
-          </span>
-        </SwiperProcessor>
+          <SwiperProcessor>
+            <div>
+              <progress id = "file" max = {Assets.length} value = {snapIndex+1}></progress>
+              Step {snapIndex + 1} / {Assets.length}
+            </div>
+            <span className="prev">
+              <img></img>
+            </span>
+            <span className="next">
+              <img></img>
+            </span>
+          </SwiperProcessor>
+        </div>
+        <div>
+          {
+            Assets[snapIndex].steps.map((item, index) => (
+              <TapItem key={ index } keys={index} active={tabSelect[snapIndex]} onClick = {() => {
+                let temp = tabSelect;
+                temp[snapIndex] = index;
+                SetTabSelect(temp);
+              }}>
+                <span>
+                  {item.name}
+                </span>
+                <span>
+                  {item.price}
+                </span>
+                <div></div>
+              </TapItem>
+            ))
+          }
+        </div>
       </TopDiv>
       <MediumDiv>
         <Swiper
@@ -39,127 +67,109 @@ const Tools = () => {
           }}
           scrollbar={{ draggable: true }}
           onSlideChange={(event) => {
-            setSnapIndex(event.snapIndex + 1);
+            setSnapIndex(event.snapIndex);
           }}
-          onSwiper={(swiper) => console.log(swiper)}
+          onSwiper={(swiper) => console.log('--')}
         >
-          <SwiperSlide>
-            <Selector >
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
+
+          <SwiperSlide style={SwiperSildeStyle}>
+            <Selector>
+              {
+                Design.items[tabSelect[snapIndex]].map((item, index) => (
+                  <SelectItem bgImg={item.selet} onClick={() => myContext.setDesign([tabSelect[snapIndex], index])}></SelectItem>
+                ))
+              }
             </Selector>
           </SwiperSlide>
 
-          <SwiperSlide>
+          <SwiperSlide style={SwiperSildeStyle}>
             <Selector>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
+              {
+                Abxy.items[tabSelect[snapIndex]].map((item, index) => (
+                  <SelectItem bgImg={item.selet} onClick={() => myContext.setAbxy([tabSelect[snapIndex], index])}></SelectItem>
+                ))
+              }
             </Selector>
           </SwiperSlide>
-          <SwiperSlide>
-            <Selector>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-              <SelectItem> 1 </SelectItem>
-            </Selector>
-          </SwiperSlide>
+
         </Swiper>
       </MediumDiv>
     </Wrapper>
   )
 }
 
+const SwiperSildeStyle = {
+  display: "flex",
+  justifyContent: "center",
+}
+
 const Wrapper = styled.div`
   width: 30%;
   background-color: ${props => props.theme.ToolBgColor};
-  padding: 0 10px;
   border-left: 3px solid ${props => props.theme.ThemeColor};
+  
   @media screen and (max-width: 800px) {
     /* display: none; */
   }
 `
 const TopDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 0;
   & > div:nth-child(1) {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-around;
     align-items: center;
-    color: ${props => props.theme.color};
-    font-family: 'Rajdhani-Medium';
-    font-size: 20px;
-    img {
-      content: url(${props => props.theme.GameConsoleImg});
+    padding: 20px 10px;
+    & > div:nth-child(1) {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      align-items: center;
+      color: ${props => props.theme.color};
+      font-family: 'Rajdhani-Medium';
+      font-size: 20px;
+      img {
+        content: url(${props => props.theme.GameConsoleImg});
+      }
+      @media screen and (max-width: 1194px) {
+        width: 100%;
+        justify-content: start;
+      }
     }
+  
     @media screen and (max-width: 1194px) {
-      width: 100%;
-      justify-content: start;
+      flex-direction: column;
     }
   }
 
-  @media screen and (max-width: 1194px) {
-    flex-direction: column;
+  & > div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+  }
+`
+
+const TapItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
+  color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
+  border-radius: 5px;
+  font-family: 'Rajdhani-Medium';
+  position: relative;
+  width: max-content;
+  padding: 10px 10px;
+  cursor: pointer;
+  & > span:nth-child(1) {
+    font-size: 15px;
+    white-space: nowrap;
+  }
+  div {
+    position: absolute;
+    background-color: ${props => props.keys === props.active ? props.theme.ThemeColor : 'none'};
+    width: 80%;
+    height: 3px;
+    bottom: 0;
   }
 `
 
@@ -196,43 +206,44 @@ const SwiperProcessor = styled.div`
 `
 
 const MediumDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  height: calc(100vh - 95px - 77px)
-`
-
-const Selector = styled.div`
-  background-color: ${props => props.theme.ToolBgColor};
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  gap: 10px;
-  justify-content: center;
-  align-content: flex-start;
+  height: calc(100vh - 95px - 177px);
   overflow-y: auto;
-  height: 100%;
   ::-webkit-scrollbar {
     width: 3px;
   }
 
-  /* Track */
   ::-webkit-scrollbar-track {
     background: ${props => props.theme.ScrollTraker};
   }
 
-  /* Handle */
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background-color: ${props => props.theme.ScrollBar};
   }
 `
 
+const Selector = styled.div`
+  background-color: ${props => props.theme.ToolBgColor};
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 10px;
+  justify-content: flex-start;
+  align-content: flex-start;
+  height: 100%;
+  
+`
+
 const SelectItem = styled.div`
-  width: 66px;
-  height: 66px;
-  border: 1px solid red;
+  width: 50px;
+  height: 50px;
   border-radius: 20px;
+  border: 1px solid white;
   color: white;
+  background-image: url(${props => props.bgImg});
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 
 export default Tools;

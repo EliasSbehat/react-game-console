@@ -58,6 +58,11 @@ export const DarkMode = {
   SwapBackColor: 'white',
   SwapBorder: '1px solid #292C33',
   AtcIcon: AtcIconImg,
+
+  TapBgColor: '#24262B',
+  TapColor: '#ffffff',
+  TapSelectColor: '#292c33',
+  TapSelectBgColor: '#ffffff'
 }
 
 export const DayMode = {
@@ -90,6 +95,11 @@ export const DayMode = {
   SwapBackColor: '#343b48',
   SwapBorder: '1px solid #292C33',
   AtcIcon: AtcIconImg,
+
+  TapBgColor: '#f1f1f1',
+  TapColor: '#343b48',
+  TapSelectColor: '#ffffff',
+  TapSelectBgColor: '#343b48'
 }
 
 export const Assets = {

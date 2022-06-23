@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import AppContext from "../../context/context";
 
 const Header = (props) => {
+  const myContext = React.useContext(AppContext);
+  React.useEffect(() => {
+  })
   return (
     <Wrapper id="header">
       <Container>
@@ -10,7 +14,7 @@ const Header = (props) => {
           <img onClick={() => props.modeChange()}></img>
         </RightDiv>
         <LeftDiv>
-          <SearchInput placeholder="Search" type="text" resflag={0}></SearchInput>
+          <SearchInput placeholder={'Search'} type="text" resflag={0}></SearchInput>
           <BritiSpan><img></img></BritiSpan>
           <FeatherSpan><img></img><span>2</span></FeatherSpan>
           <AvatarSpan><img></img></AvatarSpan>
