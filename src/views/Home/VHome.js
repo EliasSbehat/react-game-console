@@ -21,7 +21,8 @@ const VHome = () => {
   const [rearDesign, setRearDesign] = React.useState(null);
   const [razorBack, setRazorBack] = React.useState(false);
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
-  // Paddle
+  const [paddle, setPaddle] = React.useState(null);
+
   const [rdomin_1, setRdomin1] = React.useState(null);
   const [rdomin_2, setRdomin2] = React.useState(null);
   const [ldomin_1, setLdomin1] = React.useState(null);
@@ -52,12 +53,18 @@ const VHome = () => {
     setRazorBack,
     pad_esp_flag,
     setPad_esp_flag,
+    paddle,
+    setPaddle,
+
+    ldomin_1,
+    setLdomin1,
+    ldomin_2,
+    setLdomin2,
     rdomin_1,
     setRdomin1,
     rdomin_2,
     setRdomin2,
-    ldomin_1,
-    setLdomin2,
+
     spanNames : [
       {
         name: 'Design'

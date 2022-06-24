@@ -13,6 +13,8 @@ import { Touchpad } from "../../assets/images/main_assets/7-TOUCHPAD/Touchpad";
 import { Trim } from "../../assets/images/main_assets/8-TRIM/Trims";
 import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
 import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
+import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
+
 
 import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
@@ -390,7 +392,13 @@ const Tools = () => {
                 </RazorDiv>
                 {
                   myContext.pad_esp_flag ? (
-                    <span>Coming soon</span>
+                    <Selector>
+                      {
+                        Paddle.items.map((item, index) => (
+                          <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setPaddle(index)}></SelectItem>
+                        ))
+                      }
+                    </Selector>
                   ) : (
                     <span>To have paddles, please turn on switch</span>
                   )
@@ -407,12 +415,12 @@ const Tools = () => {
              */}
              <SwiperSlide>
               <LDominWrapper>
-                <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
+                <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
                   <label><div></div></label>
                 </RazorDiv>
                 {
-                  myContext.pad_esp_flag ? (
+                  !myContext.pad_esp_flag ? (
                     <LDominContainer>
                       <div>
                         <div>
@@ -422,19 +430,19 @@ const Tools = () => {
                           <Selector>
                             {
                               DominSelection.items.map((item, index) => (
-                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin1(index)}></SelectItem>
+                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin1(index)}></SelectItem>
                               ))
                             }
                           </Selector>
                         </div>
                         {
-                          myContext.rdomin_1 !== null ? (
+                          myContext.ldomin_1 !== null ? (
                             <div>
                               <div><span>{DominL.steps[0].name}</span></div>
                               <Selector>
                               {
                                 DominL.items.map((item, index) => (
-                                  <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin2(index)}></SelectItem>
+                                  <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin2(index)}></SelectItem>
                                 ))
                               }
                               </Selector>
@@ -459,12 +467,12 @@ const Tools = () => {
              */}
              <SwiperSlide>
               <LDominWrapper>
-                <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
+                <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
                   <label><div></div></label>
                 </RazorDiv>
                 {
-                  myContext.pad_esp_flag ? (
+                  !myContext.pad_esp_flag ? (
                     <LDominContainer>
                       <div>
                         <div>
@@ -474,21 +482,21 @@ const Tools = () => {
                           <Selector>
                             {
                               DominSelection.items.map((item, index) => (
-                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin1(index)}></SelectItem>
+                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin1(index)}></SelectItem>
                               ))
                             }
                           </Selector>
                         </div>
                         {
-                          myContext.ldomin_1 !== null ? (
+                          myContext.rdomin_1 !== null ? (
                             <div>
                               <div><span>{DominR.steps[0].name}</span></div>
                               <Selector>
-                              {
-                                DominR.items.map((item, index) => (
-                                  <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin2(index)}></SelectItem>
-                                ))
-                              }
+                                {
+                                  DominR.items.map((item, index) => (
+                                    <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin2(index)}></SelectItem>
+                                  ))
+                                }
                               </Selector>
                             </div>
                           ) : (() => {})()
