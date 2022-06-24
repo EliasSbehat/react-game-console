@@ -28,6 +28,8 @@ const VHome = () => {
   const [ldomin_1, setLdomin1] = React.useState(null);
   const [ldomin_2, setLdomin2] = React.useState(null);
 
+  const [digital_trigger, setDigital_trigger] = React.useState(false);
+
   const imageSetting = {
     design: design,
     setDesign,
@@ -64,6 +66,9 @@ const VHome = () => {
     setRdomin1,
     rdomin_2,
     setRdomin2,
+
+    digital_trigger,
+    setDigital_trigger,
 
     spanNames : [
       {
@@ -107,6 +112,9 @@ const VHome = () => {
       },
       {
         name: 'Right Domin8or Button'
+      },
+      {
+        name: 'Digital Triggers'
       }
     ]
   }
