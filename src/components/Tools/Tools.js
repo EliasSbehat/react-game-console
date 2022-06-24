@@ -397,6 +397,110 @@ const Tools = () => {
                 }
               </PaddleWrapper>
             </SwiperSlide>
+            {/**
+             * ██╗     ███████╗███████╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+               ██║     ██╔════╝██╔════╝╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+               ██║     █████╗  █████╗     ██║       ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║╚█████╔╝██║   ██║██████╔╝    ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
+               ██║     ██╔══╝  ██╔══╝     ██║       ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║██╔══██╗██║   ██║██╔══██╗    ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
+               ███████╗███████╗██║        ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
+               ╚══════╝╚══════╝╚═╝        ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
+             */}
+             <SwiperSlide>
+              <LDominWrapper>
+                <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
+                  <span>Left Domin button</span>
+                  <label><div></div></label>
+                </RazorDiv>
+                {
+                  myContext.pad_esp_flag ? (
+                    <LDominContainer>
+                      <div>
+                        <div>
+                          <div>
+                            <span>{DominSelection.steps.name}</span>
+                          </div>
+                          <Selector>
+                            {
+                              DominSelection.items.map((item, index) => (
+                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin1(index)}></SelectItem>
+                              ))
+                            }
+                          </Selector>
+                        </div>
+                        {
+                          myContext.rdomin_1 !== null ? (
+                            <div>
+                              <div><span>{DominL.steps[0].name}</span></div>
+                              <Selector>
+                              {
+                                DominL.items.map((item, index) => (
+                                  <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin2(index)}></SelectItem>
+                                ))
+                              }
+                              </Selector>
+                            </div>
+                          ) : (() => {})()
+                        }
+                      </div>
+                    </LDominContainer>
+                  ) : (
+                    <span>To have Left Domin button, please turn on switch</span>
+                  )
+                }
+              </LDominWrapper>
+            </SwiperSlide>
+            {/**
+             * ██████╗ ██╗ ██████╗ ██╗  ██╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+               ██╔══██╗██║██╔════╝ ██║  ██║╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+               ██████╔╝██║██║  ███╗███████║   ██║       ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║╚█████╔╝██║   ██║██████╔╝    ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
+               ██╔══██╗██║██║   ██║██╔══██║   ██║       ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║██╔══██╗██║   ██║██╔══██╗    ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
+               ██║  ██║██║╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
+               ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
+             */}
+             <SwiperSlide>
+              <LDominWrapper>
+                <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
+                  <span>Left Domin button</span>
+                  <label><div></div></label>
+                </RazorDiv>
+                {
+                  myContext.pad_esp_flag ? (
+                    <LDominContainer>
+                      <div>
+                        <div>
+                          <div>
+                            <span>{DominSelection.steps.name}</span>
+                          </div>
+                          <Selector>
+                            {
+                              DominSelection.items.map((item, index) => (
+                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin1(index)}></SelectItem>
+                              ))
+                            }
+                          </Selector>
+                        </div>
+                        {
+                          myContext.ldomin_1 !== null ? (
+                            <div>
+                              <div><span>{DominR.steps[0].name}</span></div>
+                              <Selector>
+                              {
+                                DominR.items.map((item, index) => (
+                                  <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin2(index)}></SelectItem>
+                                ))
+                              }
+                              </Selector>
+                            </div>
+                          ) : (() => {})()
+                        }
+                      </div>
+                    </LDominContainer>
+                  ) : (
+                    <span>To have Left Domin button, please turn on switch</span>
+                  )
+                }
+              </LDominWrapper>
+            </SwiperSlide>
         </Swiper>
       </MediumDiv>
     </Wrapper>
@@ -444,7 +548,6 @@ const TopItems = styled.div`
   justify-content: space-around;
   align-items: center;
 `
-
 
 const TapItem = styled.div`
   display: flex;
@@ -579,6 +682,31 @@ const RazorDiv = styled.div`
 
 const PaddleWrapper = styled.div`
 
+`
+const LDominWrapper = styled.div`
+
+`
+
+const LDominContainer = styled.div`
+  padding: 0 10px;
+  & > div:nth-child(1) {
+    border: 1px solid ${props => props.theme.ThemeColor};
+    & > div:nth-child(1), > div:nth-child(2) {
+      & > div:nth-child(1) {
+        display: flex;
+        background-color: ${props => props.theme.DirectIconBgColor};
+        margin: 10px;
+        padding: 0 20px;
+        height: 50px;
+        align-items: center;
+        justify-content: space-between;
+        font-family: 'Rajdhani-Medium';
+        color: ${props => props.theme.color};
+        border: ${props => props.theme.SwapBorder};
+        color: ${props => props.theme.color}
+      }
+    }
+  }
 `
 
 export default Tools;

@@ -22,6 +22,10 @@ const VHome = () => {
   const [razorBack, setRazorBack] = React.useState(false);
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
   // Paddle
+  const [rdomin_1, setRdomin1] = React.useState(null);
+  const [rdomin_2, setRdomin2] = React.useState(null);
+  const [ldomin_1, setLdomin1] = React.useState(null);
+  const [ldomin_2, setLdomin2] = React.useState(null);
 
   const imageSetting = {
     design: design,
@@ -48,6 +52,12 @@ const VHome = () => {
     setRazorBack,
     pad_esp_flag,
     setPad_esp_flag,
+    rdomin_1,
+    setRdomin1,
+    rdomin_2,
+    setRdomin2,
+    ldomin_1,
+    setLdomin2,
     spanNames : [
       {
         name: 'Design'
@@ -93,7 +103,7 @@ const VHome = () => {
       }
     ]
   }
-  
+
   // Check height of components
   const [h_header, getHeader] = React.useState(0);
   React.useEffect(() => {
