@@ -17,6 +17,9 @@ import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearD
 const ViewArea = () => {
   const [sideflag, setSideflag] = React.useState(true);
   const myContext = React.useContext(AppContext);
+  React.useEffect(() => {
+    
+  })
   const printRef = React.useRef();
   const handleDownloadImage = async () => {
     const element = printRef.current;
@@ -41,6 +44,9 @@ const ViewArea = () => {
   }, [])
   return (
     <Wrapper>
+      <Loading>
+        <div class="lds-ripple"><div></div><div></div></div>
+      </Loading>
       <LocalHeader>
         <div>
           <span>
@@ -325,6 +331,13 @@ const Wrapper = styled.div`
   position: relative;
 `
 
+const Loading = styled.div`
+  position: relative;
+  top: 40%;
+  z-index: 2;
+  display: none;
+`
+
 const LocalHeader = styled.div`
   display: flex;
   justify-content: start;
@@ -421,6 +434,7 @@ const Viewer = styled.div`
           img {
             position: absolute;
             width: 100%;
+            transition: all 1s;
           }
         }
       }
@@ -437,6 +451,7 @@ const Viewer = styled.div`
           position: relative;
           img {
             position: absolute;
+            transition: all 1s;
             width: 100%;
           }
         }
