@@ -1,4 +1,4 @@
-import { ModelImg } from "../assets/images";
+import { ModelBackImg, ModelImg } from "../assets/images";
 
 import { 
   AvatarImg, 
@@ -104,4 +104,5 @@ export const DayMode = {
 
 export const Assets = {
   ModelImg: ModelImg,
+  ModelBackImg: ModelBackImg
 }

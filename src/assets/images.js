@@ -26,7 +26,9 @@ import atc_icon from './images/atc-icon.png';
 
 
 import model from './images/model.png';
+import model_back from './images/model-back.png';
 export const ModelImg = model;
+export const ModelBackImg = model_back;
 
 export const AvatarImg = avatar;
 export const GameConsoleImg = game_console;

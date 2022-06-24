@@ -19,7 +19,10 @@ const VHome = () => {
   const [trim, setTrim] = React.useState(null);
   const [trigger, setTrigger] = React.useState(null);
   const [rearDesign, setRearDesign] = React.useState(null);
-  
+  const [razorBack, setRazorBack] = React.useState(false);
+  const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
+  // Paddle
+
   const imageSetting = {
     design: design,
     setDesign,
@@ -40,7 +43,55 @@ const VHome = () => {
     trigger,
     setTrigger,
     rearDesign,
-    setRearDesign
+    setRearDesign,
+    razorBack,
+    setRazorBack,
+    pad_esp_flag,
+    setPad_esp_flag,
+    spanNames : [
+      {
+        name: 'Design'
+      },
+      {
+        name: 'Abxy'
+      },
+      {
+        name: 'Dpad'
+      },
+      {
+        name: 'Thumbstick L'
+      },
+      {
+        name: 'Thumbstick R'
+      },
+      {
+        name: 'Start Back'
+      },
+      {
+        name: 'Touchpad'
+      },
+      {
+        name: 'Trim'
+      },
+      {
+        name: 'triggers'
+      },
+      {
+        name: 'Rear Design',
+      },
+      {
+        name: 'Razorback Maxfire',
+      },
+      {
+        name: 'Paddles',
+      },
+      {
+        name: 'Left Domin8or Button'
+      },
+      {
+        name: 'Right Domin8or Button'
+      }
+    ]
   }
   
   // Check height of components

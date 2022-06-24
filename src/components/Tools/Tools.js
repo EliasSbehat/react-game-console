@@ -14,6 +14,10 @@ import { Trim } from "../../assets/images/main_assets/8-TRIM/Trims";
 import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
 import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 
+import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
+import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
+import { DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
+
 import AppContext from "../../context/context";
 import "swiper/css";
 
@@ -29,25 +33,21 @@ const Tools = () => {
   const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
   const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
-
-
-  const Assets = [Design, Abxy, Dpad, ThumbL, ThumbR, StartBtn, Touchpad, Trim, Trigger, RearDesign];
   const myContext = React.useContext(AppContext);
   const [snapIndex, setSnapIndex] = React.useState(0);
-
 
   return (
     <Wrapper>
       <TopDiv>
         <div>
-          <div>
+          <div> 
             <img></img>
-            Design
+            {myContext.spanNames[snapIndex].name}
           </div>
           <SwiperProcessor>
             <div>
-              <progress id = "file" max = {Assets.length} value = {snapIndex+1}></progress>
-              Step {snapIndex + 1} / {Assets.length}
+              <progress id = "file" max = {myContext.spanNames.length} value = {snapIndex+1}></progress>
+              Step {snapIndex + 1} / {myContext.spanNames.length}
             </div>
             <span className="prev">
               <img></img>
@@ -84,7 +84,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Design.steps.map((item, index) => (
-                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
+                    <TapItem w={Design.steps.length} key={ index } keys={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -116,7 +116,7 @@ const Tools = () => {
             <TopItems>
               {
                 Abxy.steps.map((item, index) => (
-                  <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
+                  <TapItem w={Abxy.steps.length} key={ index } keys={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
                     <span>
                       {item.name}
                     </span>
@@ -219,7 +219,7 @@ const Tools = () => {
               <TopItems>
                 {
                   StartBtn.steps.map((item, index) => (
-                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
+                    <TapItem w={StartBtn.steps.length} key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -252,7 +252,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Touchpad.steps.map((item, index) => (
-                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
+                    <TapItem w={Touchpad.steps.length} key={ index } keys={index} active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -301,7 +301,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Trigger.steps.map((item, index) => (
-                    <TapItem w={Assets[snapIndex].steps.length} key={ index } keys={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
+                    <TapItem w={Trigger.steps.length} key={ index } keys={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -352,6 +352,50 @@ const Tools = () => {
                   ))
                 }
               </Selector>
+            </SwiperSlide>
+
+            {/**
+             * ██████╗  █████╗ ███████╗ ██████╗ ██████╗     ██████╗  █████╗  ██████╗██╗  ██╗
+               ██╔══██╗██╔══██╗╚══███╔╝██╔═══██╗██╔══██╗    ██╔══██╗██╔══██╗██╔════╝██║ ██╔╝
+               ██████╔╝███████║  ███╔╝ ██║   ██║██████╔╝    ██████╔╝███████║██║     █████╔╝ 
+               ██╔══██╗██╔══██║ ███╔╝  ██║   ██║██╔══██╗    ██╔══██╗██╔══██║██║     ██╔═██╗ 
+               ██║  ██║██║  ██║███████╗╚██████╔╝██║  ██║    ██████╔╝██║  ██║╚██████╗██║  ██╗
+               ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
+             * 
+            */}
+            <SwiperSlide>
+              <RazorDiv flag={myContext.razorBack} onClick = {() => myContext.setRazorBack(!myContext.razorBack)}>
+                <span>Razorback Maxfire Modes</span>
+                <label>
+                  <div>
+
+                  </div>
+                </label>
+              </RazorDiv>
+            </SwiperSlide>
+            {/**
+             * 
+             * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
+               ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝
+               ██████╔╝███████║██║  ██║██║  ██║██║     █████╗  
+               ██╔═══╝ ██╔══██║██║  ██║██║  ██║██║     ██╔══╝  
+               ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
+               ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
+             */}
+            <SwiperSlide>
+              <PaddleWrapper>
+                <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
+                  <span>Paddles</span>
+                  <label><div></div></label>
+                </RazorDiv>
+                {
+                  myContext.pad_esp_flag ? (
+                    <span>Coming soon</span>
+                  ) : (
+                    <span>To have paddles, please turn on switch</span>
+                  )
+                }
+              </PaddleWrapper>
             </SwiperSlide>
         </Swiper>
       </MediumDiv>
@@ -500,6 +544,41 @@ const SelectItem = styled.div`
   background-image: url(${props => props.bgImg});
   background-repeat: no-repeat;
   background-size: cover;
+`
+
+const RazorDiv = styled.div`
+  display: flex;
+  background-color: ${props => props.theme.DirectIconBgColor};
+  margin: 10px;
+  padding: 0 20px;
+  height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Rajdhani-Medium';
+  color: ${props => props.theme.color};
+  border: ${props => props.theme.SwapBorder};
+  & > label:nth-child(2) {
+    width: 60px;
+    height: 50%;
+    background-color: ${props => props.flag ? props.theme.ThemeColor : '#aaa'};
+    border-radius: 20px;
+    position: relative;
+    div {
+      position: absolute;
+      background-color: white;
+      display: inline-block;
+      height: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 20px;
+      transition: all .5s;
+      top: 0;
+      ${props => props.flag ? 'right' : 'left'}: 1px;
+    }
+  }
+`
+
+const PaddleWrapper = styled.div`
+
 `
 
 export default Tools;
