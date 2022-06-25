@@ -106,7 +106,7 @@ const ViewArea = () => {
             <div id="viewer">
               <div>
                 <div>
-                  <LetterDiv className="target" onFocus={() => console.log('has focus')} onBlue={() => console.log('lost focus')}>
+                  <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
                     <h1>
                       { myContext.textVal }
                     </h1>
@@ -627,7 +627,7 @@ const LetterDiv = styled.div`
   text-align: center;
   h1 {
     font-size: 30px;
-    font-family: ${"bazooka"};
+    font-family: ${props => props.ff};
   }
 `
 
