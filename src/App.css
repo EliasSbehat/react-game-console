@@ -30,6 +30,36 @@ p {
   src: url('./assets/fonts//Rajdhani-Regular.ttf');
 }
 
+@font-face {
+  font-family: 'pristina';
+  src: url('./assets/fonts/pristnia/PRISTINA.TTF');
+}
+
+@font-face {
+  font-family: 'motion-picture';
+  src: url('./assets/fonts/motion-picture/Motion\ Picture\ Personal\ Use\ \ 400.ttf');
+}
+
+@font-face {
+  font-family: 'delicia';
+  src: url('./assets/fonts/delicia/Delicia-8MyoD.otf');
+}
+
+@font-face {
+  font-family: 'luna-medium';
+  src: url('./assets/fonts/luna/Luna-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'fortnite';
+  src: url('./assets/fonts/fortnite/BurbankBigCondensed-Black.otf');
+}
+
+@font-face {
+  font-family: 'bazooka';
+  src: url('./assets/fonts/bazooka/bazooka-r.otf');
+}
+
 .lds-ripple {
   display: inline-block;
   position: relative;
@@ -75,4 +105,12 @@ p {
     height: 72px;
     opacity: 0;
   }
+}
+
+.dragDiv {
+  position: absolute;
+  background-color: blue;
+  z-index: 40;
+  padding: 30px;
+  margin: 0;
 }

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import html2canvas from 'html2canvas';
+import Moveable from "react-moveable";
 import { Assets } from "../../theme/index";
 import AppContext from "../../context/context";
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
@@ -17,356 +18,394 @@ import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 
+
 const ViewArea = () => {
+  
   const [sideflag, setSideflag] = React.useState(true);
   const myContext = React.useContext(AppContext);
+  const [target, setTarget] = React.useState();
+  const [frame] = React.useState({
+    translate: [0, 0],
+    rotate: 0,
+  });
   React.useEffect(() => {
-    
-  })
-  const printRef = React.useRef();
-  const handleDownloadImage = async () => {
-    const element = printRef.current;
-    const canvas = await html2canvas(element);
+    const target = document.querySelector('.target');
 
-    const data = canvas.toDataURL('image/jpg');
-    const link = document.createElement('a');
+    setTarget(target);
 
-    if (typeof link.download === 'string') {
-      link.href = data;
-      link.download = 'image.jpg';
+    console.log(moveableRef.current.props.target);
 
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } else {
-      window.open(data);
-    }
-  };
-  React.useEffect(() => {
-    // handleDownloadImage();
-  }, [])
-  return (
-    <Wrapper>
-      <Loading>
-        <div className="lds-ripple"><div></div><div></div></div>
-      </Loading>
-      <LocalHeader>
-        <div>
-          <span>
-            Play Station 5 Controller
-          </span>
-        </div>
-        <div>
+    target.addEventListener('load', () => {
+      setTimeout(() => {
+        moveableRef.current.updateRect();
+      }, 2000);
+    });
+  }, []); 
+    const moveableRef = React.useRef();
+    return (
+      <Wrapper>
+        <Moveable
+          ref={moveableRef}
+          target={target}
+          draggable={true}
+          throttleDrag={0}
+          resizable={true}
+          throttleResize={0}
+          rotatable={true}
+          rotationPosition={'top'}
+          throttleRotate={0}
+          hideDefaultLines={false}
+          origin={false}
+          onDragStart={({ set }) => {
+            set(frame.translate);
+          }}
+          onDrag={({ beforeTranslate }) => {
+            frame.translate = beforeTranslate;
+          }}
+          onResizeStart={({ setOrigin, dragStart }) => {
+            setOrigin(['%', '%']);
+            dragStart && dragStart.set(frame.translate);
+          }}
+          onResize={({ target, width, height, drag }) => {
+            frame.translate = drag.beforeTranslate;
+            target.style.width = `${width}px`;
+            target.style.height = `${height}px`;
+          }}
+          onRotateStart={({ set }) => {
+            set(frame.rotate);
+          }}
+          onRotate={({ beforeRotate }) => {
+            frame.rotate = beforeRotate;
+          }}
+          onRender={({ target }) => {
+            target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px) rotate(${frame.rotate}deg)`;
+          }}
+        ></Moveable>;
+        <Loading>
+          <div className="lds-ripple"><div></div><div></div></div>
+        </Loading>
+        <LocalHeader>
           <div>
-            <span onClick={() => setSideflag(true)}> Front </span>
-            <span onClick={() => setSideflag(false)}> Back </span>
-            <span onClick={() => setSideflag(!sideflag)}>
-              <img></img>
+            <span>
+              Play Station 5 Controller
             </span>
           </div>
-        </div>
-
-    </LocalHeader>
-      <Viewer flag={sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
-        <div>
-          <div id="viewer">
+          <div>
             <div>
-              <div>
-                <img src={Assets.ModelImg} ref={printRef} ></img>
-                {/* 
-                  ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-                  ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
-                  ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
-                  ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
-                  ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
-                  ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-                */}
-                {
-                  myContext.design !== null ? (() => {
-                    return (
-                      Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {
-
-                  })()
-                }
-
-
-                {/*
-                    █████╗ ██████╗ ██╗  ██╗██╗   ██╗
-                    ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
-                    ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
-                    ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
-                    ██║  ██║██████╔╝██╔╝ ██╗   ██║   
-                    ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
-                */}
-                {
-                  myContext.abxy !== null ? (() => {
-                    return (
-                      Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {
-                  })()
-                }
-                {/*
-                    ██████╗ ██████╗  █████╗ ██████╗ 
-                    ██╔══██╗██╔══██╗██╔══██╗██╔══██╗
-                    ██║  ██║██████╔╝███████║██║  ██║
-                    ██║  ██║██╔═══╝ ██╔══██║██║  ██║
-                    ██████╔╝██║     ██║  ██║██████╔╝
-                    ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
-                */}
-                {
-                  myContext.dpad !== null ? (() => {
-                    return (
-                      Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {
-                  })()
-                }
-                {/**
-                 * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██╗     
-                   ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██║     
-                      ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██║     
-                      ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██║     
-                      ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
-                      ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
-                */}
-                {
-                    myContext.thumbstickL !== null ? (() => {
-                      return (
-                        ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div className="lds-dual-ring"></div>
-                      )
-                    })() : (() => {})()
-                  }
-
-                  {/**
-                   * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
-                     ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██╔══██╗
-                        ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██████╔╝
-                        ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██╔══██╗
-                        ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
-                        ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
-                  */}
-                  {
-                    myContext.thumbstickR !== null ? (() => {
-                      return (
-                        ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div className="lds-dual-ring"></div>
-                      )
-                    })() : (() => {})()
-                  }
-
-                  {/**
-                   * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
-                     ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
-                     ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
-                     ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
-                     ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
-                     ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
-                  */}
-                  {
-                      myContext.startBtn !== null ? (() => {
-                        return (
-                          StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div className="lds-dual-ring"></div>
-                        )
-                      })() : (() => {})()
-                    }
-
-                    {
-                      /**
-                       * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
-                         ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗
-                            ██║   ██║   ██║██║   ██║██║     ███████║██████╔╝███████║██║  ██║
-                            ██║   ██║   ██║██║   ██║██║     ██╔══██║██╔═══╝ ██╔══██║██║  ██║
-                            ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
-                            ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
-                      */
-                    }
-                    {
-                      myContext.touchpad !== null ? (() => {
-                        return (
-                          Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div className="lds-dual-ring"></div>
-                        )
-                      })() : (() => {})()
-                    }
-                    {/**
-                     *████████╗██████╗ ██╗███╗   ███╗
-                      ╚══██╔══╝██╔══██╗██║████╗ ████║
-                         ██║   ██████╔╝██║██╔████╔██║
-                         ██║   ██╔══██╗██║██║╚██╔╝██║
-                         ██║   ██║  ██║██║██║ ╚═╝ ██║
-                         ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
-                    */}
-                    {
-                      myContext.trim !== null ? (() => {
-                        return (
-                          Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div className="lds-dual-ring"></div>
-                        )
-                      })() : (() => {})()
-                    }
-                    {/**
-                     * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
-                       ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
-                          ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
-                          ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
-                          ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
-                          ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
-                    */}
-                    {
-                      myContext.trigger !== null ? (() => {
-                        return (
-                          Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div className="lds-dual-ring"></div>
-                        )
-                      })() : (() => {})()
-                    }
-                    {/**
-                     * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-                       ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
-                       ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
-                       ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
-                       ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
-                       ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-                    */}
-                    {
-                      myContext.rearDesign !== null ? (() => {
-                        return (
-                          RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div className="lds-dual-ring"></div>
-                        )
-                      })() : (() => {})()
-                    }
-              </div>
+              <span onClick={() => setSideflag(true)}> Front </span>
+              <span onClick={() => setSideflag(false)}> Back </span>
+              <span onClick={() => setSideflag(!sideflag)}>
+                <img></img>
+              </span>
             </div>
-            <div>
+          </div>
+
+      </LocalHeader>
+        <Viewer flag={sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
+          <div>
+            <div id="viewer">
               <div>
-                <img src={Assets.ModelBackImg}></img>
-                {
-                  myContext.touchpad !== null ? (() => {
-                    return (
-                      Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image_back}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {})()
-                }
-                {/**
-                 *████████╗██████╗ ██╗███╗   ███╗
-                  ╚══██╔══╝██╔══██╗██║████╗ ████║
-                     ██║   ██████╔╝██║██╔████╔██║
-                     ██║   ██╔══██╗██║██║╚██╔╝██║
-                     ██║   ██║  ██║██║██║ ╚═╝ ██║
-                     ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
-                */}
-                {
-                  myContext.trim !== null ? (() => {
-                    return (
-                      Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image_back}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {})()
-                }
-                {/**
-                 * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
-                   ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
-                      ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
-                      ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
-                      ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
-                      ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
-                */}
-                {
-                  myContext.trigger !== null ? (() => {
-                    return (
-                      Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image_back ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image_back}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {})()
-                }
-                {/**
-                 * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-                   ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
-                   ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
-                   ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
-                   ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
-                   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-                */}
-                {
-                  myContext.rearDesign !== null ? (() => {
-                    return (
-                      RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image_back}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {})()
-                }
-                {/**
-                 * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
-                   ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝
-                   ██████╔╝███████║██║  ██║██║  ██║██║     █████╗  
-                   ██╔═══╝ ██╔══██║██║  ██║██║  ██║██║     ██╔══╝  
-                   ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
-                   ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
-                 */}
-                 {
-                  myContext.paddle !== null && myContext.pad_esp_flag ? (() => {
-                    return (
-                      Paddle.items[myContext.paddle].image_back ? <img src={Paddle.items[myContext.paddle].image_back}></img> : <div className="lds-dual-ring"></div>
-                    )
-                  })() : (() => {})()
-                 }
-                 {/**
-                  * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██╗     
-                    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██║     
-                    ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██║     
-                    ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██║     
-                    ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ███████╗
-                    ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚══════╝
+                <div>
+                  <LetterDiv className="target" onFocus={() => console.log('has focus')} onBlue={() => console.log('lost focus')}>
+                    <h1>
+                      { myContext.textVal }
+                    </h1>
+                  </LetterDiv>
+                  <img src={Assets.ModelImg}></img>
+                  {/* 
+                    ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+                    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+                    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+                    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
                   */}
                   {
-                    myContext.ldomin_1 !== null && myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? (() => {
+                    myContext.design !== null ? (() => {
                       return (
-                        DominL.items[myContext.ldomin_2].image_back ? <img src={DominL.items[myContext.ldomin_2].image_back}></img> : <div className="lds-dual-ring"></div>
+                        Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div className="lds-dual-ring"></div>
+                      )
+                    })() : (() => {
+
+                    })()
+                  }
+
+
+                  {/*
+                      █████╗ ██████╗ ██╗  ██╗██╗   ██╗
+                      ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
+                      ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
+                      ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
+                      ██║  ██║██████╔╝██╔╝ ██╗   ██║   
+                      ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
+                  */}
+                  {
+                    myContext.abxy !== null ? (() => {
+                      return (
+                        Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div className="lds-dual-ring"></div>
+                      )
+                    })() : (() => {
+                    })()
+                  }
+                  {/*
+                      ██████╗ ██████╗  █████╗ ██████╗ 
+                      ██╔══██╗██╔══██╗██╔══██╗██╔══██╗
+                      ██║  ██║██████╔╝███████║██║  ██║
+                      ██║  ██║██╔═══╝ ██╔══██║██║  ██║
+                      ██████╔╝██║     ██║  ██║██████╔╝
+                      ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
+                  */}
+                  {
+                    myContext.dpad !== null ? (() => {
+                      return (
+                        Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div className="lds-dual-ring"></div>
+                      )
+                    })() : (() => {
+                    })()
+                  }
+                  {/**
+                   * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██╗     
+                     ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██║     
+                        ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██║     
+                        ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██║     
+                        ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
+                        ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
+                  */}
+                  {
+                      myContext.thumbstickL !== null ? (() => {
+                        return (
+                          ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div className="lds-dual-ring"></div>
+                        )
+                      })() : (() => {})()
+                    }
+
+                    {/**
+                     * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
+                       ╚══██╔══╝██║  ██║██║   ██║████╗ ████║██╔══██╗    ██╔══██╗
+                          ██║   ███████║██║   ██║██╔████╔██║██████╔╝    ██████╔╝
+                          ██║   ██╔══██║██║   ██║██║╚██╔╝██║██╔══██╗    ██╔══██╗
+                          ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
+                          ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
+                    */}
+                    {
+                      myContext.thumbstickR !== null ? (() => {
+                        return (
+                          ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div className="lds-dual-ring"></div>
+                        )
+                      })() : (() => {})()
+                    }
+
+                    {/**
+                     * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+                       ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+                       ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
+                       ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
+                       ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
+                       ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
+                    */}
+                    {
+                        myContext.startBtn !== null ? (() => {
+                          return (
+                            StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          )
+                        })() : (() => {})()
+                      }
+
+                      {
+                        /**
+                         * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
+                           ╚══██╔══╝██╔═══██╗██║   ██║██╔════╝██║  ██║██╔══██╗██╔══██╗██╔══██╗
+                              ██║   ██║   ██║██║   ██║██║     ███████║██████╔╝███████║██║  ██║
+                              ██║   ██║   ██║██║   ██║██║     ██╔══██║██╔═══╝ ██╔══██║██║  ██║
+                              ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
+                              ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
+                        */
+                      }
+                      {
+                        myContext.touchpad !== null ? (() => {
+                          return (
+                            Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          )
+                        })() : (() => {})()
+                      }
+                      {/**
+                       *████████╗██████╗ ██╗███╗   ███╗
+                        ╚══██╔══╝██╔══██╗██║████╗ ████║
+                           ██║   ██████╔╝██║██╔████╔██║
+                           ██║   ██╔══██╗██║██║╚██╔╝██║
+                           ██║   ██║  ██║██║██║ ╚═╝ ██║
+                           ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+                      */}
+                      {
+                        myContext.trim !== null ? (() => {
+                          return (
+                            Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          )
+                        })() : (() => {})()
+                      }
+                      {/**
+                       * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
+                         ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+                            ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+                            ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+                            ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
+                            ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+                      */}
+                      {
+                        myContext.trigger !== null ? (() => {
+                          return (
+                            Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          )
+                        })() : (() => {})()
+                      }
+                      {/**
+                       * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                         ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                         ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+                         ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+                         ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+                         ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                      */}
+                      {
+                        myContext.rearDesign !== null ? (() => {
+                          return (
+                            RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          )
+                        })() : (() => {})()
+                      }
+                </div>
+              </div>
+              <div>
+                <div>
+                  <img src={Assets.ModelBackImg}></img>
+                  {
+                    myContext.touchpad !== null ? (() => {
+                      return (
+                        Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
                   }
                   {/**
-                   * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██████╗ 
-                     ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██╔══██╗
-                     ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██████╔╝
-                     ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██╔══██╗
-                     ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║  ██║
-                     ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝
-                   */}
-                   {
-                    myContext.rdomin_1 !== null && myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? (() => {
+                   *████████╗██████╗ ██╗███╗   ███╗
+                    ╚══██╔══╝██╔══██╗██║████╗ ████║
+                       ██║   ██████╔╝██║██╔████╔██║
+                       ██║   ██╔══██╗██║██║╚██╔╝██║
+                       ██║   ██║  ██║██║██║ ╚═╝ ██║
+                       ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+                  */}
+                  {
+                    myContext.trim !== null ? (() => {
                       return (
-                        DominR.items[myContext.rdomin_2].image_back ? <img src={DominR.items[myContext.rdomin_2].image_back}></img> : <div className="lds-dual-ring"></div>
+                        Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
-                   }
+                  }
+                  {/**
+                   * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
+                     ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
+                        ██║   ██████╔╝██║██║  ███╗██║  ███╗█████╗  ██████╔╝
+                        ██║   ██╔══██╗██║██║   ██║██║   ██║██╔══╝  ██╔══██╗
+                        ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
+                        ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
+                  */}
+                  {
+                    myContext.trigger !== null ? (() => {
+                      return (
+                        Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image_back ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image_back}></img> : <div className="lds-dual-ring"></div>
+                      )
+                    })() : (() => {})()
+                  }
+                  {/**
+                   * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                     ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                     ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+                     ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+                     ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+                     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+                  */}
+                  {
+                    myContext.rearDesign !== null ? (() => {
+                      return (
+                        RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image_back}></img> : <div className="lds-dual-ring"></div>
+                      )
+                    })() : (() => {})()
+                  }
+                  {/**
+                   * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
+                     ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝
+                     ██████╔╝███████║██║  ██║██║  ██║██║     █████╗  
+                     ██╔═══╝ ██╔══██║██║  ██║██║  ██║██║     ██╔══╝  
+                     ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
+                     ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
+                  */}
+                  {
+                    myContext.paddle !== null && myContext.pad_esp_flag ? (() => {
+                      return (
+                        Paddle.items[myContext.paddle].image_back ? <img src={Paddle.items[myContext.paddle].image_back}></img> : <div className="lds-dual-ring"></div>
+                      )
+                    })() : (() => {})()
+                  }
+                  {/**
+                    * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██╗     
+                      ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██║     
+                      ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██║     
+                      ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██║     
+                      ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ███████╗
+                      ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚══════╝
+                    */}
+                    {
+                      myContext.ldomin_1 !== null && myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? (() => {
+                        return (
+                          DominL.items[myContext.ldomin_2].image_back ? <img src={DominL.items[myContext.ldomin_2].image_back}></img> : <div className="lds-dual-ring"></div>
+                        )
+                      })() : (() => {})()
+                    }
+                    {/**
+                     * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██████╗ 
+                       ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██╔══██╗
+                       ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██████╔╝
+                       ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██╔══██╗
+                       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║  ██║
+                       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝
+                    */}
+                    {
+                      myContext.rdomin_1 !== null && myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? (() => {
+                        return (
+                          DominR.items[myContext.rdomin_2].image_back ? <img src={DominR.items[myContext.rdomin_2].image_back}></img> : <div className="lds-dual-ring"></div>
+                        )
+                      })() : (() => {})()
+                    }
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </Viewer>
-      <LocalFooter>
-        <div id="info_div">
-          <TotalPrice>
-            <span>
-              Total
-            </span>
-            <span>
-              $63.99
-            </span>
-          </TotalPrice>
-          <Info>
-            <div>
-              <span> Estimated Delivery Date </span>
-              <EDD>
-                04/04/2022
-              </EDD>
-            </div>
-            <ATC>
-              <img></img>
-              Add to Cart
-            </ATC>
-          </Info>
-        </div>
-      </LocalFooter>
-    </Wrapper>
-  )
+        </Viewer>
+        <LocalFooter>
+          <div id="info_div">
+            <TotalPrice>
+              <span>
+                Total
+              </span>
+              <span>
+                $63.99
+              </span>
+            </TotalPrice>
+            <Info>
+              <div>
+                <span> Estimated Delivery Date </span>
+                <EDD>
+                  04/04/2022
+                </EDD>
+              </div>
+              <ATC>
+                <img></img>
+                Add to Cart
+              </ATC>
+            </Info>
+          </div>
+        </LocalFooter>
+      </Wrapper>
+    )
 }
 
 const Wrapper = styled.div`
@@ -377,6 +416,12 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  /* .moveable-control {
+    display: none;
+  }
+  .moveable-line {
+    display: none !important;
+  } */
 `
 
 const Loading = styled.div`
@@ -569,6 +614,20 @@ const ATC = styled.button`
   background-color: ${props => props.theme.ThemeColor};
   img {
     content: url(${props => props.theme.AtcIcon});
+  }
+`
+
+const LetterDiv = styled.div`
+  padding: 20px;
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  h1 {
+    font-size: 30px;
+    font-family: ${"bazooka"};
   }
 `
 

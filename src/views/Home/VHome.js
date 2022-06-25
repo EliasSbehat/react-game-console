@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+
 import { ThemeProvider } from "styled-components";
 import Header from "../../components/Header/Header";
 import Tools from "../../components/Tools/Tools";
@@ -9,6 +10,7 @@ import AppContext from "../../context/context";
 import { DarkMode, DayMode } from "../../theme";
 
 const VHome = () => {
+
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
   const [dpad, setDpad] = React.useState(null);
@@ -29,6 +31,11 @@ const VHome = () => {
   const [ldomin_2, setLdomin2] = React.useState(null);
 
   const [digital_trigger, setDigital_trigger] = React.useState(false);
+
+  // Text
+  const [isText, setIsText] = React.useState(false);
+  const [textVal, setTextVal] = React.useState('');
+  const [familyId, setFamily] = React.useState(0);
 
   const imageSetting = {
     design: design,
@@ -70,57 +77,45 @@ const VHome = () => {
     digital_trigger,
     setDigital_trigger,
 
-    spanNames : [
-      {
-        name: 'Design'
-      },
-      {
-        name: 'Abxy'
-      },
-      {
-        name: 'Dpad'
-      },
-      {
-        name: 'Thumbstick L'
-      },
-      {
-        name: 'Thumbstick R'
-      },
-      {
-        name: 'Start Back'
-      },
-      {
-        name: 'Touchpad'
-      },
-      {
-        name: 'Trim'
-      },
-      {
-        name: 'triggers'
-      },
-      {
-        name: 'Rear Design',
-      },
-      {
-        name: 'Razorback Maxfire',
-      },
-      {
-        name: 'Paddles',
-      },
-      {
-        name: 'Left Domin8or Button'
-      },
-      {
-        name: 'Right Domin8or Button'
-      },
-      {
-        name: 'Digital Triggers'
-      }
+    // text
+    isText,
+    setIsText,
+    textVal,
+    setTextVal,
+    familyId,
+    setFamily,
+
+    spanNames : [ 
+      { name: 'Design' },
+      { name: 'Abxy' },
+      { name: 'Dpad' },
+      { name: 'Thumbstick L' },
+      { name: 'Thumbstick R' },
+      { name: 'Start Back' },
+      { name: 'Touchpad' },
+      { name: 'Trim' },
+      { name: 'triggers' },
+      { name: 'Rear Design', },
+      { name: 'Razorback Maxfire', },
+      { name: 'Paddles', },
+      { name: 'Left Domin8or Button' },
+      { name: 'Right Domin8or Button' },
+      { name: 'Digital Triggers' },
+      { name: 'Text' }
+    ],
+    fontFamiles: [
+      { name: 'motion picture', family: 'motion-picture' },
+      { name: 'pristina', family: 'pristina' },
+      { name: 'delicia', family: 'delicia' },
+      { name: 'luna', family: 'luna-medium' },
+      { name: 'FORTNITE', family: 'fortnite' },
+      { name: 'BAZOOKA', family: 'bazooka' }
     ]
   }
 
   // Check height of components
   const [h_header, getHeader] = React.useState(0);
+
   React.useEffect(() => {
     getHeader(document.getElementById('header').clientHeight + 3);
   }, [])

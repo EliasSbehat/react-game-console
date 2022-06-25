@@ -517,19 +517,56 @@ const Tools = () => {
                ██████╔╝██║╚██████╔╝██║   ██║   ██║  ██║███████╗       ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║███████║
                ╚═════╝ ╚═╝ ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
              */}
-             {
-
-             }
              <SwiperSlide>
               <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
                 <span>Digital Triggers</span>
                 <label>
                   <div>
-                    
+
                   </div>
                 </label>
               </RazorDiv>
             </SwiperSlide>
+            {/**
+             * 
+             * ████████╗███████╗██╗  ██╗████████╗
+               ╚══██╔══╝██╔════╝╚██╗██╔╝╚══██╔══╝
+                  ██║   █████╗   ╚███╔╝    ██║   
+                  ██║   ██╔══╝   ██╔██╗    ██║   
+                  ██║   ███████╗██╔╝ ██╗   ██║   
+                  ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   
+             */}
+             <SwiperSlide>
+              <RazorDiv flag={myContext.isText} onClick = {() => myContext.setIsText(!myContext.isText)}>
+                <span>
+                  {
+                    !myContext.isText ? 'Add' : 'Remove'
+                  } 
+                  text
+                  </span>
+                <label> <div /> </label>
+              </RazorDiv>
+              {
+                !myContext.isText ? (() => {})() : (
+                  <TextDiv>
+                    <input type="text" className="added-text" maxLength="14" value={myContext.textVal} onChange={(e) => myContext.setTextVal(e.target.value)} />
+                    <select className="font-type" onChange={(e) => {
+                      debugger;
+                    }}>
+                      {
+                        myContext.fontFamiles.map((item, index) => (
+                          <FontOption family={item.family} key={index} value={index} >
+                            {
+                              item.name
+                            }
+                          </FontOption>
+                        ))
+                      }
+                    </select>
+                  </TextDiv>
+                )
+              } 
+             </SwiperSlide>
         </Swiper>
       </MediumDiv>
     </Wrapper>
@@ -689,7 +726,7 @@ const RazorDiv = styled.div`
   justify-content: space-between;
   font-family: 'Rajdhani-Medium';
   color: ${props => props.theme.color};
-  border: ${props => props.theme.SwapBorder};
+  border: ${props => props.theme.DirectIconBorder};
   & > label:nth-child(2) {
     width: 60px;
     height: 50%;
@@ -732,11 +769,48 @@ const LDominContainer = styled.div`
         justify-content: space-between;
         font-family: 'Rajdhani-Medium';
         color: ${props => props.theme.color};
-        border: ${props => props.theme.SwapBorder};
+        border: ${props => props.theme.DirectIconBorder};
         color: ${props => props.theme.color}
       }
     }
   }
 `
+
+const TextDiv = styled.div`
+  margin: 10px;
+  border: 1px solid ${props => props.theme.ThemeColor};
+  padding: 10px;
+  color: ${props => props.theme.color};
+  .added-text {
+    color: ${props => props.theme.color};
+    width: calc(100% - 2 * 10px);
+    padding: 10px;
+    outline: none;
+    border: ${props => props.theme.DirectIconBorder};
+    background-color: ${props => props.theme.HeadIconBgColor};
+    margin-bottom: 20px;
+  }
+  .font-type {
+    color: ${props => props.theme.color};
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: ${props => props.theme.DirectIconBorder};
+    background-color: ${props => props.theme.DirectIconBgColor};
+    margin-bottom: 20px;
+  }
+`
+
+const FontOption = styled.option`
+  width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  outline: none;
+  border: ${props => props.theme.DirectIconBorder};
+  margin-bottom: 20px;
+  min-height: 30px;
+  height: 20px;
+  font-family: ${props => props.family};
+`;
 
 export default Tools;
