@@ -42,7 +42,7 @@ const VHome = () => {
   const [images, setImages] = React.useState([]);
 
   const imageSetting = {
-    design: design,
+    design,
     setDesign,
     abxy,
     setAbxy,

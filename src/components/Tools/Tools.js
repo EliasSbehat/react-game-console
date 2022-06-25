@@ -109,13 +109,18 @@ const Tools = () => {
               <Selector>
                 {
                   Design.items[DesigntabSelect].map((item, index) => (
-                    <SelectItem bgImg={item.selet} onClick={() => myContext.setDesign([DesigntabSelect, index])}></SelectItem>
+                    <SelectItem 
+                      bgImg={item.selet}
+                      now = { myContext.design === null ? -1 : 10000 * snapIndex + 100 * myContext.design[0] + myContext.design[1]}
+                      me = { 10000 * snapIndex + 100 * DesigntabSelect + index }
+                      onClick={() => myContext.setDesign([DesigntabSelect, index])} 
+                    />
                   ))
                 }
               </Selector>
             </SwiperSlide>
           {/*
-              █████╗ ██████╗ ██╗  ██╗██╗   ██╗
+              █████╗  ██████╗ ██╗  ██╗██╗   ██╗
               ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
               ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
               ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
@@ -141,7 +146,12 @@ const Tools = () => {
             <Selector>
               {
                 Abxy.items[AbxytabSelect].map((item, index) => (
-                  <SelectItem bgImg={item.selet} onClick={() => myContext.setAbxy([AbxytabSelect, index])}></SelectItem>
+                  <SelectItem 
+                    bgImg={item.selet}
+                    now = { myContext.abxy === null ? -1 : 10000 * snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
+                    me = { 10000 * snapIndex + 100 * AbxytabSelect + index }
+                    onClick={() => myContext.setAbxy([AbxytabSelect, index])}
+                  ></SelectItem>
                 ))
               }
             </Selector>
@@ -189,7 +199,7 @@ const Tools = () => {
                ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
           */}
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <Selector>
               {
                 ThumbL.items[ThumbLtabSelect].map((item, index) => (
@@ -197,7 +207,7 @@ const Tools = () => {
                 ))
               }
             </Selector>
-          </SwiperSlide>
+          </SwiperSlide> */}
 
           {/**
            * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
@@ -207,7 +217,7 @@ const Tools = () => {
                 ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
                 ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
            */}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <Selector>
                 {
                   ThumbR.items[ThumbRtabSelect].map((item, index) => (
@@ -215,7 +225,7 @@ const Tools = () => {
                   ))
                 }
               </Selector>
-            </SwiperSlide>
+            </SwiperSlide> */}
 
             {/**
              * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
@@ -225,7 +235,7 @@ const Tools = () => {
                ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             <SwiperSlide>
+             {/* <SwiperSlide>
               <TopItems>
                 {
                   StartBtn.steps.map((item, index) => (
@@ -248,7 +258,7 @@ const Tools = () => {
                   ))
                 }
               </Selector>
-            </SwiperSlide>
+            </SwiperSlide> */}
 
             {/**
              * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
@@ -258,7 +268,7 @@ const Tools = () => {
                   ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
                   ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
             */}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <TopItems>
                 {
                   Touchpad.steps.map((item, index) => (
@@ -281,7 +291,7 @@ const Tools = () => {
                   ))
                 }
               </Selector>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ████████╗██████╗ ██╗███╗   ███╗
                ╚══██╔══╝██╔══██╗██║████╗ ████║
@@ -290,7 +300,7 @@ const Tools = () => {
                   ██║   ██║  ██║██║██║ ╚═╝ ██║
                   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
              */}
-             <SwiperSlide>
+             {/* <SwiperSlide>
               <Selector>
                 {
                   Trim.items[TrimtabSelect].map((item, index) => (
@@ -298,7 +308,7 @@ const Tools = () => {
                   ))
                 }
               </Selector>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
                ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
@@ -307,7 +317,7 @@ const Tools = () => {
                   ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
                   ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
             */}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <TopItems>
                 {
                   Trigger.steps.map((item, index) => (
@@ -330,7 +340,7 @@ const Tools = () => {
                   ))
                 }
               </Selector>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
                ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
@@ -339,21 +349,8 @@ const Tools = () => {
                ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
                ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
             */}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <TopItems>
-                {/* {
-                  Trigger.steps.map((item, index) => (
-                    <TapItem key={ index } keys={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
-                      <span>
-                        {item.name}
-                      </span>
-                      <span>
-                        {item.price}
-                      </span>
-                      <div></div>
-                    </TapItem>
-                  ))
-                } */}
               </TopItems>
               <Selector>
                 {
@@ -362,7 +359,7 @@ const Tools = () => {
                   ))
                 }
               </Selector>
-            </SwiperSlide>
+            </SwiperSlide> */}
 
             {/**
              * ██████╗  █████╗ ███████╗ ██████╗ ██████╗     ██████╗  █████╗  ██████╗██╗  ██╗
@@ -373,7 +370,7 @@ const Tools = () => {
                ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
              * 
             */}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <RazorDiv flag={myContext.razorBack} onClick = {() => myContext.setRazorBack(!myContext.razorBack)}>
                 <span>Razorback Maxfire Modes</span>
                 <label>
@@ -382,7 +379,7 @@ const Tools = () => {
                   </div>
                 </label>
               </RazorDiv>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * 
              * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
@@ -392,7 +389,7 @@ const Tools = () => {
                ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
                ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
              */}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <PaddleWrapper>
                 <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Paddles</span>
@@ -412,7 +409,7 @@ const Tools = () => {
                   )
                 }
               </PaddleWrapper>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██╗     ███████╗███████╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
                ██║     ██╔════╝██╔════╝╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
@@ -421,7 +418,7 @@ const Tools = () => {
                ███████╗███████╗██║        ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚══════╝╚══════╝╚═╝        ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             <SwiperSlide>
+             {/* <SwiperSlide>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
@@ -464,7 +461,7 @@ const Tools = () => {
                   )
                 }
               </LDominWrapper>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██████╗ ██╗ ██████╗ ██╗  ██╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
                ██╔══██╗██║██╔════╝ ██║  ██║╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
@@ -473,7 +470,7 @@ const Tools = () => {
                ██║  ██║██║╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             <SwiperSlide>
+             {/* <SwiperSlide>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
@@ -516,7 +513,7 @@ const Tools = () => {
                   )
                 }
               </LDominWrapper>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██████╗ ██╗ ██████╗ ██╗████████╗ █████╗ ██╗         ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ ███████╗
                ██╔══██╗██║██╔════╝ ██║╚══██╔══╝██╔══██╗██║         ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗██╔════╝
@@ -525,7 +522,7 @@ const Tools = () => {
                ██████╔╝██║╚██████╔╝██║   ██║   ██║  ██║███████╗       ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║███████║
                ╚═════╝ ╚═╝ ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
              */}
-             <SwiperSlide>
+             {/* <SwiperSlide>
               <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
                 <span>Digital Triggers</span>
                 <label>
@@ -534,7 +531,7 @@ const Tools = () => {
                   </div>
                 </label>
               </RazorDiv>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * 
              * ████████╗███████╗██╗  ██╗████████╗
@@ -544,7 +541,7 @@ const Tools = () => {
                   ██║   ███████╗██╔╝ ██╗   ██║   
                   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   
              */}
-             <SwiperSlide>
+             {/* <SwiperSlide>
               <RazorDiv flag={myContext.isText} onClick = {() => myContext.setIsText(!myContext.isText)}>
                 <span>
                   {
@@ -572,7 +569,7 @@ const Tools = () => {
                   </TextDiv>
                 )
               } 
-             </SwiperSlide>
+             </SwiperSlide> */}
              {/**
               * ██╗      ██████╗  ██████╗  ██████╗ 
                 ██║     ██╔═══██╗██╔════╝ ██╔═══██╗
@@ -618,11 +615,6 @@ const Tools = () => {
                             >
                               Click here to upload image
                             </button>
-                            {/* {myContext.images.map((image, index) => (
-                              <div key={index} className="image-item">
-                                <img src={image['data_url']} alt="" width="100" />
-                              </div>
-                            ))} */}
                           </div>
                         )}
                       </ImageUploading>
@@ -757,11 +749,11 @@ const MediumDiv = styled.div`
 
 const Selector = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
-  gap: 10px;
+  gap: 20px;
   justify-content: flex-start;
   align-content: flex-start;
   height: 100%;
@@ -772,7 +764,7 @@ const SelectItem = styled.div`
   width: 50px;
   height: 50px;
   border-radius: 20px;
-  border: 1px solid white;
+  outline: ${props => props.now !== props.me ? '2px solid white' : `4px solid ${props.theme.ThemeColor}`};
   color: white;
   background-image: url(${props => props.bgImg});
   background-repeat: no-repeat;

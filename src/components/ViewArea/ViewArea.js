@@ -27,7 +27,7 @@ const ViewArea = () => {
   const [target, setTarget] = React.useState();
   const [target1, setTarget1] = React.useState();
 
-
+  const [isover_text, setOver_text] = React.useState(1);
 
   const [frame] = React.useState({
     translate: [0, 0],
@@ -60,7 +60,7 @@ const ViewArea = () => {
     const moveableRef1 = React.useRef();
 
     return (
-      <Wrapper>
+      <Wrapper isover_text={isover_text}>
         <Moveable
           ref={moveableRef}
           target={target}
@@ -477,10 +477,10 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  /* .moveable-control {
-    display: none;
+  .moveable-control {
+    display: ${props => props.isover_text ? 'black' : 'none'}
   }
-  .moveable-line {
+  /* .moveable-line {
     display: none !important;
   } */
 `
@@ -686,8 +686,10 @@ const LetterDiv = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  overflow: hidden;
   h1 {
-    font-size: 30px;
+    font-size: 20px;
+    font-size-adjust: 0.5;
     font-family: ${props => props.ff};
   }
 `

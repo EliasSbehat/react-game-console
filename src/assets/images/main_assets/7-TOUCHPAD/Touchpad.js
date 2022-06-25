@@ -45,22 +45,22 @@ export const Touchpad = {
   ],
   items: [
     [
-      { name: 'Midnight Black', image: t_1_1, selet: t_1_1s },
-      { name: 'Red Matte', image: t_1_2, selet: t_1_2s },
-      { name: 'Green Matte', image: t_1_3, selet: t_1_3s },
-      { name: 'White Matte', image: t_1_4, selet: t_1_4s },
-      { name: 'Pink Matte', image: t_1_5, selet: t_1_5s },
+      { price: 1.99, name: 'Midnight Black', image: t_1_1, selet: t_1_1s },
+      { price: 1.99, name: 'Red Matte', image: t_1_2, selet: t_1_2s },
+      { price: 1.99, name: 'Green Matte', image: t_1_3, selet: t_1_3s },
+      { price: 1.99, name: 'White Matte', image: t_1_4, selet: t_1_4s },
+      { price: 1.99, name: 'Pink Matte', image: t_1_5, selet: t_1_5s },
     ],
     [
-      { name: 'Supernova', image: t_2_1, selet: t_2_1s },
-      { name: 'Chameleon', image: t_2_2, selet: t_2_2s },
-      { name: 'Vampire Red', image: t_2_3, selet: t_2_3s },
-      { name: 'Sakura Pink', image: t_2_4, selet: t_2_4s },
-      { name: 'Soft Touch Blue', image: t_2_5, selet: t_2_5s },
-      { name: 'Soft Touch Green', image: t_2_6, selet: t_2_6s },
-      { name: 'Soft Touch Orange', image: t_2_7, selet: t_2_7s },
-      { name: 'Soft Touch Purple', image: t_2_8, selet: t_2_8s },
-      { name: 'Hope Grey', image: t_2_9, selet: t_2_9s },
+      { price: 4.99, name: 'Supernova', image: t_2_1, selet: t_2_1s },
+      { price: 4.99, name: 'Chameleon', image: t_2_2, selet: t_2_2s },
+      { price: 4.99, name: 'Vampire Red', image: t_2_3, selet: t_2_3s },
+      { price: 4.99, name: 'Sakura Pink', image: t_2_4, selet: t_2_4s },
+      { price: 4.99, name: 'Soft Touch Blue', image: t_2_5, selet: t_2_5s },
+      { price: 4.99, name: 'Soft Touch Green', image: t_2_6, selet: t_2_6s },
+      { price: 4.99, name: 'Soft Touch Orange', image: t_2_7, selet: t_2_7s },
+      { price: 4.99, name: 'Soft Touch Purple', image: t_2_8, selet: t_2_8s },
+      { price: 4.99, name: 'Hope Grey', image: t_2_9, selet: t_2_9s },
     ]
   ]
 }
