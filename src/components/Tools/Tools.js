@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ImageUploading from 'react-images-uploading';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
@@ -37,6 +38,13 @@ const Tools = () => {
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const myContext = React.useContext(AppContext);
   const [snapIndex, setSnapIndex] = React.useState(0);
+
+  const maxNumber = 69;
+
+  const onChange = (imageList, addUpdateIndex) => {
+    console.log(imageList, addUpdateIndex);
+    myContext.setImages(imageList);
+  };
 
   return (
     <Wrapper>
@@ -540,7 +548,7 @@ const Tools = () => {
               <RazorDiv flag={myContext.isText} onClick = {() => myContext.setIsText(!myContext.isText)}>
                 <span>
                   {
-                    !myContext.isText ? 'Add' : 'Remove'
+                    !myContext.isText ? 'Add ' : 'Remove '
                   } 
                   text
                   </span>
@@ -565,6 +573,63 @@ const Tools = () => {
                 )
               } 
              </SwiperSlide>
+             {/**
+              * ██╗      ██████╗  ██████╗  ██████╗ 
+                ██║     ██╔═══██╗██╔════╝ ██╔═══██╗
+                ██║     ██║   ██║██║  ███╗██║   ██║
+                ██║     ██║   ██║██║   ██║██║   ██║
+                ███████╗╚██████╔╝╚██████╔╝╚██████╔╝
+                ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ 
+              */}
+              <SwiperSlide>
+                <RazorDiv flag={myContext.isLogo} onClick = {() => myContext.setLogo(!myContext.isLogo)}>
+                  <span>
+                    {
+                      !myContext.isLogo ? 'Add ' : 'Remove '
+                    } 
+                    Logo
+                    </span>
+                  <label> <div /> </label>
+                </RazorDiv>
+                {
+                  !myContext.isLogo ? (() => {})() : (
+                    <TextDiv>
+                      <ImageUploading
+                        value={myContext.images}
+                        onChange={onChange}
+                        maxNumber={maxNumber}
+                        dataURLKey="data_url"
+                      >
+                        {({
+                          imageList,
+                          onImageUpload,
+                          onImageRemoveAll,
+                          onImageUpdate,
+                          onImageRemove,
+                          isDragging,
+                          dragProps,
+                        }) => (
+                          // write your building UI
+                          <div className="upload__image-wrapper">
+                            <button
+                              style={isDragging ? { color: 'red' } : undefined}
+                              onClick={onImageUpload}
+                              {...dragProps}
+                            >
+                              Click here to upload image
+                            </button>
+                            {/* {myContext.images.map((image, index) => (
+                              <div key={index} className="image-item">
+                                <img src={image['data_url']} alt="" width="100" />
+                              </div>
+                            ))} */}
+                          </div>
+                        )}
+                      </ImageUploading>
+                    </TextDiv>
+                  )
+                } 
+              </SwiperSlide>
         </Swiper>
       </MediumDiv>
     </Wrapper>
@@ -810,5 +875,12 @@ const FontOption = styled.option`
   height: 20px;
   font-family: ${props => props.family};
 `;
+
+const UploadImg = styled.div`
+  margin: 10px;
+  border: 1px solid ${props => props.theme.ThemeColor};
+  padding: 10px;
+  color: ${props => props.theme.color};
+`
 
 export default Tools;

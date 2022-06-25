@@ -23,25 +23,42 @@ const ViewArea = () => {
   
   const [sideflag, setSideflag] = React.useState(true);
   const myContext = React.useContext(AppContext);
+
   const [target, setTarget] = React.useState();
+  const [target1, setTarget1] = React.useState();
+
+
+
   const [frame] = React.useState({
     translate: [0, 0],
     rotate: 0,
   });
+  const [frame1] = React.useState({
+    translate: [0, 0],
+    rotate: 0,
+  });
+
   React.useEffect(() => {
     const target = document.querySelector('.target');
-
     setTarget(target);
-
-    console.log(moveableRef.current.props.target);
-
     target.addEventListener('load', () => {
       setTimeout(() => {
         moveableRef.current.updateRect();
       }, 2000);
     });
-  }, []); 
+
+    const target1 = document.querySelector('.target1');
+    setTarget1(target1);
+    target1.addEventListener('load', () => {
+      setTimeout(() => {
+        moveableRef1.current.updateRect();
+      }, 2000);
+    });
+
+    }, []); 
     const moveableRef = React.useRef();
+    const moveableRef1 = React.useRef();
+
     return (
       <Wrapper>
         <Moveable
@@ -80,7 +97,44 @@ const ViewArea = () => {
           onRender={({ target }) => {
             target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px) rotate(${frame.rotate}deg)`;
           }}
-        ></Moveable>;
+        ></Moveable>
+        <Moveable
+          ref={moveableRef1}
+          target={target1}
+          draggable={true}
+          throttleDrag={0}
+          resizable={true}
+          throttleResize={0}
+          rotatable={true}
+          rotationPosition={'top'}
+          throttleRotate={0}
+          hideDefaultLines={false}
+          origin={false}
+          onDragStart={({ set }) => {
+            set(frame1.translate);
+          }}
+          onDrag={({ beforeTranslate }) => {
+            frame1.translate = beforeTranslate;
+          }}
+          onResizeStart={({ setOrigin, dragStart }) => {
+            setOrigin(['%', '%']);
+            dragStart && dragStart.set(frame1.translate);
+          }}
+          onResize={({ target, width, height, drag }) => {
+            frame1.translate = drag.beforeTranslate;
+            target.style.width = `${width}px`;
+            target.style.height = `${height}px`;
+          }}
+          onRotateStart={({ set }) => {
+            set(frame1.rotate);
+          }}
+          onRotate={({ beforeRotate }) => {
+            frame1.rotate = beforeRotate;
+          }}
+          onRender={({ target }) => {
+            target.style.transform = `translate(${frame1.translate[0]}px, ${frame1.translate[1]}px) rotate(${frame1.rotate}deg)`;
+          }}
+        ></Moveable>
         <Loading>
           <div className="lds-ripple"><div></div><div></div></div>
         </Loading>
@@ -106,6 +160,13 @@ const ViewArea = () => {
             <div id="viewer">
               <div>
                 <div>
+                  <LogoDiv className="target1">
+                    {
+                      myContext.images.length !== 0 ? (
+                        <img src={myContext.images[0]['data_url']}></img>
+                      ) : (() => {})()
+                    }
+                  </LogoDiv>
                   <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
                     <h1>
                       { myContext.textVal }
@@ -620,7 +681,7 @@ const ATC = styled.button`
 const LetterDiv = styled.div`
   padding: 20px;
   position: absolute;
-  z-index: 10;
+  z-index: 51;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -629,6 +690,15 @@ const LetterDiv = styled.div`
     font-size: 30px;
     font-family: ${props => props.ff};
   }
+`
+
+const LogoDiv = styled.div`
+  padding: 20px;
+  z-index: 50;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export default ViewArea;

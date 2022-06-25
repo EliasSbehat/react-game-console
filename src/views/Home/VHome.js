@@ -37,6 +37,10 @@ const VHome = () => {
   const [textVal, setTextVal] = React.useState('');
   const [familyId, setFamily] = React.useState(0);
 
+  // Logo
+  const [isLogo, setLogo] = React.useState(false);
+  const [images, setImages] = React.useState([]);
+
   const imageSetting = {
     design: design,
     setDesign,
@@ -85,6 +89,11 @@ const VHome = () => {
     familyId,
     setFamily,
 
+    // Logo
+    isLogo,
+    setLogo,
+    images,
+    setImages,
     spanNames : [ 
       { name: 'Design' },
       { name: 'Abxy' },
@@ -101,7 +110,8 @@ const VHome = () => {
       { name: 'Left Domin8or Button' },
       { name: 'Right Domin8or Button' },
       { name: 'Digital Triggers' },
-      { name: 'Text' }
+      { name: 'Text' },
+      { name: 'Logo' }
     ],
     fontFamiles: [
       { name: 'motion picture', family: 'motion-picture' },
