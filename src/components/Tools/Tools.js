@@ -477,7 +477,7 @@ const Tools = () => {
                       }
                     </Selector>
                   ) : (
-                    <span>To have paddles, please turn on switch</span>
+                    <span></span>
                   )
                 }
               </PaddleWrapper>
@@ -549,7 +549,7 @@ const Tools = () => {
                       </div>
                     </LDominContainer>
                   ) : (
-                    <span>To have Left Domin button, please turn on switch</span>
+                    <span></span>
                   )
                 }
               </LDominWrapper>
@@ -622,7 +622,7 @@ const Tools = () => {
                       </div>
                     </LDominContainer>
                   ) : (
-                    <span>To have Left Domin button, please turn on switch</span>
+                    <span></span>
                   )
                 }
               </LDominWrapper>
@@ -783,8 +783,9 @@ const TopDiv = styled.div`
 `
 const TopItems = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
+  width: calc(100% - 40px);
 `
 
 const TapItem = styled.div`

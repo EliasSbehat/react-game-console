@@ -60,48 +60,52 @@ const ViewArea = () => {
 
     return (
       <Wrapper isover_text={isover_text}>
-        <Moveable
-          ref={moveableRef}
-          target={target}
-          draggable={true}
-          throttleDrag={0}
-          resizable={true}
-          throttleResize={0}
-          rotatable={true}
-          rotationPosition={'top'}
-          throttleRotate={0}
-          roundable={true}
-          warpable = {true}
-          keepRatio={false}
-          scalable = {true}
-          origin={false}
-          snapElement={true}
-          onDragStart={({ set }) => {
-            set(frame.translate);
-          }}
-          onDrag={({ beforeTranslate }) => {
-            frame.translate = beforeTranslate;
-          }}
-          onResizeStart={({ setOrigin, dragStart }) => {
-            setOrigin(['%', '%']);
-            dragStart && dragStart.set(frame.translate);
-          }}
-          onResize={({ target, width, height, drag }) => {
-            frame.translate = drag.beforeTranslate;
-            target.style.width = `${width}px`;
-            target.style.height = `${height}px`;
-          }}
-          onRotateStart={({ set }) => {
-            set(frame.rotate);
-          }}
-          onRotate={({ beforeRotate }) => {
-            frame.rotate = beforeRotate;
-          }}
-          onRender={({ target }) => {
-            target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px) rotate(${frame.rotate}deg)`;
-          }}
-        ></Moveable>
-        <Moveable
+        {
+          myContext.isText && sideflag ?
+          <Moveable
+            ref={moveableRef}
+            target={target}
+            draggable={true}
+            throttleDrag={0}
+            resizable={true}
+            throttleResize={0}
+            rotatable={true}
+            rotationPosition={'top'}
+            throttleRotate={0}
+            roundable={true}
+            warpable = {true}
+            keepRatio={false}
+            scalable = {true}
+            origin={false}
+            snapElement={true}
+            onDragStart={({ set }) => {
+              set(frame.translate);
+            }}
+            onDrag={({ beforeTranslate }) => {
+              frame.translate = beforeTranslate;
+            }}
+            onResizeStart={({ setOrigin, dragStart }) => {
+              setOrigin(['%', '%']);
+              dragStart && dragStart.set(frame.translate);
+            }}
+            onResize={({ target, width, height, drag }) => {
+              frame.translate = drag.beforeTranslate;
+              target.style.width = `${width}px`;
+              target.style.height = `${height}px`;
+            }}
+            onRotateStart={({ set }) => {
+              set(frame.rotate);
+            }}
+            onRotate={({ beforeRotate }) => {
+              frame.rotate = beforeRotate;
+            }}
+            onRender={({ target }) => {
+              target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px) rotate(${frame.rotate}deg)`;
+            }}
+          ></Moveable>
+          : (() => {})()
+        }
+        {/* <Moveable
           ref={moveableRef1}
           target={target1}
           draggable={true}
@@ -139,7 +143,7 @@ const ViewArea = () => {
           onRender={({ target }) => {
             target.style.transform = `translate(${frame1.translate[0]}px, ${frame1.translate[1]}px) rotate(${frame1.rotate}deg)`;
           }}
-        >AAAAA</Moveable>
+        ></Moveable> */}
         <Loading>
           <div className="lds-ripple"><div></div><div></div></div>
         </Loading>
@@ -160,23 +164,29 @@ const ViewArea = () => {
           </div>
 
       </LocalHeader>
+        <LogoDiv className="target1">
+          {
+            myContext.images.length !== 0 ? (
+              <img src={myContext.images[0]['data_url']}></img>
+            ) : (() => {})()
+          }
+        </LogoDiv>
         <Viewer flag={sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
           <div>
             <div id="viewer">
               <div>
                 <div>
-                  <LogoDiv className="target1">
-                    {
-                      myContext.images.length !== 0 ? (
-                        <img src={myContext.images[0]['data_url']}></img>
-                      ) : (() => {})()
-                    }
-                  </LogoDiv>
-                  <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
-                    <h1>
-                      { myContext.textVal }
-                    </h1>
-                  </LetterDiv>
+
+                  <div>
+                    <div>
+                      <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
+                        <h1>
+                          { myContext.textVal }
+                        </h1>
+                      </LetterDiv>
+                    </div>
+                  </div>
+
                   <img src={Assets.ModelImg}></img>
                   {/* 
                     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
@@ -593,7 +603,6 @@ const Viewer = styled.div`
     #viewer {
       position: relative;
       width: 100%;
-      /* transform: scale(1.3); */
       height: 100%;
       
       & > div:nth-child(1) {
@@ -603,7 +612,6 @@ const Viewer = styled.div`
         width: ${props => props.flag ? props.width1 : props.width2};
         left: ${props => props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
         top: ${props => props.flag ? props.top1 : props.top2};
-        background-color: blue;
         /* 
         height: ${props => props.flag ? '90%' : '30%'}; */
         & > div:nth-child(1) {
@@ -611,6 +619,18 @@ const Viewer = styled.div`
           min-height: 100%;
           position: relative;
           width: auto;
+          & > div:nth-child(1) {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            & > div:nth-child(1) {
+              width: 100%;
+              height: 100%;
+              position: relative;
+              background-color: red;
+              z-index: 100;
+            }
+          }
           img {
             position: absolute;
             width: 100%;
