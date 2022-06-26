@@ -17,10 +17,10 @@ import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearD
 import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 import { DominL, DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
+import ImageMove from "../ImageMove/ImageMove";
 
 const ViewArea = () => {
   
-  const [sideflag, setSideflag] = React.useState(true);
   const myContext = React.useContext(AppContext);
 
   const [target, setTarget] = React.useState();
@@ -60,7 +60,7 @@ const ViewArea = () => {
 
     return (
       <Wrapper isover_text={isover_text}>
-        {
+        {/* {
           myContext.isText && sideflag ?
           <Moveable
             ref={moveableRef}
@@ -104,7 +104,7 @@ const ViewArea = () => {
             }}
           ></Moveable>
           : (() => {})()
-        }
+        } */}
         {/* <Moveable
           ref={moveableRef1}
           target={target1}
@@ -144,6 +144,7 @@ const ViewArea = () => {
             target.style.transform = `translate(${frame1.translate[0]}px, ${frame1.translate[1]}px) rotate(${frame1.rotate}deg)`;
           }}
         ></Moveable> */}
+        <ImageMove></ImageMove>
         <Loading>
           <div className="lds-ripple"><div></div><div></div></div>
         </Loading>
@@ -155,28 +156,29 @@ const ViewArea = () => {
           </div>
           <div>
             <div>
-              <span onClick={() => setSideflag(true)}> Front </span>
-              <span onClick={() => setSideflag(false)}> Back </span>
-              <span onClick={() => setSideflag(!sideflag)}>
+              <span onClick={() => myContext.setSideflag(true)}> Front </span>
+              <span onClick={() => myContext.setSideflag(false)}> Back </span>
+              <span onClick={() => myContext.setSideflag(!myContext.sideflag)}>
                 <img></img>
               </span>
             </div>
           </div>
 
       </LocalHeader>
+        
         <LogoDiv className="target1">
-          {
+          {/* {
             myContext.images.length !== 0 ? (
               <img src={myContext.images[0]['data_url']}></img>
             ) : (() => {})()
-          }
+          } */}
         </LogoDiv>
-        <Viewer flag={sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
+        
+        <Viewer flag={myContext.sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
           <div>
             <div id="viewer">
               <div>
                 <div>
-
                   <div>
                     <div>
                       <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>

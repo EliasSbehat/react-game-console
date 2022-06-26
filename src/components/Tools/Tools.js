@@ -38,7 +38,6 @@ const Tools = () => {
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
   const myContext = React.useContext(AppContext);
-  const [snapIndex, setSnapIndex] = React.useState(0);
 
   const maxNumber = 69;
 
@@ -53,12 +52,12 @@ const Tools = () => {
         <div>
           <div> 
             <img></img>
-            {myContext.spanNames[snapIndex].name}
+            {myContext.spanNames[myContext.snapIndex].name}
           </div>
           <SwiperProcessor>
             <div>
-              <progress id = "file" max = {myContext.spanNames.length} value = {snapIndex+1}></progress>
-              Step {snapIndex + 1} / {myContext.spanNames.length}
+              <progress id = "file" max = {myContext.spanNames.length} value = {myContext.snapIndex+1}></progress>
+              Step {myContext.snapIndex + 1} / {myContext.spanNames.length}
             </div>
             <span className="prev">
               <img></img>
@@ -79,7 +78,7 @@ const Tools = () => {
           }}
           scrollbar={{ draggable: true }}
           onSlideChange={(event) => {
-            setSnapIndex(event.snapIndex);
+            myContext.setSnapIndex(event.snapIndex);
           }}
           onSwiper={(swiper) => console.log('--')}
         >
@@ -112,8 +111,8 @@ const Tools = () => {
                   Design.items[DesigntabSelect].map((item, index) => (
                     <SelectItem 
                       bgImg={item.selet}
-                      now = { myContext.design === null ? -1 : 10000 * snapIndex + 100 * myContext.design[0] + myContext.design[1]}
-                      me = { 10000 * snapIndex + 100 * DesigntabSelect + index }
+                      now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
+                      me = { 10000 * myContext.snapIndex + 100 * DesigntabSelect + index }
                       onClick={() => myContext.setDesign([DesigntabSelect, index])} 
                     />
                   ))
@@ -149,8 +148,8 @@ const Tools = () => {
                 Abxy.items[AbxytabSelect].map((item, index) => (
                   <SelectItem 
                     bgImg={item.selet}
-                    now = { myContext.abxy === null ? -1 : 10000 * snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
-                    me = { 10000 * snapIndex + 100 * AbxytabSelect + index }
+                    now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
+                    me = { 10000 * myContext.snapIndex + 100 * AbxytabSelect + index }
                     onClick={() => myContext.setAbxy([AbxytabSelect, index])}
                   ></SelectItem>
                 ))
@@ -188,8 +187,8 @@ const Tools = () => {
                 Dpad.items[DpadtabSelect].map((item, index) => (
                   <SelectItem
                     bgImg={item.selet}
-                    now = { myContext.dpad === null ? -1 : 10000 * snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
-                    me = { 10000 * snapIndex + 100 * DpadtabSelect + index }
+                    now = { myContext.dpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
+                    me = { 10000 * myContext.snapIndex + 100 * DpadtabSelect + index }
                     onClick={() => myContext.setDpad([DpadtabSelect, index])}></SelectItem>
                 ))
               }
@@ -211,8 +210,8 @@ const Tools = () => {
                   <SelectItemPrice>
                     <SelectItem
                       bgImg={item.selet}
-                      now = { myContext.thumbstickL === null ? -1 : 10000 * snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
-                      me = { 10000 * snapIndex + 100 * ThumbLtabSelect + index }
+                      now = { myContext.thumbstickL === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
+                      me = { 10000 * myContext.snapIndex + 100 * ThumbLtabSelect + index }
                       onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}
                     >
                     </SelectItem>
@@ -240,8 +239,8 @@ const Tools = () => {
                     <SelectItemPrice>
                       <SelectItem 
                         bgImg={item.selet}
-                        now = { myContext.thumbstickR === null ? -1 : 10000 * snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
-                        me = { 10000 * snapIndex + 100 * ThumbRtabSelect + index }
+                        now = { myContext.thumbstickR === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * ThumbRtabSelect + index }
                         onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])} />
                       {
                         '£'+item.price
@@ -282,8 +281,8 @@ const Tools = () => {
                     <SelectItem 
                       key={index} 
                       bgImg={item.selet} 
-                      now = { myContext.startBtn === null ? -1 : 10000 * snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
-                      me = { 10000 * snapIndex + 100 * StartBtntabSelect + index }
+                      now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
+                      me = { 10000 * myContext.snapIndex + 100 * StartBtntabSelect + index }
                       onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}
                     ></SelectItem>
                   ))
@@ -321,8 +320,8 @@ const Tools = () => {
                     <SelectItem 
                       key={index} 
                       bgImg={item.selet}
-                      now = { myContext.touchpad === null ? -1 : 10000 * snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
-                      me = { 10000 * snapIndex + 100 * TouchpadtabSelect + index }
+                      now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
+                      me = { 10000 * myContext.snapIndex + 100 * TouchpadtabSelect + index }
                       onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}
                     ></SelectItem>
                   ))
@@ -345,8 +344,8 @@ const Tools = () => {
                       <SelectItem
                         key={index} 
                         bgImg={item.selet} 
-                        now = { myContext.trim === null ? -1 : 10000 * snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
-                        me = { 10000 * snapIndex + 100 * TrimtabSelect + index }
+                        now = { myContext.trim === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * TrimtabSelect + index }
                         onClick={() => myContext.setTrim([TrimtabSelect, index])}></SelectItem>
                       {
                         '£' + item.price
@@ -386,8 +385,8 @@ const Tools = () => {
                     <SelectItem
                       key={index}
                       bgImg={item.selet}
-                      now = { myContext.trigger === null ? -1 : 10000 * snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
-                      me = { 10000 * snapIndex + 100 * TriggertabSelect + index }
+                      now = { myContext.trigger === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
+                      me = { 10000 * myContext.snapIndex + 100 * TriggertabSelect + index }
                       onClick={() => myContext.setTrigger([TriggertabSelect, index])}></SelectItem>
                   ))
                 }
@@ -411,8 +410,8 @@ const Tools = () => {
                       <SelectItem
                         key={index} 
                         bgImg={item.selet}
-                        now = { myContext.rearDesign === null ? -1 : 10000 * snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
-                        me = { 10000 * snapIndex + 100 * RearDesigntabSelect + index }
+                        now = { myContext.rearDesign === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * RearDesigntabSelect + index }
                         onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}
                       ></SelectItem>
                       {
@@ -466,8 +465,8 @@ const Tools = () => {
                           <SelectItemPrice>
                           <SelectItem
                             key={index} bgImg={item.select}
-                            now = { myContext.paddle === null ? -1 : 10000 * snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
-                            me = { 10000 * snapIndex + 100 * PaddletabSelect + index }
+                            now = { myContext.paddle === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
+                            me = { 10000 * myContext.snapIndex + 100 * PaddletabSelect + index }
                             onClick={() => myContext.setPaddle([PaddletabSelect, index])}></SelectItem>
                             {
                               '£'+item.price
@@ -510,8 +509,8 @@ const Tools = () => {
                                 <SelectItemPrice>
                                   <SelectItem
                                     key={index}
-                                    now = { myContext.ldomin_1 === null ? -1 : 10000 * snapIndex + 100 * myContext.ldomin_1}
-                                    me = { 10000 * snapIndex + 100 * index }
+                                    now = { myContext.ldomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.ldomin_1}
+                                    me = { 10000 * myContext.snapIndex + 100 * index }
                                     bgImg={item.select}
                                     onClick={() => myContext.setLdomin1(index)}></SelectItem>
                                     {
@@ -533,8 +532,8 @@ const Tools = () => {
                                     <SelectItem 
                                       key = {index} 
                                       bgImg = {item.select} 
-                                      now = { myContext.ldomin_2 === null ? -1 : 10000 * snapIndex + myContext.ldomin_2}
-                                      me = { 10000 * snapIndex + index }
+                                      now = { myContext.ldomin_2 === null ? -1 : 10000 * myContext.snapIndex + myContext.ldomin_2}
+                                      me = { 10000 * myContext.snapIndex + index }
                                       onClick = {() => myContext.setLdomin2(index)}></SelectItem>
                                       {
                                         '£'+item.price
@@ -583,8 +582,8 @@ const Tools = () => {
                                   <SelectItem
                                     key={index}
                                     bgImg={item.select}
-                                    now = { myContext.rdomin_1 === null ? -1 : 10000 * snapIndex + 100 * myContext.rdomin_1}
-                                    me = { 10000 * snapIndex + 100 * index }
+                                    now = { myContext.rdomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rdomin_1}
+                                    me = { 10000 * myContext.snapIndex + 100 * index }
                                     onClick={() => myContext.setRdomin1(index)}></SelectItem>
                                     {
                                       '£'+item.price
@@ -605,8 +604,8 @@ const Tools = () => {
                                       <SelectItem
                                         key={index}
                                         bgImg={item.select}
-                                        now = { myContext.rdomin_2 === null ? -1 : 10000 * snapIndex + myContext.rdomin_2}
-                                        me = { 10000 * snapIndex + index }
+                                        now = { myContext.rdomin_2 === null ? -1 : 10000 * myContext.snapIndex + myContext.rdomin_2}
+                                        me = { 10000 * myContext.snapIndex + index }
                                         onClick={() => myContext.setRdomin2(index)}>
                                       </SelectItem>
                                       {
@@ -738,7 +737,7 @@ const Tools = () => {
         </Swiper>
       </MediumDiv>
       <ConfirmDiv>
-        <button onClick={() => myContext.func_reset(snapIndex)}>Reset</button>
+        <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button>
       </ConfirmDiv>
     </Wrapper>
   )
@@ -756,7 +755,7 @@ const Wrapper = styled.div`
 const TopDiv = styled.div`
   & > div:nth-child(1) {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     padding: 20px 10px;
     & > div:nth-child(1) {

@@ -24,6 +24,8 @@ const VHome = () => {
   const [razorBack, setRazorBack] = React.useState(false);
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
   const [paddle, setPaddle] = React.useState(null);
+  const [sideflag, setSideflag] = React.useState(true);
+  const [snapIndex, setSnapIndex] = React.useState(0);
 
   const [ldomin_1, setLdomin1] = React.useState(null);
   const [ldomin_2, setLdomin2] = React.useState(null);
@@ -168,6 +170,11 @@ const VHome = () => {
 
     func_reset,
 
+    sideflag, 
+    setSideflag,
+    snapIndex,
+    setSnapIndex,
+
     initalPrice,
     setInitalPrice,
     spanNames : [ 
@@ -181,11 +188,11 @@ const VHome = () => {
       { name: 'Trim' },
       { name: 'triggers' },
       { name: 'Rear Design', },
-      { name: 'Razorback Maxfire', },
+      { name: 'Razorback', },
       { name: 'Paddles', },
-      { name: 'Left Domin8or Button' },
-      { name: 'Right Domin8or Button' },
-      { name: 'Digital Triggers' },
+      { name: 'LDominBtn' },
+      { name: 'RDominBtn' },
+      { name: 'D Triggers' },
       { name: 'Text' },
       { name: 'Logo' }
     ],
