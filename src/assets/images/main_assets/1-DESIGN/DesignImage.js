@@ -135,12 +135,12 @@ export const Design = {
       { price: 16.99, name: 'Chameleon', image: d_1_32, selet: d_1_32s },
     ],
     [
-      { pirce: 16.99, name: 'Vampire Red', image: d_2_1, selet: d_2_1s },
-      { pirce: 16.99, name: 'Sakura Pink', image: d_2_2, selet: d_2_2s },
-      { pirce: 16.99, name: 'Soft Touch Purple', image: d_2_3, selet: d_2_3s },
-      { pirce: 16.99, name: 'Soft Touch Blue', image: d_2_4, selet: d_2_4s },
-      { pirce: 16.99, name: 'Soft Touch Orange', image: d_2_5, selet: d_2_5s },
-      { pirce: 16.99, name: 'Soft Touch Green', image: d_2_6, selet: d_2_6s },
+      { price: 16.99, name: 'Vampire Red', image: d_2_1, selet: d_2_1s },
+      { price: 16.99, name: 'Sakura Pink', image: d_2_2, selet: d_2_2s },
+      { price: 16.99, name: 'Soft Touch Purple', image: d_2_3, selet: d_2_3s },
+      { price: 16.99, name: 'Soft Touch Blue', image: d_2_4, selet: d_2_4s },
+      { price: 16.99, name: 'Soft Touch Orange', image: d_2_5, selet: d_2_5s },
+      { price: 16.99, name: 'Soft Touch Green', image: d_2_6, selet: d_2_6s },
     ],
     [
       { price: 0, name: 'Soft Touch Green', image: d_3_1, selet: d_3_1s },

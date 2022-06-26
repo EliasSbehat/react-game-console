@@ -36,6 +36,7 @@ const Tools = () => {
   const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
   const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
+  const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
   const myContext = React.useContext(AppContext);
   const [snapIndex, setSnapIndex] = React.useState(0);
 
@@ -90,7 +91,7 @@ const Tools = () => {
              ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
              ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
           */}
-            <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
                   Design.steps.map((item, index) => (
@@ -99,7 +100,7 @@ const Tools = () => {
                         {item.name}
                       </span>
                       <span>
-                        {item.price}
+                        £{item.price}
                       </span>
                       <div></div>
                     </TapItem>
@@ -127,7 +128,7 @@ const Tools = () => {
               ██║  ██║██████╔╝██╔╝ ██╗   ██║   
               ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
           */}
-          <SwiperSlide>
+          <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
             <TopItems>
               {
                 Abxy.steps.map((item, index) => (
@@ -136,7 +137,7 @@ const Tools = () => {
                       {item.name}
                     </span>
                     <span>
-                      {item.price}
+                      £{item.price}
                     </span>
                     <div></div>
                   </TapItem>
@@ -166,7 +167,7 @@ const Tools = () => {
               ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
           */}
 
-          <SwiperSlide>
+          <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
             <TopItems>
               {
                 Dpad.steps.map((item, index) => (
@@ -175,7 +176,7 @@ const Tools = () => {
                       {item.name}
                     </span>
                     <span>
-                      {item.price}
+                      £{item.price}
                     </span>
                     <div></div>
                   </TapItem>
@@ -185,7 +186,11 @@ const Tools = () => {
             <Selector>
               {
                 Dpad.items[DpadtabSelect].map((item, index) => (
-                  <SelectItem bgImg={item.selet} onClick={() => myContext.setDpad([DpadtabSelect, index])}></SelectItem>
+                  <SelectItem
+                    bgImg={item.selet}
+                    now = { myContext.dpad === null ? -1 : 10000 * snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
+                    me = { 10000 * snapIndex + 100 * DpadtabSelect + index }
+                    onClick={() => myContext.setDpad([DpadtabSelect, index])}></SelectItem>
                 ))
               }
             </Selector>
@@ -199,15 +204,26 @@ const Tools = () => {
                ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ███████╗
                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
           */}
-          {/* <SwiperSlide>
+          <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
             <Selector>
               {
                 ThumbL.items[ThumbLtabSelect].map((item, index) => (
-                  <SelectItem bgImg={item.selet} onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}></SelectItem>
+                  <SelectItemPrice>
+                    <SelectItem
+                      bgImg={item.selet}
+                      now = { myContext.thumbstickL === null ? -1 : 10000 * snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
+                      me = { 10000 * snapIndex + 100 * ThumbLtabSelect + index }
+                      onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}
+                    >
+                    </SelectItem>
+                    {
+                      '£'+item.price
+                    }
+                  </SelectItemPrice>
                 ))
               }
             </Selector>
-          </SwiperSlide> */}
+          </SwiperSlide>
 
           {/**
            * ████████╗██╗  ██╗██╗   ██╗███╗   ███╗██████╗     ██████╗ 
@@ -217,15 +233,24 @@ const Tools = () => {
                 ██║   ██║  ██║╚██████╔╝██║ ╚═╝ ██║██████╔╝    ██║  ██║
                 ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
            */}
-            {/* <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <Selector>
                 {
                   ThumbR.items[ThumbRtabSelect].map((item, index) => (
-                    <SelectItem bgImg={item.selet} onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])}></SelectItem>
+                    <SelectItemPrice>
+                      <SelectItem 
+                        bgImg={item.selet}
+                        now = { myContext.thumbstickR === null ? -1 : 10000 * snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
+                        me = { 10000 * snapIndex + 100 * ThumbRtabSelect + index }
+                        onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])} />
+                      {
+                        '£'+item.price
+                      }
+                    </SelectItemPrice>
                   ))
                 }
               </Selector>
-            </SwiperSlide> */}
+            </SwiperSlide>
 
             {/**
              * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
@@ -235,7 +260,7 @@ const Tools = () => {
                ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             {/* <SwiperSlide>
+             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
                   StartBtn.steps.map((item, index) => (
@@ -244,7 +269,7 @@ const Tools = () => {
                         {item.name}
                       </span>
                       <span>
-                        {item.price}
+                        £{item.price}
                       </span>
                       <div></div>
                     </TapItem>
@@ -254,11 +279,17 @@ const Tools = () => {
               <Selector>
                 {
                   StartBtn.items[StartBtntabSelect].map((item, index) => (
-                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}></SelectItem>
+                    <SelectItem 
+                      key={index} 
+                      bgImg={item.selet} 
+                      now = { myContext.startBtn === null ? -1 : 10000 * snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
+                      me = { 10000 * snapIndex + 100 * StartBtntabSelect + index }
+                      onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}
+                    ></SelectItem>
                   ))
                 }
               </Selector>
-            </SwiperSlide> */}
+            </SwiperSlide>
 
             {/**
              * ████████╗ ██████╗ ██╗   ██╗ ██████╗██╗  ██╗██████╗  █████╗ ██████╗ 
@@ -268,7 +299,7 @@ const Tools = () => {
                   ██║   ╚██████╔╝╚██████╔╝╚██████╗██║  ██║██║     ██║  ██║██████╔╝
                   ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝╚═════╝ 
             */}
-            {/* <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
                   Touchpad.steps.map((item, index) => (
@@ -277,7 +308,7 @@ const Tools = () => {
                         {item.name}
                       </span>
                       <span>
-                        {item.price}
+                        £{item.price}
                       </span>
                       <div></div>
                     </TapItem>
@@ -287,11 +318,17 @@ const Tools = () => {
               <Selector>
                 {
                   Touchpad.items[TouchpadtabSelect].map((item, index) => (
-                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}></SelectItem>
+                    <SelectItem 
+                      key={index} 
+                      bgImg={item.selet}
+                      now = { myContext.touchpad === null ? -1 : 10000 * snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
+                      me = { 10000 * snapIndex + 100 * TouchpadtabSelect + index }
+                      onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}
+                    ></SelectItem>
                   ))
                 }
               </Selector>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * ████████╗██████╗ ██╗███╗   ███╗
                ╚══██╔══╝██╔══██╗██║████╗ ████║
@@ -300,15 +337,25 @@ const Tools = () => {
                   ██║   ██║  ██║██║██║ ╚═╝ ██║
                   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
              */}
-             {/* <SwiperSlide>
+             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <Selector>
                 {
                   Trim.items[TrimtabSelect].map((item, index) => (
-                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setTrim([TrimtabSelect, index])}></SelectItem>
+                    <SelectItemPrice>
+                      <SelectItem
+                        key={index} 
+                        bgImg={item.selet} 
+                        now = { myContext.trim === null ? -1 : 10000 * snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
+                        me = { 10000 * snapIndex + 100 * TrimtabSelect + index }
+                        onClick={() => myContext.setTrim([TrimtabSelect, index])}></SelectItem>
+                      {
+                        '£' + item.price
+                      }
+                    </SelectItemPrice>
                   ))
                 }
               </Selector>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ 
                ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗
@@ -317,7 +364,7 @@ const Tools = () => {
                   ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║
                   ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
             */}
-            {/* <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
                   Trigger.steps.map((item, index) => (
@@ -326,7 +373,7 @@ const Tools = () => {
                         {item.name}
                       </span>
                       <span>
-                        {item.price}
+                        £{item.price}
                       </span>
                       <div></div>
                     </TapItem>
@@ -336,11 +383,16 @@ const Tools = () => {
               <Selector>
                 {
                   Trigger.items[TriggertabSelect].map((item, index) => (
-                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setTrigger([TriggertabSelect, index])}></SelectItem>
+                    <SelectItem
+                      key={index}
+                      bgImg={item.selet}
+                      now = { myContext.trigger === null ? -1 : 10000 * snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
+                      me = { 10000 * snapIndex + 100 * TriggertabSelect + index }
+                      onClick={() => myContext.setTrigger([TriggertabSelect, index])}></SelectItem>
                   ))
                 }
               </Selector>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
                ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
@@ -349,17 +401,28 @@ const Tools = () => {
                ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
                ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
             */}
-            {/* <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
               </TopItems>
               <Selector>
                 {
                   RearDesign.items[RearDesigntabSelect].map((item, index) => (
-                    <SelectItem key={index} bgImg={item.selet} onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}></SelectItem>
+                    <SelectItemPrice>
+                      <SelectItem
+                        key={index} 
+                        bgImg={item.selet}
+                        now = { myContext.rearDesign === null ? -1 : 10000 * snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
+                        me = { 10000 * snapIndex + 100 * RearDesigntabSelect + index }
+                        onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}
+                      ></SelectItem>
+                      {
+                        '£'+item.price
+                      }
+                    </SelectItemPrice>
                   ))
                 }
               </Selector>
-            </SwiperSlide> */}
+            </SwiperSlide>
 
             {/**
              * ██████╗  █████╗ ███████╗ ██████╗ ██████╗     ██████╗  █████╗  ██████╗██╗  ██╗
@@ -370,16 +433,16 @@ const Tools = () => {
                ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═╝  ╚═╝    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
              * 
             */}
-            {/* <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <RazorDiv flag={myContext.razorBack} onClick = {() => myContext.setRazorBack(!myContext.razorBack)}>
-                <span>Razorback Maxfire Modes</span>
+                <span>Razorback Maxfire Modes{"  "}(£{myContext.razorBackPrice})</span>
                 <label>
                   <div>
 
                   </div>
                 </label>
               </RazorDiv>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * 
              * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
@@ -389,7 +452,7 @@ const Tools = () => {
                ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
                ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
              */}
-            {/* <SwiperSlide>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <PaddleWrapper>
                 <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Paddles</span>
@@ -399,8 +462,17 @@ const Tools = () => {
                   myContext.pad_esp_flag ? (
                     <Selector>
                       {
-                        Paddle.items.map((item, index) => (
-                          <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setPaddle(index)}></SelectItem>
+                        Paddle.items[PaddletabSelect].map((item, index) => (
+                          <SelectItemPrice>
+                          <SelectItem
+                            key={index} bgImg={item.select}
+                            now = { myContext.paddle === null ? -1 : 10000 * snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
+                            me = { 10000 * snapIndex + 100 * PaddletabSelect + index }
+                            onClick={() => myContext.setPaddle([PaddletabSelect, index])}></SelectItem>
+                            {
+                              '£'+item.price
+                            }
+                          </SelectItemPrice>
                         ))
                       }
                     </Selector>
@@ -409,7 +481,7 @@ const Tools = () => {
                   )
                 }
               </PaddleWrapper>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * ██╗     ███████╗███████╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
                ██║     ██╔════╝██╔════╝╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
@@ -418,7 +490,7 @@ const Tools = () => {
                ███████╗███████╗██║        ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚══════╝╚══════╝╚═╝        ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             {/* <SwiperSlide>
+             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
@@ -435,7 +507,17 @@ const Tools = () => {
                           <Selector>
                             {
                               DominSelection.items.map((item, index) => (
-                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin1(index)}></SelectItem>
+                                <SelectItemPrice>
+                                  <SelectItem
+                                    key={index}
+                                    now = { myContext.ldomin_1 === null ? -1 : 10000 * snapIndex + 100 * myContext.ldomin_1}
+                                    me = { 10000 * snapIndex + 100 * index }
+                                    bgImg={item.select}
+                                    onClick={() => myContext.setLdomin1(index)}></SelectItem>
+                                    {
+                                      '£'+item.price
+                                    }
+                                </SelectItemPrice>
                               ))
                             }
                           </Selector>
@@ -447,7 +529,17 @@ const Tools = () => {
                               <Selector>
                               {
                                 DominL.items.map((item, index) => (
-                                  <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setLdomin2(index)}></SelectItem>
+                                  <SelectItemPrice>
+                                    <SelectItem 
+                                      key = {index} 
+                                      bgImg = {item.select} 
+                                      now = { myContext.ldomin_2 === null ? -1 : 10000 * snapIndex + myContext.ldomin_2}
+                                      me = { 10000 * snapIndex + index }
+                                      onClick = {() => myContext.setLdomin2(index)}></SelectItem>
+                                      {
+                                        '£'+item.price
+                                      }
+                                  </SelectItemPrice>
                                 ))
                               }
                               </Selector>
@@ -461,7 +553,7 @@ const Tools = () => {
                   )
                 }
               </LDominWrapper>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * ██████╗ ██╗ ██████╗ ██╗  ██╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
                ██╔══██╗██║██╔════╝ ██║  ██║╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
@@ -470,7 +562,7 @@ const Tools = () => {
                ██║  ██║██║╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             {/* <SwiperSlide>
+             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
@@ -487,7 +579,17 @@ const Tools = () => {
                           <Selector>
                             {
                               DominSelection.items.map((item, index) => (
-                                <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin1(index)}></SelectItem>
+                                <SelectItemPrice>
+                                  <SelectItem
+                                    key={index}
+                                    bgImg={item.select}
+                                    now = { myContext.rdomin_1 === null ? -1 : 10000 * snapIndex + 100 * myContext.rdomin_1}
+                                    me = { 10000 * snapIndex + 100 * index }
+                                    onClick={() => myContext.setRdomin1(index)}></SelectItem>
+                                    {
+                                      '£'+item.price
+                                    }
+                                </SelectItemPrice>
                               ))
                             }
                           </Selector>
@@ -499,7 +601,18 @@ const Tools = () => {
                               <Selector>
                                 {
                                   DominR.items.map((item, index) => (
-                                    <SelectItem key={index} bgImg={item.select} onClick={() => myContext.setRdomin2(index)}></SelectItem>
+                                    <SelectItemPrice>
+                                      <SelectItem
+                                        key={index}
+                                        bgImg={item.select}
+                                        now = { myContext.rdomin_2 === null ? -1 : 10000 * snapIndex + myContext.rdomin_2}
+                                        me = { 10000 * snapIndex + index }
+                                        onClick={() => myContext.setRdomin2(index)}>
+                                      </SelectItem>
+                                      {
+                                        '£'+item.price
+                                      }
+                                    </SelectItemPrice>
                                   ))
                                 }
                               </Selector>
@@ -513,7 +626,7 @@ const Tools = () => {
                   )
                 }
               </LDominWrapper>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * ██████╗ ██╗ ██████╗ ██╗████████╗ █████╗ ██╗         ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ ███████╗
                ██╔══██╗██║██╔════╝ ██║╚══██╔══╝██╔══██╗██║         ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗██╔════╝
@@ -522,16 +635,16 @@ const Tools = () => {
                ██████╔╝██║╚██████╔╝██║   ██║   ██║  ██║███████╗       ██║   ██║  ██║██║╚██████╔╝╚██████╔╝███████╗██║  ██║███████║
                ╚═════╝ ╚═╝ ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
              */}
-             {/* <SwiperSlide>
+             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
-                <span>Digital Triggers</span>
+                <span>Digital Triggers{"  "}(£{myContext.digital_trigger_price})</span>
                 <label>
                   <div>
 
                   </div>
                 </label>
               </RazorDiv>
-            </SwiperSlide> */}
+            </SwiperSlide>
             {/**
              * 
              * ████████╗███████╗██╗  ██╗████████╗
@@ -541,13 +654,13 @@ const Tools = () => {
                   ██║   ███████╗██╔╝ ██╗   ██║   
                   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   
              */}
-             {/* <SwiperSlide>
+             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <RazorDiv flag={myContext.isText} onClick = {() => myContext.setIsText(!myContext.isText)}>
                 <span>
                   {
                     !myContext.isText ? 'Add ' : 'Remove '
                   } 
-                  text
+                  text{"  "}(£{myContext.textPrice})
                   </span>
                 <label> <div /> </label>
               </RazorDiv>
@@ -569,7 +682,7 @@ const Tools = () => {
                   </TextDiv>
                 )
               } 
-             </SwiperSlide> */}
+             </SwiperSlide>
              {/**
               * ██╗      ██████╗  ██████╗  ██████╗ 
                 ██║     ██╔═══██╗██╔════╝ ██╔═══██╗
@@ -578,7 +691,7 @@ const Tools = () => {
                 ███████╗╚██████╔╝╚██████╔╝╚██████╔╝
                 ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ 
               */}
-              <SwiperSlide>
+              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
                 <RazorDiv flag={myContext.isLogo} onClick = {() => myContext.setLogo(!myContext.isLogo)}>
                   <span>
                     {
@@ -624,6 +737,9 @@ const Tools = () => {
               </SwiperSlide>
         </Swiper>
       </MediumDiv>
+      <ConfirmDiv>
+        <button onClick={() => myContext.func_reset(snapIndex)}>Reset</button>
+      </ConfirmDiv>
     </Wrapper>
   )
 }
@@ -675,7 +791,7 @@ const TapItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(65% / ${props => props.w});
+  width: calc(75% / ${props => props.w});
   background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
   color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
   border-radius: 5px;
@@ -731,7 +847,7 @@ const SwiperProcessor = styled.div`
 `
 
 const MediumDiv = styled.div`
-  height: calc(100vh - 95px - 177px);
+  height: 70%;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 3px;
@@ -747,17 +863,32 @@ const MediumDiv = styled.div`
   }
 `
 
+const ConfirmDiv = styled.div`
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  button {
+    padding: 10px 30px;
+    border: 1px solid ${props => props.theme.ThemeColor};
+    background-color: ${props => props.theme.HeadIconBgColor};
+    border-radius: 10px;
+    font-family: 'Rajdhani-Medium';
+    color: ${props => props.theme.color}
+  }
+`
+
 const Selector = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   width: 90%;
   display: flex;
   flex-wrap: wrap;
-  padding: 20px;
+  padding: 10px;
   gap: 20px;
   justify-content: flex-start;
   align-content: flex-start;
   height: 100%;
-  
+  font-family: 20px;
 `
 
 const SelectItem = styled.div`
@@ -771,7 +902,13 @@ const SelectItem = styled.div`
   background-size: cover;
 `
 
+const SelectItemPrice = styled.div`
+  text-align: center;
+  color: ${props => props.theme.color}
+`
+
 const RazorDiv = styled.div`
+  width: calc(100% - 60px);
   display: flex;
   background-color: ${props => props.theme.DirectIconBgColor};
   margin: 10px;
@@ -803,10 +940,10 @@ const RazorDiv = styled.div`
 `
 
 const PaddleWrapper = styled.div`
-
+  width: 100%;
 `
 const LDominWrapper = styled.div`
-
+  width: 100%;
 `
 
 const LDominContainer = styled.div`

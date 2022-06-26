@@ -25,10 +25,76 @@ const VHome = () => {
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
   const [paddle, setPaddle] = React.useState(null);
 
-  const [rdomin_1, setRdomin1] = React.useState(null);
-  const [rdomin_2, setRdomin2] = React.useState(null);
   const [ldomin_1, setLdomin1] = React.useState(null);
   const [ldomin_2, setLdomin2] = React.useState(null);
+  const [rdomin_1, setRdomin1] = React.useState(null);
+  const [rdomin_2, setRdomin2] = React.useState(null);
+
+  const func_reset = (ind) => {
+    if (ind === 0) {
+      // Design
+      setDesign(null);
+    }
+    else if (ind === 1) {
+      // Abxy
+      setAbxy(null);
+    }
+    else if (ind === 2) {
+      // Dpad
+      setDpad(null);
+    }
+    else if (ind === 3) {
+      // thumbstickL
+      setThumbstickL(null);
+    }
+    else if (ind === 4) {
+      // thumbstickR
+      setThumbstickR(null);
+    }
+    else if (ind === 5) {
+      // start btn
+      setStartBtn(null);
+    }
+    else if (ind === 6) {
+      // touchpad
+      setTouchpad(null);
+    }
+    else if (ind === 7) {
+      // trim
+      setTrim(null);
+    }
+    else if (ind === 8) {
+      setTrigger(null)
+    }
+    else if (ind === 9) {
+      setRearDesign(null)
+    }
+    else if (ind === 10) {
+      setRazorBack(false)
+    }
+    else if (ind === 11) {
+      setPaddle(null)
+    }
+    else if (ind === 12) {
+      setLdomin1(null);
+      setLdomin2(null);
+    }
+    else if (ind === 13) {
+      setRdomin1(null);
+      setRdomin2(null);
+    }
+    else if (ind === 14) {
+      setDigital_trigger(false);
+    }
+    else if (ind === 15) {
+      setIsText(false);
+      setTextVal('');
+      setFamily(0);
+    } else  {
+      setLogo(false);
+      setImages([]);
+    }
+  }
 
   const [digital_trigger, setDigital_trigger] = React.useState(false);
 
@@ -40,6 +106,8 @@ const VHome = () => {
   // Logo
   const [isLogo, setLogo] = React.useState(false);
   const [images, setImages] = React.useState([]);
+
+  const [initalPrice, setInitalPrice] = React.useState(63.99);
 
   const imageSetting = {
     design,
@@ -63,6 +131,7 @@ const VHome = () => {
     rearDesign,
     setRearDesign,
     razorBack,
+    razorBackPrice: 29.99,
     setRazorBack,
     pad_esp_flag,
     setPad_esp_flag,
@@ -79,12 +148,14 @@ const VHome = () => {
     setRdomin2,
 
     digital_trigger,
+    digital_trigger_price: 30.99,
     setDigital_trigger,
 
     // text
     isText,
     setIsText,
     textVal,
+    textPrice: 10.99,
     setTextVal,
     familyId,
     setFamily,
@@ -94,6 +165,11 @@ const VHome = () => {
     setLogo,
     images,
     setImages,
+
+    func_reset,
+
+    initalPrice,
+    setInitalPrice,
     spanNames : [ 
       { name: 'Design' },
       { name: 'Abxy' },

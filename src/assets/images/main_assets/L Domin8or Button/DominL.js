@@ -33,8 +33,8 @@ export const DominL = {
 export const DominSelection = {
   steps: { name: "Button Selection" },
   items: [
-    { name: '', image: sel_1, select: sel_1, price: 12.99},
-    { name: '', image: sel_1, select: sel_2, price: 12.99},
+    { name: '', image: sel_1, select: sel_1, price: 12.99 },
+    { name: '', image: sel_1, select: sel_2, price: 12.99 },
     { name: '', image: sel_1, select: sel_3, price: 12.99 },
     { name: '', image: sel_1, select: sel_4, price: 12.99 },
     { name: '', image: sel_1, select: sel_5, price: 12.99 },

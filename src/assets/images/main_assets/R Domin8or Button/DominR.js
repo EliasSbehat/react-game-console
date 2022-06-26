@@ -16,9 +16,9 @@ export const DominR = {
     }
   ],
   items: [
-    { name: 'Circle', select: dl_1_1s, image_back: dl_1_1 },
-    { name: 'Circle Red LED', select: dl_1_2s, image_back: dl_1_2 },
-    { name: 'Circle Blue LED', select: dl_1_3s, image_back: dl_1_3 },
-    { name: 'Circle Green LED', select: dl_1_4s, image_back: dl_1_4 }
+    { price: 0, name: 'Circle', select: dl_1_1s, image_back: dl_1_1 },
+    { price: 3, name: 'Circle Red LED', select: dl_1_2s, image_back: dl_1_2 },
+    { price: 3, name: 'Circle Blue LED', select: dl_1_3s, image_back: dl_1_3 },
+    { price: 3, name: 'Circle Green LED', select: dl_1_4s, image_back: dl_1_4 }
   ]
 }

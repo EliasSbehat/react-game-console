@@ -16,9 +16,11 @@ export const Paddle = {
     {  }
   ],
   items: [
-    { name: 'Black', image_back: pa_1_1, select: pa_1_1s},
-    { name: 'Supernova', image_back: pa_1_2, select: pa_1_2s},
-    { name: 'Vampire red', image_back: pa_1_3, select: pa_1_3s},
-    { name: 'White', image_back: pa_1_4, select: pa_1_4s}
+    [
+      { price:19.99, name: 'Black', image_back: pa_1_1, select: pa_1_1s},
+      { price:19.99, name: 'Supernova', image_back: pa_1_2, select: pa_1_2s},
+      { price:19.99, name: 'Vampire red', image_back: pa_1_3, select: pa_1_3s},
+      { price:19.99, name: 'White', image_back: pa_1_4, select: pa_1_4s}
+    ]
   ]
 }

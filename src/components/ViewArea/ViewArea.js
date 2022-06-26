@@ -15,9 +15,8 @@ import { Trim } from "../../assets/images/main_assets/8-TRIM/Trims";
 import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
 import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
-import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
+import { DominL, DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
-
 
 const ViewArea = () => {
   
@@ -71,8 +70,12 @@ const ViewArea = () => {
           rotatable={true}
           rotationPosition={'top'}
           throttleRotate={0}
-          hideDefaultLines={false}
+          roundable={true}
+          warpable = {true}
+          keepRatio={false}
+          scalable = {true}
           origin={false}
+          snapElement={true}
           onDragStart={({ set }) => {
             set(frame.translate);
           }}
@@ -109,7 +112,9 @@ const ViewArea = () => {
           rotationPosition={'top'}
           throttleRotate={0}
           hideDefaultLines={false}
+          scalable={true}
           origin={false}
+          keepRatio={false}
           onDragStart={({ set }) => {
             set(frame1.translate);
           }}
@@ -134,7 +139,7 @@ const ViewArea = () => {
           onRender={({ target }) => {
             target.style.transform = `translate(${frame1.translate[0]}px, ${frame1.translate[1]}px) rotate(${frame1.rotate}deg)`;
           }}
-        ></Moveable>
+        >AAAAA</Moveable>
         <Loading>
           <div className="lds-ripple"><div></div><div></div></div>
         </Loading>
@@ -402,7 +407,7 @@ const ViewArea = () => {
                   {
                     myContext.paddle !== null && myContext.pad_esp_flag ? (() => {
                       return (
-                        Paddle.items[myContext.paddle].image_back ? <img src={Paddle.items[myContext.paddle].image_back}></img> : <div className="lds-dual-ring"></div>
+                        Paddle.items[myContext.paddle[0]][myContext.paddle[1]].image_back ? <img src={Paddle.items[myContext.paddle[0]][myContext.paddle[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
                   }
@@ -448,7 +453,26 @@ const ViewArea = () => {
                 Total
               </span>
               <span>
-                $63.99
+                £{
+                  Math.round((myContext.initalPrice +
+                    Number(myContext.design !== null ? Design.items[myContext.design[0]][myContext.design[1]].price : 0) +
+                    Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
+                    Number(myContext.dpad !== null ? Dpad.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
+                    Number(myContext.thumbstickL !== null ? ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
+                    Number(myContext.thumbstickR !== null ? ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
+                    Number(myContext.startBtn !== null ? StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
+                    Number(myContext.touchpad !== null ? Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
+                    Number(myContext.trim !== null ? Trim.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
+                    Number(myContext.trigger !== null ? Trigger.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
+                    Number(myContext.rearDesign !== null ? RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
+                    Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
+                    Number(myContext.paddle !== null && myContext.pad_esp_flag ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
+                    Number(myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? Number(DominL.items[myContext.ldomin_2].price) + Number(DominSelection.items[myContext.ldomin_1].price) : 0) + 
+                    Number(myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? Number(DominR.items[myContext.rdomin_2].price) + Number(DominSelection.items[myContext.rdomin_1].price) : 0) + 
+                    Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0)
+                  ) * 100
+                  ) / 100
+                }
               </span>
             </TotalPrice>
             <Info>
@@ -571,6 +595,7 @@ const Viewer = styled.div`
       width: 100%;
       /* transform: scale(1.3); */
       height: 100%;
+      
       & > div:nth-child(1) {
         // Frontend side
         position: absolute;
@@ -578,6 +603,7 @@ const Viewer = styled.div`
         width: ${props => props.flag ? props.width1 : props.width2};
         left: ${props => props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
         top: ${props => props.flag ? props.top1 : props.top2};
+        background-color: blue;
         /* 
         height: ${props => props.flag ? '90%' : '30%'}; */
         & > div:nth-child(1) {
