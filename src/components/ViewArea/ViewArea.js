@@ -18,133 +18,17 @@ import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 import { DominL, DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 import ImageMove from "../ImageMove/ImageMove";
+import TextMove from "../TextMove/TextMove";
 
 const ViewArea = () => {
   
   const myContext = React.useContext(AppContext);
 
-  const [target, setTarget] = React.useState();
-  const [target1, setTarget1] = React.useState();
-
   const [isover_text, setOver_text] = React.useState(1);
-
-  const [frame] = React.useState({
-    translate: [0, 0],
-    rotate: 0,
-  });
-  const [frame1] = React.useState({
-    translate: [0, 0],
-    rotate: 0,
-  });
-
-  React.useEffect(() => {
-    const target = document.querySelector('.target');
-    setTarget(target);
-    target.addEventListener('load', () => {
-      setTimeout(() => {
-        moveableRef.current.updateRect();
-      }, 2000);
-    });
-
-    const target1 = document.querySelector('.target1');
-    setTarget1(target1);
-    target1.addEventListener('load', () => {
-      setTimeout(() => {
-        moveableRef1.current.updateRect();
-      }, 2000);
-    });
-
-    }, []); 
-    const moveableRef = React.useRef();
-    const moveableRef1 = React.useRef();
-
     return (
       <Wrapper isover_text={isover_text}>
-        {/* {
-          myContext.isText && sideflag ?
-          <Moveable
-            ref={moveableRef}
-            target={target}
-            draggable={true}
-            throttleDrag={0}
-            resizable={true}
-            throttleResize={0}
-            rotatable={true}
-            rotationPosition={'top'}
-            throttleRotate={0}
-            roundable={true}
-            warpable = {true}
-            keepRatio={false}
-            scalable = {true}
-            origin={false}
-            snapElement={true}
-            onDragStart={({ set }) => {
-              set(frame.translate);
-            }}
-            onDrag={({ beforeTranslate }) => {
-              frame.translate = beforeTranslate;
-            }}
-            onResizeStart={({ setOrigin, dragStart }) => {
-              setOrigin(['%', '%']);
-              dragStart && dragStart.set(frame.translate);
-            }}
-            onResize={({ target, width, height, drag }) => {
-              frame.translate = drag.beforeTranslate;
-              target.style.width = `${width}px`;
-              target.style.height = `${height}px`;
-            }}
-            onRotateStart={({ set }) => {
-              set(frame.rotate);
-            }}
-            onRotate={({ beforeRotate }) => {
-              frame.rotate = beforeRotate;
-            }}
-            onRender={({ target }) => {
-              target.style.transform = `translate(${frame.translate[0]}px, ${frame.translate[1]}px) rotate(${frame.rotate}deg)`;
-            }}
-          ></Moveable>
-          : (() => {})()
-        } */}
-        {/* <Moveable
-          ref={moveableRef1}
-          target={target1}
-          draggable={true}
-          throttleDrag={0}
-          resizable={true}
-          throttleResize={0}
-          rotatable={true}
-          rotationPosition={'top'}
-          throttleRotate={0}
-          hideDefaultLines={false}
-          scalable={true}
-          origin={false}
-          keepRatio={false}
-          onDragStart={({ set }) => {
-            set(frame1.translate);
-          }}
-          onDrag={({ beforeTranslate }) => {
-            frame1.translate = beforeTranslate;
-          }}
-          onResizeStart={({ setOrigin, dragStart }) => {
-            setOrigin(['%', '%']);
-            dragStart && dragStart.set(frame1.translate);
-          }}
-          onResize={({ target, width, height, drag }) => {
-            frame1.translate = drag.beforeTranslate;
-            target.style.width = `${width}px`;
-            target.style.height = `${height}px`;
-          }}
-          onRotateStart={({ set }) => {
-            set(frame1.rotate);
-          }}
-          onRotate={({ beforeRotate }) => {
-            frame1.rotate = beforeRotate;
-          }}
-          onRender={({ target }) => {
-            target.style.transform = `translate(${frame1.translate[0]}px, ${frame1.translate[1]}px) rotate(${frame1.rotate}deg)`;
-          }}
-        ></Moveable> */}
         <ImageMove></ImageMove>
+        <TextMove></TextMove>
         <Loading>
           <div className="lds-ripple"><div></div><div></div></div>
         </Loading>
@@ -165,15 +49,6 @@ const ViewArea = () => {
           </div>
 
       </LocalHeader>
-        
-        <LogoDiv className="target1">
-          {/* {
-            myContext.images.length !== 0 ? (
-              <img src={myContext.images[0]['data_url']}></img>
-            ) : (() => {})()
-          } */}
-        </LogoDiv>
-        
         <Viewer flag={myContext.sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
           <div>
             <div id="viewer">
@@ -181,12 +56,12 @@ const ViewArea = () => {
                 <div>
                   <div>
                     <div>
-                      <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
+                    {/* <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
                         <h1>
                           { myContext.textVal }
                         </h1>
-                      </LetterDiv>
-                    </div>
+                      </LetterDiv>                     */}
+                </div>
                   </div>
 
                   <img src={Assets.ModelImg}></img>
@@ -723,22 +598,6 @@ const ATC = styled.button`
   background-color: ${props => props.theme.ThemeColor};
   img {
     content: url(${props => props.theme.AtcIcon});
-  }
-`
-
-const LetterDiv = styled.div`
-  padding: 20px;
-  position: absolute;
-  z-index: 51;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  overflow: hidden;
-  h1 {
-    font-size: 20px;
-    font-size-adjust: 0.5;
-    font-family: ${props => props.ff};
   }
 `
 

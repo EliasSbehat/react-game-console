@@ -675,8 +675,17 @@ const Tools = () => {
                               item.name
                             }
                           </FontOption>
+                          
                         ))
                       }
+                    </select>
+                    <select className="font-type" onChange={(e) => myContext.setTextColor(e.target.value)} >
+                      <option value='black'>Black</option>
+                      <option value='white'>White</option>
+                      <option value='blue'>Blue</option>
+                      <option value='red'>Red</option>
+                      <option value='yellow'>Yellow</option>
+                      <option value='green'>Green</option>
                     </select>
                   </TextDiv>
                 )

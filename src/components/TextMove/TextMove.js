@@ -3,43 +3,46 @@ import Moveable from "react-moveable";
 import styled from "styled-components";
 import AppContext from "../../context/context";
 
-export default function ImageMove() {
+export default function TextMove() {
 	const myContext = React.useContext(AppContext);
   const [target, setTarget] = React.useState();
   const [frame] = React.useState({
     translate: [0, 0],
     rotate: 0
   });
-  const moveableRef = React.useRef();
+  const moveableRef1 = React.useRef();
   React.useEffect(() => {
-    const target = document.querySelector('.target');
+    const target = document.querySelector('.target1');
 		if (target !== null) {
 			setTarget(target);
 	
 			target.addEventListener("load", () => {
 				setTimeout(() => {
-					moveableRef.current.updateRect();
+					moveableRef1.current.updateRect();
 				}, 2000);
 			});
 		}
   }, [myContext.images]);
   return (
-    <Wrapper className="container" display={myContext.isLogo} sideflag={myContext.sideflag}>
+    <Wrapper className="container1" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor}>
       {
-				myContext.images.length !== 0 ? (
-					<img class="target" src={myContext.images[0]['data_url']} style={{width: "200px", zIndex:"300"}}></img>
-				) : (() => {})()
+        <h1 class="target1" style={{width: "200px", zIndex:"300"}}>
+          {
+            myContext.textVal
+          }
+        </h1>
 			}
 			{
-				myContext.isLogo && myContext.images.length > 0 && myContext.sideflag && myContext.snapIndex === 16 ?
+				myContext.isText && myContext.sideflag && myContext.snapIndex === 15 ?
 					<Moveable
-						ref={moveableRef}
+						ref={moveableRef1}
 						target={target}
 						draggable={true}
 						throttleDrag={0}
 						resizable={true}
 						throttleResize={0}
 						rotatable={true}
+            origin={false}
 						rotationPosition={"top"}
 						throttleRotate={0}
 						onDragStart={({ set }) => {
@@ -79,8 +82,14 @@ const Wrapper = styled.div`
   position: absolute;
   word-break: break-all;
   z-index: 100;
+  word-break: keep-all;
+  text-align: center;
 	display: ${props => props.display ? 'flex' : 'none'};
 	transition: all 1s;
 	transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'};
 	top: ${props => !props.sideflag ? '64.5%' : '30%'};
+  font-family: ${props => props.ff};
+  h1 {
+    color: ${props => props.tc};
+  }
 `
