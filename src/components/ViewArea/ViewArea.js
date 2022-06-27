@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import html2canvas from 'html2canvas';
 import downloadjs from "downloadjs";
 import Moveable from "react-moveable";
@@ -40,27 +40,30 @@ const ViewArea = () => {
     // }
   };
 
+  React.useEffect(() => {
+    console.log('is it right?')
+  }, [myContext.AniImg]);
+
   
     return (
       <Wrapper isover_text={isover_text} id="total">
         {/* <ImageMove></ImageMove>
         <TextMove></TextMove> */}
-        <LocalHeader>
+        <LocalHeader flag={myContext.sideflag}>
+          <div>
+            <span>
+              Play Station 5 Controller
+            </span>
+          </div>
+          <div>
             <div>
-              <span>
-                Play Station 5 Controller
+              <span onClick={() => myContext.setSideflag(true)}> Front </span>
+              <span onClick={() => myContext.setSideflag(false)}> Back </span>
+              <span onClick={() => myContext.setSideflag(!myContext.sideflag)}>
+                <img></img>
               </span>
             </div>
-            <div>
-              <div>
-                <span onClick={() => myContext.setSideflag(true)}> Front </span>
-                <span onClick={() => myContext.setSideflag(false)}> Back </span>
-                <span onClick={() => myContext.setSideflag(!myContext.sideflag)}>
-                  <img></img>
-                </span>
-              </div>
-            </div>
-
+          </div>
         </LocalHeader>
         <Viewer flag={myContext.sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
           <div>
@@ -222,8 +225,8 @@ const ViewArea = () => {
                         })() : (() => {})()
                       }
                       {/**
-                       * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-                         ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                       *  ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                          ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
                           ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
                           ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
                           ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
@@ -236,6 +239,7 @@ const ViewArea = () => {
                           )
                         })() : (() => {})()
                       }
+                      <AniImg i={Design.items[0][0].image} f={myContext.aniFlag}></AniImg>
                 </div>
                   <ImageMove></ImageMove>
                   <TextMove></TextMove>
@@ -396,6 +400,7 @@ const ViewArea = () => {
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.bgColor};
+  /* background-color: white; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -459,14 +464,14 @@ const LocalHeader = styled.div`
         cursor: pointer;
       }
       & > span:nth-child(1) {
-        color: ${props => props.theme.SwapFrontColor};
-        background-color: ${props => props.theme.SwapFrontBgColor};
+        color: ${props => props.flag ? props.theme.SwapFrontColor : props.theme.SwapBackColor};
+        background-color: ${props => props.flag ? props.theme.SwapFrontBgColor : props.theme.SwapBackBgColor};
         padding-right: 30px;
         border: ${props => props.theme.SwapBorder};
       }
       & > span:nth-child(2) {
-        color: ${props => props.theme.SwapBackColor};
-        background-color: ${props => props.theme.SwapBackBgColor};
+        color: ${props => !props.flag ? props.theme.SwapFrontColor : props.theme.SwapBackColor};
+        background-color: ${props => !props.flag ? props.theme.SwapFrontBgColor : props.theme.SwapBackBgColor};
         border: ${props => props.theme.SwapBorder};
       }
   
@@ -479,7 +484,7 @@ const LocalHeader = styled.div`
         img {
           content: url(${props => props.theme.SwapIcon});
         }
-        box-shadow: 2px 2px 2px 2px #ccc;
+        /* box-shadow: 2px 2px 2px 2px #ccc; */
       }
     }
   }
@@ -634,6 +639,43 @@ const LogoDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`
+
+const AniTemp = styled.div`
+  
+`
+
+const AniImg = styled.img`
+  content: url(${props => props.i});
+  animation-name: example;
+  animation-duration: 1s;
+  animation-direction: reverse;
+  opacity: 0;
+  
+  /* @keyframes example {
+    0%   {opacity: 0;}
+    25%  {opacity: 1;}
+    50%  {opacity: 0;}
+    75%  {opacity: 1;}
+    100% {display: none;}
+  } */
+  ${(props) => {
+    switch (props.f) {
+      case true:
+        return css`
+          @keyframes example {
+            0%   {opacity: 0;}
+            25%  {opacity: 1;}
+            50%  {opacity: 0;}
+            75%  {opacity: 1;}
+            100% {display: none;}
+          }
+        `;
+      default:
+        return css`
+        `;
+    }
+  }}
 `
 
 export default ViewArea;

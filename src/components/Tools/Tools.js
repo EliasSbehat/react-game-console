@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import ImageUploading from 'react-images-uploading';
+
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { TbAlignLeft } from 'react-icons/tb';
+import { FaTimes } from 'react-icons/fa';
 
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
 import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
@@ -48,24 +53,34 @@ const Tools = () => {
 
   return (
     <Wrapper>
+      <Menu>
+        <Remove>
+          <span><FaTimes /></span>
+        </Remove>
+        <MenuBody>
+
+        </MenuBody>
+      </Menu>
       <TopDiv>
         <div>
-          <div> 
+          <progress id = "file" max = {myContext.spanNames.length} value = {myContext.snapIndex+1}></progress>
+        </div>
+        <div>
+          <div>
             <img></img>
             {myContext.spanNames[myContext.snapIndex].name}
           </div>
-          <SwiperProcessor>
-            <div>
-              <progress id = "file" max = {myContext.spanNames.length} value = {myContext.snapIndex+1}></progress>
-              Step {myContext.snapIndex + 1} / {myContext.spanNames.length}
-            </div>
+          <div>
+            <span>
+              <TbAlignLeft></TbAlignLeft>
+            </span>
             <span className="prev">
               <img></img>
             </span>
             <span className="next">
               <img></img>
             </span>
-          </SwiperProcessor>
+          </div>
         </div>
       </TopDiv>
       <MediumDiv>
@@ -76,9 +91,23 @@ const Tools = () => {
             nextEl: '.next',
             prevEl: '.prev',
           }}
+          simulateTouch={false}
           scrollbar={{ draggable: true }}
           onSlideChange={(event) => {
-            myContext.setSnapIndex(event.snapIndex);
+            const ind = event.snapIndex;
+            myContext.setSnapIndex(ind);
+            const rule = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13];
+            switch (ind) {
+              case 0:
+                if (myContext.design === null)
+                  myContext.setAniImg(Design.items[0][0]);
+                else 
+                  myContext.setAniImg(Design.items[myContext.design[0]][myContext.design[1]])
+                myContext.setAniFlag(true);
+                break;
+              default: 
+                break
+            }
           }}
           onSwiper={(swiper) => console.log('--')}
         >
@@ -106,6 +135,7 @@ const Tools = () => {
                   ))
                 }
               </TopItems>
+              <Hr></Hr>
               <Selector>
                 {
                   Design.items[DesigntabSelect].map((item, index) => (
@@ -143,6 +173,7 @@ const Tools = () => {
                 ))
               }
             </TopItems>
+            <Hr></Hr>
             <Selector>
               {
                 Abxy.items[AbxytabSelect].map((item, index) => (
@@ -182,6 +213,7 @@ const Tools = () => {
                 ))
               }
             </TopItems>
+            <Hr></Hr>
             <Selector>
               {
                 Dpad.items[DpadtabSelect].map((item, index) => (
@@ -204,6 +236,7 @@ const Tools = () => {
                ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
           */}
           <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+            <Hr></Hr>
             <Selector>
               {
                 ThumbL.items[ThumbLtabSelect].map((item, index) => (
@@ -233,6 +266,7 @@ const Tools = () => {
                 ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
            */}
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              <Hr></Hr>
               <Selector>
                 {
                   ThumbR.items[ThumbRtabSelect].map((item, index) => (
@@ -260,34 +294,35 @@ const Tools = () => {
                ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
-              <TopItems>
-                {
-                  StartBtn.steps.map((item, index) => (
-                    <TapItem w={StartBtn.steps.length} key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
-                      <span>
-                        {item.name}
-                      </span>
-                      <span>
-                        £{item.price}
-                      </span>
-                      <div></div>
-                    </TapItem>
-                  ))
-                }
-              </TopItems>
-              <Selector>
-                {
-                  StartBtn.items[StartBtntabSelect].map((item, index) => (
-                    <SelectItem 
-                      key={index} 
-                      bgImg={item.selet} 
-                      now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
-                      me = { 10000 * myContext.snapIndex + 100 * StartBtntabSelect + index }
-                      onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}
-                    ></SelectItem>
-                  ))
-                }
-              </Selector>
+                <TopItems>
+                  {
+                    StartBtn.steps.map((item, index) => (
+                      <TapItem w={StartBtn.steps.length} key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
+                        <span>
+                          {item.name}
+                        </span>
+                        <span>
+                          £{item.price}
+                        </span>
+                        <div></div>
+                      </TapItem>
+                    ))
+                  }
+                </TopItems>
+                <Hr></Hr>
+                <Selector>
+                  {
+                    StartBtn.items[StartBtntabSelect].map((item, index) => (
+                      <SelectItem 
+                        key={index} 
+                        bgImg={item.selet} 
+                        now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * StartBtntabSelect + index }
+                        onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}
+                      ></SelectItem>
+                    ))
+                  }
+                </Selector>
             </SwiperSlide>
 
             {/**
@@ -314,6 +349,7 @@ const Tools = () => {
                   ))
                 }
               </TopItems>
+              <Hr></Hr>
               <Selector>
                 {
                   Touchpad.items[TouchpadtabSelect].map((item, index) => (
@@ -337,6 +373,7 @@ const Tools = () => {
                   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              <Hr></Hr>
               <Selector>
                 {
                   Trim.items[TrimtabSelect].map((item, index) => (
@@ -379,6 +416,7 @@ const Tools = () => {
                   ))
                 }
               </TopItems>
+              <Hr></Hr>
               <Selector>
                 {
                   Trigger.items[TriggertabSelect].map((item, index) => (
@@ -403,6 +441,7 @@ const Tools = () => {
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
               </TopItems>
+              <Hr></Hr>
               <Selector>
                 {
                   RearDesign.items[RearDesigntabSelect].map((item, index) => (
@@ -433,6 +472,7 @@ const Tools = () => {
              * 
             */}
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              <Hr></Hr>
               <RazorDiv flag={myContext.razorBack} onClick = {() => myContext.setRazorBack(!myContext.razorBack)}>
                 <span>Razorback Maxfire Modes{"  "}(£{myContext.razorBackPrice})</span>
                 <label>
@@ -452,6 +492,7 @@ const Tools = () => {
                ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
              */}
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              <Hr></Hr>
               <PaddleWrapper>
                 <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Paddles</span>
@@ -490,6 +531,7 @@ const Tools = () => {
                ╚══════╝╚══════╝╚═╝        ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             <Hr></Hr>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
@@ -562,6 +604,7 @@ const Tools = () => {
                ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             <Hr></Hr>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
                   <span>Left Domin button</span>
@@ -635,6 +678,7 @@ const Tools = () => {
                ╚═════╝ ╚═╝ ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             <Hr></Hr>
               <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
                 <span>Digital Triggers{"  "}(£{myContext.digital_trigger_price})</span>
                 <label>
@@ -654,6 +698,7 @@ const Tools = () => {
                   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             <Hr></Hr>
               <RazorDiv flag={myContext.isText} onClick = {() => myContext.setIsText(!myContext.isText)}>
                 <span>
                   {
@@ -701,6 +746,7 @@ const Tools = () => {
                 ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ 
               */}
               <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              <Hr></Hr>
                 <RazorDiv flag={myContext.isLogo} onClick = {() => myContext.setLogo(!myContext.isLogo)}>
                   <span>
                     {
@@ -756,7 +802,8 @@ const Wrapper = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   border-left: 3px solid ${props => props.theme.ThemeColor};
   overflow: hidden;
-  width: 30%;
+  width: 40%;
+  position: relative;
   @media screen and (max-width: 800px) {
     width: 100%;
     /* display: none; */
@@ -764,15 +811,27 @@ const Wrapper = styled.div`
 `
 
 const TopDiv = styled.div`
+  width: 100%;
   & > div:nth-child(1) {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 10px;
-    @media screen and (max-width: 800px) {
-      padding: 5px;
-      flex-direction:row!important;
+    justify-content: center;
+    padding: 5px;
+    progress {
+      color: red;
+      width: 90%;
     }
+    /* progress::-webkit-progress-value {
+      background: lightblue;
+    }
+    progress::-moz-progress-bar {
+      background: #000;
+    } */
+  }
+  & > div:nth-child(2) {
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-between;
     & > div:nth-child(1) {
       display: flex;
       justify-content: center;
@@ -784,14 +843,41 @@ const TopDiv = styled.div`
       img {
         content: url(${props => props.theme.GameConsoleImg});
       }
-      @media screen and (max-width: 1194px) {
-        width: 100%;
-        justify-content: start;
-      }
     }
-  
-    @media screen and (max-width: 1194px) {
-      flex-direction: column;
+
+    & > div:nth-child(2) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      & > span:nth-child(1) {
+        border: ${props => props.theme.DirectIconBorder};
+        color: ${props => props.theme.color};
+        font-size: 30px;
+        cursor: pointer;
+      }
+      & > span:nth-child(2) {
+        padding: 5px 12px;
+        border: ${props => props.theme.DirectIconBorder};
+        background-color: ${props => props.theme.DirectIconBgColor};
+        border-radius: 10px;
+        height: 60%;
+        img {
+          content: url(${props => props.theme.LeftDirectIconImg});
+        }
+        cursor: pointer;
+      }
+      & > span:nth-child(3) {
+        padding: 5px 12px;
+        height: 60%;
+        border: ${props => props.theme.DirectIconBorder};
+        background-color: ${props => props.theme.DirectIconBgColor};
+        border-radius: 10px;
+        img {
+          content: url(${props => props.theme.RightDirectIconImg});
+        }
+        cursor: pointer;
+      }
     }
   }
 `
@@ -1055,5 +1141,38 @@ const UploadImg = styled.div`
   padding: 10px;
   color: ${props => props.theme.color};
 `
+
+// Chaing...
+const Hr = styled.div`
+  margin-top: 3px;
+  height: 3px;
+  width: 100%;
+  background-color: #494B51;
+  display: inline-block;
+`
+
+const Menu = styled.div`
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+`
+
+const Remove = styled.div`
+  span {
+    margin: 20px 20px 0 0;
+    float: right;
+    font-size: 30px;
+    color: ${props => props.theme.color};
+  }
+`
+
+const MenuBody = styled.div`
+  
+`
+
+
 
 export default Tools;

@@ -32,6 +32,9 @@ const VHome = () => {
   const [rdomin_1, setRdomin1] = React.useState(null);
   const [rdomin_2, setRdomin2] = React.useState(null);
 
+  const [aniFlag, setAniFlag] = React.useState(false);
+  const [aniImg, setAniImg] = React.useState(null);
+
   const func_reset = (ind) => {
     if (ind === 0) {
       // Design
@@ -183,6 +186,12 @@ const VHome = () => {
 
     initalPrice,
     setInitalPrice,
+
+    aniFlag,
+    setAniFlag,
+    aniImg,
+    setAniImg,
+    
     spanNames : [ 
       { name: 'Design' },
       { name: 'Abxy' },
