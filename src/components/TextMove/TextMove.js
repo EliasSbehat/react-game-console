@@ -89,7 +89,9 @@ const Wrapper = styled.div`
   align-items: center;
 	transition: all 1s;
 	transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'};
-	top: ${props => !props.sideflag ? '64.5%' : '30%'};
+	/* top: ${props => !props.sideflag ? '64.5%' : '30%'}; */
+	top: ${props => !props.sideflag ? '0' : '100px'};
+	/* left: 100px; */
   h1 {
     overflow: hidden;
     display: flex;

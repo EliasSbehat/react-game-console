@@ -799,7 +799,7 @@ const TopItems = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 40px);
+  width: calc(100% - 20px);
   @media screen and (max-width: 800px){
     height: min-content;
   }
@@ -821,7 +821,7 @@ const TapItem = styled.div`
   }
   cursor: pointer;
   & > span:nth-child(1) {
-    font-size: 15px;
+    font-size: 13px;
     white-space: nowrap;
   }
   div {
@@ -838,6 +838,14 @@ const SwiperProcessor = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  progress {
+    @media screen and (max-width: 1512px) {
+      width: 100%;
+    }
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
   & > div:nth-child(1) {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import html2canvas from 'html2canvas';
+import downloadjs from "downloadjs";
 import Moveable from "react-moveable";
 import { Assets } from "../../theme/index";
 import AppContext from "../../context/context";
@@ -19,16 +20,31 @@ import { DominL, DominSelection } from "../../assets/images/main_assets/L Domin8
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 import ImageMove from "../ImageMove/ImageMove";
 import TextMove from "../TextMove/TextMove";
+import download from "downloadjs";
 
 const ViewArea = () => {
   
   const myContext = React.useContext(AppContext);
 
   const [isover_text, setOver_text] = React.useState(1);
+
+  const handleCaptureClick = async () => {
+    const canvas = await html2canvas(document.getElementById('viewer'));
+    const dataURL = canvas.toDataURL('image/png');
+    downloadjs(dataURL, 'download.png', 'image/png');
+    // if (myContext.sideflag) {
+    // } else {
+    //   const canvas = await html2canvas(document.getElementById('backend'));
+    //   const dataURL = canvas.toDataURL('image/png');
+    //   downloadjs(dataURL, 'download.png', 'image/png');
+    // }
+  };
+
+  
     return (
-      <Wrapper isover_text={isover_text}>
-        <ImageMove></ImageMove>
-        <TextMove></TextMove>
+      <Wrapper isover_text={isover_text} id="total">
+        {/* <ImageMove></ImageMove>
+        <TextMove></TextMove> */}
         <LocalHeader>
             <div>
               <span>
@@ -49,16 +65,13 @@ const ViewArea = () => {
         <Viewer flag={myContext.sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
           <div>
             <div id="viewer">
-              <div>
+            
+              <div id="frontend">
+
                 <div>
                   <div>
                     <div>
-                    {/* <LetterDiv className="target" ff = {myContext.fontFamiles[myContext.familyId].family}>
-                        <h1>
-                          { myContext.textVal }
-                        </h1>
-                      </LetterDiv>                     */}
-                </div>
+                    </div>
                   </div>
 
                   <img src={Assets.ModelImg}></img>
@@ -146,8 +159,8 @@ const ViewArea = () => {
                     }
 
                     {/**
-                     * ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
-                       ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
+                     *  ███████╗████████╗ █████╗ ██████╗ ████████╗    ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
+                        ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
                         ███████╗   ██║   ███████║██████╔╝   ██║       ██████╔╝██║   ██║   ██║      ██║   ██║   ██║██╔██╗ ██║
                         ╚════██║   ██║   ██╔══██║██╔══██╗   ██║       ██╔══██╗██║   ██║   ██║      ██║   ██║   ██║██║╚██╗██║
                         ███████║   ██║   ██║  ██║██║  ██║   ██║       ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
@@ -224,8 +237,11 @@ const ViewArea = () => {
                         })() : (() => {})()
                       }
                 </div>
+                  <ImageMove></ImageMove>
+                  <TextMove></TextMove>
+                
               </div>
-              <div>
+              <div id="backend">
                 <div>
                   <img src={Assets.ModelBackImg}></img>
                   {
@@ -329,6 +345,7 @@ const ViewArea = () => {
               </div>
             </div>
           </div>
+          
         </Viewer>
         <LocalFooter>
           <div id="info_div">
@@ -366,7 +383,7 @@ const ViewArea = () => {
                   04/04/2022
                 </EDD>
               </div>
-              <ATC>
+              <ATC onClick={() => handleCaptureClick()}>
                 <img></img>
                 Add to Cart
               </ATC>
@@ -472,6 +489,7 @@ const Viewer = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
   & > div:nth-child(1) {
     width: 100%;
     height: 100%;
@@ -492,11 +510,13 @@ const Viewer = styled.div`
         top: ${props => props.flag ? props.top1 : props.top2};
         /* 
         height: ${props => props.flag ? '90%' : '30%'}; */
+
         & > div:nth-child(1) {
           min-width: 100%;
           min-height: 100%;
           position: relative;
           width: auto;
+          background-color: red;
           & > div:nth-child(1) {
             width: 100%;
             height: 100%;
@@ -505,14 +525,13 @@ const Viewer = styled.div`
               width: 100%;
               height: 100%;
               position: relative;
-              background-color: red;
               z-index: 100;
             }
           }
           img {
             position: absolute;
             width: 100%;
-            transition: all 1s;
+            /* transition: all 1s; */
           }
         }
       }

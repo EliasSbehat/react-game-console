@@ -73,7 +73,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: ${props => props.theme.bgColor};
-  padding: 17px 0;
+  padding: 10px 0;
   @media screen and (max-width: 800px) {
     display: none;
   }
