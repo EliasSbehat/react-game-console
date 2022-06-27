@@ -753,11 +753,12 @@ const Tools = () => {
   )
 }
 const Wrapper = styled.div`
-  width: 30%;
   background-color: ${props => props.theme.ToolBgColor};
   border-left: 3px solid ${props => props.theme.ThemeColor};
-  
+  overflow: hidden;
+  width: 30%;
   @media screen and (max-width: 800px) {
+    width: 100%;
     /* display: none; */
   }
 `
@@ -768,6 +769,10 @@ const TopDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 20px 10px;
+    @media screen and (max-width: 800px) {
+      padding: 5px;
+      flex-direction:row!important;
+    }
     & > div:nth-child(1) {
       display: flex;
       justify-content: center;
@@ -795,6 +800,9 @@ const TopItems = styled.div`
   justify-content: space-between;
   align-items: center;
   width: calc(100% - 40px);
+  @media screen and (max-width: 800px){
+    height: min-content;
+  }
 `
 
 const TapItem = styled.div`
@@ -808,6 +816,9 @@ const TapItem = styled.div`
   font-family: 'Rajdhani-Medium';
   position: relative;
   padding: 10px 10px;
+  @media screen and (max-width: 800px) {
+    padding: 2px 2px;
+  }
   cursor: pointer;
   & > span:nth-child(1) {
     font-size: 15px;
@@ -833,6 +844,11 @@ const SwiperProcessor = styled.div`
     align-items: flex-end;
     color: ${props => props.theme.color};
     font-family: 'Rajdhani-Medium';
+    progress {
+      @media screen and (max-width: 800px) {
+        width: 200px;
+      }
+    }
   }
   & > span:nth-child(2) {
     padding: 5px 12px;
@@ -871,6 +887,9 @@ const MediumDiv = styled.div`
     border-radius: 10px;
     background-color: ${props => props.theme.ScrollBar};
   }
+  @media screen and (max-width: 800px) {
+    height: 55%;
+  }
 `
 
 const ConfirmDiv = styled.div`
@@ -886,24 +905,31 @@ const ConfirmDiv = styled.div`
     font-family: 'Rajdhani-Medium';
     color: ${props => props.theme.color}
   }
+  @media screen and (max-width: 800px) {
+    height: min-content;
+  }
 `
 
 const Selector = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   width: 90%;
   display: flex;
-  flex-wrap: wrap;
   padding: 10px;
   gap: 20px;
   justify-content: flex-start;
   align-content: flex-start;
+  flex-wrap: wrap;
+  @media screen and (max-width: 800px) {
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+  }
   height: 100%;
   font-family: 20px;
 `
 
 const SelectItem = styled.div`
-  width: 50px;
-  height: 50px;
+  min-width: 50px;
+  min-height: 50px;
   border-radius: 20px;
   outline: ${props => props.now !== props.me ? '2px solid white' : `4px solid ${props.theme.ThemeColor}`};
   color: white;
