@@ -111,6 +111,7 @@ const VHome = () => {
 
   const [initalPrice, setInitalPrice] = React.useState(63.99);
   const [textColor, setTextColor] = React.useState('black');
+  const [fontSize, setFontSize] = React.useState(30);
 
   const imageSetting = {
     design,
@@ -164,6 +165,8 @@ const VHome = () => {
     setFamily,
     textColor, 
     setTextColor,
+    fontSize,
+    setFontSize,
 
     // Logo
     isLogo,

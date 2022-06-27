@@ -22,9 +22,9 @@ export default function TextMove() {
 				}, 2000);
 			});
 		}
-  }, [myContext.images]);
+  }, [myContext.fontSize]);
   return (
-    <Wrapper className="container1" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor}>
+    <Wrapper className="container1" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "}>
       {
         <h1 class="target1" style={{width: "200px", zIndex:"300"}}>
           {
@@ -33,7 +33,7 @@ export default function TextMove() {
         </h1>
 			}
 			{
-				myContext.isText && myContext.sideflag && myContext.snapIndex === 15 ?
+				myContext.isText && myContext.sideflag && myContext.snapIndex === 15 && myContext.textVal.length > 0 ?
 					<Moveable
 						ref={moveableRef1}
 						target={target}
@@ -85,11 +85,18 @@ const Wrapper = styled.div`
   word-break: keep-all;
   text-align: center;
 	display: ${props => props.display ? 'flex' : 'none'};
+  justify-content: center;
+  align-items: center;
 	transition: all 1s;
 	transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'};
 	top: ${props => !props.sideflag ? '64.5%' : '30%'};
-  font-family: ${props => props.ff};
   h1 {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: ${props => props.ts};
+    font-family: ${props => props.ff};
     color: ${props => props.tc};
   }
 `

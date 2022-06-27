@@ -687,6 +687,7 @@ const Tools = () => {
                       <option value='yellow'>Yellow</option>
                       <option value='green'>Green</option>
                     </select>
+                    <input type="number" className="added-text" value={myContext.fontSize} onChange={(e) => myContext.setFontSize(e.target.value)} placeholder="Text size"/>
                   </TextDiv>
                 )
               } 
