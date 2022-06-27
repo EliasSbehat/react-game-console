@@ -255,7 +255,6 @@ const MainDiv = styled.div`
   height: calc(100vh - 90px);
   /* @media screen and (max-width: 800px) {
     flex-direction: column;
-    justify-content: space-between;
   } */
 `
 

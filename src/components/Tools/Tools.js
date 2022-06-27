@@ -914,7 +914,7 @@ const SelectItem = styled.div`
 
 const SelectItemPrice = styled.div`
   text-align: center;
-  color: ${props => props.theme.color}
+  color: ${props => props.theme.color};
 `
 
 const RazorDiv = styled.div`
