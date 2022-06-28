@@ -1,13 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React, {useEffect} from "react";
+import styled, {css} from "styled-components";
 import ImageUploading from 'react-images-uploading';
-
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+import { BsCheck } from 'react-icons/bs';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-import { TbAlignLeft } from 'react-icons/tb';
+import { TbAlignLeft, TbMoodCrazyHappy } from 'react-icons/tb';
 import { FaTimes } from 'react-icons/fa';
+import { FiUpload } from 'react-icons/fi';
+import { GrImage } from 'react-icons/gr';
 
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
 import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
@@ -21,16 +25,15 @@ import { Trigger } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
 import { RearDesign } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 
-
 import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 import { DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
+import { CateImgs } from "../../assets/images/main_assets/cateImg/cate";
 
 import AppContext from "../../context/context";
 import "swiper/css";
 
 const Tools = () => {
-
   const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
   const [AbxytabSelect, AbxySetTabSelect] = React.useState(0);
   const [DpadtabSelect, DpadSetTabSelect] = React.useState(0);
@@ -42,42 +45,187 @@ const Tools = () => {
   const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
+  const [swiper, setSwiper] = React.useState(0);
+  
+  const timer = null;
+  
+  
+  const [menuFlag, setMenuFlag] = React.useState(false);
+  
   const myContext = React.useContext(AppContext);
+
+  const swiperTo = (ind) => {
+    myContext.setSnapIndex(ind);
+    swiper.slideTo(ind, 300);
+  }
+
+  const [please, setPlease] = React.useState([]);
+
+  useEffect(() => {
+  })
 
   const maxNumber = 69;
 
   const onChange = (imageList, addUpdateIndex) => {
-    console.log(imageList, addUpdateIndex);
+    const temp = imageList[0].file;
+    if (!(temp.type === 'image/png' || temp.type === 'image/jpeg' || temp.type === 'image/gif')) {
+      console.log(temp.type);
+      NotificationManager.warning('Only support png, jpeg and svg files', "Warning");
+      return;
+    } else if (temp.size / 1024 / 1014 > 2) {
+      NotificationManager.warning('The image must be 2M.', "Warning");
+      return;
+    }
     myContext.setImages(imageList);
   };
 
   return (
     <Wrapper>
-      <Menu>
-        <Remove>
+      <NotificationContainer/>
+      <Menu mf={menuFlag}>
+        <Remove onClick={() => setMenuFlag(false)}>
           <span><FaTimes /></span>
         </Remove>
         <MenuBody>
+          {/* {
+            CateImgs.map((item, index) => (
+              <MenuItem key={index} onClick={async () => {
+                await setMenuFlag(false);
+                await swiperTo(index);
+              }} curr={myContext.snapIndex} stat={please[index] === null || please[index] === false ? false : true}>
+                <img src={item.image}></img>
+                {item.name}
+                <SBsCheck></SBsCheck>
+              </MenuItem>
+            ))
+          } */}
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(0); }} me={0} curr={myContext.snapIndex} stat={myContext.design === null ? false : true}>
+            <img src={CateImgs[0].image}></img>
+            {CateImgs[0].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(1); }} me={1} curr={myContext.snapIndex} stat={myContext.abxy === null ? false : true}>
+            <img src={CateImgs[1].image}></img>
+            {CateImgs[1].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(2); }} me={2} curr={myContext.snapIndex} stat={myContext.dpad === null ? false : true}>
+            <img src={CateImgs[2].image}></img>
+            {CateImgs[2].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(3); }} me={3} curr={myContext.snapIndex} stat={myContext.thumbstickL === null ? false : true}>
+            <img src={CateImgs[3].image}></img>
+            {CateImgs[3].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(4); }} me={4} curr={myContext.snapIndex} stat={myContext.thumbstickR === null ? false : true}>
+            <img src={CateImgs[4].image}></img>
+            {CateImgs[4].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(5); }} me={5} curr={myContext.snapIndex} stat={myContext.startBtn === null ? false : true}>
+            <img src={CateImgs[5].image}></img>
+            {CateImgs[5].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(6); }} me={6} curr={myContext.snapIndex} stat={myContext.touchpad === null ? false : true}>
+            <img src={CateImgs[6].image}></img>
+            {CateImgs[6].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(7); }} me={7} curr={myContext.snapIndex} stat={myContext.trim === null ? false : true}>
+            <img src={CateImgs[7].image}></img>
+            {CateImgs[7].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(8); }} me={8} curr={myContext.snapIndex} stat={myContext.trigger === null ? false : true}>
+            <img src={CateImgs[8].image}></img>
+            {CateImgs[8].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(9); }} me={9} curr={myContext.snapIndex} stat={myContext.rearDesign === null ? false : true}>
+            <img src={CateImgs[9].image}></img>
+            {CateImgs[9].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(10); }} me={10} curr={myContext.snapIndex} stat={myContext.razorBack}>
+            <img src={CateImgs[10].image}></img>
+            {CateImgs[10].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(11); }} me={11} curr={myContext.snapIndex} stat={myContext.paddle !== null ? true : false}>
+            <img src={CateImgs[11].image}></img>
+            {CateImgs[11].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(12); }} me={12} curr={myContext.snapIndex} stat={myContext.ldomin_2 !== null ? true : false}>
+            <img src={CateImgs[12].image}></img>
+            {CateImgs[12].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(13); }} me={13} curr={myContext.snapIndex} stat={myContext.rdomin_2 !== null ? true : false}>
+            <img src={CateImgs[13].image}></img>
+            {CateImgs[13].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(14); }} me={14} curr={myContext.snapIndex} stat={myContext.digital_trigger}>
+            <img src={CateImgs[14].image}></img>
+            {CateImgs[14].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(15); }} me={15} curr={myContext.snapIndex} stat={myContext.isText}>
+            <img src={CateImgs[15].image}></img>
+            {CateImgs[15].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
+
+          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(16); }} me={16} curr={myContext.snapIndex} stat={myContext.isLogo}>
+            <img src={CateImgs[16].image}></img>
+            {CateImgs[16].name}
+            <SBsCheck></SBsCheck>
+          </MenuItem>
 
         </MenuBody>
       </Menu>
       <TopDiv>
         <div>
-          <progress id = "file" max = {myContext.spanNames.length} value = {myContext.snapIndex+1}></progress>
+          <progress id = "file" max = {CateImgs.length} value = {myContext.snapIndex+1}></progress>
         </div>
         <div>
           <div>
-            <img></img>
-            {myContext.spanNames[myContext.snapIndex].name}
+            <img src={CateImgs[myContext.snapIndex].image}></img>
+            {CateImgs[myContext.snapIndex].name}
           </div>
           <div>
-            <span>
+            <span onClick={() => setMenuFlag(!menuFlag)}>
               <TbAlignLeft></TbAlignLeft>
             </span>
-            <span className="prev">
+            <span className="prev" onClick={async () => {
+              myContext.setIsFinished(false);
+            }}>
               <img></img>
             </span>
-            <span className="next">
+            <span className="next" onClick={async () => {
+              if (myContext.snapIndex === 18) {
+                myContext.setIsFinished(true);
+              }
+            }}>
               <img></img>
             </span>
           </div>
@@ -85,6 +233,9 @@ const Tools = () => {
       </TopDiv>
       <MediumDiv>
         <Swiper
+          onSwiper={s=>{
+            setSwiper(s)
+          }}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={50}
           navigation = {{
@@ -96,20 +247,113 @@ const Tools = () => {
           onSlideChange={(event) => {
             const ind = event.snapIndex;
             myContext.setSnapIndex(ind);
-            const rule = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13];
-            switch (ind) {
-              case 0:
-                if (myContext.design === null)
-                  myContext.setAniImg(Design.items[0][0]);
-                else 
-                  myContext.setAniImg(Design.items[myContext.design[0]][myContext.design[1]])
-                myContext.setAniFlag(true);
-                break;
-              default: 
-                break
-            }
+            // const rule = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13];
+            // switch (ind) {
+            //   case 0:
+            //     if (myContext.design === null) {
+            //       clearTimeout(timer);
+            //       myContext.setAniImg(Design.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       timer = setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 1:
+            //     if (myContext.abxy === null) {
+            //       clearTimeout(timer);
+            //       myContext.setAniImg(Abxy.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       timer = setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 2:
+            //     if (myContext.dpad === null) {
+            //       clearTimeout(timer);
+            //       myContext.setAniImg(Dpad.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       timer = setTimeout(() => {
+            //         console.log('Hello');
+            //         myContext.setAniFlag(false);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 3:
+            //     if (myContext.thumbstickL === null) {
+            //       clearTimeout(timer);
+            //       myContext.setAniImg(ThumbL.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       timer = setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 4:
+            //     if (myContext.thumbstickR === null) {
+            //       clearTimeout(timer);
+            //       myContext.setAniImg(ThumbR.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       timer = setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 5:
+            //     if (myContext.startBtn === null) {
+            //       myContext.setAniImg(StartBtn.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //         console.log(myContext.aniFlag);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 6:
+            //     if (myContext.touchpad === null) {
+            //       myContext.setAniImg(Touchpad.items[0][0].image);
+            //       myContext.setAniFlag(true);
+            //       setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //         console.log(myContext.aniFlag);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 7:
+            //     if (myContext.trim === null) {
+            //       myContext.setAniImg(Trim.items[0][4].image);
+            //       myContext.setAniFlag(true);
+            //       setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //         console.log(myContext.aniFlag);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 8:
+            //     if (myContext.trigger === null) {
+            //       myContext.setAniImg(Trigger.items[0][0]);
+            //       myContext.setAniFlag(true);
+            //       setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //         console.log(myContext.aniFlag);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   case 9:
+            //     if (myContext.rearDesign === null) {
+            //       myContext.setAniImg(RearDesign.items[0][0]);
+            //       myContext.setAniFlag(true);
+            //       setTimeout(() => {
+            //         myContext.setAniFlag(false);
+            //         console.log(myContext.aniFlag);
+            //       }, 1000);
+            //     }
+            //     break;
+            //   default: 
+            //     break
+            // }
           }}
-          onSwiper={(swiper) => console.log('--')}
         >
           {/* 
              ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
@@ -143,7 +387,9 @@ const Tools = () => {
                       bgImg={item.selet}
                       now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
                       me = { 10000 * myContext.snapIndex + 100 * DesigntabSelect + index }
-                      onClick={() => myContext.setDesign([DesigntabSelect, index])} 
+                      onClick={() => myContext.setDesign([DesigntabSelect, index])}
+                      onMouseOver={async () => await myContext.setHoverImg(item.image)}
+                      onMouseLeave={async () => await myContext.setHoverImg(null)}
                     />
                   ))
                 }
@@ -182,6 +428,8 @@ const Tools = () => {
                     now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
                     me = { 10000 * myContext.snapIndex + 100 * AbxytabSelect + index }
                     onClick={() => myContext.setAbxy([AbxytabSelect, index])}
+                    onMouseOver={() => myContext.setHoverImg(item.image)}
+                    onMouseLeave={() => myContext.setHoverImg(null)}
                   ></SelectItem>
                 ))
               }
@@ -221,7 +469,12 @@ const Tools = () => {
                     bgImg={item.selet}
                     now = { myContext.dpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
                     me = { 10000 * myContext.snapIndex + 100 * DpadtabSelect + index }
-                    onClick={() => myContext.setDpad([DpadtabSelect, index])}></SelectItem>
+                    onClick={() => myContext.setDpad([DpadtabSelect, index])}
+                    onMouseOver={() => myContext.setHoverImg(item.image)}
+                    onMouseLeave={() => myContext.setHoverImg(null)}
+                  >
+                  </SelectItem>
+                    
                 ))
               }
             </Selector>
@@ -246,6 +499,8 @@ const Tools = () => {
                       now = { myContext.thumbstickL === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
                       me = { 10000 * myContext.snapIndex + 100 * ThumbLtabSelect + index }
                       onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}
+                      onMouseOver={() => myContext.setHoverImg(item.image)}
+                      onMouseLeave={() => myContext.setHoverImg(null)}
                     >
                     </SelectItem>
                     {
@@ -275,7 +530,10 @@ const Tools = () => {
                         bgImg={item.selet}
                         now = { myContext.thumbstickR === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
                         me = { 10000 * myContext.snapIndex + 100 * ThumbRtabSelect + index }
-                        onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])} />
+                        onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])} 
+                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseLeave={() => myContext.setHoverImg(null)}
+                      />
                       {
                         '£'+item.price
                       }
@@ -319,6 +577,8 @@ const Tools = () => {
                         now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
                         me = { 10000 * myContext.snapIndex + 100 * StartBtntabSelect + index }
                         onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}
+                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseLeave={() => myContext.setHoverImg(null)}
                       ></SelectItem>
                     ))
                   }
@@ -359,6 +619,8 @@ const Tools = () => {
                       now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
                       me = { 10000 * myContext.snapIndex + 100 * TouchpadtabSelect + index }
                       onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}
+                      onMouseOver={() => myContext.setHoverImg(item.image)}
+                      onMouseLeave={() => myContext.setHoverImg(null)}
                     ></SelectItem>
                   ))
                 }
@@ -383,7 +645,10 @@ const Tools = () => {
                         bgImg={item.selet} 
                         now = { myContext.trim === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
                         me = { 10000 * myContext.snapIndex + 100 * TrimtabSelect + index }
-                        onClick={() => myContext.setTrim([TrimtabSelect, index])}></SelectItem>
+                        onClick={() => myContext.setTrim([TrimtabSelect, index])}
+                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseLeave={() => myContext.setHoverImg(null)}
+                      ></SelectItem>
                       {
                         '£' + item.price
                       }
@@ -457,7 +722,7 @@ const Tools = () => {
                         '£'+item.price
                       }
                     </SelectItemPrice>
-                  ))
+                  ))  
                 }
               </Selector>
             </SwiperSlide>
@@ -473,14 +738,29 @@ const Tools = () => {
             */}
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <Hr></Hr>
-              <RazorDiv flag={myContext.razorBack} onClick = {() => myContext.setRazorBack(!myContext.razorBack)}>
+              <RozorBack>
+                <div>
+                  <RozorItem flag={!myContext.razorBack} onClick={() => myContext.setRazorBack(false)}>
+                    <svg viewBox="0 0 82.46 52" class="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.12,30.31c-2.21-.67-6.03-1.46-6.19-1.49l-.49-.1-1.55,5.07,.56,.65c-.01,.05-.03,.12-.05,.19-.09,.34-.22,.9-.42,1.77-.32,1.48,2.69,3.18,4.83,3.86,1.15,.37,2.65,.65,3.92,.65,1.2,0,2.19-.25,2.47-.93,.35-.82,.56-1.36,.68-1.69l.07-.18,.83-.21,1.66-5.03-.44-.2c-.15-.07-3.67-1.69-5.89-2.36Z"></path><path d="M76.02,28.71l-.49,.1c-.16,.03-3.98,.82-6.19,1.49-2.22,.68-5.74,2.29-5.89,2.36l-.44,.2,1.66,5.03,.83,.21c.02,.05,.04,.11,.07,.18,.12,.33,.34,.86,.68,1.69,.29,.68,1.27,.93,2.47,.93,1.27,0,2.77-.28,3.92-.65,2.14-.68,5.15-2.38,4.83-3.86-.19-.87-.33-1.43-.41-1.77-.02-.07-.04-.13-.05-.19l.56-.65-1.55-5.07Z"></path></g></g></g></g></svg>
+                    <h1>In (Default)</h1>
+                    <span><BsCheck /></span>
+                  </RozorItem>
+                  <RozorItem flag={myContext.razorBack}  onClick={() => myContext.setRazorBack(true)}>
+                    <svg viewBox="0 0 82.46 52" class="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.74,41.41c-1.23,0-2.75-.25-4.07-.67-2.22-.71-5.58-2.54-5.16-4.44,.18-.83,.31-1.38,.4-1.73l-.57-.66,1.76-5.77,.93,.19s3.97,.82,6.24,1.5h0c2.25,.68,5.8,2.32,5.95,2.38l.85,.39-1.88,5.71-.85,.21c-.13,.34-.34,.86-.66,1.64-.35,.82-1.33,1.24-2.93,1.24Zm-8.28-7.74l.56,.64-.12,.44c-.09,.34-.22,.89-.41,1.75-.21,.97,2.24,2.56,4.49,3.28,1.21,.39,2.65,.63,3.77,.63s1.85-.23,2.01-.62c.34-.81,.55-1.34,.67-1.67l.16-.43,.82-.21,1.43-4.34-.04-.02c-.15-.07-3.64-1.67-5.83-2.34h0c-2.22-.68-6.11-1.47-6.15-1.48h-.04l-1.33,4.36Z"></path><path d="M68.72,41.41c-1.6,0-2.59-.42-2.93-1.24-.33-.78-.54-1.3-.67-1.64l-.85-.21-1.89-5.71,.85-.39c.38-.18,3.77-1.72,5.95-2.38,1.99-.6,5.25-1.3,6.2-1.5l.97-.2,1.76,5.77-.57,.66c.09,.35,.22,.9,.4,1.73,.42,1.9-2.95,3.73-5.16,4.44-1.32,.42-2.84,.67-4.07,.67Zm-3.67-3.93l.82,.2,.16,.43c.12,.33,.33,.86,.68,1.67,.16,.39,.92,.62,2.01,.62s2.56-.24,3.77-.63c2.25-.72,4.7-2.31,4.49-3.28-.19-.86-.32-1.42-.41-1.75l-.12-.44,.56-.64-1.33-4.37h-.04c-.97,.21-4.19,.9-6.15,1.49-2.12,.64-5.45,2.16-5.83,2.33l-.04,.02,1.43,4.34Z"></path></g></g></g></g></svg>
+                    <h1>Out (No Vibration)</h1>
+                    <h1>£{myContext.razorBackPrice}</h1>
+                    <span><BsCheck /></span>
+                  </RozorItem>
+                </div>
+              </RozorBack>
+              {/* <RazorDiv flag={myContext.razorBack} onClick = {() => myContext.setRazorBack(!myContext.razorBack)}>
                 <span>Razorback Maxfire Modes{"  "}(£{myContext.razorBackPrice})</span>
                 <label>
                   <div>
 
                   </div>
                 </label>
-              </RazorDiv>
+              </RazorDiv> */}
             </SwiperSlide>
             {/**
              * 
@@ -679,14 +959,24 @@ const Tools = () => {
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
              <Hr></Hr>
-              <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
+              {/* <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
                 <span>Digital Triggers{"  "}(£{myContext.digital_trigger_price})</span>
                 <label>
                   <div>
 
                   </div>
                 </label>
-              </RazorDiv>
+              </RazorDiv> */}
+              <TextOptionDiv>
+                <TextOption stat = {!myContext.isText} onClick={() => myContext.setIsText(false)}>
+                  <h1>No (Default)</h1>
+                  <BsCheck></BsCheck>
+                </TextOption>
+                <TextOption stat = {myContext.isText} onClick={() => myContext.setIsText(true)}>
+                  <h1>Add Digital Trigger</h1>
+                  <BsCheck></BsCheck>
+                </TextOption>
+              </TextOptionDiv>
             </SwiperSlide>
             {/**
              * 
@@ -699,19 +989,20 @@ const Tools = () => {
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
              <Hr></Hr>
-              <RazorDiv flag={myContext.isText} onClick = {() => myContext.setIsText(!myContext.isText)}>
-                <span>
-                  {
-                    !myContext.isText ? 'Add ' : 'Remove '
-                  } 
-                  text{"  "}(£{myContext.textPrice})
-                  </span>
-                <label> <div /> </label>
-              </RazorDiv>
+              <TextOptionDiv>
+                <TextOption stat = {!myContext.isText} onClick={() => myContext.setIsText(false)}>
+                  <h1>No (Default)</h1>
+                  <BsCheck></BsCheck>
+                </TextOption>
+                <TextOption stat = {myContext.isText} onClick={() => myContext.setIsText(true)}>
+                  <h1>Add Text</h1>
+                  <BsCheck></BsCheck>
+                </TextOption>
+              </TextOptionDiv>
               {
                 !myContext.isText ? (() => {})() : (
                   <TextDiv>
-                    <input type="text" className="added-text" maxLength="14" value={myContext.textVal} onChange={(e) => myContext.setTextVal(e.target.value)} />
+                    <input type="text" className="added-text" maxLength="14" value={myContext.textVal} onChange={(e) => myContext.setTextVal(e.target.value)} placeholder={"Enter text here"}/>
                     <select className="font-type" onChange={(e) => myContext.setFamily(e.target.value)}>
                       {
                         myContext.fontFamiles.map((item, index) => (
@@ -747,15 +1038,16 @@ const Tools = () => {
               */}
               <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <Hr></Hr>
-                <RazorDiv flag={myContext.isLogo} onClick = {() => myContext.setLogo(!myContext.isLogo)}>
-                  <span>
-                    {
-                      !myContext.isLogo ? 'Add ' : 'Remove '
-                    } 
-                    Logo
-                    </span>
-                  <label> <div /> </label>
-                </RazorDiv>
+                <TextOptionDiv>
+                  <TextOption stat = {!myContext.isLogo} onClick={() => myContext.setLogo(false)}>
+                    <h1>No (Default)</h1>
+                    <BsCheck></BsCheck>
+                  </TextOption>
+                  <TextOption stat = {myContext.isLogo} onClick={() => myContext.setLogo(true)}>
+                    <h1>Add Logo</h1>
+                    <BsCheck></BsCheck>
+                  </TextOption>
+                </TextOptionDiv>
                 {
                   !myContext.isLogo ? (() => {})() : (
                     <TextDiv>
@@ -775,15 +1067,15 @@ const Tools = () => {
                           dragProps,
                         }) => (
                           // write your building UI
-                          <div className="upload__image-wrapper">
-                            <button
-                              style={isDragging ? { color: 'red' } : undefined}
-                              onClick={onImageUpload}
-                              {...dragProps}
-                            >
-                              Click here to upload image
-                            </button>
-                          </div>
+                          <UploadImg 
+                            style={isDragging ? { color: 'red' } : undefined}
+                            onClick={onImageUpload}
+                            {...dragProps}
+                          >
+                            <span><FiUpload></FiUpload></span>
+                            <h1>Download image</h1>
+                            <h1>.PNG .JPG .JPEG .GIF</h1>
+                          </UploadImg>
                         )}
                       </ImageUploading>
                     </TextDiv>
@@ -841,7 +1133,7 @@ const TopDiv = styled.div`
       font-family: 'Rajdhani-Medium';
       font-size: 20px;
       img {
-        content: url(${props => props.theme.GameConsoleImg});
+        width: 30px;
       }
     }
 
@@ -851,7 +1143,6 @@ const TopDiv = styled.div`
       align-items: center;
       gap: 10px;
       & > span:nth-child(1) {
-        border: ${props => props.theme.DirectIconBorder};
         color: ${props => props.theme.color};
         font-size: 30px;
         cursor: pointer;
@@ -1030,11 +1321,17 @@ const SelectItem = styled.div`
   background-image: url(${props => props.bgImg});
   background-repeat: no-repeat;
   background-size: cover;
+  &:hover {
+    transform: scale(1.1);
+  }
+  margin-bottom: 5px;
 `
 
 const SelectItemPrice = styled.div`
   text-align: center;
   color: ${props => props.theme.color};
+  font-family: 'Rajdhani-Light';
+  font-size: 13px;
 `
 
 const RazorDiv = styled.div`
@@ -1136,10 +1433,29 @@ const FontOption = styled.option`
 `;
 
 const UploadImg = styled.div`
-  margin: 10px;
-  border: 1px solid ${props => props.theme.ThemeColor};
   padding: 10px;
   color: ${props => props.theme.color};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 100%;
+      height: 100%;
+      stroke: ${props => props.theme.ThemeColor}
+    }
+  }
+  h1 {
+    font-family: 'Rajdhani-Light';
+    font-weight: lighter;
+    font-size: 20px;
+  }
+
 `
 
 // Chaing...
@@ -1153,14 +1469,16 @@ const Hr = styled.div`
 
 const Menu = styled.div`
   position: relative;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  display: none;
+  display: ${props => props.mf ? 'black':'none'};
+  overflow: auto;
 `
 
 const Remove = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
   span {
     margin: 20px 20px 0 0;
     float: right;
@@ -1170,9 +1488,131 @@ const Remove = styled.div`
 `
 
 const MenuBody = styled.div`
-  
+  padding-top: 50px;
+  overflow: auto;
+`
+const MenuItem = styled.div`
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: ${props => props.theme.color};
+  ${(props) => {
+    if (props.me === props.curr) {
+      return css`
+        color: ${props.theme.ThemeColor};
+      `;
+    }
+  }}
+  img {
+    height: 30px;
+    margin-right: 30px;
+  }
+  padding: 10px;
+  transition: all .1s;
+  margin-left: 0;
+  &:hover {
+    margin-left: 10px;
+  }
+  svg {
+    display: ${props => props.stat ? 'block' : 'none'};
+    color: ${props => props.theme.color};
+    /* ${(props) => {
+      if (props.stat) {
+        return css`
+          color: ${props.theme.ThemeColor};
+        `;
+      }
+    }} */
+  }
 `
 
 
+const RozorBack = styled.div`
+  width: 100%;
+  padding: 0 RozorBakc0px;
+  display: flex;
+  & > div:nth-child(1) {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+`
+const RozorItem = styled.div`
+  height: 100%;
+  position: relative;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  font-family: 'Rajdhani-Light';
+  font-size: 10px;
+  color: ${props => props.theme.color};
+  text-align: center;
+  width: 40%;
+  height: auto;
+  padding: 20px;
+  border: ${props => props.theme.SwapBorder};
+  svg {
+    fill: ${props => props.theme.color}
+  }
+  div {
+    width: 100%;
+    display: inline-block;
+    background-color: red;
+  }
+  span {
+    display: ${props => props.flag ? 'flex' : 'none'};
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: ${props => props.theme.ThemeColor};
+    }
+  }
+`
+const SBsCheck = styled(BsCheck)`
+  svg {
+    /* fill: ${props => props.theme.ThemeColor} */
+  }
+  margin-left: 20px;
+`
+
+const TextOptionDiv = styled.div`
+  width: 100%;
+  padding: 0 30px;
+  display: flex;
+  justify-content: center;
+`
+
+const TextOption = styled.div`
+  width: 40%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  border: ${props => props.theme.SwapBorder};
+  color: ${props => props.theme.color};
+  font-size: 10px;
+  position: relative;
+  padding: 30px 10px;
+  font-family: 'Rajdhani-Light';
+  cursor: pointer;
+  svg {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: ${props => props.theme.ThemeColor};
+    width: 20px;
+    height: 20px;
+    display: ${props => props.stat ? 'black' : 'none'}
+  }
+`
 
 export default Tools;

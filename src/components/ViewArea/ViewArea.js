@@ -40,9 +40,9 @@ const ViewArea = () => {
     // }
   };
 
-  React.useEffect(() => {
-    console.log('is it right?')
-  }, [myContext.AniImg]);
+  // React.useEffect(() => {
+  //   console.log('is it right?')
+  // }, [myContext.AniImg]);
 
   
     return (
@@ -239,7 +239,11 @@ const ViewArea = () => {
                           )
                         })() : (() => {})()
                       }
-                      <AniImg i={Design.items[0][0].image} f={myContext.aniFlag}></AniImg>
+                      {/* {
+                        myContext.hoverImg !== null ? */}
+                          <HoverImg img={myContext.hoverImg} />
+                      {/* } */}
+                      <AniImg i={myContext.aniImg !== null ? myContext.aniImg : 'null'} f={myContext.aniFlag}></AniImg>
                 </div>
                   <ImageMove></ImageMove>
                   <TextMove></TextMove>
@@ -387,7 +391,7 @@ const ViewArea = () => {
                   04/04/2022
                 </EDD>
               </div>
-              <ATC onClick={() => handleCaptureClick()}>
+              <ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
                 <img></img>
                 Add to Cart
               </ATC>
@@ -616,7 +620,7 @@ const EDD = styled.span`
 
 const ATC = styled.button`
   padding: 10px 20px;
-  display: flex;
+  display: ${props => props.flag ? 'flex' : 'none'};
   align-items: center;
   gap: 10px;
   font-size: 17px;
@@ -647,19 +651,18 @@ const AniTemp = styled.div`
 
 const AniImg = styled.img`
   content: url(${props => props.i});
-  animation-name: example;
+  animation-name: ${props => props.f ? 'example' : 'hello'};
   animation-duration: 1s;
   animation-direction: reverse;
   opacity: 0;
-  
-  /* @keyframes example {
+  @keyframes example {
     0%   {opacity: 0;}
     25%  {opacity: 1;}
     50%  {opacity: 0;}
     75%  {opacity: 1;}
     100% {display: none;}
-  } */
-  ${(props) => {
+  }
+  /* ${(props) => {
     switch (props.f) {
       case true:
         return css`
@@ -671,11 +674,17 @@ const AniImg = styled.img`
             100% {display: none;}
           }
         `;
+        break;
       default:
-        return css`
-        `;
+        css``;
+        break;
     }
-  }}
+  }} */
+`
+
+const HoverImg = styled.img`
+  content: url(${props => props.img !== null ? props.img : 'null'});
+  /* transition: all 2s!important; */
 `
 
 export default ViewArea;

@@ -34,6 +34,9 @@ const VHome = () => {
 
   const [aniFlag, setAniFlag] = React.useState(false);
   const [aniImg, setAniImg] = React.useState(null);
+  const [hoverImg, setHoverImg] = React.useState(null);
+
+  const [isFinished, setIsFinished] = React.useState(false);
 
   const func_reset = (ind) => {
     if (ind === 0) {
@@ -138,7 +141,7 @@ const VHome = () => {
     rearDesign,
     setRearDesign,
     razorBack,
-    razorBackPrice: 29.99,
+    razorBackPrice: 9.99,
     setRazorBack,
     pad_esp_flag,
     setPad_esp_flag,
@@ -191,26 +194,12 @@ const VHome = () => {
     setAniFlag,
     aniImg,
     setAniImg,
-    
-    spanNames : [ 
-      { name: 'Design' },
-      { name: 'Abxy' },
-      { name: 'Dpad' },
-      { name: 'Thumbstick L' },
-      { name: 'Thumbstick R' },
-      { name: 'Start Back' },
-      { name: 'Touchpad' },
-      { name: 'Trim' },
-      { name: 'triggers' },
-      { name: 'Rear Design', },
-      { name: 'Razorback', },
-      { name: 'Paddles', },
-      { name: 'LDominBtn' },
-      { name: 'RDominBtn' },
-      { name: 'D Triggers' },
-      { name: 'Text' },
-      { name: 'Logo' }
-    ],
+
+    hoverImg,
+    setHoverImg,
+
+    isFinished,
+    setIsFinished,
     fontFamiles: [
       { name: 'motion picture', family: 'motion-picture' },
       { name: 'pristina', family: 'pristina' },
