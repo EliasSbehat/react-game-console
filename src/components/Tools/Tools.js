@@ -59,6 +59,19 @@ const Tools = () => {
     swiper.slideTo(ind, 300);
   }
 
+  const swiperNext = () => {
+    if (myContext.snapIndex >= 16) {
+      myContext.setIsFinished(true);
+    } else {
+      swiper.slideNext();
+    }
+  }
+  
+  const swiperPrev = () => {
+    myContext.setIsFinished(false);
+    swiper.slidePrev();
+  }
+
   const [please, setPlease] = React.useState([]);
 
   useEffect(() => {
@@ -216,16 +229,10 @@ const Tools = () => {
             <span onClick={() => setMenuFlag(!menuFlag)}>
               <TbAlignLeft></TbAlignLeft>
             </span>
-            <span className="prev" onClick={async () => {
-              myContext.setIsFinished(false);
-            }}>
+            <span className="prev" onClick={() => swiperPrev()}>
               <img></img>
             </span>
-            <span className="next" onClick={async () => {
-              if (myContext.snapIndex === 18) {
-                myContext.setIsFinished(true);
-              }
-            }}>
+            <span className="next" onClick={() => swiperNext()}>
               <img></img>
             </span>
           </div>
@@ -238,10 +245,10 @@ const Tools = () => {
           }}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={50}
-          navigation = {{
-            nextEl: '.next',
-            prevEl: '.prev',
-          }}
+          // navigation = {{
+          //   nextEl: '.next',
+          //   prevEl: '.prev',
+          // }}
           simulateTouch={false}
           scrollbar={{ draggable: true }}
           onSlideChange={(event) => {
@@ -1084,7 +1091,7 @@ const Tools = () => {
               </SwiperSlide>
         </Swiper>
       </MediumDiv>
-      <ConfirmDiv>
+      <ConfirmDiv flag={ myContext.snapIndex === 10 || myContext.snapIndex === 14 || myContext.snapIndex === 15 || myContext.snapIndex === 16 ? false : true }>
         <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button>
       </ConfirmDiv>
     </Wrapper>
@@ -1279,7 +1286,7 @@ const MediumDiv = styled.div`
 
 const ConfirmDiv = styled.div`
   height: 60px;
-  display: flex;
+  display: ${props => props.flag ? 'flex' : 'none'};
   justify-content: space-around;
   align-items: center;
   button {
@@ -1339,6 +1346,7 @@ const RazorDiv = styled.div`
   display: flex;
   background-color: ${props => props.theme.DirectIconBgColor};
   margin: 10px;
+  margin-top: 20px;
   padding: 0 20px;
   height: 50px;
   align-items: center;
@@ -1590,6 +1598,7 @@ const TextOptionDiv = styled.div`
   padding: 0 30px;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 `
 
 const TextOption = styled.div`
