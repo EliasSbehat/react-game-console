@@ -14,7 +14,7 @@ import dominL from './dominL.png';
 import dominR from './dominR.png';
 import DTrigger from './trigger.png';
 import text from './text.png';
-import logo from './text.png';
+import logo from './logo.png';
 import add from './addtobtn.png';
 
 export const CateImgs = [
