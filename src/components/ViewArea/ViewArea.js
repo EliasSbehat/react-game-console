@@ -236,11 +236,11 @@ const ViewArea = () => {
                           <HoverImg img={myContext.hoverImg} />
                       {/* } */}
                       {/* <AniImg i={myContext.aniImg !== null ? myContext.aniImg : 'null'} f={myContext.aniFlag}></AniImg> */}
-                      <SpecialArea>
+                      <SpecialArea sf={myContext.sideflag} si={myContext.snapIndex}>
                         <div>
                           <div>
-                            <ImageMove></ImageMove>
                             <TextMove></TextMove>
+                            <ImageMove></ImageMove>
                           </div>
                         </div>
                       </SpecialArea>
@@ -319,7 +319,7 @@ const ViewArea = () => {
                     })() : (() => {})()
                   }
                   {/**
-                    * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██╗     
+                    * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██╗
                       ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██║     
                       ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██║     
                       ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██║     
@@ -559,7 +559,7 @@ const Viewer = styled.div`
         left: ${props => !props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
         top: ${props => !props.flag ? props.top1 : props.top2}; */
         left: 25%;
-        top: ${props => !props.flag ? '-10%' : '65%'};
+        top: ${props => !props.flag ? '-0%' : '65%'};
         width: 50%;
         transform: ${props => !props.flag ? 'scale(1.4)' : 'scale(0.5)'};
         & > div:nth-child(1) {
@@ -631,7 +631,8 @@ const EDD = styled.span`
 
 const ATC = styled.button`
   padding: 10px 20px;
-  display: ${props => props.flag ? 'flex' : 'none'};
+  /* display: ${props => props.flag ? 'flex' : 'none'}; */
+  display: flex;
   align-items: center;
   gap: 10px;
   font-size: 17px;
@@ -714,7 +715,7 @@ const SpecialArea = styled.div`
       top: 15%;
       left: 39.3%;
       height: 20%;
-      border: 2px dotted red;
+      outline: ${props => props.sf && (props.si === 15 || props.si === 16) ? '2px dotted red' : 'none'};
       width: 24%;
       overflow: hidden;
       img {

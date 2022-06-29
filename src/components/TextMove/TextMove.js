@@ -3,14 +3,14 @@ import Moveable from "react-moveable";
 import styled from "styled-components";
 import AppContext from "../../context/context";
 
-export default function TextMove() {
+export default function ImageMove() {
 	const myContext = React.useContext(AppContext);
   const [target, setTarget] = React.useState();
   const [frame] = React.useState({
     translate: [0, 0],
     rotate: 0
   });
-  const moveableRef1 = React.useRef();
+  const moveableRef = React.useRef();
   React.useEffect(() => {
     const target = document.querySelector('.target1');
 		if (target !== null) {
@@ -18,33 +18,35 @@ export default function TextMove() {
 	
 			target.addEventListener("load", () => {
 				setTimeout(() => {
-					moveableRef1.current.updateRect();
+					moveableRef.current.updateRect();
 				}, 2000);
 			});
 		}
-  }, [myContext.fontSize]);
+  }, [myContext.fontSize, myContext.isText, myContext.textVal]);
   return (
-    <Wrapper className="container1" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "}>
+    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "}>
       {
-        <h1 class="target1" style={{width: "200px", zIndex:"300"}}>
-          {
-            myContext.textVal
-          }
-        </h1>
+				<div>
+					<h1 class="target1" style={{width: "200px", zIndex:"300"}}>
+						{
+							myContext.textVal
+						}
+					</h1>
+				</div>
 			}
 			{
-				myContext.isText && myContext.sideflag && myContext.snapIndex === 15 && myContext.textVal.length > 0 ?
+				myContext.isText && myContext.sideflag && (myContext.snapIndex === 15 || myContext.snapIndex === 16) ?
 					<Moveable
-						ref={moveableRef1}
+						ref={moveableRef}
 						target={target}
 						draggable={true}
 						throttleDrag={0}
 						resizable={true}
 						throttleResize={0}
 						rotatable={true}
-            origin={false}
 						rotationPosition={"top"}
 						throttleRotate={0}
+						origin={false}
 						onDragStart={({ set }) => {
 							set(frame.translate);
 						}}
@@ -71,6 +73,7 @@ export default function TextMove() {
 								frame.translate[1]
 							}px) rotate(${frame.rotate}deg)`;
 						}}
+						renderDirections={["nw", "ne", "se", "sw"]}
 					/>
 				: (() => {})()
 			}
@@ -78,27 +81,36 @@ export default function TextMove() {
   );
 }
 
+
+
 const Wrapper = styled.div`
   position: absolute;
   word-break: break-all;
-  z-index: 100;
-  word-break: keep-all;
-  text-align: center;
+  z-index: 101;
 	display: ${props => props.display ? 'flex' : 'none'};
-  justify-content: center;
-  align-items: center;
 	transition: all 1s;
-	transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'};
-	/* top: ${props => !props.sideflag ? '64.5%' : '30%'}; */
-	top: ${props => !props.sideflag ? '0' : '100px'};
-	/* left: 100px; */
-  h1 {
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: ${props => props.ts};
-    font-family: ${props => props.ff};
-    color: ${props => props.tc};
-  }
+	/* width: 100%;
+	height: 100%; */
+	.moveable-control-box {
+		position: fixed !important;
+		top: unset;
+		left: unset;
+		z-index	: 10;
+	}
+	div {
+		/* width: 100%;
+		height: 100%; */
+		h1 {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			-webkit-user-select: none; /* Safari */
+			-ms-user-select: none; /* IE 10 and IE 11 */
+			user-select: none; /* Standard syntax */
+			overflow: hidden;
+			font-size: ${props => props.ts};
+			font-family: ${props => props.ff};
+			color: ${props => props.tc};
+		}
+	}
 `

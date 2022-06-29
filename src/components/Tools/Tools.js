@@ -60,7 +60,7 @@ const Tools = () => {
   }
 
   const swiperNext = () => {
-    if (myContext.snapIndex >= 16) {
+    if (myContext.snapIndex >= 17) {
       myContext.setIsFinished(true);
     } else {
       swiper.slideNext();
@@ -217,7 +217,7 @@ const Tools = () => {
       </Menu>
       <TopDiv>
         <div>
-          <progress id = "file" max = {CateImgs.length} value = {myContext.snapIndex+1}></progress>
+          <progress id="file" max = {CateImgs.length} value = {myContext.snapIndex+1}></progress>
         </div>
         <div>
           <div>
@@ -229,10 +229,10 @@ const Tools = () => {
               <TbAlignLeft></TbAlignLeft>
             </span>
             <span className="prev" onClick={() => swiperPrev()}>
-              <img></img>
+              <img style={{transform:'scale(1.3)'}}></img>
             </span>
             <span className="next" onClick={() => swiperNext()}>
-              <img></img>
+              <img style={{transform:'scale(1.3)'}}></img>
             </span>
           </div>
         </div>
@@ -250,9 +250,17 @@ const Tools = () => {
           // }}
           simulateTouch={false}
           scrollbar={{ draggable: true }}
-          onSlideChange={(event) => {
+          onSlideChange={async (event) => {
+            
             const ind = event.snapIndex;
-            myContext.setSnapIndex(ind);
+            await myContext.setSnapIndex(ind);
+
+            if (ind === 8 || ind === 9 || ind === 11 || ind === 12 || ind === 13) {
+              console.log('-----------------------');
+              await myContext.setSideflag(false);
+            } else {
+              await  myContext.setSideflag(true);
+            }
             // const rule = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13];
             // switch (ind) {
             //   case 0:
@@ -1090,10 +1098,15 @@ const Tools = () => {
                   )
                 } 
               </SwiperSlide>
+              <SwiperSlide>
+                <AddToChatDiv>
+                  <button>Add to chat</button>
+                </AddToChatDiv>
+              </SwiperSlide>
         </Swiper>
       </MediumDiv>
       <ConfirmDiv flag={ myContext.snapIndex === 10 || myContext.snapIndex === 14 || myContext.snapIndex === 15 || myContext.snapIndex === 16 ? false : true }>
-        <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button>
+        {/* <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button> */}
       </ConfirmDiv>
     </Wrapper>
   )
@@ -1120,13 +1133,16 @@ const TopDiv = styled.div`
     progress {
       color: red;
       width: 90%;
+      height: 5px;
+      border-radius: 9px;
+      margin: 10px;
     }
-    /* progress::-webkit-progress-value {
+    progress::-webkit-progress-value {
       background: lightblue;
     }
     progress::-moz-progress-bar {
-      background: #000;
-    } */
+      background: ${props => props.theme.ThemeColor};
+    }
   }
   & > div:nth-child(2) {
     display: flex;
@@ -1161,6 +1177,7 @@ const TopDiv = styled.div`
         background-color: ${props => props.theme.DirectIconBgColor};
         border-radius: 10px;
         height: 60%;
+        transform: scale(1.1);
         img {
           content: url(${props => props.theme.LeftDirectIconImg});
         }
@@ -1168,6 +1185,7 @@ const TopDiv = styled.div`
       }
       & > span:nth-child(3) {
         padding: 5px 12px;
+        transform: scale(1.1);
         height: 60%;
         border: ${props => props.theme.DirectIconBorder};
         background-color: ${props => props.theme.DirectIconBgColor};
@@ -1622,6 +1640,28 @@ const TextOption = styled.div`
     width: 20px;
     height: 20px;
     display: ${props => props.stat ? 'black' : 'none'}
+  }
+`
+
+const AddToChatDiv = styled.div`
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  button {
+    color: #EEE;
+    padding: 20px;
+    background-color: ${props => props.theme.ThemeColor};
+    border-radius: 30px;
+    border: 0;
+    font-family: 'Rajdhani-Bold';
+    font-size: 25px;
+    width: 60%;
+    transition:all 0.1s;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 `
 

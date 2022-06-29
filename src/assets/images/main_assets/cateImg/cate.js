@@ -15,6 +15,7 @@ import dominR from './dominR.png';
 import DTrigger from './trigger.png';
 import text from './text.png';
 import logo from './text.png';
+import add from './addtobtn.png';
 
 export const CateImgs = [
   { name: 'Design', image: design },
@@ -34,4 +35,5 @@ export const CateImgs = [
   { name: 'D Triggers', image: DTrigger },
   { name: 'Text', image: text },
   { name: 'Logo', image: logo },
+  { name: 'Add to chat', image: add }
 ]

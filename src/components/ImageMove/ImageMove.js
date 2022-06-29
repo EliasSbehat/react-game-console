@@ -24,14 +24,14 @@ export default function ImageMove() {
 		}
   }, [myContext.images]);
   return (
-    <Wrapper className="container" display={myContext.isLogo} sideflag={myContext.sideflag}>
+    <Wrapper className="container1" display={myContext.isLogo} sideflag={myContext.sideflag}>
       {
 				myContext.images.length !== 0 ? (
-					<img class="target" src={myContext.images[0]['data_url']} style={{width: "200px", zIndex:"300"}}></img>
+					<img src={myContext.images[0]['data_url']} style={{width: "100%", height: "100%", zIndex:"300"}} class="target"></img>
 				) : (() => {})()
 			}
 			{
-				myContext.isLogo && myContext.images.length > 0 && myContext.sideflag && myContext.snapIndex === 16 ?
+				myContext.isLogo && myContext.images.length > 0 && myContext.sideflag && (myContext.snapIndex === 15 || myContext.snapIndex === 16) ?
 					<Moveable
 						ref={moveableRef}
 						target={target}
@@ -77,15 +77,19 @@ export default function ImageMove() {
   );
 }
 
+
+
 const Wrapper = styled.div`
   position: absolute;
   word-break: break-all;
   z-index: 100;
 	display: ${props => props.display ? 'flex' : 'none'};
 	transition: all 1s;
-	/* transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'} */
-	/* top: ${props => !props.sideflag ? '0' : '100px'};
-	left: ${props => !props.sideflag ? '0' : '100px'};
-	top: ${props => !props.sideflag ? '64.5%' : '30%'};
-	transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'}; */
+	width: 100%;
+	height: 100%;
+	.moveable-control-box {
+		position: fixed !important;
+		top: unset;
+		left: unset;
+	}
 `
