@@ -81,14 +81,13 @@ const Tools = () => {
 
   const onChange = (imageList, addUpdateIndex) => {
     const temp = imageList[0].file;
-    if (!(temp.type === 'image/png' || temp.type === 'image/jpeg' || temp.type === 'image/gif')) {
-      console.log(temp.type);
-      NotificationManager.warning('Only support png, jpeg and svg files', "Warning");
-      return;
-    } else if (temp.size / 1024 / 1014 > 2) {
-      NotificationManager.warning('The image must be 2M.', "Warning");
-      return;
-    }
+    // if (!(temp.type === 'image/png' || temp.type === 'image/jpeg' || temp.type === 'image/gif')) {
+    //   NotificationManager.warning('Only support png, jpeg and svg files', "Warning");
+    //   return;
+    // } else if (temp.size / 1024 / 1014 > 2) {
+    //   NotificationManager.warning('The image must be 2M.', "Warning");
+    //   return;
+    // }
     myContext.setImages(imageList);
   };
 
@@ -1063,6 +1062,8 @@ const Tools = () => {
                         onChange={onChange}
                         maxNumber={maxNumber}
                         dataURLKey="data_url"
+                        // acceptType={['jpg', 'gif', 'png']}
+                        // maxFileSize={1024 * 1024 * 2}
                       >
                         {({
                           imageList,

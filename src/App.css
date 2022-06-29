@@ -114,3 +114,8 @@ p {
   padding: 30px;
   margin: 0;
 }
+
+.moveable-direction {
+  width: 10px;
+  height: 10px;
+}

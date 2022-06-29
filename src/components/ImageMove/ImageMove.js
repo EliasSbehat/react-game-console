@@ -42,6 +42,7 @@ export default function ImageMove() {
 						rotatable={true}
 						rotationPosition={"top"}
 						throttleRotate={0}
+						origin={false}
 						onDragStart={({ set }) => {
 							set(frame.translate);
 						}}
@@ -68,6 +69,7 @@ export default function ImageMove() {
 								frame.translate[1]
 							}px) rotate(${frame.rotate}deg)`;
 						}}
+						renderDirections={["nw", "ne", "se", "sw"]}
 					/>
 				: (() => {})()
 			}
@@ -81,7 +83,7 @@ const Wrapper = styled.div`
   z-index: 100;
 	display: ${props => props.display ? 'flex' : 'none'};
 	transition: all 1s;
-	transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'}
+	/* transform: ${props => !props.sideflag ? 'scale(0.3)' : 'scale(1)'} */
 	/* top: ${props => !props.sideflag ? '0' : '100px'};
 	left: ${props => !props.sideflag ? '0' : '100px'};
 	top: ${props => !props.sideflag ? '64.5%' : '30%'};

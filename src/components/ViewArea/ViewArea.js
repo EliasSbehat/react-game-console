@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled, {css} from "styled-components";
 import html2canvas from 'html2canvas';
 import downloadjs from "downloadjs";
-import Moveable from "react-moveable";
+import Moveable, { Scalable } from "react-moveable";
 import { Assets } from "../../theme/index";
 import AppContext from "../../context/context";
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
@@ -47,8 +47,6 @@ const ViewArea = () => {
   
     return (
       <Wrapper isover_text={isover_text} id="total">
-        {/* <ImageMove></ImageMove>
-        <TextMove></TextMove> */}
         <LocalHeader flag={myContext.sideflag}>
           <div>
             <span>
@@ -68,15 +66,9 @@ const ViewArea = () => {
         <Viewer flag={myContext.sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
           <div>
             <div id="viewer">
-            
               <div id="frontend">
-
                 <div>
                   <div>
-                    <div>
-                    </div>
-                  </div>
-
                   <img src={Assets.ModelImg}></img>
                   {/* 
                     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
@@ -197,10 +189,10 @@ const ViewArea = () => {
                       {/**
                        *████████╗██████╗ ██╗███╗   ███╗
                         ╚══██╔══╝██╔══██╗██║████╗ ████║
-                            ██║   ██████╔╝██║██╔████╔██║
-                            ██║   ██╔══██╗██║██║╚██╔╝██║
-                            ██║   ██║  ██║██║██║ ╚═╝ ██║
-                            ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
+                           ██║   ██████╔╝██║██╔████╔██║
+                           ██║   ██╔══██╗██║██║╚██╔╝██║
+                           ██║   ██║  ██║██║██║ ╚═╝ ██║
+                           ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
                       */}
                       {
                         myContext.trim !== null ? (() => {
@@ -243,12 +235,19 @@ const ViewArea = () => {
                         myContext.hoverImg !== null ? */}
                           <HoverImg img={myContext.hoverImg} />
                       {/* } */}
-                      <AniImg i={myContext.aniImg !== null ? myContext.aniImg : 'null'} f={myContext.aniFlag}></AniImg>
+                      {/* <AniImg i={myContext.aniImg !== null ? myContext.aniImg : 'null'} f={myContext.aniFlag}></AniImg> */}
+                      <SpecialArea>
+                        <div>
+                          <div>
+                            <ImageMove></ImageMove>
+                            <TextMove></TextMove>
+                          </div>
+                        </div>
+                      </SpecialArea>
+                  </div>
                 </div>
-                  <ImageMove></ImageMove>
-                  <TextMove></TextMove>
-                
               </div>
+
               <div id="backend">
                 <div>
                   <img src={Assets.ModelBackImg}></img>
@@ -305,8 +304,8 @@ const ViewArea = () => {
                     })() : (() => {})()
                   }
                   {/**
-                   * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
-                     ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝
+                   *  ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
+                      ██╔══██╗██╔══██╗██╔══██╗██╔══██╗██║     ██╔════╝
                       ██████╔╝███████║██║  ██║██║  ██║██║     █████╗  
                       ██╔═══╝ ██╔══██║██║  ██║██║  ██║██║     ██╔══╝  
                       ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
@@ -335,12 +334,12 @@ const ViewArea = () => {
                       })() : (() => {})()
                     }
                     {/**
-                     * ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██████╗ 
-                       ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██╔══██╗
-                        ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██████╔╝
-                        ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██╔══██╗
-                        ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║  ██║
-                        ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝
+                       *  ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗    ██████╗ 
+                          ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║    ██╔══██╗
+                          ██║  ██║██║   ██║██╔████╔██║██║██╔██╗ ██║    ██████╔╝
+                          ██║  ██║██║   ██║██║╚██╔╝██║██║██║╚██╗██║    ██╔══██╗
+                          ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║  ██║
+                          ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝
                     */}
                     {
                       myContext.rdomin_1 !== null && myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? (() => {
@@ -503,7 +502,7 @@ const Viewer = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    transform: scale(1.4);
+    /* transform: scale(1.4); */
     justify-content: center;
     #viewer {
       position: relative;
@@ -514,33 +513,41 @@ const Viewer = styled.div`
         // Frontend side
         position: absolute;
         transition: all 1s;
-        width: ${props => props.flag ? props.width1 : props.width2};
-        left: ${props => props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
-        top: ${props => props.flag ? props.top1 : props.top2};
-        /* 
-        height: ${props => props.flag ? '90%' : '30%'}; */
 
+        /* left: 50%;
+        top: 50%;
+        transform: ${props => props.flag ? 'scale(8)' : 'scale(2)'}; */
+
+        /* width: ${props => props.flag ? props.width1 : props.width2};
+        left: ${props => props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
+        top: ${props => props.flag ? props.top1 : props.top2}; */
+        left: 25%;
+        top: ${props => props.flag ? '-0%' : '65%'};
+        width: 50%;
+        transform: ${props => props.flag ? 'scale(1.4)' : 'scale(0.5)'};
         & > div:nth-child(1) {
           min-width: 100%;
           min-height: 100%;
-          position: relative;
-          width: auto;
-          background-color: red;
           & > div:nth-child(1) {
-            width: 100%;
-            height: 100%;
-            position: absolute;
+            position: relative;
+            width: auto;
             & > div:nth-child(1) {
               width: 100%;
               height: 100%;
-              position: relative;
-              z-index: 100;
+              position: absolute;
+              & > div:nth-child(1) {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                z-index: 100;
+              }
             }
-          }
-          img {
-            position: absolute;
-            width: 100%;
-            /* transition: all 1s; */
+            img {
+              position: absolute;
+              width: 100%;
+              /* transition: all 1s; */
+            }
+
           }
         }
       }
@@ -548,9 +555,13 @@ const Viewer = styled.div`
         // Backend side
         position: absolute;
         transition: all 1s;
-        width: ${props => !props.flag ? props.width1 : props.width2};
+        /* width: ${props => !props.flag ? props.width1 : props.width2};
         left: ${props => !props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
-        top: ${props => !props.flag ? props.top1 : props.top2};
+        top: ${props => !props.flag ? props.top1 : props.top2}; */
+        left: 25%;
+        top: ${props => !props.flag ? '-10%' : '65%'};
+        width: 50%;
+        transform: ${props => !props.flag ? 'scale(1.4)' : 'scale(0.5)'};
         & > div:nth-child(1) {
           width: 100%;
           height: 100%;
@@ -685,6 +696,41 @@ const AniImg = styled.img`
 const HoverImg = styled.img`
   content: url(${props => props.img !== null ? props.img : 'null'});
   /* transition: all 2s!important; */
+`
+
+const SpecialArea = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  /* padding-top: 66.6%; */
+  top: 0;
+  & > div:nth-child(1) {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-top: 63%;
+    & > div:nth-child(1) {
+      position: absolute;
+      top: 15%;
+      left: 39.3%;
+      height: 20%;
+      border: 2px dotted red;
+      width: 24%;
+      overflow: hidden;
+      img {
+        /* max-width: 100%;
+        max-height: 100%; */
+      }
+    }
+
+    .moveable-control {
+      position: absolute;
+      /* width: 10px;
+      height: 10px;
+      top:3px;
+      left: 3px; */
+    }
+  }
 `
 
 export default ViewArea;
