@@ -28,6 +28,25 @@ const ViewArea = () => {
 
   const [isover_text, setOver_text] = React.useState(1);
 
+  React.useEffect(() => {
+    document.addEventListener('click', function(event) {
+      var isClickInside = document.getElementById('imagemove').contains(event.target);
+      if (!isClickInside) {
+        myContext.setImgStatus(false);
+        var isClickInside1 = document.getElementById('txtmove').contains(event.target);
+        if (!isClickInside1) {
+          myContext.setTxtStatus(false);
+        } else {
+          myContext.setTxtStatus(true);  
+        }
+      } else {
+        myContext.setImgStatus(true);
+        myContext.setTxtStatus(false);
+      }
+    });
+  })
+
+
   const handleCaptureClick = async () => {
     const canvas = await html2canvas(document.getElementById('viewer'));
     const dataURL = canvas.toDataURL('image/png');
@@ -58,7 +77,7 @@ const ViewArea = () => {
               <span onClick={() => myContext.setSideflag(true)}> Front </span>
               <span onClick={() => myContext.setSideflag(false)}> Back </span>
               <span onClick={() => myContext.setSideflag(!myContext.sideflag)}>
-                <img></img>
+              <img></img>
               </span>
             </div>
           </div>
@@ -236,11 +255,11 @@ const ViewArea = () => {
                           <HoverImg img={myContext.hoverImg} />
                       {/* } */}
                       {/* <AniImg i={myContext.aniImg !== null ? myContext.aniImg : 'null'} f={myContext.aniFlag}></AniImg> */}
-                      <SpecialArea sf={myContext.sideflag} si={myContext.snapIndex}>
+                      <SpecialArea sf={myContext.sideflag} si={myContext.snapIndex} id='specialArea'>
                         <div>
                           <div>
                             <TextMove></TextMove>
-                            <ImageMove></ImageMove>
+                            <ImageMove id="imagemove"></ImageMove>
                           </div>
                         </div>
                       </SpecialArea>

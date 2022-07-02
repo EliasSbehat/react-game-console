@@ -24,14 +24,14 @@ export default function ImageMove() {
 		}
   }, [myContext.images]);
   return (
-    <Wrapper className="container1" display={myContext.isLogo} sideflag={myContext.sideflag}>
+    <Wrapper display={myContext.isLogo} sideflag={myContext.sideflag}>
       {
 				myContext.images.length !== 0 ? (
-					<img src={myContext.images[0]['data_url']} style={{width: "100%", height: "100%", zIndex:"300"}} class="target"></img>
+					<img id="imagemove" src={myContext.images[0]['data_url']} style={{width: "100%", height: "100%", zIndex:"300"}} class="target"></img>
 				) : (() => {})()
 			}
 			{
-				myContext.isLogo && myContext.images.length > 0 && myContext.sideflag && (myContext.snapIndex === 15 || myContext.snapIndex === 16) ?
+				myContext.isLogo && myContext.images.length > 0 && myContext.sideflag && myContext.imgStatus ?
 					<Moveable
 						ref={moveableRef}
 						target={target}
@@ -43,10 +43,10 @@ export default function ImageMove() {
 						rotationPosition={"top"}
 						throttleRotate={0}
 						origin={false}
+						keepRatio={true}
 						onDragStart={({ set }) => {
 							set(frame.translate);
 						}}
-						keepRatio={true}
 						onDrag={({ beforeTranslate }) => {
 							frame.translate = beforeTranslate;
 						}}
@@ -95,8 +95,5 @@ const Wrapper = styled.div`
 	}
 	img {
 		cursor: grab;
-		-webkit-user-select: none; /* Safari */
-		-ms-user-select: none; /* IE 10 and IE 11 */
-		user-select: none; /* Standard syntax */
 	}
 `

@@ -104,6 +104,7 @@ const Tools = () => {
     //   return;
     // }
     myContext.setImages(imageList);
+    myContext.setImgStatus(true);
   };
 
   return (
@@ -1031,7 +1032,12 @@ const Tools = () => {
               {
                 !myContext.isText ? (() => {})() : (
                   <TextDiv>
-                    <input type="text" className="added-text" maxLength="14" value={myContext.textVal} onChange={(e) => myContext.setTextVal(e.target.value)} placeholder={"Enter text here"}/>
+                    <input type="text" className="added-text" maxLength="14" value={myContext.textVal} onChange={(e) => {
+                      myContext.setTextVal(e.target.value);
+                      if (e.target.value.length > 0) {
+                        myContext.setTxtStatus(true);
+                      }
+                    }} placeholder={"Enter text here"}/>
                     <select className="font-type" onChange={(e) => myContext.setFamily(e.target.value)}>
                       {
                         myContext.fontFamiles.map((item, index) => (

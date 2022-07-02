@@ -24,10 +24,10 @@ export default function ImageMove() {
 		}
   }, [myContext.fontSize, myContext.isText, myContext.textVal]);
   return (
-    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "}>
+    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} onFocus={() => console.log('----------')}>
       {
 				<div>
-					<h1 class="target1" style={{width: "200px", zIndex:"300"}}>
+					<h1 className="target1" id="txtmove">
 						{
 							myContext.textVal
 						}
@@ -35,7 +35,7 @@ export default function ImageMove() {
 				</div>
 			}
 			{
-				myContext.isText && myContext.sideflag && (myContext.snapIndex === 15 || myContext.snapIndex === 16) ?
+				myContext.isText && myContext.sideflag && myContext.txtStatus ?
 					<Moveable
 						ref={moveableRef}
 						target={target}
@@ -44,6 +44,7 @@ export default function ImageMove() {
 						resizable={true}
 						throttleResize={0}
 						rotatable={true}
+						scalable={true}
 						rotationPosition={"top"}
 						throttleRotate={0}
 						origin={false}

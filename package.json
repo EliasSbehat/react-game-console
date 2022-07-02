@@ -21,6 +21,7 @@
     "react-notifications": "^1.7.3",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-selecto": "^1.16.2",
     "scenejs": "^1.6.0",
     "styled-components": "^5.3.5",
     "subjx": "^1.0.0",

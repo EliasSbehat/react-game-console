@@ -46,6 +46,9 @@ const VHome = () => {
 
   const [isFinished, setIsFinished] = React.useState(false);
 
+  const [imgStatus, setImgStatus] = React.useState(false);
+  const [txtStatus, setTxtStatus] = React.useState(false);
+
   function func_file_select() {
     const temp = document.getElementById('file_selector');
     setModalFlag(false);
@@ -216,6 +219,12 @@ const VHome = () => {
 
     isFinished,
     setIsFinished,
+
+    imgStatus,
+    setImgStatus,
+    txtStatus,
+    setTxtStatus,
+
     fontFamiles: [
       { name: 'motion picture', family: 'motion-picture' },
       { name: 'pristina', family: 'pristina' },
