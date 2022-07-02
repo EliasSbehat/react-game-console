@@ -46,6 +46,7 @@ export default function ImageMove() {
 						onDragStart={({ set }) => {
 							set(frame.translate);
 						}}
+						keepRatio={true}
 						onDrag={({ beforeTranslate }) => {
 							frame.translate = beforeTranslate;
 						}}
@@ -91,5 +92,11 @@ const Wrapper = styled.div`
 		position: fixed !important;
 		top: unset;
 		left: unset;
+	}
+	img {
+		cursor: grab;
+		-webkit-user-select: none; /* Safari */
+		-ms-user-select: none; /* IE 10 and IE 11 */
+		user-select: none; /* Standard syntax */
 	}
 `

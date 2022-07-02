@@ -1,5 +1,8 @@
 import React, {useEffect} from "react";
 import styled, {css} from "styled-components";
+import html2canvas from 'html2canvas';
+import downloadjs from "downloadjs";
+
 import ImageUploading from 'react-images-uploading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
@@ -51,6 +54,18 @@ const Tools = () => {
   
   
   const [menuFlag, setMenuFlag] = React.useState(false);
+
+  const handleCaptureClick = async () => {
+    const canvas = await html2canvas(document.getElementById('viewer'));
+    const dataURL = canvas.toDataURL('image/png');
+    downloadjs(dataURL, 'download.png', 'image/png');
+    // if (myContext.sideflag) {
+    // } else {
+    //   const canvas = await html2canvas(document.getElementById('backend'));
+    //   const dataURL = canvas.toDataURL('image/png');
+    //   downloadjs(dataURL, 'download.png', 'image/png');
+    // }
+  };
   
   const myContext = React.useContext(AppContext);
 
@@ -1065,6 +1080,16 @@ const Tools = () => {
                 {
                   !myContext.isLogo ? (() => {})() : (
                     <TextDiv>
+                        <UploadImg 
+                          onClick={() => {
+                            myContext.setModalFlag(true);
+                            // onImageUpload()
+                          }}
+                        >
+                          <span><FiUpload></FiUpload></span>
+                          <h1>Download image</h1>
+                          <h1>Maximum file size 2MB</h1>
+                        </UploadImg>
                       <ImageUploading
                         value={myContext.images}
                         onChange={onChange}
@@ -1086,11 +1111,9 @@ const Tools = () => {
                           <UploadImg 
                             style={isDragging ? { color: 'red' } : undefined}
                             onClick={onImageUpload}
+                            id="file_selector"
                             {...dragProps}
                           >
-                            <span><FiUpload></FiUpload></span>
-                            <h1>Download image</h1>
-                            <h1>.PNG .JPG .JPEG .GIF</h1>
                           </UploadImg>
                         )}
                       </ImageUploading>
@@ -1105,9 +1128,52 @@ const Tools = () => {
               </SwiperSlide>
         </Swiper>
       </MediumDiv>
-      <ConfirmDiv flag={ myContext.snapIndex === 10 || myContext.snapIndex === 14 || myContext.snapIndex === 15 || myContext.snapIndex === 16 ? false : true }>
+      {/* <ConfirmDiv flag={ myContext.snapIndex === 10 || myContext.snapIndex === 14 || myContext.snapIndex === 15 || myContext.snapIndex === 16 ? false : true }> */}
         {/* <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button> */}
-      </ConfirmDiv>
+      {/* </ConfirmDiv> */}
+      <LocalFooter>
+        <div id="info_div">
+          <TotalPrice>
+            <span>
+              Total
+            </span>
+            <span>
+              £{
+                Math.round((myContext.initalPrice +
+                  Number(myContext.design !== null ? Design.items[myContext.design[0]][myContext.design[1]].price : 0) +
+                  Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
+                  Number(myContext.dpad !== null ? Dpad.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
+                  Number(myContext.thumbstickL !== null ? ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
+                  Number(myContext.thumbstickR !== null ? ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
+                  Number(myContext.startBtn !== null ? StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
+                  Number(myContext.touchpad !== null ? Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
+                  Number(myContext.trim !== null ? Trim.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
+                  Number(myContext.trigger !== null ? Trigger.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
+                  Number(myContext.rearDesign !== null ? RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
+                  Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
+                  Number(myContext.paddle !== null && myContext.pad_esp_flag ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
+                  Number(myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? Number(DominL.items[myContext.ldomin_2].price) + Number(DominSelection.items[myContext.ldomin_1].price) : 0) + 
+                  Number(myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? Number(DominR.items[myContext.rdomin_2].price) + Number(DominSelection.items[myContext.rdomin_1].price) : 0) + 
+                  Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0)
+                ) * 100
+                ) / 100
+              }
+            </span>
+          </TotalPrice>
+          <Info>
+            <div>
+              <span> Estimated Delivery Date </span>
+              <EDD>
+                04/04/2022
+              </EDD>
+            </div>
+            <ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
+              <img></img>
+              Add to Cart
+            </ATC>
+          </Info>
+        </div>
+      </LocalFooter>
     </Wrapper>
   )
 }
@@ -1125,6 +1191,7 @@ const Wrapper = styled.div`
 
 const TopDiv = styled.div`
   width: 100%;
+  margin-bottom: 20px;
   & > div:nth-child(1) {
     width: 100%;
     display: flex;
@@ -1133,8 +1200,8 @@ const TopDiv = styled.div`
     progress {
       color: red;
       width: 90%;
-      height: 5px;
-      border-radius: 9px;
+      height: 8px;
+      border-radius: 20px;
       margin: 10px;
     }
     progress::-webkit-progress-value {
@@ -1200,7 +1267,7 @@ const TopDiv = styled.div`
 `
 const TopItems = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: calc(100% - 20px);
   @media screen and (max-width: 800px){
@@ -1212,7 +1279,9 @@ const TapItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(75% / ${props => props.w});
+
+  /* width: calc(75% / ${props => props.w}); */
+  width: 25%;
   background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
   color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
   border-radius: 5px;
@@ -1284,7 +1353,6 @@ const SwiperProcessor = styled.div`
 `
 
 const MediumDiv = styled.div`
-  height: 70%;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 3px;
@@ -1325,7 +1393,7 @@ const Selector = styled.div`
   background-color: ${props => props.theme.ToolBgColor};
   width: 90%;
   display: flex;
-  padding: 10px;
+  padding: 30px 10px;
   gap: 20px;
   justify-content: flex-start;
   align-content: flex-start;
@@ -1664,5 +1732,142 @@ const AddToChatDiv = styled.div`
     }
   }
 `
+
+const LocalHeader = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 10px 0;
+  width: 100%;
+  & > div:nth-child(1) {
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    span {
+      font-size: 30px;
+      font-family: 'Rajdhani-Regular';
+      color: ${props => props.theme.color};
+    }
+    img {
+      background-color: ${props => props.theme.HeadIconBgColor};
+      padding: 10px;
+      content: url(${props => props.theme.FlagIcon});
+      border-radius: 15px;
+      border: ${props => props.theme.DirectIconBorder};
+    }
+  }
+  & > div:nth-child(2) {
+    position: absolute;
+    right: 20px;
+    & > div:nth-child(1) {
+      position: relative;
+      font-size: 15px;
+      font-family: 'Rajdhani-Medium';
+      span {
+        border-radius: 10px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+      & > span:nth-child(1) {
+        color: ${props => props.flag ? props.theme.SwapFrontColor : props.theme.SwapBackColor};
+        background-color: ${props => props.flag ? props.theme.SwapFrontBgColor : props.theme.SwapBackBgColor};
+        padding-right: 30px;
+        border: ${props => props.theme.SwapBorder};
+      }
+      & > span:nth-child(2) {
+        color: ${props => !props.flag ? props.theme.SwapFrontColor : props.theme.SwapBackColor};
+        background-color: ${props => !props.flag ? props.theme.SwapFrontBgColor : props.theme.SwapBackBgColor};
+        border: ${props => props.theme.SwapBorder};
+      }
+  
+      & > span:nth-child(3) {
+        position: absolute;
+        top: -10px;
+        left: 35%;
+        padding: 10px;
+        background-color: ${props => props.theme.ThemeColor};
+        img {
+          content: url(${props => props.theme.SwapIcon});
+        }
+        /* box-shadow: 2px 2px 2px 2px #ccc; */
+      }
+    }
+  }
+`
+
+const TotalPrice = styled.div`
+  display: flex;
+  flex-direction: column;
+  & span:nth-child(1) {
+    font-size: 15px;
+    font-family: 'Rajdhani-Light';
+  }
+  & span:nth-child(2) {
+    font-size: 20px;
+    font-family: 'Rajdhani-Medium';
+  }
+`
+
+const Info = styled.div`
+  text-align: right;
+  display: flex;
+  gap: 10px;
+  & > div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    & > span:nth-child(1) {
+      font-size: 15px;
+      font-family: 'Rajdhani-Light';
+    }
+  }
+`
+
+const EDD = styled.span`
+  font-size: 17px;
+  font-family: 'Rajdhani-Light';
+`
+
+const ATC = styled.button`
+  padding: 0 10px;
+  /* display: ${props => props.flag ? 'flex' : 'none'}; */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  color: white;
+  border: 0;
+  border-radius: 20px;
+  background-color: ${props => props.theme.ThemeColor};
+  img {
+    content: url(${props => props.theme.AtcIcon});
+  }
+  @media screen and (max-width: 800px) {
+    
+  }
+`
+
+
+const LocalFooter = styled.div`
+  width: 100%;
+  @media screen and (max-width: 800px){
+    display: none;
+  }
+  #info_div {
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    background-color: white;
+    margin-bottom: 10px;
+    @media screen and (max-width:800px) {
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+`
+
 
 export default Tools;

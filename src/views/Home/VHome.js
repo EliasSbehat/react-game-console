@@ -2,14 +2,20 @@ import React from "react";
 import styled from "styled-components";
 
 import { ThemeProvider } from "styled-components";
+import { ModelBackImg } from "../../assets/images";
 import Header from "../../components/Header/Header";
 import Tools from "../../components/Tools/Tools";
 import ViewArea from "../../components/ViewArea/ViewArea";
 import AppContext from "../../context/context";
 
+import {BsCheckLg} from 'react-icons/bs';
+import {TiTimes} from 'react-icons/ti';
+
 import { DarkMode, DayMode } from "../../theme";
 
 const VHome = () => {
+
+  
 
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
@@ -32,11 +38,19 @@ const VHome = () => {
   const [rdomin_1, setRdomin1] = React.useState(null);
   const [rdomin_2, setRdomin2] = React.useState(null);
 
+  const [modal_flag, setModalFlag] = React.useState(false);
+
   const [aniFlag, setAniFlag] = React.useState(false);
   const [aniImg, setAniImg] = React.useState(null);
   const [hoverImg, setHoverImg] = React.useState(null);
 
   const [isFinished, setIsFinished] = React.useState(false);
+
+  function func_file_select() {
+    const temp = document.getElementById('file_selector');
+    setModalFlag(false);
+    temp.click();
+  }
 
   const func_reset = (ind) => {
     if (ind === 0) {
@@ -173,6 +187,8 @@ const VHome = () => {
     setTextColor,
     fontSize,
     setFontSize,
+    modal_flag,
+    setModalFlag,
 
     // Logo
     isLogo,
@@ -233,11 +249,36 @@ const VHome = () => {
       <AppContext.Provider value={imageSetting}>
         <>
           <Wrapper>
-              <Header modeChange={modeChange} flag='1'></Header>
-              <MainDiv pl={h_header}>
-                <ViewArea />
-                <Tools></Tools>
-              </MainDiv>
+            <Header modeChange={modeChange} flag='1'></Header>
+            <MainDiv pl={h_header}>
+              <ViewArea />
+              <Tools></Tools>
+            </MainDiv>
+            <Modal flag={modal_flag}>
+              <div>
+                <h1>
+                  Tips for uploading an image for controller logo
+                </h1>
+                <MoConItem>
+                  <h1><BsCheckLg></BsCheckLg>File size</h1>
+                  <p>
+                    File size must be smaller than 2MB
+                  </p>
+                </MoConItem>
+                <MoConItem>
+                  <h1><BsCheckLg></BsCheckLg>File type</h1>
+                  <p>
+                    Only available Jpeg, Png, SVG
+                  </p>
+                </MoConItem>
+                <MoOkay onClick={func_file_select}>
+                  Okay
+                </MoOkay>
+                <HideModal onClick={() => setModalFlag(false)}>
+                  <TiTimes></TiTimes>
+                </HideModal>
+              </div>
+            </Modal>
           </Wrapper>
         </>
       </AppContext.Provider>
@@ -250,11 +291,80 @@ const Wrapper = styled.div`
 `
 const MainDiv = styled.div`
   display: flex;
-  height: calc(100vh - 90px);
+  height: calc(100vh - 81px);
   @media screen and (max-width: 800px) {
     flex-direction: column;
     justify-content: space-between;
   }
+  position: relative;
+`
+
+const Modal = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  display: ${props => props.flag ? 'flex':'none'};
+  justify-content: center;
+  align-items: center;
+  color: black;;
+  background-color: rgba(0, 0, 0, 0.3);
+  & > div:nth-child(1) {
+    box-shadow: 2px 2px 2px 2px #aaa;
+    border-radius: 20px;
+    position: relative;
+    font-family: 'Rajdhani-Regular';
+    background-color: rgba(240,248,248,0.8);
+    backdrop-filter: blur(100px);
+    -webkit-backdrop-filter: blur(20px); 
+    max-width: 40vw;
+    padding: 20px;
+    h1 {
+      margin-top: 30px;
+    }
+  }
+`
+
+const MoConItem = styled.div`
+  
+  h1 {
+    font-size: 25px;
+    svg {
+      width: 30px;
+      height: 20px;
+      margin-top: 5px;
+      fill: #00ce71;
+    }
+  }
+  p {
+    font-size: 20px;
+  }
+`
+
+const HideModal = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  transition: all .1s;
+  &:hover {
+    transform: scale(1.1);
+  }
+`
+
+const MoOkay = styled.div`
+  font-family: 'Rajdhani-Bold';
+  font-size: 20px;
+  margin: 20px 0 0 40px;
+  cursor: pointer;
 `
 
 export default VHome;

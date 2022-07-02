@@ -354,7 +354,7 @@ const ViewArea = () => {
           </div>
           
         </Viewer>
-        <LocalFooter>
+        {/* <LocalFooter>
           <div id="info_div">
             <TotalPrice>
               <span>
@@ -396,14 +396,14 @@ const ViewArea = () => {
               </ATC>
             </Info>
           </div>
-        </LocalFooter>
+        </LocalFooter> */}
       </Wrapper>
     )
 }
 
 const Wrapper = styled.div`
   background-color: ${props => props.theme.bgColor};
-  /* background-color: white; */
+  /* background-color: #E9E9EB; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -444,6 +444,7 @@ const LocalHeader = styled.div`
     span {
       font-size: 30px;
       font-family: 'Rajdhani-Regular';
+      /* color: '#333333'; */
       color: ${props => props.theme.color};
     }
     img {
