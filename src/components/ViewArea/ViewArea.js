@@ -28,23 +28,23 @@ const ViewArea = () => {
 
   const [isover_text, setOver_text] = React.useState(1);
 
-  React.useEffect(() => {
-    document.addEventListener('click', function(event) {
-      var isClickInside = document.getElementById('imagemove').contains(event.target);
-      if (!isClickInside) {
-        myContext.setImgStatus(false);
-        var isClickInside1 = document.getElementById('txtmove').contains(event.target);
-        if (!isClickInside1) {
-          myContext.setTxtStatus(false);
-        } else {
-          myContext.setTxtStatus(true);  
-        }
-      } else {
-        myContext.setImgStatus(true);
-        myContext.setTxtStatus(false);
-      }
-    });
-  })
+  // React.useEffect(() => {
+  //   document.addEventListener('click', function(event) {
+  //     var isClickInside = document.getElementById('imagemove').contains(event.target);
+  //     if (!isClickInside) {
+  //       myContext.setImgStatus(false);
+  //       var isClickInside1 = document.getElementById('txtmove').contains(event.target);
+  //       if (!isClickInside1) {
+  //         myContext.setTxtStatus(false);
+  //       } else {
+  //         myContext.setTxtStatus(true);  
+  //       }
+  //     } else {
+  //       myContext.setImgStatus(true);
+  //       myContext.setTxtStatus(false);
+  //     }
+  //   });
+  // })
 
 
   const handleCaptureClick = async () => {
@@ -421,8 +421,8 @@ const ViewArea = () => {
 }
 
 const Wrapper = styled.div`
-  background-color: ${props => props.theme.bgColor};
-  /* background-color: #E9E9EB; */
+  /* background-color: ${props => props.theme.bgColor}; */
+  background-color: #E9E9EB;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -463,8 +463,8 @@ const LocalHeader = styled.div`
     span {
       font-size: 30px;
       font-family: 'Rajdhani-Regular';
-      /* color: '#333333'; */
-      color: ${props => props.theme.color};
+      /* color: ${props => props.theme.color}; */
+      color: '#333333';
     }
     img {
       background-color: ${props => props.theme.HeadIconBgColor};
@@ -530,9 +530,11 @@ const Viewer = styled.div`
       height: 100%;
       
       & > div:nth-child(1) {
+        border-radius: 40px;
         // Frontend side
         position: absolute;
-        transition: all 1s;
+        z-index: ${props => !props.flag ? '100!important' : '99!important'};
+        transition: all 1s, z-index 0s;
 
         /* left: 50%;
         top: 50%;
@@ -572,9 +574,11 @@ const Viewer = styled.div`
         }
       }
       & > div:nth-child(2) {
+        border-radius: 40px;
+        z-index: ${props => props.flag ? '100!important' : '99!important'};
         // Backend side
         position: absolute;
-        transition: all 1s;
+        transition: all 1s, z-index 0s;
         /* width: ${props => !props.flag ? props.width1 : props.width2};
         left: ${props => !props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
         top: ${props => !props.flag ? props.top1 : props.top2}; */

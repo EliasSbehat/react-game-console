@@ -27,6 +27,13 @@ import atc_icon from './images/atc-icon.png';
 
 import model from './images/model.png';
 import model_back from './images/model-back.png';
+
+import mark from './images/mark-dark.png';
+import mark_hover from './images/mark-hover.png';
+
+export const MarkImg = mark;
+export const MarkHoverImg = mark_hover;
+
 export const ModelImg = model;
 export const ModelBackImg = model_back;
 

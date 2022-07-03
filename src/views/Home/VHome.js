@@ -33,6 +33,8 @@ const VHome = () => {
   const [sideflag, setSideflag] = React.useState(true);
   const [snapIndex, setSnapIndex] = React.useState(0);
 
+  const [lrdomin, setLRdomin] = React.useState(false);
+
   const [ldomin_1, setLdomin1] = React.useState(null);
   const [ldomin_2, setLdomin2] = React.useState(null);
   const [rdomin_1, setRdomin1] = React.useState(null);
@@ -49,11 +51,17 @@ const VHome = () => {
   const [imgStatus, setImgStatus] = React.useState(false);
   const [txtStatus, setTxtStatus] = React.useState(false);
 
+  const [esportsFlag, setEsportsFlag] = React.useState(0);
+
+  const [remap, setRemap] = React.useState(true);
+
+  
+
   function func_file_select() {
     const temp = document.getElementById('file_selector');
     setModalFlag(false);
     temp.click();
-  }
+  }  
 
   const func_reset = (ind) => {
     if (ind === 0) {
@@ -224,6 +232,15 @@ const VHome = () => {
     setImgStatus,
     txtStatus,
     setTxtStatus,
+
+    lrdomin,
+    setLRdomin,
+
+    esportsFlag, 
+    setEsportsFlag,
+
+    remap,
+    setRemap,
 
     fontFamiles: [
       { name: 'motion picture', family: 'motion-picture' },

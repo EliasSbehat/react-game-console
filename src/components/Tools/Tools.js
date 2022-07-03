@@ -14,7 +14,9 @@ import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 import { TbAlignLeft, TbMoodCrazyHappy } from 'react-icons/tb';
 import { FaTimes } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
-import { GrImage } from 'react-icons/gr';
+import { AiOutlineStop } from 'react-icons/ai';
+
+import { MarkImg, MarkHoverImg } from "../../assets/images";
 
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
 import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
@@ -792,6 +794,107 @@ const Tools = () => {
                 </label>
               </RazorDiv> */}
             </SwiperSlide>
+
+            {/**
+             * ███████╗███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗
+               ██╔════╝██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝
+               █████╗  ███████╗██████╔╝██║   ██║██████╔╝   ██║   ███████╗
+               ██╔══╝  ╚════██║██╔═══╝ ██║   ██║██╔══██╗   ██║   ╚════██║
+               ███████╗███████║██║     ╚██████╔╝██║  ██║   ██║   ███████║
+               ╚══════╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝
+             */}
+             <SwiperSlide>
+              <EsportsWrapper>
+                <EsportsContainer>
+                  <div>
+                    <EsportItems flag={myContext.esportsFlag === 0} onClick={() => {
+                      myContext.setPaddle(null);
+                      myContext.setLRdomin(false);
+                      myContext.setEsportsFlag(0);
+                    }}>
+                      <div>
+                        <AiOutlineStop></AiOutlineStop>
+                      </div>
+                      <div>
+                        No (Default)
+                      </div>
+                      <div>
+                        <SBsCheck></SBsCheck>
+                      </div>
+                    </EsportItems>
+                    <EsportItems flag={myContext.esportsFlag === 1} onClick={() => {
+                      myContext.setEsportsFlag(1);
+                    }}>
+                      <div>
+                        <img src={CateImgs[11].image}></img>
+                        Paddles
+                      </div>
+                      <div>
+                        £9.99
+                      </div>
+                      <div>
+                        <SBsCheck></SBsCheck>
+                      </div>
+                    </EsportItems>
+                    <EsportItems flag={myContext.esportsFlag === 2} onClick={() => {
+                      myContext.setEsportsFlag(2);
+                    }}>
+                      <div>
+                        <img src={CateImgs[12].image}></img>
+                        Domin8or Button
+                      </div>
+                      <div>
+                        £9.99
+                      </div>
+                      <div>
+                        <SBsCheck></SBsCheck>
+                      </div>
+                    </EsportItems>
+                  </div>
+
+                  {/* Paddle */}
+                  {
+                    myContext.esportsFlag === 1 ? (
+                      <div>
+                        <div>
+                          <img src={CateImgs[11].image}></img>
+                          Paddle
+                        </div>
+                        <Selector>
+                          {
+                            Paddle.items[PaddletabSelect].map((item, index) => (
+                              <SelectItemPrice>
+                              <SelectItem
+                                key={index} bgImg={item.select}
+                                now = { myContext.paddle === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
+                                me = { 10000 * myContext.snapIndex + 100 * PaddletabSelect + index }
+                                onClick={() => myContext.setPaddle([PaddletabSelect, index])}></SelectItem>
+                                {
+                                  '£'+item.price
+                                }
+                              </SelectItemPrice>
+                            ))
+                          }
+                        </Selector>
+                        <RemapDiv>
+                          <CusSwitch flag={myContext.remap} onClick={() => myContext.setRemap(!myContext.remap)}>
+                            <div></div>
+                          </CusSwitch>
+                          <h6>Remappable Technology +£0.00</h6>
+                          <MarkDiv>
+                            <img></img>
+                          </MarkDiv>
+                        </RemapDiv>
+                      </div>
+                    ) : null
+                  }
+
+                  
+                  
+
+                </EsportsContainer>
+              </EsportsWrapper>
+             </SwiperSlide>
             {/**
              * 
              * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
@@ -1127,6 +1230,14 @@ const Tools = () => {
                   )
                 } 
               </SwiperSlide>
+              {/**
+               *  █████╗ ██████╗ ██████╗     ████████╗ ██████╗      ██████╗██╗  ██╗ █████╗ ████████╗
+                  ██╔══██╗██╔══██╗██╔══██╗    ╚══██╔══╝██╔═══██╗    ██╔════╝██║  ██║██╔══██╗╚══██╔══╝
+                  ███████║██║  ██║██║  ██║       ██║   ██║   ██║    ██║     ███████║███████║   ██║   
+                  ██╔══██║██║  ██║██║  ██║       ██║   ██║   ██║    ██║     ██╔══██║██╔══██║   ██║   
+                  ██║  ██║██████╔╝██████╔╝       ██║   ╚██████╔╝    ╚██████╗██║  ██║██║  ██║   ██║   
+                  ╚═╝  ╚═╝╚═════╝ ╚═════╝        ╚═╝    ╚═════╝      ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
+               */}
               <SwiperSlide>
                 <AddToChatDiv>
                   <button>Add to chat</button>
@@ -1144,7 +1255,7 @@ const Tools = () => {
               Total
             </span>
             <span>
-              £{
+              {/* £{
                 Math.round((myContext.initalPrice +
                   Number(myContext.design !== null ? Design.items[myContext.design[0]][myContext.design[1]].price : 0) +
                   Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
@@ -1163,7 +1274,7 @@ const Tools = () => {
                   Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0)
                 ) * 100
                 ) / 100
-              }
+              } */}
             </span>
           </TotalPrice>
           <Info>
@@ -1873,6 +1984,123 @@ const LocalFooter = styled.div`
       padding: 0;
     }
   }
+`
+
+const EsportsWrapper = styled.div`
+  
+`
+
+const EsportsContainer = styled.div`
+  & > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  & > div:nth-child(2) {
+    padding: 20px 20px;
+    color: ${props => props.theme.color};
+    & > div:nth-child(1) {
+      display: flex;
+      align-items: center;
+      width: 120px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid ${props => props.theme.color};
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  gap: 4%;
+`
+
+const EsportItems = styled.div`
+  width: 26%;
+  font-family: 'Rajdhani-Regular';
+  color: ${props => props.theme.color};
+  position: relative;
+  font-size: 19px;
+  padding: 10px;
+  border: ${props => props.theme.SwapBorder};
+  cursor: pointer;
+  & > div:nth-child(1) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    height: 100px;
+    gap: 10px;
+    svg {
+      width: 80%;
+      height: 80%;
+      fill: white;
+    }
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  & > div:nth-child(2) {
+    text-align: center;
+    margin: 20px 0;
+    white-space: nowrap;
+  }
+
+  & > div:nth-child(3) {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    display: ${props => props.flag ? 'block':'none'};
+    svg {
+      fill: ${props => props.theme.ThemeColor};
+    }
+  }
+`
+
+const CusSwitch = styled.div`
+  width: 40px;
+  height: 20px;
+  background-color: ${props => props.flag ? props.theme.ThemeColor : '#aaa'};
+  border-radius: 20px;
+  position: relative;
+  div {
+    position: absolute;
+    background-color: white;
+    display: inline-block;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 20px;
+    transition: all .5s;
+    top: 0;
+    ${props => props.flag ? 'right' : 'left'}: 1px;
+  }
+`
+
+const RemapDiv = styled.div`
+  border: 1px solid ${props => props.theme.ThemeColor};
+  padding: 0 20px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Rajdhani-Light';
+  font-size: 20px;
+  font-weight: lighter;
+`
+
+const MarkDiv = styled.div`
+  img {
+    content: url(${MarkImg});
+    vertical-align: middle;
+    display: inline-block;
+  }
+  &:hover {
+    img {
+      content: url(${MarkHoverImg});
+    }
+  }
+  border-radius: 100%;
 `
 
 
