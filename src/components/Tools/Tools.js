@@ -33,7 +33,7 @@ import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 import { DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
-import { CateImgs } from "../../assets/images/main_assets/cateImg/cate";
+import { CateImgs, PaddleImg, DominLimg, DominRImg } from "../../assets/images/main_assets/cateImg/cate";
 
 import AppContext from "../../context/context";
 import "swiper/css";
@@ -80,13 +80,13 @@ const Tools = () => {
     if (myContext.snapIndex >= 17) {
       myContext.setIsFinished(true);
     } else {
-      swiper.slideNext();
+      myContext.snapIndex === 10 && myContext.paddle !== null ? swiperTo(myContext.snapIndex+2) : swiper.slideNext();
     }
   }
   
   const swiperPrev = () => {
     myContext.setIsFinished(false);
-    swiper.slidePrev();
+    myContext.snapIndex === 12 && myContext.paddle !== null ? swiperTo(myContext.snapIndex-2) : swiper.slidePrev();
   }
 
   const [please, setPlease] = React.useState([]);
@@ -225,12 +225,6 @@ const Tools = () => {
             <SBsCheck></SBsCheck>
           </MenuItem>
 
-          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(16); }} me={16} curr={myContext.snapIndex} stat={myContext.isLogo}>
-            <img src={CateImgs[16].image}></img>
-            {CateImgs[16].name}
-            <SBsCheck></SBsCheck>
-          </MenuItem>
-
         </MenuBody>
       </Menu>
       <TopDiv>
@@ -273,10 +267,10 @@ const Tools = () => {
             const ind = event.snapIndex;
             await myContext.setSnapIndex(ind);
 
-            if (ind === 8 || ind === 9 || ind === 11 || ind === 12 || ind === 13) {
-              console.log('-----------------------');
+            if (ind === 8 || ind === 9 || ind === 10 || ind === 11 || ind === 12) {
               await myContext.setSideflag(false);
             } else {
+              console.log(ind);
               await  myContext.setSideflag(true);
             }
             // const rule = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13];
@@ -727,37 +721,7 @@ const Tools = () => {
                 }
               </Selector>
             </SwiperSlide>
-            {/**
-             * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-               ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
-               ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
-               ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
-               ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
-               ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-            */}
-            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
-              <TopItems>
-              </TopItems>
-              <Hr></Hr>
-              <Selector>
-                {
-                  RearDesign.items[RearDesigntabSelect].map((item, index) => (
-                    <SelectItemPrice>
-                      <SelectItem
-                        key={index} 
-                        bgImg={item.selet}
-                        now = { myContext.rearDesign === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * RearDesigntabSelect + index }
-                        onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}
-                      ></SelectItem>
-                      {
-                        '£'+item.price
-                      }
-                    </SelectItemPrice>
-                  ))  
-                }
-              </Selector>
-            </SwiperSlide>
+            
 
             {/**
              * ██████╗  █████╗ ███████╗ ██████╗ ██████╗     ██████╗  █████╗  ██████╗██╗  ██╗
@@ -773,12 +737,12 @@ const Tools = () => {
               <RozorBack>
                 <div>
                   <RozorItem flag={!myContext.razorBack} onClick={() => myContext.setRazorBack(false)}>
-                    <svg viewBox="0 0 82.46 52" class="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.12,30.31c-2.21-.67-6.03-1.46-6.19-1.49l-.49-.1-1.55,5.07,.56,.65c-.01,.05-.03,.12-.05,.19-.09,.34-.22,.9-.42,1.77-.32,1.48,2.69,3.18,4.83,3.86,1.15,.37,2.65,.65,3.92,.65,1.2,0,2.19-.25,2.47-.93,.35-.82,.56-1.36,.68-1.69l.07-.18,.83-.21,1.66-5.03-.44-.2c-.15-.07-3.67-1.69-5.89-2.36Z"></path><path d="M76.02,28.71l-.49,.1c-.16,.03-3.98,.82-6.19,1.49-2.22,.68-5.74,2.29-5.89,2.36l-.44,.2,1.66,5.03,.83,.21c.02,.05,.04,.11,.07,.18,.12,.33,.34,.86,.68,1.69,.29,.68,1.27,.93,2.47,.93,1.27,0,2.77-.28,3.92-.65,2.14-.68,5.15-2.38,4.83-3.86-.19-.87-.33-1.43-.41-1.77-.02-.07-.04-.13-.05-.19l.56-.65-1.55-5.07Z"></path></g></g></g></g></svg>
+                    <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.12,30.31c-2.21-.67-6.03-1.46-6.19-1.49l-.49-.1-1.55,5.07,.56,.65c-.01,.05-.03,.12-.05,.19-.09,.34-.22,.9-.42,1.77-.32,1.48,2.69,3.18,4.83,3.86,1.15,.37,2.65,.65,3.92,.65,1.2,0,2.19-.25,2.47-.93,.35-.82,.56-1.36,.68-1.69l.07-.18,.83-.21,1.66-5.03-.44-.2c-.15-.07-3.67-1.69-5.89-2.36Z"></path><path d="M76.02,28.71l-.49,.1c-.16,.03-3.98,.82-6.19,1.49-2.22,.68-5.74,2.29-5.89,2.36l-.44,.2,1.66,5.03,.83,.21c.02,.05,.04,.11,.07,.18,.12,.33,.34,.86,.68,1.69,.29,.68,1.27,.93,2.47,.93,1.27,0,2.77-.28,3.92-.65,2.14-.68,5.15-2.38,4.83-3.86-.19-.87-.33-1.43-.41-1.77-.02-.07-.04-.13-.05-.19l.56-.65-1.55-5.07Z"></path></g></g></g></g></svg>
                     <h1>In (Default)</h1>
                     <span><BsCheck /></span>
                   </RozorItem>
                   <RozorItem flag={myContext.razorBack}  onClick={() => myContext.setRazorBack(true)}>
-                    <svg viewBox="0 0 82.46 52" class="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.74,41.41c-1.23,0-2.75-.25-4.07-.67-2.22-.71-5.58-2.54-5.16-4.44,.18-.83,.31-1.38,.4-1.73l-.57-.66,1.76-5.77,.93,.19s3.97,.82,6.24,1.5h0c2.25,.68,5.8,2.32,5.95,2.38l.85,.39-1.88,5.71-.85,.21c-.13,.34-.34,.86-.66,1.64-.35,.82-1.33,1.24-2.93,1.24Zm-8.28-7.74l.56,.64-.12,.44c-.09,.34-.22,.89-.41,1.75-.21,.97,2.24,2.56,4.49,3.28,1.21,.39,2.65,.63,3.77,.63s1.85-.23,2.01-.62c.34-.81,.55-1.34,.67-1.67l.16-.43,.82-.21,1.43-4.34-.04-.02c-.15-.07-3.64-1.67-5.83-2.34h0c-2.22-.68-6.11-1.47-6.15-1.48h-.04l-1.33,4.36Z"></path><path d="M68.72,41.41c-1.6,0-2.59-.42-2.93-1.24-.33-.78-.54-1.3-.67-1.64l-.85-.21-1.89-5.71,.85-.39c.38-.18,3.77-1.72,5.95-2.38,1.99-.6,5.25-1.3,6.2-1.5l.97-.2,1.76,5.77-.57,.66c.09,.35,.22,.9,.4,1.73,.42,1.9-2.95,3.73-5.16,4.44-1.32,.42-2.84,.67-4.07,.67Zm-3.67-3.93l.82,.2,.16,.43c.12,.33,.33,.86,.68,1.67,.16,.39,.92,.62,2.01,.62s2.56-.24,3.77-.63c2.25-.72,4.7-2.31,4.49-3.28-.19-.86-.32-1.42-.41-1.75l-.12-.44,.56-.64-1.33-4.37h-.04c-.97,.21-4.19,.9-6.15,1.49-2.12,.64-5.45,2.16-5.83,2.33l-.04,.02,1.43,4.34Z"></path></g></g></g></g></svg>
+                    <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.74,41.41c-1.23,0-2.75-.25-4.07-.67-2.22-.71-5.58-2.54-5.16-4.44,.18-.83,.31-1.38,.4-1.73l-.57-.66,1.76-5.77,.93,.19s3.97,.82,6.24,1.5h0c2.25,.68,5.8,2.32,5.95,2.38l.85,.39-1.88,5.71-.85,.21c-.13,.34-.34,.86-.66,1.64-.35,.82-1.33,1.24-2.93,1.24Zm-8.28-7.74l.56,.64-.12,.44c-.09,.34-.22,.89-.41,1.75-.21,.97,2.24,2.56,4.49,3.28,1.21,.39,2.65,.63,3.77,.63s1.85-.23,2.01-.62c.34-.81,.55-1.34,.67-1.67l.16-.43,.82-.21,1.43-4.34-.04-.02c-.15-.07-3.64-1.67-5.83-2.34h0c-2.22-.68-6.11-1.47-6.15-1.48h-.04l-1.33,4.36Z"></path><path d="M68.72,41.41c-1.6,0-2.59-.42-2.93-1.24-.33-.78-.54-1.3-.67-1.64l-.85-.21-1.89-5.71,.85-.39c.38-.18,3.77-1.72,5.95-2.38,1.99-.6,5.25-1.3,6.2-1.5l.97-.2,1.76,5.77-.57,.66c.09,.35,.22,.9,.4,1.73,.42,1.9-2.95,3.73-5.16,4.44-1.32,.42-2.84,.67-4.07,.67Zm-3.67-3.93l.82,.2,.16,.43c.12,.33,.33,.86,.68,1.67,.16,.39,.92,.62,2.01,.62s2.56-.24,3.77-.63c2.25-.72,4.7-2.31,4.49-3.28-.19-.86-.32-1.42-.41-1.75l-.12-.44,.56-.64-1.33-4.37h-.04c-.97,.21-4.19,.9-6.15,1.49-2.12,.64-5.45,2.16-5.83,2.33l-.04,.02,1.43,4.34Z"></path></g></g></g></g></svg>
                     <h1>Out (No Vibration)</h1>
                     <h1>£{myContext.razorBackPrice}</h1>
                     <span><BsCheck /></span>
@@ -826,7 +790,7 @@ const Tools = () => {
                       myContext.setEsportsFlag(1);
                     }}>
                       <div>
-                        <img src={CateImgs[11].image}></img>
+                        <img src={PaddleImg}></img>
                         Paddles
                       </div>
                       <div>
@@ -840,7 +804,7 @@ const Tools = () => {
                       myContext.setEsportsFlag(2);
                     }}>
                       <div>
-                        <img src={CateImgs[12].image}></img>
+                        <img src={DominLimg}></img>
                         Domin8or Button
                       </div>
                       <div>
@@ -857,7 +821,7 @@ const Tools = () => {
                     myContext.esportsFlag === 1 ? (
                       <div>
                         <div>
-                          <img src={CateImgs[11].image}></img>
+                          <img src={PaddleImg}></img>
                           Paddle
                         </div>
                         <Selector>
@@ -868,7 +832,13 @@ const Tools = () => {
                                 key={index} bgImg={item.select}
                                 now = { myContext.paddle === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
                                 me = { 10000 * myContext.snapIndex + 100 * PaddletabSelect + index }
-                                onClick={() => myContext.setPaddle([PaddletabSelect, index])}></SelectItem>
+                                onClick={() => {
+                                  myContext.setPaddle([PaddletabSelect, index]);
+                                  myContext.setLdomin1(null);
+                                  myContext.setLdomin2(null);
+                                  myContext.setRdomin1(null);
+                                  myContext.setRdomin2(null);
+                                }}></SelectItem>
                                 {
                                   '£'+item.price
                                 }
@@ -889,12 +859,144 @@ const Tools = () => {
                     ) : null
                   }
 
-                  
-                  
-
+                  {/* DominBtn */}
+                  {
+                    myContext.esportsFlag === 2 ? (
+                      <div>
+                        <UnderlinedDiv>
+                          <img src={DominLimg}></img>
+                          LDominBtn
+                        </UnderlinedDiv>
+                        <Selector>
+                          {
+                            DominSelection.items.map((item, index) => (
+                              <SelectItemPrice>
+                                <SelectItem
+                                  key={index}
+                                  now = { myContext.ldomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.ldomin_1}
+                                  me = { 10000 * myContext.snapIndex + 100 * index }
+                                  bgImg={item.select}
+                                  onClick={() => myContext.setLdomin1(index)}></SelectItem>
+                                  {
+                                    '£'+item.price
+                                  }
+                              </SelectItemPrice>
+                            ))
+                          }
+                        </Selector>
+                        {
+                          myContext.ldomin_1 !== null ? (
+                            <div>
+                              <div><span>{DominL.steps[0].name}</span></div>
+                              <Selector>
+                              {
+                                DominL.items.map((item, index) => (
+                                  <SelectItemPrice>
+                                    <SelectItem 
+                                      key = {index} 
+                                      bgImg = {item.select} 
+                                      now = { myContext.ldomin_2 === null ? -1 : 10000 * myContext.snapIndex + myContext.ldomin_2}
+                                      me = { 10000 * myContext.snapIndex + index }
+                                      onClick = {() => {
+                                        myContext.setLdomin2(index);
+                                        myContext.setPaddle(null);
+                                      }}></SelectItem>
+                                      {
+                                        '£'+item.price
+                                      }
+                                  </SelectItemPrice>
+                                ))
+                              }
+                              </Selector>
+                            </div>
+                          ) : (() => {})()
+                        }
+                        {/* RDominBtn */}
+                        <UnderlinedDiv>
+                          <img src={DominRImg}></img>
+                          RDominBtn
+                        </UnderlinedDiv>
+                        <Selector>
+                          {
+                            DominSelection.items.map((item, index) => (
+                              <SelectItemPrice>
+                                <SelectItem
+                                  key={index}
+                                  bgImg={item.select}
+                                  now = { myContext.rdomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rdomin_1}
+                                  me = { 10000 * myContext.snapIndex + 100 * index }
+                                  onClick={() => myContext.setRdomin1(index)}></SelectItem>
+                                  {
+                                    '£'+item.price
+                                  }
+                              </SelectItemPrice>
+                            ))
+                          }
+                        </Selector>
+                        {
+                          myContext.rdomin_1 !== null ? (
+                            <div>
+                              <div><span>{DominR.steps[0].name}</span></div>
+                              <Selector>
+                              {
+                                DominR.items.map((item, index) => (
+                                  <SelectItemPrice>
+                                    <SelectItem 
+                                      key = {index} 
+                                      bgImg = {item.select} 
+                                      now = { myContext.rdomin_2 === null ? -1 : 10000 * myContext.snapIndex + myContext.rdomin_2}
+                                      me = { 10000 * myContext.snapIndex + index }
+                                      onClick = {() => {
+                                        myContext.setRdomin2(index);
+                                        myContext.setPaddle(null);
+                                      }}></SelectItem>
+                                      {
+                                        '£'+item.price
+                                      }
+                                  </SelectItemPrice>
+                                ))
+                              }
+                              </Selector>
+                            </div>
+                          ) : (() => {})()
+                        }
+                      </div>
+                    ) : null
+                  }
                 </EsportsContainer>
               </EsportsWrapper>
              </SwiperSlide>
+             {/**
+             * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+               ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+               ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
+               ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
+               ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
+               ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
+            */}
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              <TopItems>
+              </TopItems>
+              <Hr></Hr>
+              <Selector>
+                {
+                  RearDesign.items[RearDesigntabSelect].map((item, index) => (
+                    <SelectItemPrice>
+                      <SelectItem
+                        key={index} 
+                        bgImg={item.selet}
+                        now = { myContext.rearDesign === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * RearDesigntabSelect + index }
+                        onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}
+                      ></SelectItem>
+                      {
+                        '£'+item.price
+                      }
+                    </SelectItemPrice>
+                  ))  
+                }
+              </Selector>
+            </SwiperSlide>
             {/**
              * 
              * ██████╗  █████╗ ██████╗ ██████╗ ██╗     ███████╗
@@ -904,7 +1006,7 @@ const Tools = () => {
                ██║     ██║  ██║██████╔╝██████╔╝███████╗███████╗
                ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
              */}
-            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+            {/* <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <Hr></Hr>
               <PaddleWrapper>
                 <RazorDiv flag={myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
@@ -934,7 +1036,7 @@ const Tools = () => {
                   )
                 }
               </PaddleWrapper>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██╗     ███████╗███████╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
                ██║     ██╔════╝██╔════╝╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
@@ -943,7 +1045,7 @@ const Tools = () => {
                ███████╗███████╗██║        ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚══════╝╚══════╝╚═╝        ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             {/* <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
              <Hr></Hr>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
@@ -1007,7 +1109,7 @@ const Tools = () => {
                   )
                 }
               </LDominWrapper>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██████╗ ██╗ ██████╗ ██╗  ██╗████████╗    ██████╗  ██████╗ ███╗   ███╗██╗███╗   ██╗ █████╗  ██████╗ ██████╗     ██████╗ ██╗   ██╗████████╗████████╗ ██████╗ ███╗   ██╗
                ██╔══██╗██║██╔════╝ ██║  ██║╚══██╔══╝    ██╔══██╗██╔═══██╗████╗ ████║██║████╗  ██║██╔══██╗██╔═══██╗██╔══██╗    ██╔══██╗██║   ██║╚══██╔══╝╚══██╔══╝██╔═══██╗████╗  ██║
@@ -1016,7 +1118,7 @@ const Tools = () => {
                ██║  ██║██║╚██████╔╝██║  ██║   ██║       ██████╔╝╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║╚█████╔╝╚██████╔╝██║  ██║    ██████╔╝╚██████╔╝   ██║      ██║   ╚██████╔╝██║ ╚████║
                ╚═╝  ╚═╝╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝ ╚════╝  ╚═════╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
              */}
-             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             {/* <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
              <Hr></Hr>
               <LDominWrapper>
                 <RazorDiv flag={!myContext.pad_esp_flag} onClick = {() => myContext.setPad_esp_flag(!myContext.pad_esp_flag)}>
@@ -1081,7 +1183,7 @@ const Tools = () => {
                   )
                 }
               </LDominWrapper>
-            </SwiperSlide>
+            </SwiperSlide> */}
             {/**
              * ██████╗ ██╗ ██████╗ ██╗████████╗ █████╗ ██╗         ████████╗██████╗ ██╗ ██████╗  ██████╗ ███████╗██████╗ ███████╗
                ██╔══██╗██║██╔════╝ ██║╚══██╔══╝██╔══██╗██║         ╚══██╔══╝██╔══██╗██║██╔════╝ ██╔════╝ ██╔════╝██╔══██╗██╔════╝
@@ -1255,7 +1357,7 @@ const Tools = () => {
               Total
             </span>
             <span>
-              {/* £{
+              £{
                 Math.round((myContext.initalPrice +
                   Number(myContext.design !== null ? Design.items[myContext.design[0]][myContext.design[1]].price : 0) +
                   Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
@@ -1268,13 +1370,13 @@ const Tools = () => {
                   Number(myContext.trigger !== null ? Trigger.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
                   Number(myContext.rearDesign !== null ? RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
                   Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
-                  Number(myContext.paddle !== null && myContext.pad_esp_flag ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
-                  Number(myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? Number(DominL.items[myContext.ldomin_2].price) + Number(DominSelection.items[myContext.ldomin_1].price) : 0) + 
-                  Number(myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? Number(DominR.items[myContext.rdomin_2].price) + Number(DominSelection.items[myContext.rdomin_1].price) : 0) + 
+                  Number(myContext.paddle !== null ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
+                  Number(myContext.ldomin_2 !== null ? Number(DominL.items[myContext.ldomin_2].price) + Number(DominSelection.items[myContext.ldomin_1].price) : 0) + 
+                  Number(myContext.rdomin_2 !== null ? Number(DominR.items[myContext.rdomin_2].price) + Number(DominSelection.items[myContext.rdomin_1].price) : 0) + 
                   Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0)
                 ) * 100
                 ) / 100
-              } */}
+              }
             </span>
           </TotalPrice>
           <Info>
@@ -1322,10 +1424,19 @@ const TopDiv = styled.div`
       margin: 10px;
     }
     progress::-webkit-progress-value {
-      background: lightblue;
+      background: ${props => props.theme.ThemeColor};
+      border: 0;
+      border-radius: 20px;
     }
     progress::-moz-progress-bar {
       background: ${props => props.theme.ThemeColor};
+      border: 0;
+      border-radius: 20px;
+    }
+
+    progress::-webkit-progress-bar {
+      border: 0;
+      border-radius: 20px;
     }
   }
   & > div:nth-child(2) {
@@ -1470,7 +1581,8 @@ const SwiperProcessor = styled.div`
 `
 
 const MediumDiv = styled.div`
-  overflow-y: auto;
+  height: calc(100% - 105px - 80px);
+  overflow: auto;
   ::-webkit-scrollbar {
     width: 3px;
   }
@@ -1483,9 +1595,7 @@ const MediumDiv = styled.div`
     border-radius: 10px;
     background-color: ${props => props.theme.ScrollBar};
   }
-  @media screen and (max-width: 800px) {
-    height: 55%;
-  }
+  /* height: 60%; */
 `
 
 const ConfirmDiv = styled.div`
@@ -1519,7 +1629,7 @@ const Selector = styled.div`
     overflow-x: scroll;
     flex-wrap: nowrap;
   }
-  height: 100%;
+  /* height: 100%; */
   font-family: 20px;
 `
 
@@ -1677,6 +1787,26 @@ const Hr = styled.div`
   width: 100%;
   background-color: #494B51;
   display: inline-block;
+
+  & + ${Selector} {
+    overflow-y: auto;
+    height: 100%;
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: ${props => props.theme.ScrollTraker};
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background-color: ${props => props.theme.ScrollBar};
+    }
+    @media screen and (max-width: 800px) {
+      height: 55%;
+    }
+  }
 `
 
 const Menu = styled.div`
@@ -1968,8 +2098,10 @@ const ATC = styled.button`
 
 const LocalFooter = styled.div`
   width: 100%;
+  position: absolute;
+  bottom: 0;
   @media screen and (max-width: 800px){
-    display: none;
+    /* display: none; */
   }
   #info_div {
     padding: 5px 10px;
@@ -1991,6 +2123,22 @@ const EsportsWrapper = styled.div`
 `
 
 const EsportsContainer = styled.div`
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${props => props.theme.ScrollTraker};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: ${props => props.theme.ScrollBar};
+  }
+  @media screen and (max-width: 800px) {
+    height: 55%;
+  }
   & > div:nth-child(1) {
     display: flex;
     justify-content: center;
@@ -2008,6 +2156,7 @@ const EsportsContainer = styled.div`
       img {
         width: 30px;
         height: 30px;
+        margin-right: 10px;
       }
     }
   }
@@ -2103,5 +2252,17 @@ const MarkDiv = styled.div`
   border-radius: 100%;
 `
 
+const UnderlinedDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 120px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid ${props => props.theme.color};
+  img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+`
 
 export default Tools;

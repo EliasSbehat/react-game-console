@@ -17,23 +17,25 @@ import text from './text.png';
 import logo from './logo.png';
 import add from './addtobtn.png';
 
+export const PaddleImg = paddle;
+export const DominLimg = dominL;
+export const DominRImg = dominR;
+
 export const CateImgs = [
-  { name: 'Design', image: design },
-  { name: 'Abxy', image: abxy },
-  { name: 'Dpad', image: dpad },
-  { name: 'Thumbstick L', image: tmbL },
-  { name: 'Thumbstick R', image: tmbR },
-  { name: 'Start Back', image: startbtn },
-  { name: 'Touchpad', image: touchpad },
-  { name: 'Trim', image: trim },
-  { name: 'Triggers', image: trigger },
-  { name: 'Rear Design', image: Reardesign },
-  { name: 'Razorback', image: razor },
-  { name: 'Paddles', image: paddle },
-  { name: 'LDominBtn', image: dominL },
-  { name: 'RDominBtn', image: dominR },
-  { name: 'D Triggers', image: DTrigger },
-  { name: 'Text', image: text },
-  { name: 'Logo', image: logo },
-  { name: 'Add to chat', image: add }
+  { ind: 0,  name: 'Design', image: design },
+  { ind: 1,  name: 'Abxy', image: abxy },
+  { ind: 2,  name: 'Dpad', image: dpad },
+  { ind: 3,  name: 'Thumbstick L', image: tmbL },
+  { ind: 4,  name: 'Thumbstick R', image: tmbR },
+  { ind: 5,  name: 'Start Back', image: startbtn },
+  { ind: 6,  name: 'Touchpad', image: touchpad },
+  { ind: 7,  name: 'Trim', image: trim },
+  { ind: 8,  name: 'Triggers', image: trigger },
+  { ind: 9, name: 'Razorback', image: razor },
+  { ind: 10, name: 'Esports', image: Reardesign },  
+  { ind: 11, name: 'Rear Design', image: Reardesign },
+  { ind: 12, name: 'D Triggers', image: DTrigger },
+  { ind: 13, name: 'Text', image: text },
+  { ind: 14, name: 'Logo', image: logo },
+  { ind: 15, name: 'Add to chat', image: add }
 ]

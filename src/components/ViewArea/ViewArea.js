@@ -28,23 +28,50 @@ const ViewArea = () => {
 
   const [isover_text, setOver_text] = React.useState(1);
 
-  // React.useEffect(() => {
-  //   document.addEventListener('click', function(event) {
-  //     var isClickInside = document.getElementById('imagemove').contains(event.target);
-  //     if (!isClickInside) {
-  //       myContext.setImgStatus(false);
-  //       var isClickInside1 = document.getElementById('txtmove').contains(event.target);
-  //       if (!isClickInside1) {
-  //         myContext.setTxtStatus(false);
-  //       } else {
-  //         myContext.setTxtStatus(true);  
-  //       }
-  //     } else {
-  //       myContext.setImgStatus(true);
-  //       myContext.setTxtStatus(false);
-  //     }
-  //   });
-  // })
+  React.useEffect(() => {
+    // document.addEventListener('click', function(event) {
+    //   var isClickInside = document.getElementById('txtmove').contains(event.target);
+    //   if (isClickInside === undefined || !isClickInside) {
+    //     myContext.setImgStatus(false);
+    //     console.log('-------------');
+    //     var isClickInside1 = document.getElementById('imagemove').contains(event.target);
+    //     if (!isClickInside1) {
+    //       myContext.setImgStatus(false);
+    //     } else {
+    //       myContext.setImgStatus(true);  
+    //     }
+    //   } else {
+    //     myContext.setImgStatus(true);
+    //     myContext.setTxtStatus(false);
+    //   }
+    // });
+
+    // new
+    document.addEventListener('click', function(event) {
+      let flag = 0;
+      if (document.getElementById('txtmove') !== null) {
+        var isClickInside = document.getElementById('txtmove').contains(event.target);
+        if (isClickInside) {
+          myContext.setTxtStatus(true);
+          myContext.setImgStatus(false);
+          flag = 1;
+        }
+      }
+      if (document.getElementById('imagemove') !== null) {
+        var isClickInside = document.getElementById('imagemove').contains(event.target);
+        if (isClickInside) {
+          myContext.setImgStatus(true);
+          myContext.setTxtStatus(false);
+          flag = 1;
+        }
+      }
+
+      if (flag === 0) {
+        myContext.setImgStatus(false);
+        myContext.setTxtStatus(false);
+      }
+    });
+  });
 
 
   const handleCaptureClick = async () => {
@@ -308,8 +335,8 @@ const ViewArea = () => {
                     })() : (() => {})()
                   }
                   {/**
-                   * ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
-                     ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
+                   *  ██████╗ ███████╗ █████╗ ██████╗     ██████╗ ███████╗███████╗██╗ ██████╗ ███╗   ██╗
+                      ██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗██╔════╝██╔════╝██║██╔════╝ ████╗  ██║
                       ██████╔╝█████╗  ███████║██████╔╝    ██║  ██║█████╗  ███████╗██║██║  ███╗██╔██╗ ██║
                       ██╔══██╗██╔══╝  ██╔══██║██╔══██╗    ██║  ██║██╔══╝  ╚════██║██║██║   ██║██║╚██╗██║
                       ██║  ██║███████╗██║  ██║██║  ██║    ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
@@ -331,7 +358,7 @@ const ViewArea = () => {
                       ╚═╝     ╚═╝  ╚═╝╚═════╝ ╚═════╝ ╚══════╝╚══════╝
                   */}
                   {
-                    myContext.paddle !== null && myContext.pad_esp_flag ? (() => {
+                    myContext.paddle !== null ? (() => {
                       return (
                         Paddle.items[myContext.paddle[0]][myContext.paddle[1]].image_back ? <img src={Paddle.items[myContext.paddle[0]][myContext.paddle[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
@@ -346,7 +373,7 @@ const ViewArea = () => {
                       ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚══════╝
                     */}
                     {
-                      myContext.ldomin_1 !== null && myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? (() => {
+                      myContext.ldomin_1 !== null && myContext.ldomin_2 !== null ? (() => {
                         return (
                           DominL.items[myContext.ldomin_2].image_back ? <img src={DominL.items[myContext.ldomin_2].image_back}></img> : <div className="lds-dual-ring"></div>
                         )
@@ -361,7 +388,7 @@ const ViewArea = () => {
                           ╚═════╝  ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝  ╚═╝
                     */}
                     {
-                      myContext.rdomin_1 !== null && myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? (() => {
+                      myContext.rdomin_1 !== null && myContext.rdomin_2 !== null ? (() => {
                         return (
                           DominR.items[myContext.rdomin_2].image_back ? <img src={DominR.items[myContext.rdomin_2].image_back}></img> : <div className="lds-dual-ring"></div>
                         )
@@ -739,7 +766,7 @@ const SpecialArea = styled.div`
       top: 15%;
       left: 39.3%;
       height: 20%;
-      outline: ${props => props.sf && (props.si === 15 || props.si === 16) ? '2px dotted red' : 'none'};
+      outline: ${props => props.sf && (props.si === 13 || props.si === 14) ? '2px dotted red' : 'none'};
       width: 24%;
       overflow: hidden;
       img {
