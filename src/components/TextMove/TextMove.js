@@ -101,6 +101,7 @@ const Wrapper = styled.div`
 	div {
 		/* width: 100%;
 		height: 100%; */
+		white-space: nowrap;
 		h1 {
 			display: flex;
 			justify-content: center;

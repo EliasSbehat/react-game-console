@@ -33,7 +33,7 @@ import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 import { DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
-import { CateImgs, PaddleImg, DominLimg, DominRImg } from "../../assets/images/main_assets/cateImg/cate";
+import { CateImgs, PaddleImg, DominLimg, DominRImg, TextImg } from "../../assets/images/main_assets/cateImg/cate";
 
 import AppContext from "../../context/context";
 import "swiper/css";
@@ -219,11 +219,11 @@ const Tools = () => {
             <SBsCheck></SBsCheck>
           </MenuItem>
 
-          <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(15); }} me={15} curr={myContext.snapIndex} stat={myContext.isText}>
+          {/* <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(15); }} me={15} curr={myContext.snapIndex} stat={myContext.isText}>
             <img src={CateImgs[15].image}></img>
             {CateImgs[15].name}
             <SBsCheck></SBsCheck>
-          </MenuItem>
+          </MenuItem> */}
 
         </MenuBody>
       </Menu>
@@ -1193,26 +1193,174 @@ const Tools = () => {
                ╚═════╝ ╚═╝ ╚═════╝ ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝       ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝╚══════╝
              */}
              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
-             <Hr></Hr>
-              {/* <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
-                <span>Digital Triggers{"  "}(£{myContext.digital_trigger_price})</span>
-                <label>
-                  <div>
+              <Hr></Hr>
+                {/* <RazorDiv flag={myContext.digital_trigger} onClick = {() => myContext.setDigital_trigger(!myContext.digital_trigger)}>
+                  <span>Digital Triggers{"  "}(£{myContext.digital_trigger_price})</span>
+                  <label>
+                    <div>
 
-                  </div>
-                </label>
-              </RazorDiv> */}
-              <TextOptionDiv>
-                <TextOption stat = {!myContext.isText} onClick={() => myContext.setIsText(false)}>
-                  <h1>No (Default)</h1>
-                  <BsCheck></BsCheck>
-                </TextOption>
-                <TextOption stat = {myContext.isText} onClick={() => myContext.setIsText(true)}>
-                  <h1>Add Digital Trigger</h1>
-                  <BsCheck></BsCheck>
-                </TextOption>
-              </TextOptionDiv>
-            </SwiperSlide>
+                    </div>
+                  </label>
+                </RazorDiv> */}
+                <TextOptionDiv>
+                  <TextOption stat = {!myContext.isText} onClick={() => myContext.setIsText(false)}>
+                    <h1>No (Default)</h1>
+                    <BsCheck></BsCheck>
+                  </TextOption>
+                  <TextOption stat = {myContext.isText} onClick={() => myContext.setIsText(true)}>
+                    <h1>Add Digital Trigger</h1>
+                    <BsCheck></BsCheck>
+                  </TextOption>
+                </TextOptionDiv>
+              </SwiperSlide>
+              {/**
+               *  /$$$$$$$$                    /$$                                     /$$       /$$                                    
+                  |__  $$__/                   | $$                                    | $$      | $$                                    
+                    | $$  /$$$$$$  /$$   /$$ /$$$$$$          /$$$$$$  /$$$$$$$   /$$$$$$$      | $$        /$$$$$$   /$$$$$$   /$$$$$$ 
+                    | $$ /$$__  $$|  $$ /$$/|_  $$_/         |____  $$| $$__  $$ /$$__  $$      | $$       /$$__  $$ /$$__  $$ /$$__  $$
+                    | $$| $$$$$$$$ \  $$$$/   | $$            /$$$$$$$| $$  \ $$| $$  | $$      | $$      | $$  \ $$| $$  \ $$| $$  \ $$
+                    | $$| $$_____/  >$$  $$   | $$ /$$       /$$__  $$| $$  | $$| $$  | $$      | $$      | $$  | $$| $$  | $$| $$  | $$
+                    | $$|  $$$$$$$ /$$/\  $$  |  $$$$/      |  $$$$$$$| $$  | $$|  $$$$$$$      | $$$$$$$$|  $$$$$$/|  $$$$$$$|  $$$$$$/
+                    |__/ \_______/|__/  \__/   \___/         \_______/|__/  |__/ \_______/      |________/ \______/  \____  $$ \______/ 
+               */}
+              <SwiperSlide>
+                <EsportsWrapper>
+                  <EsportsContainer>
+                    <div>
+                      <EsportItems flag={!myContext.isText && !myContext.isLogo} onClick={() => {
+                        myContext.setIsText(false);
+                        myContext.setLogo(false);
+                      }}>
+                        <div>
+                          <AiOutlineStop></AiOutlineStop>
+                        </div>
+                        <div>
+                          No (Default)
+                        </div>
+                        <div>
+                          <SBsCheck></SBsCheck>
+                        </div>
+                      </EsportItems>
+                      <EsportItems flag={myContext.isText} onClick={() => {
+                        myContext.setIsText(true);
+                        myContext.setLogo(false);
+                      }}>
+                        <div>
+                          <img src={TextImg} style={{width: '45px'}}></img>
+                          Text
+                        </div>
+                        <div>
+                          £9.99
+                        </div>
+                        <div>
+                          <SBsCheck></SBsCheck>
+                        </div>
+                      </EsportItems>
+                      <EsportItems flag={myContext.isLogo} onClick={() => {
+                        myContext.setIsText(false);
+                        myContext.setLogo(true);
+                      }}>
+                        <div>
+                          <img src={CateImgs[13].image}  style={{width: '45px'}}></img>
+                          Logo
+                        </div>
+                        <div>
+                          £9.99
+                        </div>
+                        <div>
+                          <SBsCheck></SBsCheck>
+                        </div>
+                      </EsportItems>
+                    </div>
+
+                    {/* Paddle */}
+                    {
+                      !myContext.isText ? (() => {})() : (
+                        <TextDiv>
+                          <input type="text" className="added-text" maxLength="14" value={myContext.textVal} onChange={(e) => {
+                            myContext.setTextVal(e.target.value);
+                            if (e.target.value.length > 0) {
+                              myContext.setTxtStatus(true);
+                            }
+                          }} placeholder={"Enter text here"}/>
+                          <select className="font-type" onChange={(e) => myContext.setFamily(e.target.value)}>
+                            {
+                              myContext.fontFamiles.map((item, index) => (
+                                <FontOption family={item.family} key={index} value={index} >
+                                  {
+                                    item.name
+                                  }
+                                </FontOption>
+                                
+                              ))
+                            }
+                          </select>
+                          <select className="font-type" onChange={(e) => myContext.setTextColor(e.target.value)} >
+                            <option value='black'>Black</option>
+                            <option value='white'>White</option>
+                            <option value='blue'>Blue</option>
+                            <option value='red'>Red</option>
+                            <option value='yellow'>Yellow</option>
+                            <option value='green'>Green</option>
+                          </select>
+                          <select className='font-type' onChange={(e) => myContext.setFontSize(e.target.value)}>
+                            <option value={30}>Small</option>
+                            <option value={40}>Medium</option>
+                            <option value={50}>Large</option>
+                          </select>
+                        </TextDiv>
+                      )
+                    } 
+
+                    {/* Logo */}
+                    {
+                      myContext.isLogo ? (
+                        <span>
+                          <TextDiv>
+                            <UploadImg 
+                              onClick={() => {
+                                myContext.setModalFlag(true);
+                                // onImageUpload()
+                              }}
+                            >
+                              <span><FiUpload></FiUpload></span>
+                              <h1>Download image</h1>
+                              <h1>Maximum file size 2MB</h1>
+                            </UploadImg>
+                          <ImageUploading
+                            value={myContext.images}
+                            onChange={onChange}
+                            maxNumber={maxNumber}
+                            dataURLKey="data_url"
+                            // acceptType={['jpg', 'gif', 'png']}
+                            // maxFileSize={1024 * 1024 * 2}
+                          >
+                            {({
+                              imageList,
+                              onImageUpload,
+                              onImageRemoveAll,
+                              onImageUpdate,
+                              onImageRemove,
+                              isDragging,
+                              dragProps,
+                            }) => (
+                              // write your building UI
+                              <UploadImg 
+                                style={isDragging ? { color: 'red' } : undefined}
+                                onClick={onImageUpload}
+                                id="file_selector"
+                                {...dragProps}
+                              >
+                              </UploadImg>
+                            )}
+                          </ImageUploading>
+                        </TextDiv>
+                      </span>
+                      ) : null
+                    }
+                  </EsportsContainer>
+                </EsportsWrapper>
+              </SwiperSlide>
             {/**
              * 
              * ████████╗███████╗██╗  ██╗████████╗
@@ -1222,7 +1370,7 @@ const Tools = () => {
                   ██║   ███████╗██╔╝ ██╗   ██║   
                   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚═╝   
              */}
-             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+             {/* <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
              <Hr></Hr>
               <TextOptionDiv>
                 <TextOption stat = {!myContext.isText} onClick={() => myContext.setIsText(false)}>
@@ -1263,11 +1411,15 @@ const Tools = () => {
                       <option value='yellow'>Yellow</option>
                       <option value='green'>Green</option>
                     </select>
-                    <input type="number" className="added-text" value={myContext.fontSize} onChange={(e) => myContext.setFontSize(e.target.value)} placeholder="Text size"/>
+                    <select className='font-type' onChange={(e) => myContext.setFontSize(e.target.value)}>
+                      <option value={30}>Small</option>
+                      <option value={40}>Medium</option>
+                      <option value={50}>Large</option>
+                    </select>
                   </TextDiv>
                 )
               } 
-             </SwiperSlide>
+             </SwiperSlide> */}
              {/**
               * ██╗      ██████╗  ██████╗  ██████╗ 
                 ██║     ██╔═══██╗██╔════╝ ██╔═══██╗
@@ -1276,7 +1428,7 @@ const Tools = () => {
                 ███████╗╚██████╔╝╚██████╔╝╚██████╔╝
                 ╚══════╝ ╚═════╝  ╚═════╝  ╚═════╝ 
               */}
-              <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+              {/* <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <Hr></Hr>
                 <TextOptionDiv>
                   <TextOption stat = {!myContext.isLogo} onClick={() => myContext.setLogo(false)}>
@@ -1331,7 +1483,7 @@ const Tools = () => {
                     </TextDiv>
                   )
                 } 
-              </SwiperSlide>
+              </SwiperSlide> */}
               {/**
                *  █████╗ ██████╗ ██████╗     ████████╗ ██████╗      ██████╗██╗  ██╗ █████╗ ████████╗
                   ██╔══██╗██╔══██╗██╔══██╗    ╚══██╔══╝██╔═══██╗    ██╔════╝██║  ██║██╔══██╗╚══██╔══╝

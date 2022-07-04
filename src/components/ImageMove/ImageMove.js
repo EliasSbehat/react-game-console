@@ -43,7 +43,6 @@ export default function ImageMove() {
 						rotationPosition={"top"}
 						throttleRotate={0}
 						origin={false}
-						keepRatio={true}
 						onDragStart={({ set }) => {
 							set(frame.translate);
 						}}
