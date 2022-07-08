@@ -261,14 +261,22 @@ const VHome = () => {
           'Content-Type': 'application/json;charset=UTF-8',
           'Authorization': 'Bearer 7qcul86v2eqvursm9a60ecgk8g9ofz5m',
           "Access-Control-Allow-Origin": '*',
-          "mode": "no-cors",
           "Access-Control-Allow-Credentials": true,
           "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
           "Access-Control-Allow-Headers": "Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control"
         }
     };
-      const temp = await axios.get("https://cors-anywhere.herokuapp.com/https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig);
+      // const temp = await axios.get("https://cors-anywhere.herokuapp.com/https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig);
+      const temp = await axios.get("https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig);
       console.log(temp);
+      // (() => {
+      //   fetch("https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig)
+      //     .then((response) => response.json())
+      //     .then((json) => {
+      //       console.log(json)
+      //       // setData(json);
+      //     });
+      // })()
     })()
   });
 
