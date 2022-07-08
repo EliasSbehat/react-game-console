@@ -27,7 +27,7 @@ export default function ImageMove() {
     <Wrapper display={myContext.isLogo} sideflag={myContext.sideflag}>
       {
 				myContext.images.length !== 0 ? (
-					<img id="imagemove" src={myContext.images[0]['data_url']} style={{width: "100%", height: "100%", zIndex:"300"}} className="target"></img>
+					<img id="imagemove" src={myContext.images[0]['data_url']} style={{zIndex:"300"}} className="target"></img>
 				) : (() => {})()
 			}
 			{
@@ -43,6 +43,7 @@ export default function ImageMove() {
 						rotationPosition={"top"}
 						throttleRotate={0}
 						origin={false}
+						keepRatio={true}
 						onDragStart={({ set }) => {
 							set(frame.translate);
 						}}
@@ -86,13 +87,13 @@ const Wrapper = styled.div`
 	display: ${props => props.display ? 'flex' : 'none'};
 	transition: all 1s;
 	width: 100%;
-	height: 100%;
 	.moveable-control-box {
 		position: fixed !important;
 		top: unset;
 		left: unset;
 	}
 	img {
+		display: inline-block;
 		cursor: grab;
 	}
 `

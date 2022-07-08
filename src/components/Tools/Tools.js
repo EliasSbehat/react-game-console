@@ -105,6 +105,7 @@ const Tools = () => {
     //   NotificationManager.warning('The image must be 2M.', "Warning");
     //   return;
     // }
+    
     myContext.setImages(imageList);
     myContext.setImgStatus(true);
   };
@@ -1556,7 +1557,7 @@ const Wrapper = styled.div`
   position: relative;
   @media screen and (max-width: 800px) {
     width: 100%;
-    /* display: none; */
+    height: 40%;
   }
 `
 
@@ -1652,6 +1653,7 @@ const TopItems = styled.div`
   width: calc(100% - 20px);
   @media screen and (max-width: 800px){
     height: min-content;
+    display: none;
   }
 `
 
@@ -2253,7 +2255,7 @@ const LocalFooter = styled.div`
   position: absolute;
   bottom: 0;
   @media screen and (max-width: 800px){
-    /* display: none; */
+    bottom: 20px;
   }
   #info_div {
     padding: 5px 10px;

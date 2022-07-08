@@ -108,7 +108,7 @@ export const Design = {
       { price: 16.99, name: 'Web Slinger', image: d_1_5, selet: d_1_5s },
       { price: 16.99, name: 'Joker Cards', image: d_1_6, selet: d_1_6s },
       { price: 16.99, name: 'Joker HAHA', image: d_1_7, selet: d_1_7s },
-      { price: 16.99, name: 'J0ker', image: d_1_8, selet: d_1_8s },
+      { price: 16.99, name: 'Joker', image: d_1_8, selet: d_1_8s },
       { price: 16.99, name: 'Union Jack', image: d_1_9, selet: d_1_9s },
       { price: 16.99, name: 'Old Glory', image: d_1_10, selet: d_1_10s },
       { price: 16.99, name: 'Kraken', image: d_1_11, selet: d_1_11s },

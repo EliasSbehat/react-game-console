@@ -13,10 +13,9 @@ import {TiTimes} from 'react-icons/ti';
 
 import { DarkMode, DayMode } from "../../theme";
 
+import axios from "axios";
+
 const VHome = () => {
-
-  
-
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
   const [dpad, setDpad] = React.useState(null);
@@ -256,8 +255,21 @@ const VHome = () => {
   const [h_header, getHeader] = React.useState(0);
 
   React.useEffect(() => {
-    getHeader(document.getElementById('header').clientHeight + 3);
-  }, [])
+    (async () =>{
+      let axiosConfig = {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          'Authorization': 'Bearer 7qcul86v2eqvursm9a60ecgk8g9ofz5m',
+          "Access-Control-Allow-Origin": '*',
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
+          "Access-Control-Allow-Headers": "Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control"
+        }
+    };
+      const temp = await axios.get("https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig);
+      console.log(temp);
+    })()
+  });
 
   const [theme, setTheme] = React.useState(DarkMode);
   const [themeStatus, setStatus] = React.useState(0);
