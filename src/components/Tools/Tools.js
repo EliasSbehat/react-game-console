@@ -92,7 +92,7 @@ const Tools = () => {
   const [please, setPlease] = React.useState([]);
 
   useEffect(() => {
-  })
+  }, [DesigntabSelect])
 
   const maxNumber = 69;
 
@@ -235,7 +235,97 @@ const Tools = () => {
         <div>
           <div>
             <img src={CateImgs[myContext.snapIndex].image}></img>
-            {CateImgs[myContext.snapIndex].name}
+            <span>
+              <span>{CateImgs[myContext.snapIndex].name}</span>
+
+              {/** Design */}
+              {
+                myContext.snapIndex == 0 ? (
+                  <MobileSelector onChange={(e) => DesignSetTabSelect(e.target.value)}>
+                    {
+                      Design.steps.map((item, index) => 
+                        <option key={index} value={index}>
+                          { item.name }
+                        </option>
+                      )
+                    }
+                  </MobileSelector> 
+                ): null
+              }
+              {/** Abxy */}
+              {
+                myContext.snapIndex == 1 ? (
+                  <MobileSelector onChange={(e) => AbxySetTabSelect(e.target.value)}>
+                    {
+                      Abxy.steps.map((item, index) => 
+                        <option key={index} value={index}>
+                          { item.name }
+                        </option>
+                      )
+                    }
+                  </MobileSelector> 
+                ): null
+              }
+
+              {/** Dpad */}
+              {
+                myContext.snapIndex == 2 ? (
+                  <MobileSelector onChange={(e) => DpadSetTabSelect(e.target.value)}>
+                    {
+                      Dpad.steps.map((item, index) => 
+                        <option key={index} value={index}>
+                          { item.name }
+                        </option>
+                      )
+                    }
+                  </MobileSelector> 
+                ): null
+              }
+
+              {/** Start Back */}
+              {
+                myContext.snapIndex == 5 ? (
+                  <MobileSelector onChange={(e) => StartBtnSetTabSelect(e.target.value)}>
+                    {
+                      Dpad.steps.map((item, index) => 
+                        <option key={index} value={index}>
+                          { item.name }
+                        </option>
+                      )
+                    }
+                  </MobileSelector> 
+                ): null
+              }
+              {/** Touchpad */}
+              {
+                myContext.snapIndex == 6 ? (
+                  <MobileSelector onChange={(e) => TouchpadSetTabSelect(e.target.value)}>
+                    {
+                      Dpad.steps.map((item, index) => 
+                        <option key={index} value={index}>
+                          { item.name }
+                        </option>
+                      )
+                    }
+                  </MobileSelector> 
+                ): null
+              }
+
+              {/** Touchpad */}
+              {
+                myContext.snapIndex == 8 ? (
+                  <MobileSelector onChange={(e) => TriggerSetTabSelect(e.target.value)}>
+                    {
+                      Dpad.steps.map((item, index) => 
+                        <option key={index} value={index}>
+                          { item.name }
+                        </option>
+                      )
+                    }
+                  </MobileSelector> 
+                ): null
+              }
+            </span>
           </div>
           <div>
             <span onClick={() => setMenuFlag(!menuFlag)}>
@@ -274,112 +364,6 @@ const Tools = () => {
               console.log(ind);
               await  myContext.setSideflag(true);
             }
-            // const rule = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13];
-            // switch (ind) {
-            //   case 0:
-            //     if (myContext.design === null) {
-            //       clearTimeout(timer);
-            //       myContext.setAniImg(Design.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       timer = setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 1:
-            //     if (myContext.abxy === null) {
-            //       clearTimeout(timer);
-            //       myContext.setAniImg(Abxy.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       timer = setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 2:
-            //     if (myContext.dpad === null) {
-            //       clearTimeout(timer);
-            //       myContext.setAniImg(Dpad.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       timer = setTimeout(() => {
-            //         console.log('Hello');
-            //         myContext.setAniFlag(false);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 3:
-            //     if (myContext.thumbstickL === null) {
-            //       clearTimeout(timer);
-            //       myContext.setAniImg(ThumbL.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       timer = setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 4:
-            //     if (myContext.thumbstickR === null) {
-            //       clearTimeout(timer);
-            //       myContext.setAniImg(ThumbR.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       timer = setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 5:
-            //     if (myContext.startBtn === null) {
-            //       myContext.setAniImg(StartBtn.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //         console.log(myContext.aniFlag);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 6:
-            //     if (myContext.touchpad === null) {
-            //       myContext.setAniImg(Touchpad.items[0][0].image);
-            //       myContext.setAniFlag(true);
-            //       setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //         console.log(myContext.aniFlag);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 7:
-            //     if (myContext.trim === null) {
-            //       myContext.setAniImg(Trim.items[0][4].image);
-            //       myContext.setAniFlag(true);
-            //       setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //         console.log(myContext.aniFlag);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 8:
-            //     if (myContext.trigger === null) {
-            //       myContext.setAniImg(Trigger.items[0][0]);
-            //       myContext.setAniFlag(true);
-            //       setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //         console.log(myContext.aniFlag);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   case 9:
-            //     if (myContext.rearDesign === null) {
-            //       myContext.setAniImg(RearDesign.items[0][0]);
-            //       myContext.setAniFlag(true);
-            //       setTimeout(() => {
-            //         myContext.setAniFlag(false);
-            //         console.log(myContext.aniFlag);
-            //       }, 1000);
-            //     }
-            //     break;
-            //   default: 
-            //     break
-            // }
           }}
         >
           {/* 
@@ -1564,6 +1548,9 @@ const Wrapper = styled.div`
 const TopDiv = styled.div`
   width: 100%;
   margin-bottom: 20px;
+  @media screen and (max-width: 800px) {
+    margin: 0;
+  }
   & > div:nth-child(1) {
     width: 100%;
     display: flex;
@@ -1575,6 +1562,9 @@ const TopDiv = styled.div`
       height: 8px;
       border-radius: 20px;
       margin: 10px;
+    }
+    @media screen and (max-width: 800px) {
+      padding: 0;
     }
     progress::-webkit-progress-value {
       background: ${props => props.theme.ThemeColor};
@@ -1606,6 +1596,10 @@ const TopDiv = styled.div`
       font-size: 20px;
       img {
         width: 30px;
+      }
+      & > span:nth-child(2) {
+        display: flex;
+        flex-direction: column;
       }
     }
 
@@ -1735,7 +1729,10 @@ const SwiperProcessor = styled.div`
 `
 
 const MediumDiv = styled.div`
-  height: calc(100% - 105px - 80px);
+  height: calc(100% - 105px - 75px);
+  @media screen and (max-width: 800px) {
+    height: calc(100% - 105px - 20px);
+  }
   overflow: auto;
   ::-webkit-scrollbar {
     width: 3px;
@@ -1771,7 +1768,8 @@ const ConfirmDiv = styled.div`
 `
 
 const Selector = styled.div`
-  background-color: ${props => props.theme.ToolBgColor};
+  /* background-color: ${props => props.theme.ToolBgColor}; */
+  /* background-color: red; */
   width: 90%;
   display: flex;
   padding: 30px 10px;
@@ -1779,12 +1777,14 @@ const Selector = styled.div`
   justify-content: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
+  
+  overflow-x: auto;
   @media screen and (max-width: 800px) {
-    overflow-x: scroll;
     flex-wrap: nowrap;
+    padding: 10px 10px;
+    height: 55%;
   }
   /* height: 100%; */
-  font-family: 20px;
 `
 
 const SelectItem = styled.div`
@@ -1947,6 +1947,7 @@ const Hr = styled.div`
     height: 100%;
     ::-webkit-scrollbar {
       width: 3px;
+      height: 3px;
     }
 
     ::-webkit-scrollbar-track {
@@ -1992,6 +1993,7 @@ const MenuItem = styled.div`
   align-items: center;
   cursor: pointer;
   color: ${props => props.theme.color};
+  d
   ${(props) => {
     if (props.me === props.curr) {
       return css`
@@ -2255,7 +2257,7 @@ const LocalFooter = styled.div`
   position: absolute;
   bottom: 0;
   @media screen and (max-width: 800px){
-    bottom: 20px;
+    /* bottom: 20px; */
   }
   #info_div {
     padding: 5px 10px;
@@ -2416,6 +2418,20 @@ const UnderlinedDiv = styled.div`
     width: 30px;
     height: 30px;
     margin-right: 10px;
+  }
+`
+
+const MobileSelector = styled.select`
+  border: 0;
+  color: ${props => props.theme.ThemeColor};
+  background-color: transparent;
+  display: none;
+  option {
+    background-color: ${props => props.theme.ToolBgColor};
+  }
+
+  @media screen and (max-width: 800px) {
+    display: block;
   }
 `
 
