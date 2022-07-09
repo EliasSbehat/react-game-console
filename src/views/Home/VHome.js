@@ -255,28 +255,25 @@ const VHome = () => {
   const [h_header, getHeader] = React.useState(0);
 
   React.useEffect(() => {
-    (async () =>{
-      let axiosConfig = {
-        headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          'Authorization': 'Bearer 7qcul86v2eqvursm9a60ecgk8g9ofz5m',
-          "Access-Control-Allow-Origin": '*',
-          "Access-Control-Allow-Credentials": true,
-          "Access-Control-Allow-Methods": "OPTIONS, GET, POST",
-          "Access-Control-Allow-Headers": "Content-Type, Depth, User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control"
+    (() => {
+      fetch('/test', {
+        method: 'get'
+      })
+      .then(response => {
+        if (response.ok)  {
+          return response.json()
         }
-    };
-      // const temp = await axios.get("https://cors-anywhere.herokuapp.com/https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig);
-      const temp = await axios.get("https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig);
-      console.log(temp);
-      // (() => {
-      //   fetch("https://m2-dev-controllermodz.aqeltech.com/rest/V1/products/byops5", axiosConfig)
-      //     .then((response) => response.json())
-      //     .then((json) => {
-      //       console.log(json)
-      //       // setData(json);
-      //     });
-      // })()
+        throw response;
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error fetch error', error);
+      })
+      .finally(() => {
+        console.log('Loading is end');
+      })
     })()
   });
 
