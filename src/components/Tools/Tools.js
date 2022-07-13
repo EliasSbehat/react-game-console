@@ -340,6 +340,13 @@ const Tools = () => {
           </div>
         </div>
       </TopDiv>
+
+
+      {/**
+       * ------------------------------------------------- Arror Area ------------------------------------------------- 
+       */}
+
+      
       <MediumDiv>
         <Swiper
           onSwiper={s=>{
@@ -378,7 +385,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Design.steps.map((item, index) => (
-                    <TapItem w={Design.steps.length} key={ index } keys={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
+                    <TapItem w={Design.steps.length} key={ index } key={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -396,6 +403,7 @@ const Tools = () => {
                   Design.items[DesigntabSelect].map((item, index) => (
                     <SelectItem 
                       bgImg={item.selet}
+                      key={index}
                       now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
                       me = { 10000 * myContext.snapIndex + 100 * DesigntabSelect + index }
                       onClick={() => myContext.setDesign([DesigntabSelect, index])}
@@ -418,7 +426,7 @@ const Tools = () => {
             <TopItems>
               {
                 Abxy.steps.map((item, index) => (
-                  <TapItem w={Abxy.steps.length} key={ index } keys={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
+                  <TapItem w={Abxy.steps.length} key={ index } key={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
                     <span>
                       {item.name}
                     </span>
@@ -460,7 +468,7 @@ const Tools = () => {
             <TopItems>
               {
                 Dpad.steps.map((item, index) => (
-                  <TapItem key={ index } keys={index} active={DpadtabSelect} onClick = {() => DpadSetTabSelect(index)}>
+                  <TapItem key={ index } key={index} active={DpadtabSelect} onClick = {() => DpadSetTabSelect(index)}>
                     <span>
                       {item.name}
                     </span>
@@ -478,6 +486,7 @@ const Tools = () => {
                 Dpad.items[DpadtabSelect].map((item, index) => (
                   <SelectItem
                     bgImg={item.selet}
+                    key={index}
                     now = { myContext.dpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
                     me = { 10000 * myContext.snapIndex + 100 * DpadtabSelect + index }
                     onClick={() => myContext.setDpad([DpadtabSelect, index])}
@@ -507,6 +516,7 @@ const Tools = () => {
                   <SelectItemPrice>
                     <SelectItem
                       bgImg={item.selet}
+                      key={index}
                       now = { myContext.thumbstickL === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
                       me = { 10000 * myContext.snapIndex + 100 * ThumbLtabSelect + index }
                       onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}
@@ -539,6 +549,7 @@ const Tools = () => {
                     <SelectItemPrice>
                       <SelectItem 
                         bgImg={item.selet}
+                        key={index}
                         now = { myContext.thumbstickR === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
                         me = { 10000 * myContext.snapIndex + 100 * ThumbRtabSelect + index }
                         onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])} 
@@ -566,7 +577,7 @@ const Tools = () => {
                 <TopItems>
                   {
                     StartBtn.steps.map((item, index) => (
-                      <TapItem w={StartBtn.steps.length} key={ index } keys={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
+                      <TapItem w={StartBtn.steps.length} key={ index } key={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
                         <span>
                           {item.name}
                         </span>
@@ -608,7 +619,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Touchpad.steps.map((item, index) => (
-                    <TapItem w={Touchpad.steps.length} key={ index } keys={index} active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
+                    <TapItem w={Touchpad.steps.length} key={ index } key={index} active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -680,7 +691,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Trigger.steps.map((item, index) => (
-                    <TapItem w={Trigger.steps.length} key={ index } keys={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
+                    <TapItem w={Trigger.steps.length} key={ index } key={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -1484,6 +1495,11 @@ const Tools = () => {
               </SwiperSlide>
         </Swiper>
       </MediumDiv>
+
+      {/**
+       * ------------------------------------------------- Arror Area ------------------------------------------------- 
+       */}
+
       {/* <ConfirmDiv flag={ myContext.snapIndex === 10 || myContext.snapIndex === 14 || myContext.snapIndex === 15 || myContext.snapIndex === 16 ? false : true }> */}
         {/* <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button> */}
       {/* </ConfirmDiv> */}
@@ -1658,8 +1674,8 @@ const TapItem = styled.div`
 
   /* width: calc(75% / ${props => props.w}); */
   width: 25%;
-  background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
-  color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
+  background-color: ${props => props.key === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
+  color: ${props => props.key === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
   border-radius: 5px;
   font-family: 'Rajdhani-Medium';
   position: relative;
@@ -1674,7 +1690,7 @@ const TapItem = styled.div`
   }
   div {
     position: absolute;
-    background-color: ${props => props.keys === props.active ? props.theme.ThemeColor : 'none'};
+    background-color: ${props => props.key === props.active ? props.theme.ThemeColor : 'none'};
     width: 80%;
     height: 3px;
     bottom: 0;

@@ -255,27 +255,42 @@ const VHome = () => {
   const [h_header, getHeader] = React.useState(0);
 
   React.useEffect(() => {
-    (() => {
-      fetch('/test', {
-        method: 'get'
-      })
-      .then(response => {
-        if (response.ok)  {
-          return response.json()
-        }
-        throw response;
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetch error', error);
-      })
-      .finally(() => {
-        console.log('Loading is end');
-      })
-    })()
-  });
+    (async () => {
+      const response = await fetch('http://localhost:5000/test', { method: 'GET' });
+      if (response.ok) {
+        const json = await response.json();
+        console.log(json);
+      } else {
+        console.log("HTTP-Error: " + response.status);
+      }
+    })();
+  }, [])
+
+  // React.useEffect(() => {
+  //   (() => {
+  //     console.log('Hello');
+  //     fetch('https://game-server-deploy.herokuapp.com/test', {
+  //       method: 'get'
+  //     })
+  //     .then(response => {
+  //       if (response.ok)  {
+  //         console.log('Response Okay');
+  //         return response.json()
+  //       }
+  //       console.log('Response non Okay');
+  //       throw response;
+  //     })
+  //     .then(data => {
+  //       console.log(data);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error fetch error', error);
+  //     })
+  //     .finally(() => {
+  //       console.log('Loading is end');
+  //     })
+  //   })()
+  // });
 
   const [theme, setTheme] = React.useState(DarkMode);
   const [themeStatus, setStatus] = React.useState(0);
