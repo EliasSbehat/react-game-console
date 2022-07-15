@@ -78,8 +78,6 @@ import d_2_4s from './2/4s.png';
 import d_2_5s from './2/5s.png';
 import d_2_6s from './2/6s.png';
 
-
-
 import d_3_1 from './3/1.png';
 import d_3_1s from './3/1s.png';
 
@@ -127,6 +125,7 @@ export const Design = {
       { price: 16.99, name: 'Pinata', image: d_1_24, selet: d_1_24s },
       { price: 16.99, name: 'Dollar Bills', image: d_1_25, selet: d_1_25s },
       { price: 16.99, name: 'Carbon Fiber', image: d_1_26, selet: d_1_26s },
+      
       { price: 16.99, name: 'Gold Chrome', image: d_1_27, selet: d_1_27s },
       { price: 16.99, name: 'Blue Chrome', image: d_1_28, selet: d_1_28s },
       { price: 16.99, name: 'Red Chrome', image: d_1_29, selet: d_1_29s },

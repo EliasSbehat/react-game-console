@@ -13,8 +13,6 @@ import {TiTimes} from 'react-icons/ti';
 
 import { DarkMode, DayMode } from "../../theme";
 
-import axios from "axios";
-
 const VHome = () => {
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
@@ -253,44 +251,90 @@ const VHome = () => {
 
   // Check height of components
   const [h_header, getHeader] = React.useState(0);
-
+  const [apiFlag, setApiFlag] = React.useState(false);
   React.useEffect(() => {
-    (async () => {
-      const response = await fetch('http://localhost:5000/test', { method: 'GET' });
-      if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-      } else {
-        console.log("HTTP-Error: " + response.status);
-      }
-    })();
+    if (!apiFlag)
+      (async () => {
+        const response = await fetch('https://game-server-deploy.herokuapp.com/test', { method: 'GET' });
+        if (response.ok) {
+          // ---------------------- Response is Okay ----------------------
+          let json = await response.json();
+          let object_data = {};
+          let childs = {};
+          
+          for (var i = 0; i <json.length; i++) {
+            if (json[i].values != undefined) {              
+              if (json[i].values[0]['extension_attributes'].dependency == undefined) {
+                object_data['optId_'+json[i].option_id] = {};
+                object_data['optId_'+json[i].option_id]['option_id'] = json[i].option_id;
+                object_data['optId_'+json[i].option_id]['title'] = json[i].title;
+                object_data['optId_'+json[i].option_id]['dependType'] = json[i].extension_attributes.dependency_type;
+                object_data['optId_'+json[i].option_id]['disabled'] = json[i].extension_attributes.disabled;
+                object_data['optId_'+json[i].option_id]['option_title_id'] = json[i].extension_attributes.option_title_id;
+                object_data['optId_'+json[i].option_id]['values'] = {};
+                object_data['optId_'+json[i].option_id]['values'] = new Object();
+                // object_data['optId_'+json[i].option_id]['childs'] = {};
+                for (var j = 0; j < json[i].values.length; j++) {
+                  object_data['optId_'+json[i].option_id]['values']["optTypeId_" + json[i].values[j].option_type_id] = json[i].values[j];
+                  // object_data['optId_'+json[i].option_id]['childs']["optTypeId_" + json[i].values[j].option_type_id] = {};
+                }
+              } else {
+                // Childs
+                  for (var j = 0; j < json[i].values.length; j++) {
+                    childs['optId_'+json[i].values[j].option_type_id] = json[i].values[j];
+                  }
+                // Childs End
+              }
+            } else {
+              object_data['optId_'+json[i].option_id] = {};
+              object_data['optId_'+json[i].option_id]['option_id'] = json[i].option_id;
+              object_data['optId_'+json[i].option_id]['title'] = json[i].title;
+              object_data['optId_'+json[i].option_id]['dependType'] = json[i].extension_attributes.dependency_type;
+              object_data['optId_'+json[i].option_id]['disabled'] = json[i].extension_attributes.disabled;
+              object_data['optId_'+json[i].option_id]['option_title_id'] = json[i].extension_attributes.option_title_id;
+              object_data['optId_'+json[i].option_id]['values'] = {};
+            }
+          }
+          const childKeys = Object.keys(childs);
+          console.log(childs);
+          for (var i = 0; i < childKeys.length; i++) {
+            const link = JSON.parse(childs[childKeys[i]]['extension_attributes'].dependency)[0];
+            if (object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'] != undefined) {
+              object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'].push(childs[childKeys[i]]);
+            } else {
+              object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'] = [];
+              object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'].push(childs[childKeys[i]]);
+            }
+          }
+          const object_keys = Object.keys(object_data);
+            // --------------- Design ---------------
+              let design = {};
+              let design_step = object_data[object_keys[0]].values;
+              let design_step_keys = Object.keys(design_step);
+              design.steps = [];
+              design.items = [];
+              for (var i = 0; i < design_step_keys.length; i++) {
+                design.items.push([]);
+                let temp = {
+                  name: design_step[design_step_keys[i]].title,
+                  price: design_step[design_step_keys[i]].price
+                }
+                for (var j = 0; j < design_step[design_step_keys[i]].childs; j++) {
+                  let ltemp = {
+                    name: design_step[design_step_keys[i]].childs[j].title,
+                    price: design_step[design_step_keys[i]].childs[j].price,
+                    
+                  }
+                }
+                design.steps.push(temp);
+              }
+            // --------------- Design End ---------------
+          // ---------------------- Response is Okay End ----------------------
+        } else {
+          console.log("HTTP-Error: " + response.status);
+        }
+      })();
   }, [])
-
-  // React.useEffect(() => {
-  //   (() => {
-  //     console.log('Hello');
-  //     fetch('https://game-server-deploy.herokuapp.com/test', {
-  //       method: 'get'
-  //     })
-  //     .then(response => {
-  //       if (response.ok)  {
-  //         console.log('Response Okay');
-  //         return response.json()
-  //       }
-  //       console.log('Response non Okay');
-  //       throw response;
-  //     })
-  //     .then(data => {
-  //       console.log(data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetch error', error);
-  //     })
-  //     .finally(() => {
-  //       console.log('Loading is end');
-  //     })
-  //   })()
-  // });
 
   const [theme, setTheme] = React.useState(DarkMode);
   const [themeStatus, setStatus] = React.useState(0);
