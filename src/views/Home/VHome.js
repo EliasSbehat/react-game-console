@@ -12,8 +12,10 @@ import {BsCheckLg} from 'react-icons/bs';
 import {TiTimes} from 'react-icons/ti';
 
 import { DarkMode, DayMode } from "../../theme";
+import { Design_APIED } from '../../assets/images/main_assets/1-DESIGN/DesignImage';
 
 const VHome = () => {
+  const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
   const [dpad, setDpad] = React.useState(null);
@@ -126,6 +128,8 @@ const VHome = () => {
     }
   }
 
+  
+
   const [digital_trigger, setDigital_trigger] = React.useState(false);
 
   // Text
@@ -141,6 +145,8 @@ const VHome = () => {
   const [textColor, setTextColor] = React.useState('black');
   const [fontSize, setFontSize] = React.useState(30);
 
+  // const [DesignData, setDesignData] = React.useState([]);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
   const imageSetting = {
     design,
     setDesign,
@@ -248,10 +254,6 @@ const VHome = () => {
       { name: 'BAZOOKA', family: 'bazooka' }
     ]
   }
-
-  // Check height of components
-  const [h_header, getHeader] = React.useState(0);
-  const [apiFlag, setApiFlag] = React.useState(false);
   React.useEffect(() => {
     if (!apiFlag)
       (async () => {
@@ -296,7 +298,6 @@ const VHome = () => {
             }
           }
           const childKeys = Object.keys(childs);
-          console.log(childs);
           for (var i = 0; i < childKeys.length; i++) {
             const link = JSON.parse(childs[childKeys[i]]['extension_attributes'].dependency)[0];
             if (object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'] != undefined) {
@@ -306,6 +307,7 @@ const VHome = () => {
               object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'].push(childs[childKeys[i]]);
             }
           }
+          // console.log(object_data);
           const object_keys = Object.keys(object_data);
             // --------------- Design ---------------
               let design = {};
@@ -313,28 +315,37 @@ const VHome = () => {
               let design_step_keys = Object.keys(design_step);
               design.steps = [];
               design.items = [];
-              for (var i = 0; i < design_step_keys.length; i++) {
-                design.items.push([]);
+              for (i = 0; i < design_step_keys.length; i++) {
                 let temp = {
                   name: design_step[design_step_keys[i]].title,
                   price: design_step[design_step_keys[i]].price
                 }
-                for (var j = 0; j < design_step[design_step_keys[i]].childs; j++) {
-                  let ltemp = {
+                let ltemp = [];
+                for (j = 0; j < design_step[design_step_keys[i]].childs.length; j++) {
+                  let image = JSON.parse(design_step[design_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  ltemp.push({
                     name: design_step[design_step_keys[i]].childs[j].title,
                     price: design_step[design_step_keys[i]].childs[j].price,
-                    
-                  }
+                    image: base_url + image,
+                    selet: Design_APIED[i][j],
+                  });
                 }
                 design.steps.push(temp);
+                design.items.push(ltemp);
               }
+              // setDesignData(design);
             // --------------- Design End ---------------
           // ---------------------- Response is Okay End ----------------------
         } else {
-          console.log("HTTP-Error: " + response.status);
+          // console.log("HTTP-Error: " + response.status);
         }
       })();
-  }, [])
+  }, []);
+
+  // Check height of components
+  const [h_header, getHeader] = React.useState(0);
+  const [apiFlag, setApiFlag] = React.useState(false);
+  
 
   const [theme, setTheme] = React.useState(DarkMode);
   const [themeStatus, setStatus] = React.useState(0);

@@ -92,6 +92,7 @@ const Tools = () => {
   const [please, setPlease] = React.useState([]);
 
   useEffect(() => {
+    console.log(myContext.DesignData);
   }, [DesigntabSelect])
 
   const maxNumber = 69;
@@ -368,7 +369,6 @@ const Tools = () => {
             if (ind === 8 || ind === 9 || ind === 10 || ind === 11 || ind === 12) {
               await myContext.setSideflag(false);
             } else {
-              console.log(ind);
               await  myContext.setSideflag(true);
             }
           }}

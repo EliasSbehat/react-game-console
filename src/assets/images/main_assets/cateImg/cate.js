@@ -37,6 +37,5 @@ export const CateImgs = [
   { ind: 11, name: 'Rear Design', image: Reardesign },
   { ind: 12, name: 'D Triggers', image: DTrigger },
   { ind: 13, name: 'Text and Logo', image: logo },
-  // { ind: 14, name: 'Logo', image: logo },
   { ind: 14, name: 'Add to chat', image: add }
 ]

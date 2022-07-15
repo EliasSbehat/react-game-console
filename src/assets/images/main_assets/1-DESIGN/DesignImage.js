@@ -125,7 +125,7 @@ export const Design = {
       { price: 16.99, name: 'Pinata', image: d_1_24, selet: d_1_24s },
       { price: 16.99, name: 'Dollar Bills', image: d_1_25, selet: d_1_25s },
       { price: 16.99, name: 'Carbon Fiber', image: d_1_26, selet: d_1_26s },
-      
+
       { price: 16.99, name: 'Gold Chrome', image: d_1_27, selet: d_1_27s },
       { price: 16.99, name: 'Blue Chrome', image: d_1_28, selet: d_1_28s },
       { price: 16.99, name: 'Red Chrome', image: d_1_29, selet: d_1_29s },
@@ -146,3 +146,48 @@ export const Design = {
     ]
   ]
 }
+
+export const Design_APIED = [
+  [
+    { name: 'King Panther', image: d_1_1 },
+    { name: 'Samurai Ghosts', image: d_1_2 },
+    { name: 'Scarlet Demon', image: d_1_3 },
+    { name: 'Symbiote', image: d_1_4 },
+    { name: 'Web Slinger', image: d_1_5 },
+    { name: 'Joker Cards', image: d_1_6 },
+    { name: 'Joker HAHA', image: d_1_7 },
+    { name: 'Joker', image: d_1_8 },
+    { name: 'Union Jack', image: d_1_9 },
+    { name: 'Old Glory', image: d_1_10 },
+    { name: 'Kraken', image: d_1_11 },
+    { name: 'Nebula', image: d_1_12 },
+    { name: 'Hypnotic', image: d_1_13 },
+    { name: 'Paint Splash', image: d_1_14 },
+    { name: 'Flamingo', image: d_1_15 },
+    { name: 'Storm Surge', image: d_1_16 },
+    { name: 'Plasma', image: d_1_17 },
+    { name: 'Illusion', image: d_1_18 },
+    { name: 'Weed', image: d_1_19 },
+    { name: 'Blue Flame', image: d_1_20 },
+    { name: 'Scarefest', image: d_1_21 },
+    { name: 'Cosmos', image: d_1_22 },
+    { name: 'Galaxy', image: d_1_23 },
+    { name: 'Pinata', image: d_1_24 },
+    { name: 'Dollar Bills', image: d_1_25 },
+    { name: 'Carbon Fiber', image: d_1_26 },
+  ],
+  [
+    { name: 'Gold Chrome', image: d_1_27 },
+    { name: 'Blue Chrome', image: d_1_28 },
+    { name: 'Red Chrome', image: d_1_29 },
+    { name: 'Silver Chrome', image: d_1_30 },
+    { name: 'Supernova', image: d_1_31 },
+    { name: 'Chameleon', image: d_1_32 },
+    { name: 'Vampire Red', image: d_2_1 },
+    { name: 'Sakura Pink', image: d_2_2 },
+    { name: 'Soft Touch Purple', image: d_2_3 },
+    { name: 'Soft Touch Blue', image: d_2_4 },
+    { name: 'Soft Touch Orange', image: d_2_5 },
+    { name: 'Soft Touch Green', image: d_2_6 },
+  ]
+]
