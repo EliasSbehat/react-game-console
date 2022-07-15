@@ -34,6 +34,7 @@ import a_2_6s from './2/6s.png';
 import a_2_7s from './2/7s.png';
 import a_2_8s from './2/8s.png';
 
+import trans from '../../transparent.png';
 
 export const Abxy = {
   flag: 0,
@@ -70,3 +71,27 @@ export const Abxy = {
     ]
   ]
 }
+
+export const ABXY_APIED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Sakura Pink', image: a_1_1},
+    { name: 'Vampire Red', image: a_1_2},
+    { name: 'Hope Grey', image: a_1_3},
+    { name: 'Soft Touch Orange', image: a_1_4},
+    { name: 'Soft Touch Blue', image: a_1_5},
+    { name: 'Soft Touch Green', image: a_1_6},
+    { name: 'Soft Touch Purple', image: a_1_7},
+    { name: 'Midnight Black', image: a_1_8},
+  ],
+  [
+    { name: 'Gold Chrome', image: a_2_1 },
+    { name: 'Blue Chrome', image: a_2_2 },
+    { name: 'Red Chrome', image: a_2_3 },
+    { name: 'Purple Chrome', image: a_2_4 },
+    { name: 'Green Chrome', image: a_2_5 },
+    { name: 'Pink Chrome', image: a_2_6 },
+    { name: 'Chameleon', image: a_2_7 },
+    { name: 'Bullet', image: a_2_8 },
+  ]
+]

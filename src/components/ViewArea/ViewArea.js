@@ -144,9 +144,10 @@ const ViewArea = () => {
                       ╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝   ╚═╝   
                   */}
                   {
-                    myContext.abxy !== null ? (() => {
+                    myContext.abxy !== null && myContext.abxyData != null ? (() => {
+                      console.log('---------');
                       return (
-                        Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={Abxy.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div className="lds-dual-ring"></div>
+                        myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {
                     })()

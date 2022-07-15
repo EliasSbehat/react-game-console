@@ -13,6 +13,7 @@ import {TiTimes} from 'react-icons/ti';
 
 import { DarkMode, DayMode } from "../../theme";
 import { Design_APIED } from '../../assets/images/main_assets/1-DESIGN/DesignImage';
+import { ABXY_APIED } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
@@ -146,9 +147,11 @@ const VHome = () => {
   const [fontSize, setFontSize] = React.useState(30);
 
   const [designData, setDesignData] = React.useState(null);
+  const [abxyData, setAbxyData] = React.useState(null);
 
   const imageSetting = {
     designData,
+    abxyData,
     design,
     setDesign,
     abxy,
@@ -337,9 +340,40 @@ const VHome = () => {
                 design.steps.push(temp);
                 design.items.push(ltemp);
               }
-              console.log(design);
+              // console.log(design);
               setDesignData(design);
             // --------------- Design End ---------------
+
+            // --------------- Design ---------------
+              let abxy = {};
+              let abxy_step = object_data[object_keys[1]].values;
+              let abxy_step_keys = Object.keys(abxy_step);
+              abxy.steps = [];
+              abxy.items = [];
+              for (i = 0; i < abxy_step_keys.length; i++) {
+                let temp = {
+                  name: abxy_step[abxy_step_keys[i]].title,
+                  price: abxy_step[abxy_step_keys[i]].price,
+                  is_default: abxy_step[abxy_step_keys[i]].extension_attributes['is_default']
+                }
+
+                let ltemp = [];
+                for (j = 0; j < abxy_step[abxy_step_keys[i]].childs.length; j++) {
+                  let image = JSON.parse(abxy_step[abxy_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  ltemp.push({
+                    name: abxy_step[abxy_step_keys[i]].childs[j].title,
+                    price: abxy_step[abxy_step_keys[i]].childs[j].price,
+                    image: ABXY_APIED[i][j].image,
+                    selet: base_url + image,
+                  });
+                }
+                abxy.steps.push(temp);
+                abxy.items.push(ltemp);
+              }
+              setAbxyData(abxy);
+            // --------------- Design End ---------------
+
+            
           // ---------------------- Response is Okay End ----------------------
         } else {
           // console.log("HTTP-Error: " + response.status);

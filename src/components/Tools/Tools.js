@@ -415,7 +415,7 @@ const Tools = () => {
                 {
                   myContext.designData !== null ?
                     myContext.designData.items[DesigntabSelect].map((item, index) => (
-                      <SelectItem 
+                      <SelectItem
                         bgImg={item.selet}
                         key={index}
                         now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
@@ -439,32 +439,43 @@ const Tools = () => {
           <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
             <TopItems>
               {
-                Abxy.steps.map((item, index) => (
-                  <TapItem key={ index } w={Abxy.steps.length} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
-                    <span>
-                      {item.name}
-                    </span>
-                    <span>
-                      £{item.price}
-                    </span>
-                    <div></div>
-                  </TapItem>
+                myContext.abxyData !== null ?
+                myContext.abxyData.steps.map((item, index) => (
+                  (() => {
+                    return (
+                      <TapItem key={index} keys = {index} w = { myContext.abxyData.steps.length } active={AbxytabSelect} onClick = {() => {
+                        AbxySetTabSelect(index);
+                          console.log(index + "__" + AbxytabSelect);
+                        }}>
+                          <span>
+                            {item.name}
+                          </span>
+                          <span>
+                            £{item.price}
+                          </span>
+                          <div></div>
+                        </TapItem>
+                      )
+                      if (item.is_default) DesignSetTabSelect(index);
+                  })()
                 ))
+                  : null
               }
             </TopItems>
             <Hr></Hr>
             <Selector>
               {
-                Abxy.items[AbxytabSelect].map((item, index) => (
-                  <SelectItem 
-                    bgImg={item.selet}
-                    now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
-                    me = { 10000 * myContext.snapIndex + 100 * AbxytabSelect + index }
-                    onClick={() => myContext.setAbxy([AbxytabSelect, index])}
-                    // onMouseOver={() => myContext.setHoverImg(item.image)}
-                    onMouseLeave={() => myContext.setHoverImg(null)}
-                  ></SelectItem>
-                ))
+                myContext.abxyData !== null ?
+                  myContext.abxyData.items[AbxytabSelect].map((item, index) => (
+                    <SelectItem 
+                      bgImg={item.selet}
+                      now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
+                      me = { 10000 * myContext.snapIndex + 100 * AbxytabSelect + index }
+                      onClick={() => myContext.setAbxy([AbxytabSelect, index])}
+                      // onMouseOver={() => myContext.setHoverImg(item.image)}
+                      onMouseLeave={() => myContext.setHoverImg(null)}
+                    />
+                  )) : null
               }
             </Selector>
           </SwiperSlide>
@@ -1526,8 +1537,8 @@ const Tools = () => {
             <span>
               £{
                 Math.round((myContext.initalPrice +
-                  Number(myContext.design !== null && myContext.designData != [] ? myContext.designData.items[myContext.design[0]][myContext.design[1]].price : 0) +
-                  Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
+                  Number(myContext.design !== null && myContext.designData != null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].price : 0) +
+                  Number(myContext.abxy !== null && myContext.anxyData != null ? myContext.anxyData.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
                   Number(myContext.dpad !== null ? Dpad.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
                   Number(myContext.thumbstickL !== null ? ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
                   Number(myContext.thumbstickR !== null ? ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
