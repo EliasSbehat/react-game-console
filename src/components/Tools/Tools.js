@@ -6,12 +6,12 @@ import downloadjs from "downloadjs";
 import ImageUploading from 'react-images-uploading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import { BsCheck } from 'react-icons/bs';
+import { BsCheck, BsFillEmojiNeutralFill } from 'react-icons/bs';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-import { TbAlignLeft, TbMoodCrazyHappy } from 'react-icons/tb';
+import { TbAlignLeft, TbMoodCrazyHappy, TbSortDescendingNumbers } from 'react-icons/tb';
 import { FaTimes } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
 import { AiOutlineStop } from 'react-icons/ai';
@@ -92,8 +92,8 @@ const Tools = () => {
   const [please, setPlease] = React.useState([]);
 
   useEffect(() => {
-    console.log(myContext.DesignData);
-  }, [DesigntabSelect])
+    
+  }, [])
 
   const maxNumber = 69;
 
@@ -241,14 +241,17 @@ const Tools = () => {
 
               {/** Design */}
               {
-                myContext.snapIndex == 0 ? (
+                myContext.snapIndex == 0 && (myContext.designData != []) ? (
                   <MobileSelector onChange={(e) => DesignSetTabSelect(e.target.value)}>
                     {
-                      Design.steps.map((item, index) => 
-                        <option key={index} value={index}>
-                          { item.name }
-                        </option>
-                      )
+                      // Design.steps.map((item, index) => 
+                      myContext.designData !== null? 
+                        myContext.designData.steps.map((item, index) => 
+                          <option key={index} value={index}>
+                            { item.name }
+                          </option>
+                        )
+                      : null
                     }
                   </MobileSelector> 
                 ): null
@@ -384,33 +387,44 @@ const Tools = () => {
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
-                  Design.steps.map((item, index) => (
-                    <TapItem w={Design.steps.length} key={ index } key={index} active={DesigntabSelect} onClick = {() => DesignSetTabSelect(index)}>
-                      <span>
-                        {item.name}
-                      </span>
-                      <span>
-                        £{item.price}
-                      </span>
-                      <div></div>
-                    </TapItem>
+                  myContext.designData !== null ?
+                  myContext.designData.steps.map((item, index) => (
+                    (() => {
+                      return (
+                        <TapItem key={index} keys = {index} w = { myContext.designData.steps.length } active={DesigntabSelect} onClick = {() => {
+                          DesignSetTabSelect(index);
+                            console.log(index + "__" + DesigntabSelect);
+                          }}>
+                            <span>
+                              {item.name}
+                            </span>
+                            <span>
+                              £{item.price}
+                            </span>
+                            <div></div>
+                          </TapItem>
+                        )
+                        if (item.is_default) DesignSetTabSelect(index);
+                    })()
                   ))
+                    : null
                 }
               </TopItems>
               <Hr></Hr>
               <Selector>
                 {
-                  Design.items[DesigntabSelect].map((item, index) => (
-                    <SelectItem 
-                      bgImg={item.selet}
-                      key={index}
-                      now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
-                      me = { 10000 * myContext.snapIndex + 100 * DesigntabSelect + index }
-                      onClick={() => myContext.setDesign([DesigntabSelect, index])}
-                      onMouseOver={async () => await myContext.setHoverImg(item.image)}
-                      onMouseLeave={async () => await myContext.setHoverImg(null)}
-                    />
-                  ))
+                  myContext.designData !== null ?
+                    myContext.designData.items[DesigntabSelect].map((item, index) => (
+                      <SelectItem 
+                        bgImg={item.selet}
+                        key={index}
+                        now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * DesigntabSelect + index }
+                        onClick={() => myContext.setDesign([DesigntabSelect, index])}
+                        // onMouseOver={async () => await myContext.setHoverImg(item.image)}
+                        onMouseLeave={async () => await myContext.setHoverImg(null)}
+                      />
+                    )) : null
                 }
               </Selector>
             </SwiperSlide>
@@ -426,7 +440,7 @@ const Tools = () => {
             <TopItems>
               {
                 Abxy.steps.map((item, index) => (
-                  <TapItem w={Abxy.steps.length} key={ index } key={index} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
+                  <TapItem key={ index } w={Abxy.steps.length} active={AbxytabSelect} onClick = {() => AbxySetTabSelect(index)}>
                     <span>
                       {item.name}
                     </span>
@@ -447,7 +461,7 @@ const Tools = () => {
                     now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
                     me = { 10000 * myContext.snapIndex + 100 * AbxytabSelect + index }
                     onClick={() => myContext.setAbxy([AbxytabSelect, index])}
-                    onMouseOver={() => myContext.setHoverImg(item.image)}
+                    // onMouseOver={() => myContext.setHoverImg(item.image)}
                     onMouseLeave={() => myContext.setHoverImg(null)}
                   ></SelectItem>
                 ))
@@ -468,7 +482,7 @@ const Tools = () => {
             <TopItems>
               {
                 Dpad.steps.map((item, index) => (
-                  <TapItem key={ index } key={index} active={DpadtabSelect} onClick = {() => DpadSetTabSelect(index)}>
+                  <TapItem key={ index } active={DpadtabSelect} onClick = {() => DpadSetTabSelect(index)}>
                     <span>
                       {item.name}
                     </span>
@@ -490,7 +504,7 @@ const Tools = () => {
                     now = { myContext.dpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
                     me = { 10000 * myContext.snapIndex + 100 * DpadtabSelect + index }
                     onClick={() => myContext.setDpad([DpadtabSelect, index])}
-                    onMouseOver={() => myContext.setHoverImg(item.image)}
+                    // onMouseOver={() => myContext.setHoverImg(item.image)}
                     onMouseLeave={() => myContext.setHoverImg(null)}
                   >
                   </SelectItem>
@@ -520,7 +534,7 @@ const Tools = () => {
                       now = { myContext.thumbstickL === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
                       me = { 10000 * myContext.snapIndex + 100 * ThumbLtabSelect + index }
                       onClick={() => myContext.setThumbstickL([ThumbLtabSelect, index])}
-                      onMouseOver={() => myContext.setHoverImg(item.image)}
+                      // onMouseOver={() => myContext.setHoverImg(item.image)}
                       onMouseLeave={() => myContext.setHoverImg(null)}
                     >
                     </SelectItem>
@@ -553,7 +567,7 @@ const Tools = () => {
                         now = { myContext.thumbstickR === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
                         me = { 10000 * myContext.snapIndex + 100 * ThumbRtabSelect + index }
                         onClick={() => myContext.setThumbstickR([ThumbRtabSelect, index])} 
-                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        // onMouseOver={() => myContext.setHoverImg(item.image)}
                         onMouseLeave={() => myContext.setHoverImg(null)}
                       />
                       {
@@ -577,7 +591,7 @@ const Tools = () => {
                 <TopItems>
                   {
                     StartBtn.steps.map((item, index) => (
-                      <TapItem w={StartBtn.steps.length} key={ index } key={index} active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
+                      <TapItem w={StartBtn.steps.length} key={ index } active={StartBtntabSelect} onClick = {() => StartBtnSetTabSelect(index)}>
                         <span>
                           {item.name}
                         </span>
@@ -599,7 +613,7 @@ const Tools = () => {
                         now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
                         me = { 10000 * myContext.snapIndex + 100 * StartBtntabSelect + index }
                         onClick={() => myContext.setStartBtn([StartBtntabSelect, index])}
-                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        // onMouseOver={() => myContext.setHoverImg(item.image)}
                         onMouseLeave={() => myContext.setHoverImg(null)}
                       ></SelectItem>
                     ))
@@ -619,7 +633,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Touchpad.steps.map((item, index) => (
-                    <TapItem w={Touchpad.steps.length} key={ index } key={index} active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
+                    <TapItem w={Touchpad.steps.length} key={ index } active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -641,7 +655,7 @@ const Tools = () => {
                       now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
                       me = { 10000 * myContext.snapIndex + 100 * TouchpadtabSelect + index }
                       onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}
-                      onMouseOver={() => myContext.setHoverImg(item.image)}
+                      // onMouseOver={() => myContext.setHoverImg(item.image)}
                       onMouseLeave={() => myContext.setHoverImg(null)}
                     ></SelectItem>
                   ))
@@ -668,7 +682,7 @@ const Tools = () => {
                         now = { myContext.trim === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
                         me = { 10000 * myContext.snapIndex + 100 * TrimtabSelect + index }
                         onClick={() => myContext.setTrim([TrimtabSelect, index])}
-                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        // onMouseOver={() => myContext.setHoverImg(item.image)}
                         onMouseLeave={() => myContext.setHoverImg(null)}
                       ></SelectItem>
                       {
@@ -691,7 +705,7 @@ const Tools = () => {
               <TopItems>
                 {
                   Trigger.steps.map((item, index) => (
-                    <TapItem w={Trigger.steps.length} key={ index } key={index} active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
+                    <TapItem w={Trigger.steps.length} key={ index } active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
@@ -1512,7 +1526,7 @@ const Tools = () => {
             <span>
               £{
                 Math.round((myContext.initalPrice +
-                  Number(myContext.design !== null ? Design.items[myContext.design[0]][myContext.design[1]].price : 0) +
+                  Number(myContext.design !== null && myContext.designData != [] ? myContext.designData.items[myContext.design[0]][myContext.design[1]].price : 0) +
                   Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
                   Number(myContext.dpad !== null ? Dpad.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
                   Number(myContext.thumbstickL !== null ? ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
@@ -1672,10 +1686,9 @@ const TapItem = styled.div`
   flex-direction: column;
   align-items: center;
 
-  /* width: calc(75% / ${props => props.w}); */
-  width: 25%;
-  background-color: ${props => props.key === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
-  color: ${props => props.key === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
+  width: calc(80% / ${props => props.w});
+  background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
+  color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
   border-radius: 5px;
   font-family: 'Rajdhani-Medium';
   position: relative;

@@ -145,9 +145,10 @@ const VHome = () => {
   const [textColor, setTextColor] = React.useState('black');
   const [fontSize, setFontSize] = React.useState(30);
 
-  // const [DesignData, setDesignData] = React.useState([]);
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+  const [designData, setDesignData] = React.useState(null);
+
   const imageSetting = {
+    designData,
     design,
     setDesign,
     abxy,
@@ -254,6 +255,7 @@ const VHome = () => {
       { name: 'BAZOOKA', family: 'bazooka' }
     ]
   }
+
   React.useEffect(() => {
     if (!apiFlag)
       (async () => {
@@ -318,22 +320,25 @@ const VHome = () => {
               for (i = 0; i < design_step_keys.length; i++) {
                 let temp = {
                   name: design_step[design_step_keys[i]].title,
-                  price: design_step[design_step_keys[i]].price
+                  price: design_step[design_step_keys[i]].price,
+                  is_default: design_step[design_step_keys[i]].extension_attributes['is_default']
                 }
+
                 let ltemp = [];
                 for (j = 0; j < design_step[design_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(design_step[design_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
                   ltemp.push({
                     name: design_step[design_step_keys[i]].childs[j].title,
                     price: design_step[design_step_keys[i]].childs[j].price,
-                    image: base_url + image,
-                    selet: Design_APIED[i][j],
+                    image: Design_APIED[i][j].image,
+                    selet: base_url + image,
                   });
                 }
                 design.steps.push(temp);
                 design.items.push(ltemp);
               }
-              // setDesignData(design);
+              console.log(design);
+              setDesignData(design);
             // --------------- Design End ---------------
           // ---------------------- Response is Okay End ----------------------
         } else {

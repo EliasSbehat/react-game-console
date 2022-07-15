@@ -125,9 +125,9 @@ const ViewArea = () => {
                     ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
                   */}
                   {
-                    myContext.design !== null ? (() => {
+                    myContext.design !== null && myContext.designData !== null ? (() => {
                       return (
-                        Design.items[myContext.design[0]][myContext.design[1]].image ? <img src={Design.items[myContext.design[0]][myContext.design[1]].image}></img> : <div className="lds-dual-ring"></div>
+                        myContext.designData.items[myContext.design[0]][myContext.design[1]].image ? <img src={myContext.designData.items[myContext.design[0]][myContext.design[1]].image}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {
 

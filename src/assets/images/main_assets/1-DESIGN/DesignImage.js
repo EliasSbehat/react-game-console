@@ -81,6 +81,8 @@ import d_2_6s from './2/6s.png';
 import d_3_1 from './3/1.png';
 import d_3_1s from './3/1s.png';
 
+import trans from '../../transparent.png';
+
 export const Design = {
   flag: 0,
   steps: [
@@ -149,6 +151,7 @@ export const Design = {
 
 export const Design_APIED = [
   [
+    { name: 'Stock', image: trans },
     { name: 'King Panther', image: d_1_1 },
     { name: 'Samurai Ghosts', image: d_1_2 },
     { name: 'Scarlet Demon', image: d_1_3 },
