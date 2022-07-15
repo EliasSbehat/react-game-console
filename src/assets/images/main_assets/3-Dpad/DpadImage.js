@@ -32,6 +32,7 @@ import d_2_5s from './2/5s.png';
 import d_2_6s from './2/6s.png';
 import d_2_7s from './2/7s.png';
 
+import trans from '../../transparent.png';
 
 export const Dpad = {
   flag: 0,
@@ -67,3 +68,26 @@ export const Dpad = {
     ]
   ]
 }
+
+export const DPAD_APIED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Sakura Pink', image: d_1_1 },
+    { name: 'Vampire Red', image: d_1_2 },
+    { name: 'Hope Grey', image: d_1_3 },
+    { name: 'Soft Touch Orange', image: d_1_4 },
+    { name: 'Soft Touch Blue', image: d_1_5 },
+    { name: 'Soft Touch Green', image: d_1_6 },
+    { name: 'Soft Touch Purple', image: d_1_7 },
+    { name: 'Midnight Black', image: d_1_8 },
+  ],
+  [
+    { name: 'Gold Chrome', image:d_2_1 },
+    { name: 'Silver Chrome', image:d_2_2 },
+    { name: 'Blue Chrome', image: d_2_3 },
+    { name: 'Red Chrome', image: d_2_4 },
+    { name: 'Green Chrome', image: d_2_5 },
+    { name: 'Pink Chrome', image: d_2_6 },
+    { name: 'Chameleon', image: d_2_7 },
+  ]
+]

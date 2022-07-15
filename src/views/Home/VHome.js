@@ -14,6 +14,8 @@ import {TiTimes} from 'react-icons/ti';
 import { DarkMode, DayMode } from "../../theme";
 import { Design_APIED } from '../../assets/images/main_assets/1-DESIGN/DesignImage';
 import { ABXY_APIED } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
+import { DPAD_APIED } from "../../assets/images/main_assets/3-Dpad/DpadImage";
+import { ThumbL_APIED } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
@@ -148,10 +150,39 @@ const VHome = () => {
 
   const [designData, setDesignData] = React.useState(null);
   const [abxyData, setAbxyData] = React.useState(null);
+  const [dpadData, setDpadData] = React.useState(null);
+  const [thubmLData, setThumbLData] = React.useState(null);
+  const [thubmRData, setThumbRData] = React.useState(null);
+  const [startBackData, setStateBackData] = React.useState(null);
+  const [thuchPadData, setTouchPadData] = React.useState(null);
+  const [trimData, setTrimData] = React.useState(null);
+  const [triggersData, setTriggersData] = React.useState(null);
+
+
+  // TablIndexs
+  const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
+  const [AbxytabSelect, AbxySetTabSelect] = React.useState(0);
+  const [DpadtabSelect, DpadSetTabSelect] = React.useState(0);
 
   const imageSetting = {
+
     designData,
     abxyData,
+    dpadData,
+    thubmLData,
+    thubmRData,
+    startBackData,
+    thuchPadData,
+    trimData,
+    triggersData,
+
+    DesigntabSelect,
+    DesignSetTabSelect,
+    AbxytabSelect,
+    AbxySetTabSelect,
+    DpadtabSelect,
+    DpadSetTabSelect,
+
     design,
     setDesign,
     abxy,
@@ -327,6 +358,8 @@ const VHome = () => {
                   is_default: design_step[design_step_keys[i]].extension_attributes['is_default']
                 }
 
+                if (temp.is_default) DesignSetTabSelect(i);
+
                 let ltemp = [];
                 for (j = 0; j < design_step[design_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(design_step[design_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
@@ -335,7 +368,12 @@ const VHome = () => {
                     price: design_step[design_step_keys[i]].childs[j].price,
                     image: Design_APIED[i][j].image,
                     selet: base_url + image,
+                    is_default: design_step[design_step_keys[i]].childs[j]['extension_attributes'].is_default
                   });
+
+                  if (ltemp.is_default) {
+                    setDesign([i, j])
+                  }
                 }
                 design.steps.push(temp);
                 design.items.push(ltemp);
@@ -344,7 +382,7 @@ const VHome = () => {
               setDesignData(design);
             // --------------- Design End ---------------
 
-            // --------------- Design ---------------
+            // --------------- Abxy ---------------
               let abxy = {};
               let abxy_step = object_data[object_keys[1]].values;
               let abxy_step_keys = Object.keys(abxy_step);
@@ -356,6 +394,8 @@ const VHome = () => {
                   price: abxy_step[abxy_step_keys[i]].price,
                   is_default: abxy_step[abxy_step_keys[i]].extension_attributes['is_default']
                 }
+
+                if (temp.is_default) AbxySetTabSelect(i);
 
                 let ltemp = [];
                 for (j = 0; j < abxy_step[abxy_step_keys[i]].childs.length; j++) {
@@ -371,9 +411,52 @@ const VHome = () => {
                 abxy.items.push(ltemp);
               }
               setAbxyData(abxy);
-            // --------------- Design End ---------------
+              console.log(object_data);
+            // --------------- Abxy End ---------------
 
-            
+            // --------------- Dpad ---------------
+              let dpad = {};
+              let dpad_step = object_data[object_keys[2]].values;
+              let dpad_step_keys = Object.keys(dpad_step);
+              dpad.steps = [];
+              dpad.items = [];
+              for (i = 0; i < dpad_step_keys.length; i++) {
+                let temp = {
+                  name: dpad_step[dpad_step_keys[i]].title,
+                  price: dpad_step[dpad_step_keys[i]].price,
+                  is_default: dpad_step[dpad_step_keys[i]].extension_attributes['is_default']
+                }
+
+                let ltemp = [];
+                for (j = 0; j < dpad_step[dpad_step_keys[i]].childs.length; j++) {
+                  let image = JSON.parse(dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  ltemp.push({
+                    name: dpad_step[dpad_step_keys[i]].childs[j].title,
+                    price: dpad_step[dpad_step_keys[i]].childs[j].price,
+                    image: DPAD_APIED[i][j].image,
+                    selet: base_url + image,
+                  });
+                }
+                dpad.steps.push(temp);
+                dpad.items.push(ltemp);
+              }
+              setDpadData(dpad);
+            // --------------- Dpad End --------------
+
+            // --------------- ThumbL --------------
+              let thumbl = { steps: [''], items: [[]] };
+              let thumbl_values = Object.keys(object_data['optId_1528'].values);
+              for (i = 0; i < thumbl_values.length; i++) {
+                const temp = object_data['optId_1528'].values[thumbl_values[i]];
+                thumbl.items[0].push({
+                  name: temp.title,
+                  price: temp.price,
+                  selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
+                  image: ThumbL_APIED[i].image
+                });
+              }
+              setThumbLData(thumbl);
+            // --------------- ThumbL End ---------------
           // ---------------------- Response is Okay End ----------------------
         } else {
           // console.log("HTTP-Error: " + response.status);
