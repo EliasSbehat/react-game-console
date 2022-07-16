@@ -41,9 +41,7 @@ import "swiper/css";
 const Tools = () => {
   
   // const [myContext.DpadtabSelect, myContext.DpadSetTabSelect] = React.useState(0);
-  
-  const [TouchpadtabSelect, TouchpadSetTabSelect] = React.useState(0);
-  const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
+    
   const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
@@ -300,7 +298,7 @@ const Tools = () => {
               {/** Touchpad */}
               {
                 myContext.snapIndex == 6 ? (
-                  <MobileSelector onChange={(e) => TouchpadSetTabSelect(e.target.value)}>
+                  <MobileSelector onChange={(e) => myContext.TouchpadSetTabSelect(e.target.value)}>
                     {
                       Dpad.steps.map((item, index) => 
                         <option key={index} value={index}>
@@ -644,33 +642,37 @@ const Tools = () => {
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
-                  Touchpad.steps.map((item, index) => (
-                    <TapItem w={Touchpad.steps.length} key={ index } active={TouchpadtabSelect} onClick = {() => TouchpadSetTabSelect(index)}>
-                      <span>
-                        {item.name}
-                      </span>
-                      <span>
-                        £{item.price}
-                      </span>
-                      <div></div>
-                    </TapItem>
-                  ))
+                  myContext.thuchPadData != undefined ? 
+                    myContext.thuchPadData.steps.map((item, index) => (
+                      <TapItem w={myContext.thuchPadData.steps.length} key={ index } keys = { index } active={myContext.TouchpadtabSelect} onClick = {() => myContext.TouchpadSetTabSelect(index)}>
+                        <span>
+                          {item.name}
+                        </span>
+                        <span>
+                          £{item.price}
+                        </span>
+                        <div></div>
+                      </TapItem>
+                    ))
+                  : null
                 }
               </TopItems>
               <Hr></Hr>
               <Selector>
                 {
-                  Touchpad.items[TouchpadtabSelect].map((item, index) => (
-                    <SelectItem 
-                      key={index} 
-                      bgImg={item.selet}
-                      now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
-                      me = { 10000 * myContext.snapIndex + 100 * TouchpadtabSelect + index }
-                      onClick={() => myContext.setTouchpad([TouchpadtabSelect, index])}
-                      // onMouseOver={() => myContext.setHoverImg(item.image)}
-                      onMouseLeave={() => myContext.setHoverImg(null)}
-                    ></SelectItem>
-                  ))
+                  myContext.thuchPadData != null ?
+                    myContext.thuchPadData.items[myContext.TouchpadtabSelect].map((item, index) => (
+                      <SelectItem 
+                        key={index} 
+                        bgImg={item.selet}
+                        now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * myContext.TouchpadtabSelect + index }
+                        onClick={() => myContext.setTouchpad([myContext.TouchpadtabSelect, index])}
+                        // onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseLeave={() => myContext.setHoverImg(null)}
+                      ></SelectItem>
+                    ))
+                  : null
                 }
               </Selector>
             </SwiperSlide>
@@ -686,22 +688,24 @@ const Tools = () => {
               <Hr></Hr>
               <Selector>
                 {
-                  Trim.items[TrimtabSelect].map((item, index) => (
-                    <SelectItemPrice>
-                      <SelectItem
-                        key={index} 
-                        bgImg={item.selet} 
-                        now = { myContext.trim === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * TrimtabSelect + index }
-                        onClick={() => myContext.setTrim([TrimtabSelect, index])}
-                        // onMouseOver={() => myContext.setHoverImg(item.image)}
-                        onMouseLeave={() => myContext.setHoverImg(null)}
-                      ></SelectItem>
-                      {
-                        '£' + item.price
-                      }
-                    </SelectItemPrice>
-                  ))
+                  myContext.trimData != null ?
+                    myContext.trimData.items[myContext.TrimtabSelect].map((item, index) => (
+                      <SelectItemPrice>
+                        <SelectItem
+                          key={index} 
+                          bgImg={item.selet} 
+                          now = { myContext.trim === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
+                          me = { 10000 * myContext.snapIndex + 100 * myContext.TrimtabSelect + index }
+                          onClick={() => myContext.setTrim([myContext.TrimtabSelect, index])}
+                          // onMouseOver={() => myContext.setHoverImg(item.image)}
+                          onMouseLeave={() => myContext.setHoverImg(null)}
+                        ></SelectItem>
+                        {
+                          '£' + item.price
+                        }
+                      </SelectItemPrice>
+                    ))
+                  : null
                 }
               </Selector>
             </SwiperSlide>

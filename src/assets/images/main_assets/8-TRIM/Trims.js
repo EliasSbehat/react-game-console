@@ -44,6 +44,8 @@ import t_2_12s from './front/12s.png';
 import t_2_13s from './front/13s.png';
 import t_2_14s from './front/14s.png';
 
+import trans from '../../transparent.png';
+
 
 export const Trim = {
   flag: 1,
@@ -72,3 +74,23 @@ export const Trim = {
     ]
   ]
 }
+
+export const Trim_APIED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Blue Chrome', image: t_1_1, selet: t_2_1s },
+    { name: 'Red Chrome', image: t_1_2, selet: t_2_2s },
+    { name: 'Gold Chrome', image: t_1_3, selet: t_2_3s },
+    { name: 'Silver Chrome', image: t_1_4, selet: t_2_4s },
+    { name: 'Wood Grain', image: t_1_5, selet: t_2_5s },
+    { name: 'Carbon Fiber', image: t_1_6, selet: t_2_6s },
+    { name: 'Sakura Pink', image: t_1_7, selet: t_2_7s },
+    { name: 'Hope Grey', image: t_1_8, selet: t_2_8s },
+    { name: 'Vampire Red', image: t_1_9, selet: t_2_9s },
+    { name: 'Soft Touch Blue', image: t_1_10, selet: t_2_10s },
+    { name: 'Soft Touch Green', image: t_1_11, selet: t_2_11s },
+    { name: 'Soft Touch Orange', image: t_1_12, selet: t_2_12s },
+    { name: 'Soft Touch Purple', image: t_1_13, selet: t_2_13s },
+    { name: 'White', image: t_1_14, selet: t_2_14s },
+  ]
+]

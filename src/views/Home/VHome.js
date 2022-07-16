@@ -18,6 +18,8 @@ import { DPAD_APIED } from "../../assets/images/main_assets/3-Dpad/DpadImage";
 import { ThumbL_APIED } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
 import { ThumbR_APIED } from "../../assets/images/main_assets/5-THUMBSTICK R/ThumbR";
 import { StartBtn_APIDED } from "../../assets/images/main_assets/6-START BACK/StartBtn";
+import { Touchpad_APIED } from "../../assets/images/main_assets/7-TOUCHPAD/Touchpad";
+import { Trim_APIED } from "../../assets/images/main_assets/8-TRIM/Trims";
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
@@ -168,6 +170,9 @@ const VHome = () => {
   const [ThumbLtabSelect, ThumbLSetTabSelect] = React.useState(0);
   const [ThumbRtabSelect, ThumbRSetTabSelect] = React.useState(0);
   const [StartBtntabSelect, StartBtnSetTabSelect] = React.useState(0);
+  const [TouchpadtabSelect, TouchpadSetTabSelect] = React.useState(0);
+  const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
+
 
   const imageSetting = {
 
@@ -193,6 +198,10 @@ const VHome = () => {
     ThumbRSetTabSelect,
     StartBtntabSelect,
     StartBtnSetTabSelect,
+    TouchpadtabSelect,
+    TouchpadSetTabSelect,
+    TrimtabSelect,
+    TrimSetTabSelect,
 
     design,
     setDesign,
@@ -422,7 +431,6 @@ const VHome = () => {
                 abxy.items.push(ltemp);
               }
               setAbxyData(abxy);
-              console.log(object_data);
             // --------------- Abxy End ---------------
 
             // --------------- Dpad ---------------
@@ -514,6 +522,52 @@ const VHome = () => {
               }
               setStateBackData(startback);
             // --------------- Start Back End ---------------
+
+            // --------------- Touchpad ---------------
+              let touchpad = {};
+              let touchpad_step = object_data['optId_1533'].values;
+              let touchpad_step_keys = Object.keys(touchpad_step);
+              touchpad.steps = [];
+              touchpad.items = [];
+              for (i = 0; i < touchpad_step_keys.length; i++) {
+                let temp = {
+                  name: touchpad_step[touchpad_step_keys[i]].title,
+                  price: touchpad_step[touchpad_step_keys[i]].price,
+                  is_default: touchpad_step[touchpad_step_keys[i]].extension_attributes['is_default']
+                }
+
+                if (temp.is_default) TouchpadSetTabSelect(i)
+
+                let ltemp = [];
+                for (j = 0; j < touchpad_step[touchpad_step_keys[i]].childs.length; j++) {
+                  let image = JSON.parse(touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  ltemp.push({
+                    name: touchpad_step[touchpad_step_keys[i]].childs[j].title,
+                    price: touchpad_step[touchpad_step_keys[i]].childs[j].price,
+                    image: Touchpad_APIED[i][j].image,
+                    selet: base_url + image,
+                  });
+                }
+                touchpad.steps.push(temp);
+                touchpad.items.push(ltemp);
+              }
+              setTouchPadData(touchpad);
+          // --------------- Touchpad End ---------------
+
+          // --------------- ThumbL --------------
+            let trim = { steps: [''], items: [[]] };
+            let trim_values = Object.keys(object_data['optId_1536'].values);
+            for (i = 0; i < trim_values.length; i++) {
+              const temp = object_data['optId_1536'].values[trim_values[i]];
+              trim.items[0].push({
+                name: temp.title,
+                price: temp.price,
+                selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
+                image: Trim_APIED[0][i].image
+              });
+            }
+            setTrimData(trim);
+          // --------------- ThumbL End ---------------
 
           // ---------------------- Response is Okay End ----------------------
         } else {

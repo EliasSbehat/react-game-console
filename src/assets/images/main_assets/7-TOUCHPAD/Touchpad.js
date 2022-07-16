@@ -30,6 +30,7 @@ import t_2_7s from './2/7s.png';
 import t_2_8s from './2/8s.png';
 import t_2_9s from './2/9s.png';
 
+import trans from '../../transparent.png';
 
 export const Touchpad = {
   flag: 0,
@@ -64,3 +65,25 @@ export const Touchpad = {
     ]
   ]
 }
+
+export const Touchpad_APIED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Midnight Black', image: t_1_1 },
+    { name: 'Red Matte', image: t_1_2 },
+    { name: 'Green Matte', image: t_1_3 },
+    { name: 'White Matte', image: t_1_4 },
+    { name: 'Pink Matte', image: t_1_5 },
+  ],
+  [
+    { name: 'Supernova', image: t_2_1 },
+    { name: 'Chameleon', image: t_2_2 },
+    { name: 'Vampire Red', image: t_2_3 },
+    { name: 'Sakura Pink', image: t_2_4 },
+    { name: 'Soft Touch Blue', image: t_2_5 },
+    { name: 'Soft Touch Green', image: t_2_6 },
+    { name: 'Soft Touch Orange', image: t_2_7 },
+    { name: 'Soft Touch Purple', image: t_2_8 },
+    { name: 'Hope Grey', image: t_2_9 },
+  ]
+]
