@@ -35,6 +35,8 @@ import tr_1_15s from './15s.png';
 import tr_1_16s from './16s.png';
 import tr_1_17s from './17s.png';
 
+import trans from '../../transparent.png';
+
 
 export const ThumbR = {
   flag: 0,
@@ -61,3 +63,26 @@ export const ThumbR = {
     ]
   ]
 }
+
+export const ThumbR_APIED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Blue', image: tr_1_1 },
+    { name: 'Green', image: tr_1_2 },
+    { name: 'Orange', image: tr_1_3 },
+    { name: 'Pink', image: tr_1_4 },
+    { name: 'Purple', image: tr_1_5 },
+    { name: 'Red', image: tr_1_6 },
+    { name: 'White', image: tr_1_7 },
+    { name: 'Silver Chrome', image: tr_1_8 },
+    { name: 'Purple Chrome', image: tr_1_9 },
+    { name: 'Jade Chrome', image: tr_1_10 },
+    { name: 'Black Interchangeable', image: tr_1_11 },
+    { name: 'White Interchangeable', image: tr_1_12 },
+    { name: 'Red Interchangeable', image: tr_1_13 },
+    { name: 'Blue Interchangeable', image: tr_1_14 },
+    { name: 'Green Interchangeable', image: tr_1_15 },
+    { name: 'Yellow Interchangeable', image: tr_1_16 },
+    { name: 'Bullet', image: tr_1_17 },
+  ]
+]

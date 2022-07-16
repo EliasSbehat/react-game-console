@@ -34,6 +34,7 @@ import s_2_6s from './2/6s.png';
 import s_2_7s from './2/7s.png';
 import s_2_8s from './2/8s.png';
 
+import trans from '../../transparent.png';
 
 export const StartBtn = {
   flag: 0,
@@ -70,3 +71,27 @@ export const StartBtn = {
     ]
   ]
 }
+
+export const StartBtn_APIDED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Sakura Pink', image: s_1_1 },
+    { name: 'Vampire Red', image: s_1_2 },
+    { name: 'Hope Grey', image: s_1_3 },
+    { name: 'Soft Touch Orange', image: s_1_4 },
+    { name: 'Soft Touch Blue', image: s_1_5 },
+    { name: 'Soft Touch Green', image: s_1_6 },
+    { name: 'Soft Touch Purple', image: s_1_7 },
+    { name: 'Midnight Black', image: s_1_8 },
+  ],
+  [
+    { name: 'Gold Chrome', image: s_2_1 },
+    { name: 'Blue Chrome', image: s_2_2 },
+    { name: 'Red Chrome', image: s_2_3 },
+    { name: 'Purple Chrome', image: s_2_4 },
+    { name: 'Green Chrome', image: s_2_5 },
+    { name: 'Pink Chrome', image: s_2_6 },
+    { name: 'Supernova', image: s_2_7 },
+    { name: 'Chameleon', image: s_2_8 },
+  ]
+]

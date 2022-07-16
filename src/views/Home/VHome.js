@@ -16,6 +16,8 @@ import { Design_APIED } from '../../assets/images/main_assets/1-DESIGN/DesignIma
 import { ABXY_APIED } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
 import { DPAD_APIED } from "../../assets/images/main_assets/3-Dpad/DpadImage";
 import { ThumbL_APIED } from "../../assets/images/main_assets/4-THUMBSTICK L/ThumbL";
+import { ThumbR_APIED } from "../../assets/images/main_assets/5-THUMBSTICK R/ThumbR";
+import { StartBtn_APIDED } from "../../assets/images/main_assets/6-START BACK/StartBtn";
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
@@ -163,6 +165,9 @@ const VHome = () => {
   const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
   const [AbxytabSelect, AbxySetTabSelect] = React.useState(0);
   const [DpadtabSelect, DpadSetTabSelect] = React.useState(0);
+  const [ThumbLtabSelect, ThumbLSetTabSelect] = React.useState(0);
+  const [ThumbRtabSelect, ThumbRSetTabSelect] = React.useState(0);
+  const [StartBtntabSelect, StartBtnSetTabSelect] = React.useState(0);
 
   const imageSetting = {
 
@@ -182,6 +187,12 @@ const VHome = () => {
     AbxySetTabSelect,
     DpadtabSelect,
     DpadSetTabSelect,
+    ThumbLtabSelect,
+    ThumbLSetTabSelect,
+    ThumbRtabSelect,
+    ThumbRSetTabSelect,
+    StartBtntabSelect,
+    StartBtnSetTabSelect,
 
     design,
     setDesign,
@@ -457,6 +468,53 @@ const VHome = () => {
               }
               setThumbLData(thumbl);
             // --------------- ThumbL End ---------------
+
+            // --------------- ThumbL --------------
+              let thumbr = { steps: [''], items: [[]] };
+              let thumbr_values = Object.keys(object_data['optId_1529'].values);
+              for (i = 0; i < thumbr_values.length; i++) {
+                const temp = object_data['optId_1529'].values[thumbr_values[i]];
+                thumbr.items[0].push({
+                  name: temp.title,
+                  price: temp.price,
+                  selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
+                  image: ThumbR_APIED[0][i].image
+                });
+              }
+              setThumbRData(thumbr);
+            // --------------- ThumbL End ---------------
+
+            // --------------- Start Back ---------------
+              let startback = {};
+              let startback_step = object_data['optId_1530'].values;
+              let startback_step_keys = Object.keys(startback_step);
+              startback.steps = [];
+              startback.items = [];
+              for (i = 0; i < startback_step_keys.length; i++) {
+                let temp = {
+                  name: startback_step[startback_step_keys[i]].title,
+                  price: startback_step[startback_step_keys[i]].price,
+                  is_default: startback_step[startback_step_keys[i]].extension_attributes['is_default']
+                }
+                if (temp.is_default) StartBtnSetTabSelect(i);
+
+
+                let ltemp = [];
+                for (j = 0; j < startback_step[startback_step_keys[i]].childs.length; j++) {
+                  let image = JSON.parse(startback_step[startback_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  ltemp.push({
+                    name: startback_step[startback_step_keys[i]].childs[j].title,
+                    price: startback_step[startback_step_keys[i]].childs[j].price,
+                    image: StartBtn_APIDED[i][j].image,
+                    selet: base_url + image,
+                  });
+                }
+                startback.steps.push(temp);
+                startback.items.push(ltemp);
+              }
+              setStateBackData(startback);
+            // --------------- Start Back End ---------------
+
           // ---------------------- Response is Okay End ----------------------
         } else {
           // console.log("HTTP-Error: " + response.status);
