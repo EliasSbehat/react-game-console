@@ -161,9 +161,9 @@ const ViewArea = () => {
                       ╚═════╝ ╚═╝     ╚═╝  ╚═╝╚═════╝ 
                   */}
                   {
-                    myContext.dpad !== null ? (() => {
+                    myContext.dpad !== null && myContext.dpadData ? (() => {
                       return (
-                        Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={Dpad.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div className="lds-dual-ring"></div>
+                        myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].image ? <img src={myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].image}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {
                     })()
@@ -177,9 +177,9 @@ const ViewArea = () => {
                         ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚══════╝
                   */}
                   {
-                      myContext.thumbstickL !== null ? (() => {
+                      myContext.thumbstickL !== null && myContext.thubmLData ? (() => {
                         return (
-                          ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image ? <img src={myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].image}></img> : <div className="lds-dual-ring"></div>
                         )
                       })() : (() => {})()
                     }
@@ -193,9 +193,9 @@ const ViewArea = () => {
                           ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝     ╚═╝  ╚═╝
                     */}
                     {
-                      myContext.thumbstickR !== null ? (() => {
+                      myContext.thumbstickR !== null && myContext.thubmRData ? (() => {
                         return (
-                          ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div className="lds-dual-ring"></div>
+                          myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image ? <img src={myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].image}></img> : <div className="lds-dual-ring"></div>
                         )
                       })() : (() => {})()
                     }
@@ -209,9 +209,9 @@ const ViewArea = () => {
                         ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝       ╚═════╝  ╚═════╝    ╚═╝      ╚═╝    ╚═════╝ ╚═╝  ╚═══╝
                     */}
                     {
-                        myContext.startBtn !== null ? (() => {
+                        myContext.startBtn !== null && myContext.startBackData ? (() => {
                           return (
-                            StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div className="lds-dual-ring"></div>
+                            myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].image ? <img src={myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].image}></img> : <div className="lds-dual-ring"></div>
                           )
                         })() : (() => {})()
                       }
@@ -227,9 +227,9 @@ const ViewArea = () => {
                         */
                       }
                       {
-                        myContext.touchpad !== null ? (() => {
+                        myContext.touchpad !== null && myContext.thuchPadData ? (() => {
                           return (
-                            Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div className="lds-dual-ring"></div>
+                            myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].image}></img> : <div className="lds-dual-ring"></div>
                           )
                         })() : (() => {})()
                       }
@@ -298,16 +298,16 @@ const ViewArea = () => {
               <div id="backend">
                 <div>
                   <img src={Assets.ModelBackImg}></img>
-                  {
+                  {/* {
                     myContext.touchpad !== null ? (() => {
                       return (
                         Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image ? <img src={Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
-                  }
+                  } */}
                   {/**
-                   *████████╗██████╗ ██╗███╗   ███╗
-                    ╚══██╔══╝██╔══██╗██║████╗ ████║
+                   * ████████╗██████╗ ██╗███╗   ███╗
+                     ╚══██╔══╝██╔══██╗██║████╗ ████║
                         ██║   ██████╔╝██║██╔████╔██║
                         ██║   ██╔══██╗██║██║╚██╔╝██║
                         ██║   ██║  ██║██║██║ ╚═╝ ██║

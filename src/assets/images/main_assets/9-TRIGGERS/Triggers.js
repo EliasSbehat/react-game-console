@@ -57,6 +57,7 @@ import tri_2_7s from './front/2/7s.png';
 import tri_2_8s from './front/2/8s.png';
 import tri_2_9s from './front/2/9s.png';
 
+import trans from '../../transparent.png';
 
 export const Trigger = {
   flag: 1,
@@ -94,3 +95,28 @@ export const Trigger = {
     ]
   ]
 }
+
+export const Trigger_APIED = [
+  [
+    { name: 'Stock', image: trans },
+    { name: 'Sakura Pink', image: tri_1_1 },
+    { name: 'Vampire Red', image: tri_1_2 },
+    { name: 'Hope Grey', image: tri_1_3 },
+    { name: 'White', image: tri_1_4 },
+    { name: 'Soft Touch Orange', image: tri_1_5 },
+    { name: 'Soft Touch Blue', image: tri_1_6 },
+    { name: 'Soft Touch Green', image: tri_1_7 },
+    { name: 'Soft Touch Purple', image: tri_1_8 },
+  ],
+  [
+    { name: 'Gold Chrome', image: tri_2_1 },
+    { name: 'Silver Chrome', image: tri_2_2 },
+    { name: 'Blue Chrome', image: tri_2_3 },
+    { name: 'Red Chrome', image: tri_2_4 },
+    { name: 'Purple Chrome', image: tri_2_5 },
+    { name: 'Green Chrome', image: tri_2_6 },
+    { name: 'Pink Chrome', image: tri_2_7 },
+    { name: 'Supernova', image: tri_2_8 },
+    { name: 'Chameleon', image: tri_2_9 },
+  ]
+]

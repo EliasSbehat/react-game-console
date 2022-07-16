@@ -20,6 +20,7 @@ import { ThumbR_APIED } from "../../assets/images/main_assets/5-THUMBSTICK R/Thu
 import { StartBtn_APIDED } from "../../assets/images/main_assets/6-START BACK/StartBtn";
 import { Touchpad_APIED } from "../../assets/images/main_assets/7-TOUCHPAD/Touchpad";
 import { Trim_APIED } from "../../assets/images/main_assets/8-TRIM/Trims";
+import { Trigger_APIED } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
@@ -33,7 +34,9 @@ const VHome = () => {
   const [trim, setTrim] = React.useState(null);
   const [trigger, setTrigger] = React.useState(null);
   const [rearDesign, setRearDesign] = React.useState(null);
+
   const [razorBack, setRazorBack] = React.useState(false);
+
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
   const [paddle, setPaddle] = React.useState(null);
   const [sideflag, setSideflag] = React.useState(true);
@@ -161,7 +164,7 @@ const VHome = () => {
   const [thuchPadData, setTouchPadData] = React.useState(null);
   const [trimData, setTrimData] = React.useState(null);
   const [triggersData, setTriggersData] = React.useState(null);
-
+  const [razorBackPrice, setRazorBackPrice] = React.useState(null);
 
   // TablIndexs
   const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
@@ -172,6 +175,7 @@ const VHome = () => {
   const [StartBtntabSelect, StartBtnSetTabSelect] = React.useState(0);
   const [TouchpadtabSelect, TouchpadSetTabSelect] = React.useState(0);
   const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
+  const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
 
 
   const imageSetting = {
@@ -202,6 +206,8 @@ const VHome = () => {
     TouchpadSetTabSelect,
     TrimtabSelect,
     TrimSetTabSelect,
+    TriggertabSelect,
+    TriggerSetTabSelect,
 
     design,
     setDesign,
@@ -224,7 +230,7 @@ const VHome = () => {
     rearDesign,
     setRearDesign,
     razorBack,
-    razorBackPrice: 9.99,
+    razorBackPrice,
     setRazorBack,
     pad_esp_flag,
     setPad_esp_flag,
@@ -569,6 +575,52 @@ const VHome = () => {
             setTrimData(trim);
           // --------------- ThumbL End ---------------
 
+          // --------------- triggers ---------------
+            let triggers = {};
+            let triggers_step = object_data['optId_1537'].values;
+            let triggers_step_keys = Object.keys(triggers_step);
+            triggers.steps = [];
+            triggers.items = [];
+            for (i = 0; i < triggers_step_keys.length; i++) {
+              let temp = {
+                name: triggers_step[triggers_step_keys[i]].title,
+                price: triggers_step[triggers_step_keys[i]].price,
+                is_default: triggers_step[triggers_step_keys[i]].extension_attributes['is_default']
+              }
+
+              if (temp.is_default) TriggerSetTabSelect(i);
+
+              let ltemp = [];
+              for (j = 0; j < triggers_step[triggers_step_keys[i]].childs.length; j++) {
+                let image = JSON.parse(triggers_step[triggers_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                ltemp.push({
+                  name: triggers_step[triggers_step_keys[i]].childs[j].title,
+                  price: triggers_step[triggers_step_keys[i]].childs[j].price,
+                  image: Trigger_APIED[i][j].image,
+                  selet: base_url + image,
+                });
+              }
+              triggers.steps.push(temp);
+              triggers.items.push(ltemp);
+            }
+            setTriggersData(triggers);
+        // --------------- triggers End ---------------
+        
+        // --------------- raborback ---------------
+          // setRazorbackData
+          
+          let razorback = {};
+          let razorback_keys = Object.keys(object_data['optId_1540'].values);
+          razorback.price = object_data['optId_1540'].values[razorback_keys[0]].price;
+          razorback.is_default = object_data['optId_1540'].values[razorback_keys[0]].extension_attributes.is_default;
+          setRazorBackPrice(razorback.price);
+          setRazorBack(razorback.is_default);
+        // --------------- raborback end ---------------
+
+        // --------------- esports ---------------
+          console.log(object_data);
+        // --------------- esports end ---------------
+          
           // ---------------------- Response is Okay End ----------------------
         } else {
           // console.log("HTTP-Error: " + response.status);

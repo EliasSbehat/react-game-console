@@ -42,7 +42,6 @@ const Tools = () => {
   
   // const [myContext.DpadtabSelect, myContext.DpadSetTabSelect] = React.useState(0);
     
-  const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
   const [swiper, setSwiper] = React.useState(0);
@@ -313,7 +312,7 @@ const Tools = () => {
               {/** Touchpad */}
               {
                 myContext.snapIndex == 8 ? (
-                  <MobileSelector onChange={(e) => TriggerSetTabSelect(e.target.value)}>
+                  <MobileSelector onChange={(e) => myContext.TriggerSetTabSelect(e.target.value)}>
                     {
                       Dpad.steps.map((item, index) => 
                         <option key={index} value={index}>
@@ -616,17 +615,19 @@ const Tools = () => {
                 <Hr></Hr>
                 <Selector>
                   {
-                    StartBtn.items[myContext.StartBtntabSelect].map((item, index) => (
-                      <SelectItem 
-                        key={index} 
-                        bgImg={item.selet} 
-                        now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * myContext.StartBtntabSelect + index }
-                        onClick={() => myContext.setStartBtn([myContext.StartBtntabSelect, index])}
-                        // onMouseOver={() => myContext.setHoverImg(item.image)}
-                        onMouseLeave={() => myContext.setHoverImg(null)}
-                      ></SelectItem>
-                    ))
+                    myContext.startBackData != null ?
+                      myContext.startBackData.items[myContext.StartBtntabSelect].map((item, index) => (
+                        <SelectItem 
+                          key={index} 
+                          bgImg={item.selet} 
+                          now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
+                          me = { 10000 * myContext.snapIndex + 100 * myContext.StartBtntabSelect + index }
+                          onClick={() => myContext.setStartBtn([myContext.StartBtntabSelect, index])}
+                          // onMouseOver={() => myContext.setHoverImg(item.image)}
+                          onMouseLeave={() => myContext.setHoverImg(null)}
+                        ></SelectItem>
+                      ))
+                    : null
                   }
                 </Selector>
             </SwiperSlide>
@@ -667,7 +668,9 @@ const Tools = () => {
                         bgImg={item.selet}
                         now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
                         me = { 10000 * myContext.snapIndex + 100 * myContext.TouchpadtabSelect + index }
-                        onClick={() => myContext.setTouchpad([myContext.TouchpadtabSelect, index])}
+                        onClick={() => { 
+                          myContext.setTouchpad([myContext.TouchpadtabSelect, index]);
+                        }}
                         // onMouseOver={() => myContext.setHoverImg(item.image)}
                         onMouseLeave={() => myContext.setHoverImg(null)}
                       ></SelectItem>
@@ -720,30 +723,34 @@ const Tools = () => {
             <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
               <TopItems>
                 {
-                  Trigger.steps.map((item, index) => (
-                    <TapItem w={Trigger.steps.length} key={ index } active={TriggertabSelect} onClick = {() => TriggerSetTabSelect(index)}>
-                      <span>
-                        {item.name}
-                      </span>
-                      <span>
-                        £{item.price}
-                      </span>
-                      <div></div>
-                    </TapItem>
-                  ))
+                  myContext.triggersData != null ? 
+                    myContext.triggersData.steps.map((item, index) => (
+                      <TapItem w={Trigger.steps.length} key={ index } keys = { index } active={myContext.TriggertabSelect} onClick = {() => myContext.TriggerSetTabSelect(index)}>
+                        <span>
+                          {item.name}
+                        </span>
+                        <span>
+                          £{item.price}
+                        </span>
+                        <div></div>
+                      </TapItem>
+                    ))
+                  : null
                 }
               </TopItems>
               <Hr></Hr>
               <Selector>
                 {
-                  Trigger.items[TriggertabSelect].map((item, index) => (
-                    <SelectItem
-                      key={index}
-                      bgImg={item.selet}
-                      now = { myContext.trigger === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
-                      me = { 10000 * myContext.snapIndex + 100 * TriggertabSelect + index }
-                      onClick={() => myContext.setTrigger([TriggertabSelect, index])}></SelectItem>
-                  ))
+                  myContext.triggersData != null ?
+                    myContext.triggersData.items[myContext.TriggertabSelect].map((item, index) => (
+                      <SelectItem
+                        key={index}
+                        bgImg={item.selet}
+                        now = { myContext.trigger === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * myContext.TriggertabSelect + index }
+                        onClick={() => myContext.setTrigger([myContext.TriggertabSelect, index])}></SelectItem>
+                    ))
+                  : null
                 }
               </Selector>
             </SwiperSlide>
@@ -1547,10 +1554,10 @@ const Tools = () => {
                   Number(myContext.dpad !== null && myContext.dpadData != null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
                   Number(myContext.thumbstickL !== null && myContext.thubmLData ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
                   Number(myContext.thumbstickR !== null && myContext.thubmRData ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
-                  Number(myContext.startBtn !== null ? StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
-                  Number(myContext.touchpad !== null ? Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
-                  Number(myContext.trim !== null ? Trim.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
-                  Number(myContext.trigger !== null ? Trigger.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
+                  Number(myContext.startBtn !== null && myContext.startBackData ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
+                  Number(myContext.touchpad !== null && myContext.thuchPadData ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
+                  Number(myContext.trim !== null && myContext.trimData ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
+                  Number(myContext.trigger !== null && myContext.triggersData ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
                   Number(myContext.rearDesign !== null ? RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
                   Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
                   Number(myContext.paddle !== null ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
