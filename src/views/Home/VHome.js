@@ -21,6 +21,8 @@ import { StartBtn_APIDED } from "../../assets/images/main_assets/6-START BACK/St
 import { Touchpad_APIED } from "../../assets/images/main_assets/7-TOUCHPAD/Touchpad";
 import { Trim_APIED } from "../../assets/images/main_assets/8-TRIM/Trims";
 import { Trigger_APIED } from "../../assets/images/main_assets/9-TRIGGERS/Triggers";
+import { Paddle_APIED } from "../../assets/images/main_assets/paddle/Paddle";
+import { RearDesign_APIED } from "../../assets/images/main_assets/10-REAR DESIGN/RearDesign";
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
@@ -34,8 +36,8 @@ const VHome = () => {
   const [trim, setTrim] = React.useState(null);
   const [trigger, setTrigger] = React.useState(null);
   const [rearDesign, setRearDesign] = React.useState(null);
-
   const [razorBack, setRazorBack] = React.useState(false);
+  
 
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
   const [paddle, setPaddle] = React.useState(null);
@@ -63,8 +65,6 @@ const VHome = () => {
   const [esportsFlag, setEsportsFlag] = React.useState(0);
 
   const [remap, setRemap] = React.useState(true);
-
-  
 
   function func_file_select() {
     const temp = document.getElementById('file_selector');
@@ -127,6 +127,7 @@ const VHome = () => {
     }
     else if (ind === 14) {
       setDigital_trigger(false);
+      
     }
     else if (ind === 15) {
       setIsText(false);
@@ -141,14 +142,18 @@ const VHome = () => {
   
 
   const [digital_trigger, setDigital_trigger] = React.useState(false);
+  const [digital_trigger_price, setDigital_trigger_price] = React.useState(0);
+  
 
   // Text
   const [isText, setIsText] = React.useState(false);
   const [textVal, setTextVal] = React.useState('');
   const [familyId, setFamily] = React.useState(0);
+  const [textPrice, setTextPrice] = React.useState(0);
 
   // Logo
   const [isLogo, setLogo] = React.useState(false);
+  const [logoPrice, setLogoPrice] = React.useState(0);
   const [images, setImages] = React.useState([]);
 
   const [initalPrice, setInitalPrice] = React.useState(63.99);
@@ -165,6 +170,10 @@ const VHome = () => {
   const [trimData, setTrimData] = React.useState(null);
   const [triggersData, setTriggersData] = React.useState(null);
   const [razorBackPrice, setRazorBackPrice] = React.useState(null);
+  const [paddleData, setPaddleData] = React.useState(null);
+  const [dominselectData, setDominselectData] = React.useState(null);
+  const [rearDesignData, setRearDesignData] = React.useState(null);
+  const [personalizationData, setPersonalizationData] = React.useState(null);
 
   // TablIndexs
   const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
@@ -189,6 +198,13 @@ const VHome = () => {
     thuchPadData,
     trimData,
     triggersData,
+    paddleData,
+    setPaddleData,
+    dominselectData,
+    setDominselectData,
+    rearDesignData,
+    setRearDesignData,
+    personalizationData,
 
     DesigntabSelect,
     DesignSetTabSelect,
@@ -247,15 +263,19 @@ const VHome = () => {
     setRdomin2,
 
     digital_trigger,
-    digital_trigger_price: 30.99,
+    
+    digital_trigger_price,
+    
     setDigital_trigger,
+    
 
     // text
     isText,
     setIsText,
     textVal,
     setTextVal,
-    textPrice: 10.99,
+    textPrice,
+    setTextPrice,
     familyId,
     setFamily,
     textColor, 
@@ -268,6 +288,8 @@ const VHome = () => {
     // Logo
     isLogo,
     setLogo,
+    logoPrice,
+    setLogoPrice,
     images,
     setImages,
 
@@ -569,7 +591,8 @@ const VHome = () => {
                 name: temp.title,
                 price: temp.price,
                 selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
-                image: Trim_APIED[0][i].image
+                image: Trim_APIED[0][i].image,
+                image_back: Trim_APIED[0][i].image_back
               });
             }
             setTrimData(trim);
@@ -597,6 +620,7 @@ const VHome = () => {
                   name: triggers_step[triggers_step_keys[i]].childs[j].title,
                   price: triggers_step[triggers_step_keys[i]].childs[j].price,
                   image: Trigger_APIED[i][j].image,
+                  image_back: Trigger_APIED[i][j].image_back,
                   selet: base_url + image,
                 });
               }
@@ -605,10 +629,8 @@ const VHome = () => {
             }
             setTriggersData(triggers);
         // --------------- triggers End ---------------
-        
         // --------------- raborback ---------------
           // setRazorbackData
-          
           let razorback = {};
           let razorback_keys = Object.keys(object_data['optId_1540'].values);
           razorback.price = object_data['optId_1540'].values[razorback_keys[0]].price;
@@ -618,8 +640,88 @@ const VHome = () => {
         // --------------- raborback end ---------------
 
         // --------------- esports ---------------
-          console.log(object_data);
+          let esport = object_data['optId_1541'];
+          let esport_keys = Object.keys(esport.values);
+          // --------------- Paddle ---------------
+            let temp = esport.values[esport_keys[1]];
+            let paddles = {};
+            paddles.name = temp.title;
+            paddles.price = temp.price;
+            paddles.is_default = temp.extension_attributes.is_default;
+            paddles.items = [[]];
+            console.log(temp.childs.length);
+            for (i = 0; i < temp.childs.length; i++) {
+              paddles.items[0].push(
+                {
+                  name: temp.childs[i].title,
+                  price: temp.childs[i].price,
+                  selet: base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value,
+                  image_back: Paddle_APIED[0][i].image_back
+                }
+              )
+            }
+            setPaddleData(paddles);
+          // --------------- Paddle End ---------------
+          // --------------- Domin8or Button ---------------
+            temp = esport.values[esport_keys[2]];
+            let dominselect = {};
+            dominselect.name = temp.title;
+            dominselect.price = temp.price;
+            dominselect.items = [];
+            for (i = 0; i < temp.childs.length / 2; i++) {
+              let temp1 = {};
+              temp1.name = temp.childs[i].keys;
+              temp1.price = temp.childs[i].price;
+              temp1.image = base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value;
+              temp1.select = base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value;
+              dominselect.items.push(temp1);
+            }
+            setDominselectData(dominselect);
+          // --------------- Domin8or Button End ---------------
         // --------------- esports end ---------------
+
+        // --------------- RearDesign ---------------
+          let rearDesign = { steps: [''], items: [[]] };
+          let rearDesign_values = Object.keys(object_data['optId_1545'].values);
+          rearDesign.name = object_data['optId_1545'].title;
+          for (i = 0; i < rearDesign_values.length; i++) {
+            const temp = object_data['optId_1545'].values[rearDesign_values[i]];
+            rearDesign.items[0].push({
+              name: temp.title,
+              price: temp.price,
+              selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
+              image: RearDesign_APIED[0][i].image,
+              image_back: RearDesign_APIED[0][i].image_back
+            });
+          }
+          setRearDesignData(rearDesign);
+        // --------------- RearDesign End ---------------
+
+        // --------------- D triggers ---------------
+          let dtriggers = {};
+          let dtriggers_keys = Object.keys(object_data['optId_1549'].values);
+          dtriggers.price = object_data['optId_1549'].values[dtriggers_keys[1]].price;
+          dtriggers.is_default = object_data['optId_1549'].values[dtriggers_keys[1]].extension_attributes.is_default;
+          setDigital_trigger(dtriggers.is_default);
+          setDigital_trigger_price(dtriggers.price);
+        // --------------- D triggers End ---------------
+
+        // --------------- Text and Logo ---------------
+          const per = object_data['optId_1546'];
+          const per_value_keys = Object.keys(object_data['optId_1546'].values);
+
+          let names = [];
+          console.log(object_data);
+          names.push(per.title);
+          names.push({ name: per.values[per_value_keys[0]].title, price: per.values[per_value_keys[0]].price });
+          names.push({ name: per.values[per_value_keys[1]].title, price: per.values[per_value_keys[1]].price });
+          names.push({ name: per.values[per_value_keys[2]].title, price: per.values[per_value_keys[2]].price });
+          setTextPrice(per.values[per_value_keys[1]].price);
+          setLogoPrice(per.values[per_value_keys[2]].price)
+          if (per.values[per_value_keys[1]].extension_attributes.is_default) setIsText(true);
+          if (per.values[per_value_keys[2]].extension_attributes.is_default) setLogo(true);
+          setPersonalizationData(names);
+        // --------------- Text and Logo End ---------------
           
           // ---------------------- Response is Okay End ----------------------
         } else {

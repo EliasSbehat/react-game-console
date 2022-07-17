@@ -40,7 +40,7 @@ import reard_back_1_11 from './backend/11.png';
 import reard_back_1_12 from './backend/12.png';
 import reard_back_1_13 from './backend/13.png';
 
-
+import trans from '../../transparent.png';
 export const RearDesign = {
   flag: 1,
   steps: [
@@ -67,3 +67,22 @@ export const RearDesign = {
     ],
   ]
 }
+
+export const RearDesign_APIED = [
+  [
+    { name: 'Stock', image: trans, image_back: trans },
+    { name: 'Midnight Black', image: reard_1_1, image_back: reard_back_1_1 },
+    { name: 'Silver Chrome', image: reard_1_2, image_back: reard_back_1_2 },
+    { name: 'Gold Chrome', image: reard_1_3, image_back: reard_back_1_3 },
+    { name: 'Supernova', image: reard_1_4, image_back: reard_back_1_4 },
+    { name: 'Chameleon', image: reard_1_5, image_back: reard_back_1_5 },
+    { name: 'Vampire Red', image: reard_1_6, image_back: reard_back_1_6 },
+    { name: 'Soft Touch Orange', image: reard_1_7, image_back: reard_back_1_7 },
+    { name: 'Soft Touch Green', image: reard_1_8, image_back: reard_back_1_8 },
+    { name: 'Soft Touch Blue', image: reard_1_9, image_back: reard_back_1_9 },
+    { name: 'Soft Touch Purple', image: reard_1_10, image_back: reard_back_1_10 },
+    { name: 'Sakura Pink', image: reard_1_11, image_back: reard_back_1_11 },
+    { name: 'Wood', image: reard_1_12, image_back: reard_back_1_12 },
+    { name: 'Carbon Fiber', image: reard_1_13, image_back: reard_back_1_13 },
+  ],
+]

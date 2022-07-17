@@ -382,7 +382,7 @@ const Tools = () => {
               <TopItems>
                 {
                   myContext.designData !== null ?
-                  myContext.designData.steps.map((item, index) => (
+                    myContext.designData.steps.map((item, index) => (
                     (() => {                      
                       return (
                         <TapItem key={index} keys = {index} w = { myContext.designData.steps.length } active={myContext.DesigntabSelect} onClick = {() => {
@@ -838,10 +838,14 @@ const Tools = () => {
                     }}>
                       <div>
                         <img src={DominLimg}></img>
-                        Domin8or Button
+                        {
+                          myContext.dominselectData != null ? myContext.dominselectData.name : ''
+                        }
                       </div>
                       <div>
-                        £9.99
+                        £{
+                          myContext.dominselectData != null ? myContext.dominselectData.price : ''
+                        }
                       </div>
                       <div>
                         <SBsCheck></SBsCheck>
@@ -859,24 +863,26 @@ const Tools = () => {
                         </div>
                         <Selector>
                           {
-                            Paddle.items[PaddletabSelect].map((item, index) => (
-                              <SelectItemPrice>
-                              <SelectItem
-                                key={index} bgImg={item.select}
-                                now = { myContext.paddle === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
-                                me = { 10000 * myContext.snapIndex + 100 * PaddletabSelect + index }
-                                onClick={() => {
-                                  myContext.setPaddle([PaddletabSelect, index]);
-                                  myContext.setLdomin1(null);
-                                  myContext.setLdomin2(null);
-                                  myContext.setRdomin1(null);
-                                  myContext.setRdomin2(null);
-                                }}></SelectItem>
-                                {
-                                  '£'+item.price
-                                }
-                              </SelectItemPrice>
-                            ))
+                            myContext.paddleData != null ?
+                              myContext.paddleData.items[PaddletabSelect].map((item, index) => (
+                                <SelectItemPrice>
+                                <SelectItem
+                                  key={index} bgImg={item.selet}
+                                  now = { myContext.paddle === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.paddle[0] + myContext.paddle[1]}
+                                  me = { 10000 * myContext.snapIndex + 100 * PaddletabSelect + index }
+                                  onClick={() => {
+                                    myContext.setPaddle([PaddletabSelect, index]);
+                                    myContext.setLdomin1(null);
+                                    myContext.setLdomin2(null);
+                                    myContext.setRdomin1(null);
+                                    myContext.setRdomin2(null);
+                                  }}></SelectItem>
+                                  {
+                                    '£'+item.price
+                                  }
+                                </SelectItemPrice>
+                              ))
+                            : null
                           }
                         </Selector>
                         <RemapDiv>
@@ -902,19 +908,21 @@ const Tools = () => {
                         </UnderlinedDiv>
                         <Selector>
                           {
-                            DominSelection.items.map((item, index) => (
-                              <SelectItemPrice>
-                                <SelectItem
-                                  key={index}
-                                  now = { myContext.ldomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.ldomin_1}
-                                  me = { 10000 * myContext.snapIndex + 100 * index }
-                                  bgImg={item.select}
-                                  onClick={() => myContext.setLdomin1(index)}></SelectItem>
-                                  {
-                                    '£'+item.price
-                                  }
-                              </SelectItemPrice>
-                            ))
+                            myContext.dominselectData != null ? 
+                              myContext.dominselectData.items.map((item, index) => (
+                                <SelectItemPrice>
+                                  <SelectItem
+                                    key={index}
+                                    now = { myContext.ldomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.ldomin_1}
+                                    me = { 10000 * myContext.snapIndex + 100 * index }
+                                    bgImg={item.select}
+                                    onClick={() => myContext.setLdomin1(index)}></SelectItem>
+                                    {
+                                      '£'+item.price
+                                    }
+                                </SelectItemPrice>
+                              ))
+                            : null
                           }
                         </Selector>
                         {
@@ -951,19 +959,21 @@ const Tools = () => {
                         </UnderlinedDiv>
                         <Selector>
                           {
-                            DominSelection.items.map((item, index) => (
-                              <SelectItemPrice>
-                                <SelectItem
-                                  key={index}
-                                  bgImg={item.select}
-                                  now = { myContext.rdomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rdomin_1}
-                                  me = { 10000 * myContext.snapIndex + 100 * index }
-                                  onClick={() => myContext.setRdomin1(index)}></SelectItem>
-                                  {
-                                    '£'+item.price
-                                  }
-                              </SelectItemPrice>
-                            ))
+                            myContext.dominselectData != null ? 
+                              myContext.dominselectData.items.map((item, index) => (
+                                <SelectItemPrice>
+                                  <SelectItem
+                                    key={index}
+                                    bgImg={item.select}
+                                    now = { myContext.rdomin_1 === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rdomin_1}
+                                    me = { 10000 * myContext.snapIndex + 100 * index }
+                                    onClick={() => myContext.setRdomin1(index)}></SelectItem>
+                                    {
+                                      '£'+item.price
+                                    }
+                                </SelectItemPrice>
+                              ))
+                            : null
                           }
                         </Selector>
                         {
@@ -1013,20 +1023,22 @@ const Tools = () => {
               <Hr></Hr>
               <Selector>
                 {
-                  RearDesign.items[RearDesigntabSelect].map((item, index) => (
-                    <SelectItemPrice>
-                      <SelectItem
-                        key={index} 
-                        bgImg={item.selet}
-                        now = { myContext.rearDesign === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * RearDesigntabSelect + index }
-                        onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}
-                      ></SelectItem>
-                      {
-                        '£'+item.price
-                      }
-                    </SelectItemPrice>
-                  ))  
+                  myContext.rearDesignData != null ? 
+                    myContext.rearDesignData.items[RearDesigntabSelect].map((item, index) => (
+                      <SelectItemPrice>
+                        <SelectItem
+                          key={index} 
+                          bgImg={item.selet}
+                          now = { myContext.rearDesign === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.rearDesign[0] + myContext.rearDesign[1]}
+                          me = { 10000 * myContext.snapIndex + 100 * RearDesigntabSelect + index }
+                          onClick={() => myContext.setRearDesign([RearDesigntabSelect, index])}
+                        ></SelectItem>
+                        {
+                          '£'+item.price
+                        }
+                      </SelectItemPrice>
+                    ))
+                  : null
                 }
               </Selector>
             </SwiperSlide>
@@ -1236,11 +1248,11 @@ const Tools = () => {
                   </label>
                 </RazorDiv> */}
                 <TextOptionDiv>
-                  <TextOption stat = {!myContext.isText} onClick={() => myContext.setIsText(false)}>
+                  <TextOption stat = {!myContext.digital_trigger} onClick={() => myContext.setDigital_trigger(false)}>
                     <h1>No (Default)</h1>
                     <BsCheck></BsCheck>
                   </TextOption>
-                  <TextOption stat = {myContext.isText} onClick={() => myContext.setIsText(true)}>
+                  <TextOption stat = {myContext.digital_trigger} onClick={() => myContext.setDigital_trigger(true)}>
                     <h1>Add Digital Trigger</h1>
                     <BsCheck></BsCheck>
                   </TextOption>
@@ -1268,7 +1280,9 @@ const Tools = () => {
                           <AiOutlineStop></AiOutlineStop>
                         </div>
                         <div>
-                          No (Default)
+                          {
+                            myContext.personalizationData != null ? myContext.personalizationData[1].name : null
+                          }
                         </div>
                         <div>
                           <SBsCheck></SBsCheck>
@@ -1280,10 +1294,14 @@ const Tools = () => {
                       }}>
                         <div>
                           <img src={TextImg} style={{width: '45px'}}></img>
-                          Text
+                          {
+                            myContext.personalizationData != null ? myContext.personalizationData[2].name : null
+                          }
                         </div>
                         <div>
-                          £9.99
+                          £{
+                            myContext.textPrice
+                          }
                         </div>
                         <div>
                           <SBsCheck></SBsCheck>
@@ -1295,10 +1313,14 @@ const Tools = () => {
                       }}>
                         <div>
                           <img src={CateImgs[13].image}  style={{width: '45px'}}></img>
-                          Logo
+                          {
+                            myContext.personalizationData != null ? myContext.personalizationData[3].name : null
+                          }
                         </div>
                         <div>
-                          £9.99
+                          £{
+                            myContext.logoPrice
+                          }
                         </div>
                         <div>
                           <SBsCheck></SBsCheck>
@@ -1558,12 +1580,14 @@ const Tools = () => {
                   Number(myContext.touchpad !== null && myContext.thuchPadData ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
                   Number(myContext.trim !== null && myContext.trimData ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
                   Number(myContext.trigger !== null && myContext.triggersData ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
-                  Number(myContext.rearDesign !== null ? RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
+                  Number(myContext.rearDesign !== null && myContext.rearDesignData ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
                   Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
-                  Number(myContext.paddle !== null ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
-                  Number(myContext.ldomin_2 !== null ? Number(DominL.items[myContext.ldomin_2].price) + Number(DominSelection.items[myContext.ldomin_1].price) : 0) + 
-                  Number(myContext.rdomin_2 !== null ? Number(DominR.items[myContext.rdomin_2].price) + Number(DominSelection.items[myContext.rdomin_1].price) : 0) + 
-                  Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0)
+                  Number(myContext.paddle !== null && myContext.paddleData ? myContext.paddleData.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
+                  Number(myContext.ldomin_2 !== null && myContext.dominselectData ? Number(DominL.items[myContext.ldomin_2].price) + Number(myContext.dominselectData.items[myContext.ldomin_1].price) : 0) + 
+                  Number(myContext.rdomin_2 !== null && myContext.dominselectData ? Number(DominR.items[myContext.rdomin_2].price) + Number(myContext.dominselectData.items[myContext.rdomin_1].price) : 0) + 
+                  Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0) + 
+                  Number(myContext.isText ? myContext.textPrice : 0) + 
+                  Number(myContext.isLogo ? myContext.logoPrice : 0) 
                 ) * 100
                 ) / 100
               }
@@ -2045,7 +2069,6 @@ const MenuItem = styled.div`
   align-items: center;
   cursor: pointer;
   color: ${props => props.theme.color};
-  d
   ${(props) => {
     if (props.me === props.curr) {
       return css`
@@ -2054,8 +2077,9 @@ const MenuItem = styled.div`
     }
   }}
   img {
-    height: 30px;
-    margin-right: 30px;
+    width: 62px;
+    height: 40px;
+    margin-right: 10px;
   }
   padding: 10px;
   transition: all .1s;

@@ -242,9 +242,9 @@ const ViewArea = () => {
                            ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
                       */}
                       {
-                        myContext.trim !== null ? (() => {
+                        myContext.trim !== null && myContext.trimData ? (() => {
                           return (
-                            Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div className="lds-dual-ring"></div>
+                            myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].image}></img> : <div className="lds-dual-ring"></div>
                           )
                         })() : (() => {})()
                       }
@@ -257,9 +257,9 @@ const ViewArea = () => {
                             ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
                       */}
                       {
-                        myContext.trigger !== null ? (() => {
+                        myContext.trigger !== null && myContext.triggersData ? (() => {
                           return (
-                            Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div className="lds-dual-ring"></div>
+                            myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].image ? <img src={myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].image}></img> : <div className="lds-dual-ring"></div>
                           )
                         })() : (() => {})()
                       }
@@ -272,9 +272,9 @@ const ViewArea = () => {
                           ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
                       */}
                       {
-                        myContext.rearDesign !== null ? (() => {
+                        myContext.rearDesign !== null && myContext.rearDesignData ? (() => {
                           return (
-                            RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div className="lds-dual-ring"></div>
+                            myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image}></img> : <div className="lds-dual-ring"></div>
                           )
                         })() : (() => {})()
                       }
@@ -314,9 +314,9 @@ const ViewArea = () => {
                         ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝     ╚═╝
                   */}
                   {
-                    myContext.trim !== null ? (() => {
+                    myContext.trim !== null && myContext.trimData ? (() => {
                       return (
-                        Trim.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={Trim.items[myContext.trim[0]][myContext.trim[1]].image_back}></img> : <div className="lds-dual-ring"></div>
+                        myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].image ? <img src={myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
                   }
@@ -329,9 +329,9 @@ const ViewArea = () => {
                         ╚═╝   ╚═╝  ╚═╝╚═╝ ╚═════╝  ╚═════╝ ╚══════╝╚═╝  ╚═╝
                   */}
                   {
-                    myContext.trigger !== null ? (() => {
+                    myContext.trigger !== null && myContext.triggersData != null ? (() => {
                       return (
-                        Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image_back ? <img src={Trigger.items[myContext.trigger[0]][myContext.trigger[1]].image_back}></img> : <div className="lds-dual-ring"></div>
+                        myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].image_back ? <img src={myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
                   }
@@ -344,9 +344,9 @@ const ViewArea = () => {
                       ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
                   */}
                   {
-                    myContext.rearDesign !== null ? (() => {
+                    myContext.rearDesign !== null && myContext.rearDesignData != null ? (() => {
                       return (
-                        RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image_back}></img> : <div className="lds-dual-ring"></div>
+                        myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image ? <img src={myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].image_back}></img> : <div className="lds-dual-ring"></div>
                       )
                     })() : (() => {})()
                   }

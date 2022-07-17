@@ -41,3 +41,14 @@ export const DominSelection = {
     { name: '', image: sel_1, select: sel_6, price: 12.99 },
   ]
 }
+
+// export const DominSelection_APIED = {
+//   items: [
+//     { name: '', image: sel_1, select: sel_1, price: 12.99 },
+//     { name: '', image: sel_1, select: sel_2, price: 12.99 },
+//     { name: '', image: sel_1, select: sel_3, price: 12.99 },
+//     { name: '', image: sel_1, select: sel_4, price: 12.99 },
+//     { name: '', image: sel_1, select: sel_5, price: 12.99 },
+//     { name: '', image: sel_1, select: sel_6, price: 12.99 },
+//   ]
+// }

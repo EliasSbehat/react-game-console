@@ -13,14 +13,23 @@ import pa_1_4s from './4s.png';
 export const Paddle = {
   flag: 0,
   steps: [
-    {  }
+    {}
   ],
   items: [
     [
-      { price:19.99, name: 'Black', image_back: pa_1_1, select: pa_1_1s},
-      { price:19.99, name: 'Supernova', image_back: pa_1_2, select: pa_1_2s},
-      { price:19.99, name: 'Vampire red', image_back: pa_1_3, select: pa_1_3s},
-      { price:19.99, name: 'White', image_back: pa_1_4, select: pa_1_4s}
+      { price:19.99, name: 'Black', image_back: pa_1_1, select: pa_1_1s },
+      { price:19.99, name: 'Supernova', image_back: pa_1_2, select: pa_1_2s },
+      { price:19.99, name: 'Vampire red', image_back: pa_1_3, select: pa_1_3s },
+      { price:19.99, name: 'White', image_back: pa_1_4, select: pa_1_4s }
     ]
   ]
 }
+
+export const Paddle_APIED = [
+  [
+    { name: 'Black', image_back: pa_1_1 },
+    { name: 'Supernova', image_back: pa_1_2 },
+    { name: 'Vampire red', image_back: pa_1_3 },
+    { name: 'White', image_back: pa_1_4 },
+  ]
+]
