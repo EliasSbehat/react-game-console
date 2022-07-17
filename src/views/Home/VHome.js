@@ -174,6 +174,10 @@ const VHome = () => {
   const [dominselectData, setDominselectData] = React.useState(null);
   const [rearDesignData, setRearDesignData] = React.useState(null);
   const [personalizationData, setPersonalizationData] = React.useState(null);
+  const [razorBackData, setRazorBackData] = React.useState(null);
+  const [esportsData, setEsportsData] = React.useState(null);
+  const [dtriggersData, setDtriggersData] = React.useState(null);
+  const [textandlogoData, setTextandlogoData] = React.useState(null);
 
   // TablIndexs
   const [DesigntabSelect, DesignSetTabSelect] = React.useState(0);
@@ -205,6 +209,10 @@ const VHome = () => {
     rearDesignData,
     setRearDesignData,
     personalizationData,
+    razorBackData,
+    esportsData,
+    dtriggersData,
+    textandlogoData,
 
     DesigntabSelect,
     DesignSetTabSelect,
@@ -399,6 +407,7 @@ const VHome = () => {
               let design_step_keys = Object.keys(design_step);
               design.steps = [];
               design.items = [];
+              design.name = object_data[object_keys[0]].title;
               for (i = 0; i < design_step_keys.length; i++) {
                 let temp = {
                   name: design_step[design_step_keys[i]].title,
@@ -426,7 +435,7 @@ const VHome = () => {
                 design.steps.push(temp);
                 design.items.push(ltemp);
               }
-              // console.log(design);
+              console.log(design);
               setDesignData(design);
             // --------------- Design End ---------------
 
@@ -436,6 +445,7 @@ const VHome = () => {
               let abxy_step_keys = Object.keys(abxy_step);
               abxy.steps = [];
               abxy.items = [];
+              abxy.name = object_data[object_keys[1]].title;
               for (i = 0; i < abxy_step_keys.length; i++) {
                 let temp = {
                   name: abxy_step[abxy_step_keys[i]].title,
@@ -467,6 +477,7 @@ const VHome = () => {
               let dpad_step_keys = Object.keys(dpad_step);
               dpad.steps = [];
               dpad.items = [];
+              dpad.name = object_data[object_keys[2]].title;
               for (i = 0; i < dpad_step_keys.length; i++) {
                 let temp = {
                   name: dpad_step[dpad_step_keys[i]].title,
@@ -493,6 +504,7 @@ const VHome = () => {
             // --------------- ThumbL --------------
               let thumbl = { steps: [''], items: [[]] };
               let thumbl_values = Object.keys(object_data['optId_1528'].values);
+              thumbl.name = object_data['optId_1528'].title;
               for (i = 0; i < thumbl_values.length; i++) {
                 const temp = object_data['optId_1528'].values[thumbl_values[i]];
                 thumbl.items[0].push({
@@ -505,8 +517,8 @@ const VHome = () => {
               setThumbLData(thumbl);
             // --------------- ThumbL End ---------------
 
-            // --------------- ThumbL --------------
-              let thumbr = { steps: [''], items: [[]] };
+            // --------------- ThumbR --------------
+              let thumbr = { steps: [''], items: [[]], name: object_data['optId_1529'].title };
               let thumbr_values = Object.keys(object_data['optId_1529'].values);
               for (i = 0; i < thumbr_values.length; i++) {
                 const temp = object_data['optId_1529'].values[thumbr_values[i]];
@@ -518,7 +530,7 @@ const VHome = () => {
                 });
               }
               setThumbRData(thumbr);
-            // --------------- ThumbL End ---------------
+            // --------------- ThumbR End ---------------
 
             // --------------- Start Back ---------------
               let startback = {};
@@ -526,6 +538,7 @@ const VHome = () => {
               let startback_step_keys = Object.keys(startback_step);
               startback.steps = [];
               startback.items = [];
+              startback.name = object_data['optId_1530'].title;
               for (i = 0; i < startback_step_keys.length; i++) {
                 let temp = {
                   name: startback_step[startback_step_keys[i]].title,
@@ -557,6 +570,7 @@ const VHome = () => {
               let touchpad_step_keys = Object.keys(touchpad_step);
               touchpad.steps = [];
               touchpad.items = [];
+              touchpad.name = object_data['optId_1533'].title;
               for (i = 0; i < touchpad_step_keys.length; i++) {
                 let temp = {
                   name: touchpad_step[touchpad_step_keys[i]].title,
@@ -582,8 +596,8 @@ const VHome = () => {
               setTouchPadData(touchpad);
           // --------------- Touchpad End ---------------
 
-          // --------------- ThumbL --------------
-            let trim = { steps: [''], items: [[]] };
+          // --------------- Trim --------------
+            let trim = { steps: [''], items: [[]], name: object_data['optId_1536'].title };
             let trim_values = Object.keys(object_data['optId_1536'].values);
             for (i = 0; i < trim_values.length; i++) {
               const temp = object_data['optId_1536'].values[trim_values[i]];
@@ -596,7 +610,7 @@ const VHome = () => {
               });
             }
             setTrimData(trim);
-          // --------------- ThumbL End ---------------
+          // --------------- Trim End ---------------
 
           // --------------- triggers ---------------
             let triggers = {};
@@ -604,6 +618,7 @@ const VHome = () => {
             let triggers_step_keys = Object.keys(triggers_step);
             triggers.steps = [];
             triggers.items = [];
+            triggers.name = object_data['optId_1537'].title;
             for (i = 0; i < triggers_step_keys.length; i++) {
               let temp = {
                 name: triggers_step[triggers_step_keys[i]].title,
@@ -632,9 +647,11 @@ const VHome = () => {
         // --------------- raborback ---------------
           // setRazorbackData
           let razorback = {};
+          razorback.name = object_data['optId_1540'].title;
           let razorback_keys = Object.keys(object_data['optId_1540'].values);
           razorback.price = object_data['optId_1540'].values[razorback_keys[0]].price;
           razorback.is_default = object_data['optId_1540'].values[razorback_keys[0]].extension_attributes.is_default;
+          setRazorBackData(razorback);
           setRazorBackPrice(razorback.price);
           setRazorBack(razorback.is_default);
         // --------------- raborback end ---------------
@@ -642,6 +659,7 @@ const VHome = () => {
         // --------------- esports ---------------
           let esport = object_data['optId_1541'];
           let esport_keys = Object.keys(esport.values);
+          setEsportsData({name: esport.title});
           // --------------- Paddle ---------------
             let temp = esport.values[esport_keys[1]];
             let paddles = {};
@@ -698,18 +716,21 @@ const VHome = () => {
         // --------------- RearDesign End ---------------
 
         // --------------- D triggers ---------------
+        // const [dtriggersData, ]
           let dtriggers = {};
+          dtriggers.name = object_data['optId_1549'].title;
           let dtriggers_keys = Object.keys(object_data['optId_1549'].values);
           dtriggers.price = object_data['optId_1549'].values[dtriggers_keys[1]].price;
           dtriggers.is_default = object_data['optId_1549'].values[dtriggers_keys[1]].extension_attributes.is_default;
+          setDtriggersData(dtriggers);
           setDigital_trigger(dtriggers.is_default);
           setDigital_trigger_price(dtriggers.price);
         // --------------- D triggers End ---------------
 
         // --------------- Text and Logo ---------------
           const per = object_data['optId_1546'];
+          setTextandlogoData({name: per.title});
           const per_value_keys = Object.keys(object_data['optId_1546'].values);
-
           let names = [];
           console.log(object_data);
           names.push(per.title);

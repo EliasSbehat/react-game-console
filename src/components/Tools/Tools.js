@@ -127,85 +127,113 @@ const Tools = () => {
           } */}
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(0); }} me={0} curr={myContext.snapIndex} stat={myContext.design === null ? false : true}>
             <img src={CateImgs[0].image}></img>
-            {CateImgs[0].name}
+            {
+              myContext.designData ? myContext.designData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(1); }} me={1} curr={myContext.snapIndex} stat={myContext.abxy === null ? false : true}>
             <img src={CateImgs[1].image}></img>
-            {CateImgs[1].name}
+            {
+              myContext.abxyData ? myContext.abxyData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(2); }} me={2} curr={myContext.snapIndex} stat={myContext.dpad === null ? false : true}>
             <img src={CateImgs[2].image}></img>
-            {CateImgs[2].name}
+            {
+              myContext.dpadData ? myContext.dpadData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(3); }} me={3} curr={myContext.snapIndex} stat={myContext.thumbstickL === null ? false : true}>
             <img src={CateImgs[3].image}></img>
-            {CateImgs[3].name}
+            {
+              myContext.thubmLData ? myContext.thubmLData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(4); }} me={4} curr={myContext.snapIndex} stat={myContext.thumbstickR === null ? false : true}>
             <img src={CateImgs[4].image}></img>
-            {CateImgs[4].name}
+            {
+              myContext.thubmRData ? myContext.thubmRData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(5); }} me={5} curr={myContext.snapIndex} stat={myContext.startBtn === null ? false : true}>
             <img src={CateImgs[5].image}></img>
-            {CateImgs[5].name}
+            {
+              myContext.startBackData ? myContext.startBackData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(6); }} me={6} curr={myContext.snapIndex} stat={myContext.touchpad === null ? false : true}>
             <img src={CateImgs[6].image}></img>
-            {CateImgs[6].name}
+            {
+              myContext.thuchPadData ? myContext.thuchPadData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(7); }} me={7} curr={myContext.snapIndex} stat={myContext.trim === null ? false : true}>
             <img src={CateImgs[7].image}></img>
-            {CateImgs[7].name}
+            {
+              myContext.trimData ? myContext.trimData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(8); }} me={8} curr={myContext.snapIndex} stat={myContext.trigger === null ? false : true}>
             <img src={CateImgs[8].image}></img>
-            {CateImgs[8].name}
+            {
+              myContext.triggersData ? myContext.triggersData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(9); }} me={9} curr={myContext.snapIndex} stat={myContext.rearDesign === null ? false : true}>
             <img src={CateImgs[9].image}></img>
-            {CateImgs[9].name}
+            {
+              myContext.razorBackData ? myContext.razorBackData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(10); }} me={10} curr={myContext.snapIndex} stat={myContext.razorBack}>
             <img src={CateImgs[10].image}></img>
-            {CateImgs[10].name}
+            {
+              myContext.esportsData ? myContext.esportsData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(11); }} me={11} curr={myContext.snapIndex} stat={myContext.paddle !== null ? true : false}>
             <img src={CateImgs[11].image}></img>
-            {CateImgs[11].name}
+            {
+              myContext.rearDesignData ? myContext.rearDesignData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(12); }} me={12} curr={myContext.snapIndex} stat={myContext.ldomin_2 !== null ? true : false}>
             <img src={CateImgs[12].image}></img>
-            {CateImgs[12].name}
+            {
+              myContext.dtriggersData ? myContext.dtriggersData.name : ''
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(13); }} me={13} curr={myContext.snapIndex} stat={myContext.rdomin_2 !== null ? true : false}>
             <img src={CateImgs[13].image}></img>
-            {CateImgs[13].name}
+            {
+              myContext.textandlogoData ? myContext.textandlogoData.name : null
+            }
             <SBsCheck></SBsCheck>
           </MenuItem>
 
@@ -2063,6 +2091,7 @@ const Remove = styled.div`
 const MenuBody = styled.div`
   padding-top: 50px;
   overflow: auto;
+  margin-bottom: 100px;
 `
 const MenuItem = styled.div`
   display: flex;

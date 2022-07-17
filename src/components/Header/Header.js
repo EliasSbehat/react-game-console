@@ -14,7 +14,7 @@ const Header = (props) => {
           <img onClick={() => props.modeChange()}></img>
         </RightDiv>
         <LeftDiv>
-          <SearchInput placeholder={myContext.designData != undefined ? JSON.stringify(myContext.designData) : 'Search'} type="text" resflag={0}></SearchInput>
+          <SearchInput placeholder={'Search'} type="text" resflag={0}></SearchInput>
           <BritiSpan><img></img></BritiSpan>
           <FeatherSpan><img></img><span>2</span></FeatherSpan>
           <AvatarSpan><img></img></AvatarSpan>
