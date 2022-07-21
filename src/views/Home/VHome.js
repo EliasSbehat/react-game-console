@@ -460,7 +460,8 @@ const VHome = () => {
                 let temp = {
                   name: abxy_step[abxy_step_keys[i]].title,
                   price: abxy_step[abxy_step_keys[i]].price,
-                  is_default: abxy_step[abxy_step_keys[i]].extension_attributes['is_default']
+                  is_default: abxy_step[abxy_step_keys[i]].extension_attributes['is_default'],
+                  option_type_id: abxy_step[abxy_step_keys[i]].option_type_id
                 }
 
                 if (temp.is_default) AbxySetTabSelect(i);
@@ -473,8 +474,11 @@ const VHome = () => {
                     price: abxy_step[abxy_step_keys[i]].childs[j].price,
                     image: ABXY_APIED[i][j].image,
                     selet: base_url + image,
+                    option_id: abxy_step[abxy_step_keys[i]].childs[j].option_id,
+                    option_type_id: abxy_step[abxy_step_keys[i]].childs[j].option_type_id,
                   });
                 }
+                abxy.option_id = object_data[object_keys[1]].option_id;
                 abxy.steps.push(temp);
                 abxy.items.push(ltemp);
               }
@@ -492,7 +496,8 @@ const VHome = () => {
                 let temp = {
                   name: dpad_step[dpad_step_keys[i]].title,
                   price: dpad_step[dpad_step_keys[i]].price,
-                  is_default: dpad_step[dpad_step_keys[i]].extension_attributes['is_default']
+                  is_default: dpad_step[dpad_step_keys[i]].extension_attributes['is_default'],
+                  option_type_id: dpad_step[dpad_step_keys[i]].option_type_id
                 }
 
                 let ltemp = [];
@@ -503,8 +508,12 @@ const VHome = () => {
                     price: dpad_step[dpad_step_keys[i]].childs[j].price,
                     image: DPAD_APIED[i][j].image,
                     selet: base_url + image,
+                    is_default: dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes'].is_default,
+                    option_id: dpad_step[dpad_step_keys[i]].childs[j].option_id,
+                    option_type_id: dpad_step[dpad_step_keys[i]].childs[j].option_type_id,
                   });
                 }
+                dpad.option_id = object_data[object_keys[2]].option_id;
                 dpad.steps.push(temp);
                 dpad.items.push(ltemp);
               }
@@ -521,9 +530,13 @@ const VHome = () => {
                   name: temp.title,
                   price: temp.price,
                   selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
-                  image: ThumbL_APIED[i].image
+                  image: ThumbL_APIED[i].image,
+                  is_default: temp['extension_attributes'].is_default,
+                  option_id: object_data[object_keys[3]].option_id,
+                  option_type_id: temp.option_type_id
                 });
               }
+              thumbl.option_id = object_data[object_keys[3]].option_id;
               setThumbLData(thumbl);
             // --------------- ThumbL End ---------------
 
@@ -536,7 +549,10 @@ const VHome = () => {
                   name: temp.title,
                   price: temp.price,
                   selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
-                  image: ThumbR_APIED[0][i].image
+                  image: ThumbR_APIED[0][i].image,
+                  is_default: temp['extension_attributes'].is_default,
+                  option_id: object_data[object_keys[4]].option_id,
+                  option_type_id: temp.option_type_id
                 });
               }
               setThumbRData(thumbr);
@@ -553,7 +569,8 @@ const VHome = () => {
                 let temp = {
                   name: startback_step[startback_step_keys[i]].title,
                   price: startback_step[startback_step_keys[i]].price,
-                  is_default: startback_step[startback_step_keys[i]].extension_attributes['is_default']
+                  is_default: startback_step[startback_step_keys[i]].extension_attributes['is_default'],
+                  option_type_id: startback_step[startback_step_keys[i]].option_type_id
                 }
                 if (temp.is_default) StartBtnSetTabSelect(i);
 
@@ -566,8 +583,12 @@ const VHome = () => {
                     price: startback_step[startback_step_keys[i]].childs[j].price,
                     image: StartBtn_APIDED[i][j].image,
                     selet: base_url + image,
+                    is_default: startback_step[startback_step_keys[i]].childs[j]['extension_attributes'].is_default,
+                    option_id: startback_step[startback_step_keys[i]].childs[j].option_id,
+                    option_type_id: startback_step[startback_step_keys[i]].childs[j].option_type_id,
                   });
                 }
+                startback.option_id = object_data[object_keys[5]].option_id;
                 startback.steps.push(temp);
                 startback.items.push(ltemp);
               }
@@ -586,7 +607,8 @@ const VHome = () => {
                 let temp = {
                   name: touchpad_step[touchpad_step_keys[i]].title,
                   price: touchpad_step[touchpad_step_keys[i]].price,
-                  is_default: touchpad_step[touchpad_step_keys[i]].extension_attributes['is_default']
+                  is_default: touchpad_step[touchpad_step_keys[i]].extension_attributes['is_default'],
+                  option_type_id: touchpad_step[touchpad_step_keys[i]].option_type_id
                 }
 
                 if (temp.is_default) TouchpadSetTabSelect(i)
@@ -599,8 +621,12 @@ const VHome = () => {
                     price: touchpad_step[touchpad_step_keys[i]].childs[j].price,
                     image: Touchpad_APIED[i][j].image,
                     selet: base_url + image,
+                    is_default: touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes'].is_default,
+                    option_id: touchpad_step[touchpad_step_keys[i]].childs[j].option_id,
+                    option_type_id: touchpad_step[touchpad_step_keys[i]].childs[j].option_type_id,
                   });
                 }
+                touchpad.option_id = object_data[object_keys[6]].option_id;
                 touchpad.steps.push(temp);
                 touchpad.items.push(ltemp);
               }
@@ -617,7 +643,10 @@ const VHome = () => {
                 price: temp.price,
                 selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
                 image: Trim_APIED[0][i].image,
-                image_back: Trim_APIED[0][i].image_back
+                image_back: Trim_APIED[0][i].image_back,
+                is_default: temp['extension_attributes'].is_default,
+                option_id: object_data[object_keys[7]].option_id,
+                option_type_id: temp.option_type_id
               });
             }
             setTrimData(trim);
@@ -634,7 +663,8 @@ const VHome = () => {
               let temp = {
                 name: triggers_step[triggers_step_keys[i]].title,
                 price: triggers_step[triggers_step_keys[i]].price,
-                is_default: triggers_step[triggers_step_keys[i]].extension_attributes['is_default']
+                is_default: triggers_step[triggers_step_keys[i]].extension_attributes['is_default'],
+                option_type_id: triggers_step[triggers_step_keys[i]].option_type_id
               }
 
               if (temp.is_default) TriggerSetTabSelect(i);
@@ -648,8 +678,12 @@ const VHome = () => {
                   image: Trigger_APIED[i][j].image,
                   image_back: Trigger_APIED[i][j].image_back,
                   selet: base_url + image,
+                  is_default: triggers_step[triggers_step_keys[i]].childs[j]['extension_attributes'].is_default,
+                  option_id: triggers_step[triggers_step_keys[i]].childs[j].option_id,
+                  option_type_id: triggers_step[triggers_step_keys[i]].childs[j].option_type_id,
                 });
               }
+              triggers.option_id = object_data[object_keys[8]].option_id;
               triggers.steps.push(temp);
               triggers.items.push(ltemp);
             }
@@ -657,14 +691,16 @@ const VHome = () => {
         // --------------- triggers End ---------------
         // --------------- raborback ---------------
           // setRazorbackData
-          let razorback = {};
-          razorback.name = object_data[object_keys[9]].title;
-          let razorback_keys = Object.keys(object_data[object_keys[9]].values);
-          razorback.price = object_data[object_keys[9]].values[razorback_keys[0]].price;
-          razorback.is_default = object_data[object_keys[9]].values[razorback_keys[0]].extension_attributes.is_default;
-          setRazorBackData(razorback);
-          setRazorBackPrice(razorback.price);
-          setRazorBack(razorback.is_default);
+          let razorbacks = {};
+          razorbacks.name = object_data[object_keys[9]].title;
+          let razorbacks_keys = Object.keys(object_data[object_keys[9]].values);
+          razorbacks.price = object_data[object_keys[9]].values[razorbacks_keys[0]].price;
+          razorbacks.is_default = object_data[object_keys[9]].values[razorbacks_keys[0]].extension_attributes.is_default;
+          razorbacks.option_id = object_data[object_keys[9]].option_id;
+          razorbacks.option_type_id = object_data[object_keys[9]].values[razorbacks_keys[0]].option_type_id
+          setRazorBackData(razorbacks);
+          setRazorBackPrice(razorbacks.price);
+          setRazorBack(razorbacks.is_default);
         // --------------- raborback end ---------------
 
         // --------------- esports ---------------
