@@ -26,6 +26,10 @@ import { RearDesign_APIED } from "../../assets/images/main_assets/10-REAR DESIGN
 
 const VHome = () => {
   const base_url = 'https://m2-dev-controllermodz.aqeltech.com/media/mageworx/optionfeatures/product/option/value';
+
+  const [object_data, setObjectData] = React.useState();
+  const [object_keys, setObjectKeys] = React.useState();
+
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
   const [dpad, setDpad] = React.useState(null);
@@ -192,6 +196,8 @@ const VHome = () => {
 
 
   const imageSetting = {
+    object_data,
+    object_data,
 
     designData,
     abxyData,
@@ -357,7 +363,7 @@ const VHome = () => {
           let childs = {};
           
           for (var i = 0; i <json.length; i++) {
-            if (json[i].values != undefined) {              
+            if (json[i].values != undefined) {
               if (json[i].values[0]['extension_attributes'].dependency == undefined) {
                 object_data['optId_'+json[i].option_id] = {};
                 object_data['optId_'+json[i].option_id]['option_id'] = json[i].option_id;
@@ -365,9 +371,7 @@ const VHome = () => {
                 object_data['optId_'+json[i].option_id]['dependType'] = json[i].extension_attributes.dependency_type;
                 object_data['optId_'+json[i].option_id]['disabled'] = json[i].extension_attributes.disabled;
                 object_data['optId_'+json[i].option_id]['option_title_id'] = json[i].extension_attributes.option_title_id;
-                object_data['optId_'+json[i].option_id]['values'] = {};
                 object_data['optId_'+json[i].option_id]['values'] = new Object();
-                // object_data['optId_'+json[i].option_id]['childs'] = {};
                 for (var j = 0; j < json[i].values.length; j++) {
                   object_data['optId_'+json[i].option_id]['values']["optTypeId_" + json[i].values[j].option_type_id] = json[i].values[j];
                   // object_data['optId_'+json[i].option_id]['childs']["optTypeId_" + json[i].values[j].option_type_id] = {};
@@ -376,6 +380,7 @@ const VHome = () => {
                 // Childs
                   for (var j = 0; j < json[i].values.length; j++) {
                     childs['optId_'+json[i].values[j].option_type_id] = json[i].values[j];
+                    childs['optId_'+json[i].values[j].option_type_id]['option_id'] = json[i].option_id;
                   }
                 // Childs End
               }
@@ -399,8 +404,10 @@ const VHome = () => {
               object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'].push(childs[childKeys[i]]);
             }
           }
-          // console.log(object_data);
+          
           const object_keys = Object.keys(object_data);
+          setObjectData(object_data);
+          setObjectKeys(object_keys);
             // --------------- Design ---------------
               let design = {};
               let design_step = object_data[object_keys[0]].values;
@@ -412,30 +419,33 @@ const VHome = () => {
                 let temp = {
                   name: design_step[design_step_keys[i]].title,
                   price: design_step[design_step_keys[i]].price,
-                  is_default: design_step[design_step_keys[i]].extension_attributes['is_default']
+                  is_default: design_step[design_step_keys[i]].extension_attributes['is_default'],
+                  option_type_id: design_step[design_step_keys[i]].option_type_id
                 }
-
                 if (temp.is_default) DesignSetTabSelect(i);
-
                 let ltemp = [];
                 for (j = 0; j < design_step[design_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(design_step[design_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  if (design_step[design_step_keys[i]].childs[j]['extension_attributes'].is_default) {
+                    setDesign([i, j]);
+                  }
                   ltemp.push({
                     name: design_step[design_step_keys[i]].childs[j].title,
                     price: design_step[design_step_keys[i]].childs[j].price,
                     image: Design_APIED[i][j].image,
                     selet: base_url + image,
-                    is_default: design_step[design_step_keys[i]].childs[j]['extension_attributes'].is_default
+                    is_default: design_step[design_step_keys[i]].childs[j]['extension_attributes'].is_default,
+                    option_id: design_step[design_step_keys[i]].childs[j].option_id,
+                    option_type_id: design_step[design_step_keys[i]].childs[j].option_type_id,
                   });
-
                   if (ltemp.is_default) {
                     setDesign([i, j])
                   }
                 }
+                design.option_id = object_data[object_keys[0]].option_id;
                 design.steps.push(temp);
                 design.items.push(ltemp);
               }
-              console.log(design);
               setDesignData(design);
             // --------------- Design End ---------------
 
@@ -503,10 +513,10 @@ const VHome = () => {
 
             // --------------- ThumbL --------------
               let thumbl = { steps: [''], items: [[]] };
-              let thumbl_values = Object.keys(object_data['optId_1528'].values);
-              thumbl.name = object_data['optId_1528'].title;
+              let thumbl_values = Object.keys(object_data[object_keys[3]].values);
+              thumbl.name = object_data[object_keys[3]].title;
               for (i = 0; i < thumbl_values.length; i++) {
-                const temp = object_data['optId_1528'].values[thumbl_values[i]];
+                const temp = object_data[object_keys[3]].values[thumbl_values[i]];
                 thumbl.items[0].push({
                   name: temp.title,
                   price: temp.price,
@@ -518,10 +528,10 @@ const VHome = () => {
             // --------------- ThumbL End ---------------
 
             // --------------- ThumbR --------------
-              let thumbr = { steps: [''], items: [[]], name: object_data['optId_1529'].title };
-              let thumbr_values = Object.keys(object_data['optId_1529'].values);
+              let thumbr = { steps: [''], items: [[]], name: object_data[object_keys[4]].title };
+              let thumbr_values = Object.keys(object_data[object_keys[4]].values);
               for (i = 0; i < thumbr_values.length; i++) {
-                const temp = object_data['optId_1529'].values[thumbr_values[i]];
+                const temp = object_data[object_keys[4]].values[thumbr_values[i]];
                 thumbr.items[0].push({
                   name: temp.title,
                   price: temp.price,
@@ -534,11 +544,11 @@ const VHome = () => {
 
             // --------------- Start Back ---------------
               let startback = {};
-              let startback_step = object_data['optId_1530'].values;
+              let startback_step = object_data[object_keys[5]].values;
               let startback_step_keys = Object.keys(startback_step);
               startback.steps = [];
               startback.items = [];
-              startback.name = object_data['optId_1530'].title;
+              startback.name = object_data[object_keys[5]].title;
               for (i = 0; i < startback_step_keys.length; i++) {
                 let temp = {
                   name: startback_step[startback_step_keys[i]].title,
@@ -565,12 +575,13 @@ const VHome = () => {
             // --------------- Start Back End ---------------
 
             // --------------- Touchpad ---------------
+              console.log(object_data);
               let touchpad = {};
-              let touchpad_step = object_data['optId_1533'].values;
+              let touchpad_step = object_data[object_keys[6]].values;
               let touchpad_step_keys = Object.keys(touchpad_step);
               touchpad.steps = [];
               touchpad.items = [];
-              touchpad.name = object_data['optId_1533'].title;
+              touchpad.name = object_data[object_keys[6]].title;
               for (i = 0; i < touchpad_step_keys.length; i++) {
                 let temp = {
                   name: touchpad_step[touchpad_step_keys[i]].title,
@@ -597,10 +608,10 @@ const VHome = () => {
           // --------------- Touchpad End ---------------
 
           // --------------- Trim --------------
-            let trim = { steps: [''], items: [[]], name: object_data['optId_1536'].title };
-            let trim_values = Object.keys(object_data['optId_1536'].values);
+            let trim = { steps: [''], items: [[]], name: object_data[object_keys[7]].title };
+            let trim_values = Object.keys(object_data[object_keys[7]].values);
             for (i = 0; i < trim_values.length; i++) {
-              const temp = object_data['optId_1536'].values[trim_values[i]];
+              const temp = object_data[object_keys[7]].values[trim_values[i]];
               trim.items[0].push({
                 name: temp.title,
                 price: temp.price,
@@ -614,11 +625,11 @@ const VHome = () => {
 
           // --------------- triggers ---------------
             let triggers = {};
-            let triggers_step = object_data['optId_1537'].values;
+            let triggers_step = object_data[object_keys[8]].values;
             let triggers_step_keys = Object.keys(triggers_step);
             triggers.steps = [];
             triggers.items = [];
-            triggers.name = object_data['optId_1537'].title;
+            triggers.name = object_data[object_keys[8]].title;
             for (i = 0; i < triggers_step_keys.length; i++) {
               let temp = {
                 name: triggers_step[triggers_step_keys[i]].title,
@@ -647,17 +658,17 @@ const VHome = () => {
         // --------------- raborback ---------------
           // setRazorbackData
           let razorback = {};
-          razorback.name = object_data['optId_1540'].title;
-          let razorback_keys = Object.keys(object_data['optId_1540'].values);
-          razorback.price = object_data['optId_1540'].values[razorback_keys[0]].price;
-          razorback.is_default = object_data['optId_1540'].values[razorback_keys[0]].extension_attributes.is_default;
+          razorback.name = object_data[object_keys[9]].title;
+          let razorback_keys = Object.keys(object_data[object_keys[9]].values);
+          razorback.price = object_data[object_keys[9]].values[razorback_keys[0]].price;
+          razorback.is_default = object_data[object_keys[9]].values[razorback_keys[0]].extension_attributes.is_default;
           setRazorBackData(razorback);
           setRazorBackPrice(razorback.price);
           setRazorBack(razorback.is_default);
         // --------------- raborback end ---------------
 
         // --------------- esports ---------------
-          let esport = object_data['optId_1541'];
+          let esport = object_data[object_keys[10]];
           let esport_keys = Object.keys(esport.values);
           setEsportsData({name: esport.title});
           // --------------- Paddle ---------------
@@ -667,7 +678,6 @@ const VHome = () => {
             paddles.price = temp.price;
             paddles.is_default = temp.extension_attributes.is_default;
             paddles.items = [[]];
-            console.log(temp.childs.length);
             for (i = 0; i < temp.childs.length; i++) {
               paddles.items[0].push(
                 {
@@ -700,10 +710,10 @@ const VHome = () => {
 
         // --------------- RearDesign ---------------
           let rearDesign = { steps: [''], items: [[]] };
-          let rearDesign_values = Object.keys(object_data['optId_1545'].values);
-          rearDesign.name = object_data['optId_1545'].title;
+          let rearDesign_values = Object.keys(object_data[object_keys[11]].values);
+          rearDesign.name = object_data[object_keys[11]].title;
           for (i = 0; i < rearDesign_values.length; i++) {
-            const temp = object_data['optId_1545'].values[rearDesign_values[i]];
+            const temp = object_data[object_keys[11]].values[rearDesign_values[i]];
             rearDesign.items[0].push({
               name: temp.title,
               price: temp.price,
@@ -718,21 +728,20 @@ const VHome = () => {
         // --------------- D triggers ---------------
         // const [dtriggersData, ]
           let dtriggers = {};
-          dtriggers.name = object_data['optId_1549'].title;
-          let dtriggers_keys = Object.keys(object_data['optId_1549'].values);
-          dtriggers.price = object_data['optId_1549'].values[dtriggers_keys[1]].price;
-          dtriggers.is_default = object_data['optId_1549'].values[dtriggers_keys[1]].extension_attributes.is_default;
+          dtriggers.name = object_data[object_keys[12]].title;
+          let dtriggers_keys = Object.keys(object_data[object_keys[12]].values);
+          dtriggers.price = object_data[object_keys[12]].values[dtriggers_keys[1]].price;
+          dtriggers.is_default = object_data[object_keys[12]].values[dtriggers_keys[1]].extension_attributes.is_default;
           setDtriggersData(dtriggers);
           setDigital_trigger(dtriggers.is_default);
           setDigital_trigger_price(dtriggers.price);
         // --------------- D triggers End ---------------
 
         // --------------- Text and Logo ---------------
-          const per = object_data['optId_1546'];
+          const per = object_data[object_keys[13]];
           setTextandlogoData({name: per.title});
-          const per_value_keys = Object.keys(object_data['optId_1546'].values);
+          const per_value_keys = Object.keys(object_data[object_keys[13]].values);
           let names = [];
-          console.log(object_data);
           names.push(per.title);
           names.push({ name: per.values[per_value_keys[0]].title, price: per.values[per_value_keys[0]].price });
           names.push({ name: per.values[per_value_keys[1]].title, price: per.values[per_value_keys[1]].price });
@@ -746,7 +755,6 @@ const VHome = () => {
           
           // ---------------------- Response is Okay End ----------------------
         } else {
-          // console.log("HTTP-Error: " + response.status);
         }
       })();
   }, []);

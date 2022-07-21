@@ -46,21 +46,12 @@ const Tools = () => {
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
   const [swiper, setSwiper] = React.useState(0);
   
-  const timer = null;
-  
-  
   const [menuFlag, setMenuFlag] = React.useState(false);
 
   const handleCaptureClick = async () => {
     const canvas = await html2canvas(document.getElementById('viewer'));
     const dataURL = canvas.toDataURL('image/png');
-    downloadjs(dataURL, 'download.png', 'image/png');
-    // if (myContext.sideflag) {
-    // } else {
-    //   const canvas = await html2canvas(document.getElementById('backend'));
-    //   const dataURL = canvas.toDataURL('image/png');
-    //   downloadjs(dataURL, 'download.png', 'image/png');
-    // }
+    // downloadjs(dataURL, 'download.png', 'image/png');
   };
   
   const myContext = React.useContext(AppContext);
@@ -104,6 +95,19 @@ const Tools = () => {
     myContext.setImages(imageList);
     myContext.setImgStatus(true);
   };
+
+  async function addToCart() {
+    let quote_id;
+    await fetch(`https://game-server-deploy.herokuapp.com/get_quote_id`, {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+         }
+      })
+      .then(async (response) => console.log(quote_id = await response.text()));
+    console.log(myContext.object_data);
+    console.log(myContext.design);
+  }
 
   return (
     <Wrapper>
@@ -1567,18 +1571,12 @@ const Tools = () => {
                   )
                 } 
               </SwiperSlide> */}
-              {/**
-               *  █████╗ ██████╗ ██████╗     ████████╗ ██████╗      ██████╗██╗  ██╗ █████╗ ████████╗
-                  ██╔══██╗██╔══██╗██╔══██╗    ╚══██╔══╝██╔═══██╗    ██╔════╝██║  ██║██╔══██╗╚══██╔══╝
-                  ███████║██║  ██║██║  ██║       ██║   ██║   ██║    ██║     ███████║███████║   ██║   
-                  ██╔══██║██║  ██║██║  ██║       ██║   ██║   ██║    ██║     ██╔══██║██╔══██║   ██║   
-                  ██║  ██║██████╔╝██████╔╝       ██║   ╚██████╔╝    ╚██████╗██║  ██║██║  ██║   ██║   
-                  ╚═╝  ╚═╝╚═════╝ ╚═════╝        ╚═╝    ╚═════╝      ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   
+              {/** 
                */}
               <SwiperSlide>
-                <AddToChatDiv>
-                  <button>Add to chat</button>
-                </AddToChatDiv>
+                <AddToCartDiv>
+                  <button onClick = {() => addToCart()}>Add to cart</button>
+                </AddToCartDiv>
               </SwiperSlide>
         </Swiper>
       </MediumDiv>
@@ -2219,7 +2217,7 @@ const TextOption = styled.div`
   }
 `
 
-const AddToChatDiv = styled.div`
+const AddToCartDiv = styled.div`
   padding: 20px;
   width: 100%;
   height: 100%;
