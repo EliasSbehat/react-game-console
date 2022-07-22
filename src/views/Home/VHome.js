@@ -33,8 +33,8 @@ const VHome = () => {
   const [design, setDesign] = React.useState(null);
   const [abxy, setAbxy] = React.useState(null);
   const [dpad, setDpad] = React.useState(null);
-  const [thumbstickL, setThumbstickL] = React.useState(null);
   const [thumbstickR, setThumbstickR] = React.useState(null);
+  const [thumbstickL, setThumbstickL] = React.useState(null);
   const [startBtn, setStartBtn] = React.useState(null);
   const [touchpad, setTouchpad] = React.useState(null);
   const [trim, setTrim] = React.useState(null);
@@ -422,7 +422,9 @@ const VHome = () => {
                   is_default: design_step[design_step_keys[i]].extension_attributes['is_default'],
                   option_type_id: design_step[design_step_keys[i]].option_type_id
                 }
+
                 if (temp.is_default) DesignSetTabSelect(i);
+
                 let ltemp = [];
                 for (j = 0; j < design_step[design_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(design_step[design_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
@@ -469,6 +471,9 @@ const VHome = () => {
                 let ltemp = [];
                 for (j = 0; j < abxy_step[abxy_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(abxy_step[abxy_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  if (abxy_step[abxy_step_keys[i]].childs[j]['extension_attributes'].is_default) {
+                    setAbxy([i, j]);
+                  }
                   ltemp.push({
                     name: abxy_step[abxy_step_keys[i]].childs[j].title,
                     price: abxy_step[abxy_step_keys[i]].childs[j].price,
@@ -501,8 +506,14 @@ const VHome = () => {
                 }
 
                 let ltemp = [];
+
                 for (j = 0; j < dpad_step[dpad_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+
+                  if (dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes'].is_default) {
+                    setDpad([i, j]);
+                  }
+
                   ltemp.push({
                     name: dpad_step[dpad_step_keys[i]].childs[j].title,
                     price: dpad_step[dpad_step_keys[i]].childs[j].price,
@@ -526,6 +537,9 @@ const VHome = () => {
               thumbl.name = object_data[object_keys[3]].title;
               for (i = 0; i < thumbl_values.length; i++) {
                 const temp = object_data[object_keys[3]].values[thumbl_values[i]];
+                if (temp['extension_attributes'].is_default) {
+                  setThumbstickL([0, i]);
+                }
                 thumbl.items[0].push({
                   name: temp.title,
                   price: temp.price,
@@ -545,6 +559,9 @@ const VHome = () => {
               let thumbr_values = Object.keys(object_data[object_keys[4]].values);
               for (i = 0; i < thumbr_values.length; i++) {
                 const temp = object_data[object_keys[4]].values[thumbr_values[i]];
+                if (temp['extension_attributes'].is_default) {
+                  setThumbstickR([0, i]);
+                }
                 thumbr.items[0].push({
                   name: temp.title,
                   price: temp.price,
@@ -555,6 +572,7 @@ const VHome = () => {
                   option_type_id: temp.option_type_id
                 });
               }
+              thumbr.option_id = object_data[object_keys[4]].option_id;
               setThumbRData(thumbr);
             // --------------- ThumbR End ---------------
 
@@ -573,8 +591,6 @@ const VHome = () => {
                   option_type_id: startback_step[startback_step_keys[i]].option_type_id
                 }
                 if (temp.is_default) StartBtnSetTabSelect(i);
-
-
                 let ltemp = [];
                 for (j = 0; j < startback_step[startback_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(startback_step[startback_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
@@ -587,6 +603,9 @@ const VHome = () => {
                     option_id: startback_step[startback_step_keys[i]].childs[j].option_id,
                     option_type_id: startback_step[startback_step_keys[i]].childs[j].option_type_id,
                   });
+                  if (startback_step[startback_step_keys[i]].childs[j]['extension_attributes'].is_default) {
+                    setStartBtn([i, j]);
+                  }
                 }
                 startback.option_id = object_data[object_keys[5]].option_id;
                 startback.steps.push(temp);
@@ -616,6 +635,10 @@ const VHome = () => {
                 let ltemp = [];
                 for (j = 0; j < touchpad_step[touchpad_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                  if (touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes'].is_default) {
+                    setTouchpad([i, j]);
+                    console.log('--------------------');
+                  }
                   ltemp.push({
                     name: touchpad_step[touchpad_step_keys[i]].childs[j].title,
                     price: touchpad_step[touchpad_step_keys[i]].childs[j].price,
@@ -638,6 +661,7 @@ const VHome = () => {
             let trim_values = Object.keys(object_data[object_keys[7]].values);
             for (i = 0; i < trim_values.length; i++) {
               const temp = object_data[object_keys[7]].values[trim_values[i]];
+              if (temp['extension_attributes'].is_default) setTrim([0, i]);
               trim.items[0].push({
                 name: temp.title,
                 price: temp.price,
@@ -649,6 +673,7 @@ const VHome = () => {
                 option_type_id: temp.option_type_id
               });
             }
+            trim.option_id = object_data[object_keys[7]].option_id;
             setTrimData(trim);
           // --------------- Trim End ---------------
 
@@ -672,6 +697,7 @@ const VHome = () => {
               let ltemp = [];
               for (j = 0; j < triggers_step[triggers_step_keys[i]].childs.length; j++) {
                 let image = JSON.parse(triggers_step[triggers_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
+                if (triggers_step[triggers_step_keys[i]].childs[j]['extension_attributes'].is_default) setTrigger([i, j]);
                 ltemp.push({
                   name: triggers_step[triggers_step_keys[i]].childs[j].title,
                   price: triggers_step[triggers_step_keys[i]].childs[j].price,
@@ -705,8 +731,21 @@ const VHome = () => {
 
         // --------------- esports ---------------
           let esport = object_data[object_keys[10]];
+          let tempEsportData = {};
+          tempEsportData.name = esport.title;
+          tempEsportData.option_id = esport.option_id;
+          tempEsportData.values = [];
+          let tempEsportDataKeys = Object.keys(esport.values);
+          for (i = 0; i < tempEsportDataKeys.length; i++) {
+            tempEsportData.values.push(
+              {
+                option_type_id: esport.values[tempEsportDataKeys[i]].option_type_id
+              }
+            )
+          }
+          console.log(tempEsportData);
+          setEsportsData(tempEsportData);
           let esport_keys = Object.keys(esport.values);
-          setEsportsData({name: esport.title});
           // --------------- Paddle ---------------
             let temp = esport.values[esport_keys[1]];
             let paddles = {};
@@ -714,16 +753,18 @@ const VHome = () => {
             paddles.price = temp.price;
             paddles.is_default = temp.extension_attributes.is_default;
             paddles.items = [[]];
+            paddles.option_id = object_data[object_keys[10]].option_id;
             for (i = 0; i < temp.childs.length; i++) {
               paddles.items[0].push(
                 {
                   name: temp.childs[i].title,
                   price: temp.childs[i].price,
                   selet: base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value,
-                  image_back: Paddle_APIED[0][i].image_back
+                  image_back: Paddle_APIED[0][i].image_back,
                 }
               )
             }
+            console.log(paddles);
             setPaddleData(paddles);
           // --------------- Paddle End ---------------
           // --------------- Domin8or Button ---------------
@@ -750,12 +791,16 @@ const VHome = () => {
           rearDesign.name = object_data[object_keys[11]].title;
           for (i = 0; i < rearDesign_values.length; i++) {
             const temp = object_data[object_keys[11]].values[rearDesign_values[i]];
+            if (temp['extension_attributes'].is_default) setRearDesign([0, i]);
             rearDesign.items[0].push({
               name: temp.title,
               price: temp.price,
               selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
               image: RearDesign_APIED[0][i].image,
-              image_back: RearDesign_APIED[0][i].image_back
+              image_back: RearDesign_APIED[0][i].image_back,
+              is_default: temp['extension_attributes'].is_default,
+              option_id: object_data[object_keys[11]].option_id,
+              option_type_id: temp.option_type_id
             });
           }
           setRearDesignData(rearDesign);
@@ -768,6 +813,9 @@ const VHome = () => {
           let dtriggers_keys = Object.keys(object_data[object_keys[12]].values);
           dtriggers.price = object_data[object_keys[12]].values[dtriggers_keys[1]].price;
           dtriggers.is_default = object_data[object_keys[12]].values[dtriggers_keys[1]].extension_attributes.is_default;
+          dtriggers.option_id = object_data[object_keys[12]].option_id;
+          dtriggers.option_type_id1 = object_data[object_keys[12]].values[dtriggers_keys[0]].option_type_id;
+          dtriggers.option_type_id2 = object_data[object_keys[12]].values[dtriggers_keys[1]].option_type_id;
           setDtriggersData(dtriggers);
           setDigital_trigger(dtriggers.is_default);
           setDigital_trigger_price(dtriggers.price);
@@ -783,7 +831,7 @@ const VHome = () => {
           names.push({ name: per.values[per_value_keys[1]].title, price: per.values[per_value_keys[1]].price });
           names.push({ name: per.values[per_value_keys[2]].title, price: per.values[per_value_keys[2]].price });
           setTextPrice(per.values[per_value_keys[1]].price);
-          setLogoPrice(per.values[per_value_keys[2]].price)
+          setLogoPrice(per.values[per_value_keys[2]].price);
           if (per.values[per_value_keys[1]].extension_attributes.is_default) setIsText(true);
           if (per.values[per_value_keys[2]].extension_attributes.is_default) setLogo(true);
           setPersonalizationData(names);

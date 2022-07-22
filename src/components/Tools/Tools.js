@@ -1,7 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useCallback } from "react";
 import styled, {css} from "styled-components";
 import html2canvas from 'html2canvas';
-import downloadjs from "downloadjs";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 import ImageUploading from 'react-images-uploading';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
@@ -91,12 +93,11 @@ const Tools = () => {
     //   NotificationManager.warning('The image must be 2M.', "Warning");
     //   return;
     // }
-    
     myContext.setImages(imageList);
     myContext.setImgStatus(true);
   };
 
-  async function addToCart() {
+  async function AddToCart() {
     let quote_id;
     await fetch(`https://game-server-deploy.herokuapp.com/get_quote_id`, {
         headers : { 
@@ -105,9 +106,157 @@ const Tools = () => {
          }
       })
       .then(async (response) => console.log(quote_id = await response.text()));
-    console.log(myContext.object_data);
-    console.log(myContext.design);
+    console.log(myContext.razorBack);
+    console.log(myContext.razorBackData);
+    let totalData = {
+      cartItem: {
+        sku: "byops5",
+        qty: 1,
+        quoteId: quote_id,
+        productOption: {
+          extensionAttributes: {
+            customOptions: [
+              {
+                optionId: myContext.designData.option_id,
+                optionValue: myContext.designData.steps[myContext.design[0]].option_type_id
+              },
+              {
+                optionId: myContext.designData.items[myContext.design[0]][myContext.design[1]].option_id,
+                optionValue: myContext.designData.items[myContext.design[0]][myContext.design[1]].option_type_id,
+              },
+              {
+                optionId: myContext.abxyData.option_id,
+                optionValue: myContext.abxyData.steps[myContext.abxy[0]].option_type_id
+              },
+              {
+                optionId: myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].option_id,
+                optionValue: myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].option_type_id,
+              },
+              {
+                optionId: myContext.dpadData.option_id,
+                optionValue: myContext.dpadData.steps[myContext.dpad[0]].option_type_id
+              },
+              {
+                optionId: myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].option_id,
+                optionValue: myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].option_type_id,
+              },
+              {
+                optionId: myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].option_id,
+                optionValue: myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].option_type_id
+              },
+              {
+                optionId: myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].option_id,
+                optionValue: myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].option_type_id
+              },
+              {
+                optionId: myContext.startBackData.option_id,
+                optionValue: myContext.startBackData.steps[myContext.startBtn[0]].option_type_id
+              },
+              {
+                optionId: myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].option_id,
+                optionValue: myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].option_type_id,
+              },
+              {
+                optionId: myContext.thuchPadData.option_id,
+                optionValue: myContext.thuchPadData.steps[myContext.touchpad[0]].option_type_id
+              },
+              {
+                optionId: myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].option_id,
+                optionValue: myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].option_type_id,
+              },
+              {
+                optionId: myContext.trimData.option_id,
+                optionValue: myContext.trimData.steps[myContext.trim[0]].option_type_id
+              },
+              {
+                optionId: myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].option_id,
+                optionValue: myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].option_type_id,
+              },
+              {
+                optionId: myContext.triggersData.option_id,
+                optionValue: myContext.triggersData.steps[myContext.trigger[0]].option_type_id
+              },
+              {
+                optionId: myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].option_id,
+                optionValue: myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].option_type_id,
+              },
+              {
+                optionId: myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].option_id,
+                optionValue: myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].option_type_id,
+              },
+              {
+                optionId: "1862",
+                optionValue: "5988"
+              }
+            ]
+          }
+        }
+      }
+    }
+
+    // ! Razorback options
+    if (myContext.razorBack) {
+      totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+        {
+          optionId: myContext.razorBackData.option_id,
+          optionValue: myContext.razorBackData.option_type_id
+        }
+      )
+    }
+
+    // ! Esports 
+    // console.log('--------------------------------------------------');
+    // console.log(myContext.paddle);
+    // console.log(myContext.lrdomin);
+    if (myContext.paddle == null && !myContext.lrdomin) {
+      console.log('---- 1 ----');
+      totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+        {
+          optionId: myContext.esportsData.option_id,
+          optionValue: myContext.esportsData.values[0].option_type_id
+        }
+      )
+    } else if (myContext.paddle != null && !myContext.lrdomin) {
+      console.log('---- 2 ----');
+      totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+        {
+          optionId: myContext.esportsData.option_id,
+          optionValue: myContext.esportsData.values[1].option_type_id
+        }
+      )
+    } else if (myContext.paddle == null && myContext.lrdomin) {
+      console.log('---- 3 ----');
+      totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+        {
+          optionId: myContext.esportsData.option_id,
+          optionValue: myContext.esportsData.values[2].option_type_id
+        }
+      )
+    }
+
+    // ! D triggers 
+    if (!myContext.digital_trigger) {
+      totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+        {
+          optionId: myContext.dtriggersData.option_id,
+          optionValue: myContext.dtriggersData.option_type_id1
+        }
+      )
+    } else {
+      totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+        {
+          optionId: myContext.dtriggersData.option_id,
+          optionValue: myContext.dtriggersData.option_type_id2
+        }
+      )
+    }
+    console.log(totalData);
+    const res = await axios.post('https://game-server-deploy.herokuapp.com/add_product', totalData);
+    window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
+    // const navigate = useNavigate();
+    // navigate('https://controllermodz.co.uk/checkout/cart/', {replace: true});
   }
+
 
   return (
     <Wrapper>
@@ -123,14 +272,14 @@ const Tools = () => {
                 await setMenuFlag(false);
                 await swiperTo(index);
               }} curr={myContext.snapIndex} stat={please[index] === null || please[index] === false ? false : true}>
-                <img src={item.image}></img>
+                <img alt="no img" src={item.image}></img>
                 {item.name}
                 <SBsCheck></SBsCheck>
               </MenuItem>
             ))
           } */}
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(0); }} me={0} curr={myContext.snapIndex} stat={myContext.design === null ? false : true}>
-            <img src={CateImgs[0].image}></img>
+            <img alt="no img" src={CateImgs[0].image}></img>
             {
               myContext.designData ? myContext.designData.name : null
             }
@@ -138,7 +287,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(1); }} me={1} curr={myContext.snapIndex} stat={myContext.abxy === null ? false : true}>
-            <img src={CateImgs[1].image}></img>
+            <img alt="no img" src={CateImgs[1].image}></img>
             {
               myContext.abxyData ? myContext.abxyData.name : null
             }
@@ -146,7 +295,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(2); }} me={2} curr={myContext.snapIndex} stat={myContext.dpad === null ? false : true}>
-            <img src={CateImgs[2].image}></img>
+            <img alt="no img" src={CateImgs[2].image}></img>
             {
               myContext.dpadData ? myContext.dpadData.name : null
             }
@@ -154,7 +303,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(3); }} me={3} curr={myContext.snapIndex} stat={myContext.thumbstickL === null ? false : true}>
-            <img src={CateImgs[3].image}></img>
+            <img alt="no img" src={CateImgs[3].image}></img>
             {
               myContext.thubmLData ? myContext.thubmLData.name : null
             }
@@ -162,7 +311,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(4); }} me={4} curr={myContext.snapIndex} stat={myContext.thumbstickR === null ? false : true}>
-            <img src={CateImgs[4].image}></img>
+            <img alt="no img" src={CateImgs[4].image}></img>
             {
               myContext.thubmRData ? myContext.thubmRData.name : null
             }
@@ -170,7 +319,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(5); }} me={5} curr={myContext.snapIndex} stat={myContext.startBtn === null ? false : true}>
-            <img src={CateImgs[5].image}></img>
+            <img alt="no img" src={CateImgs[5].image}></img>
             {
               myContext.startBackData ? myContext.startBackData.name : null
             }
@@ -178,7 +327,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(6); }} me={6} curr={myContext.snapIndex} stat={myContext.touchpad === null ? false : true}>
-            <img src={CateImgs[6].image}></img>
+            <img alt="no img" src={CateImgs[6].image}></img>
             {
               myContext.thuchPadData ? myContext.thuchPadData.name : null
             }
@@ -186,7 +335,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(7); }} me={7} curr={myContext.snapIndex} stat={myContext.trim === null ? false : true}>
-            <img src={CateImgs[7].image}></img>
+            <img alt="no img" src={CateImgs[7].image}></img>
             {
               myContext.trimData ? myContext.trimData.name : null
             }
@@ -194,7 +343,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(8); }} me={8} curr={myContext.snapIndex} stat={myContext.trigger === null ? false : true}>
-            <img src={CateImgs[8].image}></img>
+            <img alt="no img" src={CateImgs[8].image}></img>
             {
               myContext.triggersData ? myContext.triggersData.name : null
             }
@@ -202,7 +351,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(9); }} me={9} curr={myContext.snapIndex} stat={myContext.rearDesign === null ? false : true}>
-            <img src={CateImgs[9].image}></img>
+            <img alt="no img" src={CateImgs[9].image}></img>
             {
               myContext.razorBackData ? myContext.razorBackData.name : null
             }
@@ -210,7 +359,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(10); }} me={10} curr={myContext.snapIndex} stat={myContext.razorBack}>
-            <img src={CateImgs[10].image}></img>
+            <img alt="no img" src={CateImgs[10].image}></img>
             {
               myContext.esportsData ? myContext.esportsData.name : null
             }
@@ -218,7 +367,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(11); }} me={11} curr={myContext.snapIndex} stat={myContext.paddle !== null ? true : false}>
-            <img src={CateImgs[11].image}></img>
+            <img alt="no img" src={CateImgs[11].image}></img>
             {
               myContext.rearDesignData ? myContext.rearDesignData.name : null
             }
@@ -226,7 +375,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(12); }} me={12} curr={myContext.snapIndex} stat={myContext.ldomin_2 !== null ? true : false}>
-            <img src={CateImgs[12].image}></img>
+            <img alt="no img" src={CateImgs[12].image}></img>
             {
               myContext.dtriggersData ? myContext.dtriggersData.name : ''
             }
@@ -234,7 +383,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(13); }} me={13} curr={myContext.snapIndex} stat={myContext.rdomin_2 !== null ? true : false}>
-            <img src={CateImgs[13].image}></img>
+            <img alt="no img" src={CateImgs[13].image}></img>
             {
               myContext.textandlogoData ? myContext.textandlogoData.name : null
             }
@@ -242,13 +391,13 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(14); }} me={14} curr={myContext.snapIndex} stat={myContext.digital_trigger}>
-            <img src={CateImgs[14].image}></img>
+            <img alt="no img" src={CateImgs[14].image}></img>
             {CateImgs[14].name}
             <SBsCheck></SBsCheck>
           </MenuItem>
 
           {/* <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(15); }} me={15} curr={myContext.snapIndex} stat={myContext.isText}>
-            <img src={CateImgs[15].image}></img>
+            <img alt="no img" src={CateImgs[15].image}></img>
             {CateImgs[15].name}
             <SBsCheck></SBsCheck>
           </MenuItem> */}
@@ -261,13 +410,13 @@ const Tools = () => {
         </div>
         <div>
           <div>
-            <img src={CateImgs[myContext.snapIndex].image}></img>
+            <img alt="no img" src={CateImgs[myContext.snapIndex].image}></img>
             <span>
               <span>{CateImgs[myContext.snapIndex].name}</span>
 
               {/** Design */}
               {
-                myContext.snapIndex == 0 && (myContext.designData != []) ? (
+                myContext.snapIndex === 0 && (myContext.designData !== []) ? (
                   <MobileSelector onChange={(e) => myContext.DesignSetTabSelect(e.target.value)}>
                     {
                       // Design.steps.map((item, index) => 
@@ -284,7 +433,7 @@ const Tools = () => {
               }
               {/** Abxy */}
               {
-                myContext.snapIndex == 1 ? (
+                myContext.snapIndex === 1 ? (
                   <MobileSelector onChange={(e) => myContext.AbxySetTabSelect(e.target.value)}>
                     {
                       Abxy.steps.map((item, index) => 
@@ -299,7 +448,7 @@ const Tools = () => {
 
               {/** Dpad */}
               {
-                myContext.snapIndex == 2 ? (
+                myContext.snapIndex === 2 ? (
                   <MobileSelector onChange={(e) => myContext.DpadSetTabSelect(e.target.value)}>
                     {
                       Dpad.steps.map((item, index) => 
@@ -314,7 +463,7 @@ const Tools = () => {
 
               {/** Start Back */}
               {
-                myContext.snapIndex == 5 ? (
+                myContext.snapIndex === 5 ? (
                   <MobileSelector onChange={(e) => myContext.StartBtnSetTabSelect(e.target.value)}>
                     {
                       Dpad.steps.map((item, index) => 
@@ -328,7 +477,7 @@ const Tools = () => {
               }
               {/** Touchpad */}
               {
-                myContext.snapIndex == 6 ? (
+                myContext.snapIndex === 6 ? (
                   <MobileSelector onChange={(e) => myContext.TouchpadSetTabSelect(e.target.value)}>
                     {
                       Dpad.steps.map((item, index) => 
@@ -343,7 +492,7 @@ const Tools = () => {
 
               {/** Touchpad */}
               {
-                myContext.snapIndex == 8 ? (
+                myContext.snapIndex === 8 ? (
                   <MobileSelector onChange={(e) => myContext.TriggerSetTabSelect(e.target.value)}>
                     {
                       Dpad.steps.map((item, index) => 
@@ -362,10 +511,10 @@ const Tools = () => {
               <TbAlignLeft></TbAlignLeft>
             </span>
             <span className="prev" onClick={() => swiperPrev()}>
-              <img style={{transform:'scale(1.3)'}}></img>
+              <img alt="no img" style={{transform:'scale(1.3)'}}></img>
             </span>
             <span className="next" onClick={() => swiperNext()}>
-              <img style={{transform:'scale(1.3)'}}></img>
+              <img alt="no img" style={{transform:'scale(1.3)'}}></img>
             </span>
           </div>
         </div>
@@ -855,7 +1004,7 @@ const Tools = () => {
                       myContext.setEsportsFlag(1);
                     }}>
                       <div>
-                        <img src={PaddleImg}></img>
+                        <img alt="no img" src={PaddleImg}></img>
                         Paddles
                       </div>
                       <div>
@@ -869,7 +1018,7 @@ const Tools = () => {
                       myContext.setEsportsFlag(2);
                     }}>
                       <div>
-                        <img src={DominLimg}></img>
+                        <img alt="no img" src={DominLimg}></img>
                         {
                           myContext.dominselectData != null ? myContext.dominselectData.name : ''
                         }
@@ -890,7 +1039,7 @@ const Tools = () => {
                     myContext.esportsFlag === 1 ? (
                       <div>
                         <div>
-                          <img src={PaddleImg}></img>
+                          <img alt="no img" src={PaddleImg}></img>
                           Paddle
                         </div>
                         <Selector>
@@ -923,7 +1072,7 @@ const Tools = () => {
                           </CusSwitch>
                           <h6>Remappable Technology +£0.00</h6>
                           <MarkDiv>
-                            <img></img>
+                            <img alt="no img"></img>
                           </MarkDiv>
                         </RemapDiv>
                       </div>
@@ -935,7 +1084,7 @@ const Tools = () => {
                     myContext.esportsFlag === 2 ? (
                       <div>
                         <UnderlinedDiv>
-                          <img src={DominLimg}></img>
+                          <img alt="no img" src={DominLimg}></img>
                           LDominBtn
                         </UnderlinedDiv>
                         <Selector>
@@ -986,7 +1135,7 @@ const Tools = () => {
                         }
                         {/* RDominBtn */}
                         <UnderlinedDiv>
-                          <img src={DominRImg}></img>
+                          <img alt="no img" src={DominRImg}></img>
                           RDominBtn
                         </UnderlinedDiv>
                         <Selector>
@@ -1325,7 +1474,7 @@ const Tools = () => {
                         myContext.setLogo(false);
                       }}>
                         <div>
-                          <img src={TextImg} style={{width: '45px'}}></img>
+                          <img alt="no img" src={TextImg} style={{width: '45px'}}></img>
                           {
                             myContext.personalizationData != null ? myContext.personalizationData[2].name : null
                           }
@@ -1344,7 +1493,7 @@ const Tools = () => {
                         myContext.setLogo(true);
                       }}>
                         <div>
-                          <img src={CateImgs[13].image}  style={{width: '45px'}}></img>
+                          <img alt="no img" src={CateImgs[13].image}  style={{width: '45px'}}></img>
                           {
                             myContext.personalizationData != null ? myContext.personalizationData[3].name : null
                           }
@@ -1575,7 +1724,7 @@ const Tools = () => {
                */}
               <SwiperSlide>
                 <AddToCartDiv>
-                  <button onClick = {() => addToCart()}>Add to cart</button>
+                  <button onClick = {() => AddToCart()}>Add to cart</button>
                 </AddToCartDiv>
               </SwiperSlide>
         </Swiper>
@@ -1613,7 +1762,7 @@ const Tools = () => {
                   Number(myContext.rdomin_2 !== null && myContext.dominselectData ? Number(DominR.items[myContext.rdomin_2].price) + Number(myContext.dominselectData.items[myContext.rdomin_1].price) : 0) + 
                   Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0) + 
                   Number(myContext.isText ? myContext.textPrice : 0) + 
-                  Number(myContext.isLogo ? myContext.logoPrice : 0) 
+                  Number(myContext.isLogo ? myContext.logoPrice : 0)
                 ) * 100
                 ) / 100
               }
@@ -1627,7 +1776,7 @@ const Tools = () => {
               </EDD>
             </div>
             <ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
-              <img></img>
+              <img alt="no img"></img>
               Add to Cart
             </ATC>
           </Info>

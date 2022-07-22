@@ -145,7 +145,6 @@ const ViewArea = () => {
                   */}
                   {
                     myContext.abxy !== null && myContext.abxyData != null ? (() => {
-                      console.log('---------');
                       return (
                         myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].image ? <img src={myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].image}></img> : <div className="lds-dual-ring"></div>
                       )
