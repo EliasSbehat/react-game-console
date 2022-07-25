@@ -99,7 +99,7 @@ const Tools = () => {
 
   async function AddToCart() {
     let quote_id;
-    await fetch(`http://localhost:5000/get_quote_id`, {
+    await fetch(`https://game-server-deploy.herokuapp.com/get_quote_id`, {
         headers : { 
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -259,7 +259,7 @@ const Tools = () => {
     }
     console.log('--------------------');
     console.log(totalData);
-    const res = await axios.post('http://localhost:5000/add_product', totalData);
+    const res = await axios.post('https://game-server-deploy.herokuapp.com/add_product', totalData);
     window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
   }
 

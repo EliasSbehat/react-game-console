@@ -355,7 +355,7 @@ const VHome = () => {
   React.useEffect(() => {
     if (!apiFlag)
       (async () => {
-        const response = await fetch('http://localhost:5000/test', { method: 'GET' });
+        const response = await fetch('https://game-server-deploy.herokuapp.com/test', { method: 'GET' });
         if (response.ok) {
           // ---------------------- Response is Okay ----------------------
           let json = await response.json();
