@@ -99,7 +99,7 @@ const Tools = () => {
 
   async function AddToCart() {
     let quote_id;
-    await fetch(`https://game-server-deploy.herokuapp.com/get_quote_id`, {
+    await fetch(`http://localhost:5000/get_quote_id`, {
         headers : { 
           'Content-Type': 'application/json',
           'Accept': 'application/json'
@@ -217,13 +217,18 @@ const Tools = () => {
         }
       )
     } else if (myContext.paddle != null && !myContext.lrdomin) {
-      console.log('---- 2 ----');
       totalData.cartItem.productOption.extensionAttributes.customOptions.push(
         {
           optionId: myContext.esportsData.option_id,
-          optionValue: myContext.esportsData.values[1].option_type_id
+          optionValue: myContext.esportsData.values[0].option_type_id
         }
       )
+      // totalData.cartItem.productOption.extensionAttributes.customOptions.push(
+      //   {
+      //     optionId: myContext.esportsData.option_id,
+      //     optionValue: myContext.esportsData.values[1].option_type_id
+      //   }
+      // )
     } else if (myContext.paddle == null && myContext.lrdomin) {
       console.log('---- 3 ----');
       totalData.cartItem.productOption.extensionAttributes.customOptions.push(
@@ -233,6 +238,8 @@ const Tools = () => {
         }
       )
     }
+
+    console.log(totalData);
 
     // ! D triggers 
     if (!myContext.digital_trigger) {
@@ -250,11 +257,10 @@ const Tools = () => {
         }
       )
     }
+    console.log('--------------------');
     console.log(totalData);
-    const res = await axios.post('https://game-server-deploy.herokuapp.com/add_product', totalData);
+    const res = await axios.post('http://localhost:5000/add_product', totalData);
     window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
-    // const navigate = useNavigate();
-    // navigate('https://controllermodz.co.uk/checkout/cart/', {replace: true});
   }
 
 
@@ -522,7 +528,7 @@ const Tools = () => {
 
 
       {/**
-       * ------------------------------------------------- Arror Area ------------------------------------------------- 
+       * ------------------------------------------------- Error Area ------------------------------------------------- 
        */}
 
       

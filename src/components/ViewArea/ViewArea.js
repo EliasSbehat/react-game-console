@@ -104,9 +104,13 @@ const ViewArea = () => {
               <span onClick={() => myContext.setSideflag(true)}> Front </span>
               <span onClick={() => myContext.setSideflag(false)}> Back </span>
               <span onClick={() => myContext.setSideflag(!myContext.sideflag)}>
-              <img></img>
+              <img alt="what is it?"></img>
               </span>
             </div>
+          </div>
+          <div>
+            <div><img alt="what is it?"/></div>
+            <div onClick={() => myContext.setSideflag(!myContext.sideflag)}><img alt="what is it?"/></div>
           </div>
         </LocalHeader>
         <Viewer flag={myContext.sideflag} width1="60%" width2="20%" top1="10%" top2="60%">
@@ -136,7 +140,7 @@ const ViewArea = () => {
 
 
                   {/*
-                      █████╗ ██████╗ ██╗  ██╗██╗   ██╗
+                       █████╗ ██████╗ ██╗  ██╗██╗   ██╗
                       ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
                       ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
                       ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
@@ -400,49 +404,6 @@ const ViewArea = () => {
           </div>
           
         </Viewer>
-        {/* <LocalFooter>
-          <div id="info_div">
-            <TotalPrice>
-              <span>
-                Total
-              </span>
-              <span>
-                £{
-                  Math.round((myContext.initalPrice +
-                    Number(myContext.design !== null ? Design.items[myContext.design[0]][myContext.design[1]].price : 0) +
-                    Number(myContext.abxy !== null ? Abxy.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
-                    Number(myContext.dpad !== null ? Dpad.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
-                    Number(myContext.thumbstickL !== null ? ThumbL.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
-                    Number(myContext.thumbstickR !== null ? ThumbR.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
-                    Number(myContext.startBtn !== null ? StartBtn.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
-                    Number(myContext.touchpad !== null ? Touchpad.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
-                    Number(myContext.trim !== null ? Trim.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
-                    Number(myContext.trigger !== null ? Trigger.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
-                    Number(myContext.rearDesign !== null ? RearDesign.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
-                    Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
-                    Number(myContext.paddle !== null && myContext.pad_esp_flag ? Paddle.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
-                    Number(myContext.ldomin_2 !== null && !myContext.pad_esp_flag ? Number(DominL.items[myContext.ldomin_2].price) + Number(DominSelection.items[myContext.ldomin_1].price) : 0) + 
-                    Number(myContext.rdomin_2 !== null && !myContext.pad_esp_flag ? Number(DominR.items[myContext.rdomin_2].price) + Number(DominSelection.items[myContext.rdomin_1].price) : 0) + 
-                    Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0)
-                  ) * 100
-                  ) / 100
-                }
-              </span>
-            </TotalPrice>
-            <Info>
-              <div>
-                <span> Estimated Delivery Date </span>
-                <EDD>
-                  04/04/2022
-                </EDD>
-              </div>
-              <ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
-                <img></img>
-                Add to Cart
-              </ATC>
-            </Info>
-          </div>
-        </LocalFooter> */}
       </Wrapper>
     )
 }
@@ -481,6 +442,7 @@ const LocalHeader = styled.div`
   align-items: center;
   padding: 10px 0;
   width: 100%;
+  z-index: 500;
   & > div:nth-child(1) {
     margin: 0 20px;
     display: flex;
@@ -492,6 +454,10 @@ const LocalHeader = styled.div`
       font-family: 'Rajdhani-Regular';
       /* color: ${props => props.theme.color}; */
       color: '#333333';
+
+      @media screen and (max-width: 400px) {
+        font-size: 20px;
+      }
     }
     img {
       background-color: ${props => props.theme.HeadIconBgColor};
@@ -504,10 +470,14 @@ const LocalHeader = styled.div`
   & > div:nth-child(2) {
     position: absolute;
     right: 20px;
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
     & > div:nth-child(1) {
       position: relative;
       font-size: 15px;
       font-family: 'Rajdhani-Medium';
+      flex-direction: column;
       span {
         border-radius: 10px;
         padding: 5px 10px;
@@ -538,6 +508,44 @@ const LocalHeader = styled.div`
       }
     }
   }
+
+  & > div:nth-child(3) {
+    display: none;
+    position: absolute;
+    @media screen and (max-width: 800px) {
+      display: block;
+    }
+    right: 20px;
+    top: 10px;
+    div {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border-radius: 10px;
+    }
+    & > div:nth-child(1) {
+      background-color: ${props => props.theme.SwapFrontColor};
+      border: ${props => props.theme.SwapBorder};
+      display: flex;
+      justify-content: center;
+      img {
+        transform: scale(0.6);
+        content: url(${props => props.theme.FlagIcon});
+      }
+    }
+
+    & > div:nth-child(2) {
+      background-color: ${props => props.theme.ThemeColor};
+      border: 0;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      img {
+        transform: scale(0.4);
+        content: url(${props => props.theme.SwapIcon});
+      }
+    }
+  }
 `
 
 const Viewer = styled.div`
@@ -562,18 +570,11 @@ const Viewer = styled.div`
         position: absolute;
         z-index: ${props => !props.flag ? '100!important' : '99!important'};
         transition: all 1s, z-index 0s;
-
-        /* left: 50%;
-        top: 50%;
-        transform: ${props => props.flag ? 'scale(8)' : 'scale(2)'}; */
-
-        /* width: ${props => props.flag ? props.width1 : props.width2};
-        left: ${props => props.flag ? `calc((100% - ${props.width1}) / 2)` : `calc((100% - ${props.width2}) / 2)`};
-        top: ${props => props.flag ? props.top1 : props.top2}; */
         left: 25%;
-        top: ${props => props.flag ? '-0%' : '65%'};
+        top: ${props => props.flag ? '0%' : '65%'};
         width: 50%;
         transform: ${props => props.flag ? 'scale(1.4)' : 'scale(0.5)'};
+        
         & > div:nth-child(1) {
           min-width: 100%;
           min-height: 100%;
@@ -599,6 +600,24 @@ const Viewer = styled.div`
 
           }
         }
+        
+        @media screen and (max-width: 1500px) {
+          top: ${props => props.flag ? '10%' : '65%'};
+        }
+
+        @media screen and (max-width: 1000px) {
+          top: ${props => props.flag ? '20%' : '65%'};
+          transform: ${props => props.flag ? 'scale(1.9)' : 'scale(0)'};
+        }
+
+        @media screen and (max-width: 800px) {
+          top: ${props => props.flag ? '0%' : '65%'};
+          transform: ${props => props.flag ? 'scale(1.9)' : 'scale(0)'};
+        }
+        @media screen and (max-width: 400px) {
+          top: ${props => props.flag ? '20%' : '65%'};
+          transform: ${props => props.flag ? 'scale(2.1)' : 'scale(0)'};
+        }
       }
       & > div:nth-child(2) {
         border-radius: 40px;
@@ -623,126 +642,27 @@ const Viewer = styled.div`
             width: 100%;
           }
         }
+
+        @media screen and (max-width: 1500px) {
+          top: ${props => !props.flag ? '10%' : '65%'};
+        }
+
+        @media screen and (max-width: 1000px) {
+          top: ${props => !props.flag ? '20%' : '65%'};
+          transform: ${props => !props.flag ? 'scale(1.9)' : 'scale(0)'};
+        }
+
+        @media screen and (max-width: 800px) {
+          top: ${props => !props.flag ? '0%' : '65%'};
+          transform: ${props => !props.flag ? 'scale(1.9)' : 'scale(0)'};
+        }
+        @media screen and (max-width: 400px) {
+          top: ${props => !props.flag ? '20%' : '65%'};
+          transform: ${props => !props.flag ? 'scale(2.1)' : 'scale(0)'};
+        }
       }
     }
   }
-`
-
-const LocalFooter = styled.div`
-  width: 100%;
-  @media screen and (max-width: 800px){
-    display: none;
-  }
-  #info_div {
-    padding: 5px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 20px;
-    background-color: white;
-    margin-bottom: 10px;
-    @media screen and (max-width:800px) {
-      border-radius: 0;
-      padding: 0;
-    }
-  }
-`
-
-const TotalPrice = styled.div`
-  display: flex;
-  flex-direction: column;
-  & span:nth-child(1) {
-    font-size: 15px;
-    font-family: 'Rajdhani-Light';
-  }
-  & span:nth-child(2) {
-    font-size: 25px;
-    font-family: 'Rajdhani-Medium';
-  }
-`
-
-const Info = styled.div`
-  text-align: right;
-  display: flex;
-  gap: 10px;
-  & > div:nth-child(1) {
-    display: flex;
-    flex-direction: column;
-    & > span:nth-child(1) {
-      font-size: 15px;
-      font-family: 'Rajdhani-Light';
-    }
-  }
-`
-
-const EDD = styled.span`
-  font-size: 17px;
-  font-family: 'Rajdhani-Light';
-`
-
-const ATC = styled.button`
-  padding: 10px 20px;
-  /* display: ${props => props.flag ? 'flex' : 'none'}; */
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 17px;
-  color: white;
-  border: 0;
-  border-radius: 20px;
-  background-color: ${props => props.theme.ThemeColor};
-  img {
-    content: url(${props => props.theme.AtcIcon});
-  }
-  @media screen and (max-width: 800px) {
-    
-  }
-`
-
-const LogoDiv = styled.div`
-  padding: 20px;
-  z-index: 50;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const AniTemp = styled.div`
-  
-`
-
-const AniImg = styled.img`
-  content: url(${props => props.i});
-  animation-name: ${props => props.f ? 'example' : 'hello'};
-  animation-duration: 1s;
-  animation-direction: reverse;
-  opacity: 0;
-  @keyframes example {
-    0%   {opacity: 0;}
-    25%  {opacity: 1;}
-    50%  {opacity: 0;}
-    75%  {opacity: 1;}
-    100% {display: none;}
-  }
-  /* ${(props) => {
-    switch (props.f) {
-      case true:
-        return css`
-          @keyframes example {
-            0%   {opacity: 0;}
-            25%  {opacity: 1;}
-            50%  {opacity: 0;}
-            75%  {opacity: 1;}
-            100% {display: none;}
-          }
-        `;
-        break;
-      default:
-        css``;
-        break;
-    }
-  }} */
 `
 
 const HoverImg = styled.img`
@@ -766,7 +686,7 @@ const SpecialArea = styled.div`
       top: 15%;
       left: 39.3%;
       height: 20%;
-      outline: ${props => props.sf && (props.si === 13 || props.si === 14) ? '2px dotted red' : 'none'};
+      outline: ${props => props.sf && (props.si === 12 || props.si === 13) ? '2px dotted red' : 'none'};
       width: 24%;
       overflow: hidden;
       img {

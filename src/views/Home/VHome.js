@@ -355,7 +355,7 @@ const VHome = () => {
   React.useEffect(() => {
     if (!apiFlag)
       (async () => {
-        const response = await fetch('https://game-server-deploy.herokuapp.com/test', { method: 'GET' });
+        const response = await fetch('http://localhost:5000/test', { method: 'GET' });
         if (response.ok) {
           // ---------------------- Response is Okay ----------------------
           let json = await response.json();
@@ -363,7 +363,7 @@ const VHome = () => {
           let childs = {};
           
           for (var i = 0; i <json.length; i++) {
-            if (json[i].values != undefined) {
+            if (json[i].values !== undefined) {
               if (json[i].values[0]['extension_attributes'].dependency == undefined) {
                 object_data['optId_'+json[i].option_id] = {};
                 object_data['optId_'+json[i].option_id]['option_id'] = json[i].option_id;
