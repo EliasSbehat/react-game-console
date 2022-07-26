@@ -544,7 +544,7 @@ const VHome = () => {
                   name: temp.title,
                   price: temp.price,
                   selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
-                  image: ThumbL_APIED[i].image,
+                  image: ThumbL_APIED[0][i].image,
                   is_default: temp['extension_attributes'].is_default,
                   option_id: object_data[object_keys[3]].option_id,
                   option_type_id: temp.option_type_id
