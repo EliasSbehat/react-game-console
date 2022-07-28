@@ -27,7 +27,7 @@ export default function ImageMove() {
     <Wrapper display={myContext.isLogo} sideflag={myContext.sideflag}>
       {
 				myContext.images.length !== 0 ? (
-					<img id="imagemove" src={myContext.images[0]['data_url']} style={{zIndex:"300"}} className="target"></img>
+					<img alt="no img" id="imagemove" src={myContext.images[0]['data_url']} onClick={() => alert('Hello')} style={{zIndex:"300"}} className="target"></img>
 				) : (() => {})()
 			}
 			{

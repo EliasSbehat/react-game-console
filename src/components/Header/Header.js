@@ -1,30 +1,28 @@
 import React from "react";
 import styled from "styled-components";
-import AppContext from "../../context/context";
 
 const Header = (props) => {
-  const myContext = React.useContext(AppContext);
   React.useEffect(() => {
   })
   return (
     <Wrapper id="header">
       <Container>
         <RightDiv>
-          <img></img>
-          <img onClick={() => props.modeChange()}></img>
+          <img alt="no img" ></img>
+          <img alt="no img" onClick={() => props.modeChange()}></img>
         </RightDiv>
         <LeftDiv>
-          <SearchInput placeholder={'Search'} type="text" resflag={0}></SearchInput>
-          <BritiSpan><img></img></BritiSpan>
-          <FeatherSpan><img></img><span>2</span></FeatherSpan>
-          <AvatarSpan><img></img></AvatarSpan>
+          {/* <SearchInput placeholder={'Search'} type="text" resflag={0}></SearchInput> */}
+          <BritiSpan><img alt="no img"></img></BritiSpan>
+          <FeatherSpan><img alt="no img"></img></FeatherSpan>
+          {/* <AvatarSpan><img alt="no img"></img></AvatarSpan> */}
         </LeftDiv>
       </Container>
       <ResponContainer>
         <TopDiv>
-          <img></img>
-          <img onClick={() => props.modeChange()}></img>
-          <FeatherSpan><img></img><span>2</span></FeatherSpan>
+          <img alt="no img"></img>
+          <img  alt="no img" onClick={() => props.modeChange()}></img>
+          <FeatherSpan><img alt="no img"></img><span>2</span></FeatherSpan>
         </TopDiv>
         <BotDiv>
         <SearchInput placeholder="Search" type="text" resflag={1}></SearchInput>
@@ -119,6 +117,7 @@ const SearchInput = styled.input`
   border-radius: 20px;
   padding-right: 50px;
   margin-bottom: 10px;
+  margin-top: 10px;
   &:focus {
     outline: none;
   }

@@ -16,6 +16,7 @@ import { TbAlignLeft } from 'react-icons/tb';
 import { FaTimes } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
 import { AiOutlineStop } from 'react-icons/ai';
+import { MdOutlineDescription } from 'react-icons/md';
 
 import { MarkImg, MarkHoverImg } from "../../assets/images";
 
@@ -59,7 +60,7 @@ const Tools = () => {
 
   const swiperTo = (ind) => {
     myContext.setSnapIndex(ind);
-    Swiper.slideTo(ind, 300);
+    swiper.slideTo(ind, 300);
   }
 
   const swiperNext = () => {
@@ -74,8 +75,6 @@ const Tools = () => {
     myContext.setIsFinished(false);
     myContext.snapIndex === 12 && myContext.paddle !== null ? swiperTo(myContext.snapIndex-2) : swiper.slidePrev();
   }
-
-  const [please, setPlease] = React.useState([]);
 
   useEffect(() => {
     // console.log(myContext.design);
@@ -418,7 +417,6 @@ const Tools = () => {
             <img alt="no img" src={CateImgs[myContext.snapIndex].image}></img>
             <span>
               <span>{CateImgs[myContext.snapIndex].name}</span>
-
               {/** Design */}
               {
                 myContext.snapIndex === 0 && (myContext.designData !== []) ? (
@@ -512,14 +510,17 @@ const Tools = () => {
             </span>
           </div>
           <div>
+            <span>
+              <MdOutlineDescription></MdOutlineDescription>
+            </span>
             <span onClick={() => setMenuFlag(!menuFlag)}>
               <TbAlignLeft></TbAlignLeft>
             </span>
             <span className="prev" onClick={() => swiperPrev()}>
-              <img alt="no img" style={{transform:'scale(1.3)'}}></img>
+              <img alt="no img" ></img>
             </span>
             <span className="next" onClick={() => swiperNext()}>
-              <img alt="no img" style={{transform:'scale(1.3)'}}></img>
+              <img alt="no img" ></img>
             </span>
           </div>
         </div>
@@ -593,7 +594,7 @@ const Tools = () => {
                 {
                   myContext.designData !== null ?
                     myContext.designData.items[myContext.DesigntabSelect].map((item, index) => (
-                      <SelectItemPrice>
+                      <SelectItemPrice title={item.name}>
                         <SelectItem
                           bgImg={item.selet}
                           key={index}
@@ -962,7 +963,10 @@ const Tools = () => {
                           bgImg={item.selet}
                           now = { myContext.trigger === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
                           me = { 10000 * myContext.snapIndex + 100 * myContext.TriggertabSelect + index }
-                          onClick={() => myContext.setTrigger([myContext.TriggertabSelect, index])}></SelectItem>
+                          onClick={() => myContext.setTrigger([myContext.TriggertabSelect, index])}
+                          onMouseOver={() => myContext.setHoverImg(item.image)}
+                          onMouseLeave={() => myContext.setHoverImg(null)}
+                        ></SelectItem>
                           {
                             '£'+item.price
                           }
@@ -1900,11 +1904,15 @@ const TopDiv = styled.div`
       align-items: center;
       gap: 10px;
       & > span:nth-child(1) {
+        color: white;
+        transform: scale(1.6);
+      }
+      & > span:nth-child(2) {
         color: ${props => props.theme.color};
         font-size: 30px;
         cursor: pointer;
       }
-      & > span:nth-child(2) {
+      & > span:nth-child(3) {
         padding: 5px 12px;
         border: ${props => props.theme.DirectIconBorder};
         background-color: ${props => props.theme.DirectIconBgColor};
@@ -1916,7 +1924,7 @@ const TopDiv = styled.div`
         }
         cursor: pointer;
       }
-      & > span:nth-child(3) {
+      & > span:nth-child(4) {
         padding: 5px 12px;
         transform: scale(1.1);
         height: 60%;
@@ -2646,8 +2654,7 @@ const EsportItems = styled.div`
     justify-content: center;
     align-items: center;
     /* flex-wrap: wrap; */
-    height: 100px;
-    gap: 10px;
+    height: 50px;
     svg {
       width: 80%;
       height: 80%;
@@ -2661,7 +2668,7 @@ const EsportItems = styled.div`
 
   & > div:nth-child(2) {
     text-align: center;
-    margin: 20px 0;
+    margin: 1 0px 0;
     white-space: nowrap;
   }
 

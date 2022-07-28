@@ -12,22 +12,22 @@ p {
 
 @font-face {
   font-family: 'Rajdhani-Bold';
-  src: url('./assets/fonts//Rajdhani-Bold.ttf');
+  src: url('./assets/fonts/Teko/Teko-Bold.ttf');
 }
 
 @font-face {
   font-family: 'Rajdhani-Light';
-  src: url('./assets/fonts//Rajdhani-Light.ttf');
+  src: url('./assets/fonts/Rajdhani-Light.ttf');
 }
 
 @font-face {
   font-family: 'Rajdhani-Medium';
-  src: url('./assets/fonts//Rajdhani-Medium.ttf');
+  src: url('./assets/fonts/Teko/Teko-Medium.ttf');
 }
 
 @font-face {
   font-family: 'Rajdhani-Regular';
-  src: url('./assets/fonts//Rajdhani-Regular.ttf');
+  src: url('./assets/fonts/Teko/Teko-Regular.ttf');
 }
 
 @font-face {
