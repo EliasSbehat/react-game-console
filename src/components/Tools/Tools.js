@@ -1,19 +1,18 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useEffect } from "react";
 import styled, {css} from "styled-components";
 import html2canvas from 'html2canvas';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 
 import ImageUploading from 'react-images-uploading';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import {NotificationContainer } from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
-import { BsCheck, BsFillEmojiNeutralFill, BsNutFill } from 'react-icons/bs';
+import { BsCheck, BsNutFill } from 'react-icons/bs';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
 
-import { TbAlignLeft, TbMoodCrazyHappy, TbSortDescendingNumbers } from 'react-icons/tb';
+import { TbAlignLeft } from 'react-icons/tb';
 import { FaTimes } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
 import { AiOutlineStop } from 'react-icons/ai';
@@ -60,7 +59,7 @@ const Tools = () => {
 
   const swiperTo = (ind) => {
     myContext.setSnapIndex(ind);
-    swiper.slideTo(ind, 300);
+    Swiper.slideTo(ind, 300);
   }
 
   const swiperNext = () => {
@@ -442,7 +441,7 @@ const Tools = () => {
                 myContext.snapIndex === 1 ? (
                   <MobileSelector onChange={(e) => myContext.AbxySetTabSelect(e.target.value)}>
                     {
-                      Abxy.steps.map((item, index) => 
+                      myContext.abxyData.steps.map((item, index) => 
                         <option key={index} value={index}>
                           { item.name }
                         </option>
@@ -457,7 +456,7 @@ const Tools = () => {
                 myContext.snapIndex === 2 ? (
                   <MobileSelector onChange={(e) => myContext.DpadSetTabSelect(e.target.value)}>
                     {
-                      Dpad.steps.map((item, index) => 
+                      myContext.dpadData.steps.map((item, index) => 
                         <option key={index} value={index}>
                           { item.name }
                         </option>
@@ -472,7 +471,7 @@ const Tools = () => {
                 myContext.snapIndex === 5 ? (
                   <MobileSelector onChange={(e) => myContext.StartBtnSetTabSelect(e.target.value)}>
                     {
-                      Dpad.steps.map((item, index) => 
+                      myContext.startBackData.steps.map((item, index) => 
                         <option key={index} value={index}>
                           { item.name }
                         </option>
@@ -578,9 +577,9 @@ const Tools = () => {
                             <span>
                               { item.name }
                             </span>
-                            <span>
+                            {/* <span>
                               £{ item.price }
-                            </span>
+                            </span> */}
                             <div></div>
                           </TapItem>
                         )
@@ -594,15 +593,21 @@ const Tools = () => {
                 {
                   myContext.designData !== null ?
                     myContext.designData.items[myContext.DesigntabSelect].map((item, index) => (
-                      <SelectItem
-                        bgImg={item.selet}
-                        key={index}
-                        now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * myContext.DesigntabSelect + index }
-                        onClick={() => myContext.setDesign([myContext.DesigntabSelect, index])}
-                        // onMouseOver={async () => await myContext.setHoverImg(item.image)}
-                        onMouseLeave={async () => await myContext.setHoverImg(null)}
-                      />
+                      <SelectItemPrice>
+                        <SelectItem
+                          bgImg={item.selet}
+                          key={index}
+                          now = { myContext.design === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.design[0] + myContext.design[1]}
+                          me = { 10000 * myContext.snapIndex + 100 * myContext.DesigntabSelect + index }
+                          onClick={() => myContext.setDesign([myContext.DesigntabSelect, index])}
+                          onMouseOver={async () => await myContext.setHoverImg(item.image)}
+                          onMouseLeave={async () => await myContext.setHoverImg(null)}
+                        >
+                        </SelectItem>
+                        {
+                          '£'+item.price
+                        }
+                      </SelectItemPrice>
                     )) : null
                 }
               </Selector>
@@ -626,9 +631,9 @@ const Tools = () => {
                         <span>
                           {item.name}
                         </span>
-                        <span>
+                        {/* <span>
                           £{item.price}
-                        </span>
+                        </span> */}
                         <div></div>
                       </TapItem>
                       )
@@ -643,14 +648,19 @@ const Tools = () => {
               {
                 myContext.abxyData !== null ?
                   myContext.abxyData.items[myContext.AbxytabSelect].map((item, index) => (
-                    <SelectItem 
-                      bgImg={item.selet}
-                      now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
-                      me = { 10000 * myContext.snapIndex + 100 * myContext.AbxytabSelect + index }
-                      onClick={() => myContext.setAbxy([myContext.AbxytabSelect, index])}
-                      // onMouseOver={() => myContext.setHoverImg(item.image)}
-                      onMouseLeave={() => myContext.setHoverImg(null)}
-                    />
+                    <SelectItemPrice>
+                      <SelectItem 
+                        bgImg={item.selet}
+                        now = { myContext.abxy === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.abxy[0] + myContext.abxy[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * myContext.AbxytabSelect + index }
+                        onClick={() => myContext.setAbxy([myContext.AbxytabSelect, index])}
+                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseLeave={() => myContext.setHoverImg(null)}
+                      />
+                      {
+                        '£'+item.price
+                      }
+                    </SelectItemPrice>
                   )) : null
               }
             </Selector>
@@ -670,13 +680,13 @@ const Tools = () => {
               {
                 myContext.dpadData != null ?
                   myContext.dpadData.steps.map((item, index) => (
-                    <TapItem key={ index } keys = { index } active={myContext.DpadtabSelect} onClick = {() => myContext.DpadSetTabSelect(index)}>
+                    <TapItem key={ index } keys = { index } w = { myContext.dpadData.steps.length } active={myContext.DpadtabSelect} onClick = {() => myContext.DpadSetTabSelect(index)}>
                       <span>
                         {item.name}
                       </span>
-                      <span>
+                      {/* <span>
                         £{item.price}
-                      </span>
+                      </span> */}
                       <div></div>
                     </TapItem>
                   ))
@@ -688,16 +698,21 @@ const Tools = () => {
               {
                 myContext.dpadData != null ?
                   myContext.dpadData.items[myContext.DpadtabSelect].map((item, index) => (
-                    <SelectItem
-                      bgImg={item.selet}
-                      key={index}
-                      now = { myContext.dpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
-                      me = { 10000 * myContext.snapIndex + 100 * myContext.DpadtabSelect + index }
-                      onClick={() => myContext.setDpad([myContext.DpadtabSelect, index])}
-                      // onMouseOver={() => myContext.setHoverImg(item.image)}
-                      onMouseLeave={() => myContext.setHoverImg(null)}
-                    >
-                    </SelectItem>
+                    <SelectItemPrice>
+                      <SelectItem
+                        bgImg={item.selet}
+                        key={index}
+                        now = { myContext.dpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.dpad[0] + myContext.dpad[1]}
+                        me = { 10000 * myContext.snapIndex + 100 * myContext.DpadtabSelect + index }
+                        onClick={() => myContext.setDpad([myContext.DpadtabSelect, index])}
+                        onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseLeave={() => myContext.setHoverImg(null)}
+                      >
+                      </SelectItem>
+                      {
+                        '£'+item.price
+                      }
+                    </SelectItemPrice>
                   ))
                 : null
               }
@@ -725,7 +740,7 @@ const Tools = () => {
                         now = { myContext.thumbstickL === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickL[0] + myContext.thumbstickL[1]}
                         me = { 10000 * myContext.snapIndex + 100 * myContext.ThumbLtabSelect + index }
                         onClick={() => myContext.setThumbstickL([myContext.ThumbLtabSelect, index])}
-                        // onMouseOver={() => myContext.setHoverImg(item.image)}
+                        onMouseOver={() => myContext.setHoverImg(item.image)}
                         onMouseLeave={() => myContext.setHoverImg(null)}
                       >
                       </SelectItem>
@@ -760,7 +775,7 @@ const Tools = () => {
                           now = { myContext.thumbstickR === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.thumbstickR[0] + myContext.thumbstickR[1]}
                           me = { 10000 * myContext.snapIndex + 100 * myContext.ThumbRtabSelect + index }
                           onClick={() => myContext.setThumbstickR([myContext.ThumbRtabSelect, index])} 
-                          // onMouseOver={() => myContext.setHoverImg(item.image)}
+                          onMouseOver={() => myContext.setHoverImg(item.image)}
                           onMouseLeave={() => myContext.setHoverImg(null)}
                         />
                         {
@@ -790,9 +805,9 @@ const Tools = () => {
                           <span>
                             {item.name}
                           </span>
-                          <span>
+                          {/* <span>
                             £{item.price}
-                          </span>
+                          </span> */}
                           <div></div>
                         </TapItem>
                       ))
@@ -804,15 +819,20 @@ const Tools = () => {
                   {
                     myContext.startBackData != null ?
                       myContext.startBackData.items[myContext.StartBtntabSelect].map((item, index) => (
-                        <SelectItem 
-                          key={index} 
-                          bgImg={item.selet} 
-                          now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
-                          me = { 10000 * myContext.snapIndex + 100 * myContext.StartBtntabSelect + index }
-                          onClick={() => myContext.setStartBtn([myContext.StartBtntabSelect, index])}
-                          // onMouseOver={() => myContext.setHoverImg(item.image)}
-                          onMouseLeave={() => myContext.setHoverImg(null)}
-                        ></SelectItem>
+                        <SelectItemPrice>
+                          <SelectItem 
+                            key={index} 
+                            bgImg={item.selet} 
+                            now = { myContext.startBtn === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.startBtn[0] + myContext.startBtn[1]}
+                            me = { 10000 * myContext.snapIndex + 100 * myContext.StartBtntabSelect + index }
+                            onClick={() => myContext.setStartBtn([myContext.StartBtntabSelect, index])}
+                            onMouseOver={() => myContext.setHoverImg(item.image)}
+                            onMouseLeave={() => myContext.setHoverImg(null)}
+                          ></SelectItem>
+                          {
+                            '£'+item.price
+                          }
+                        </SelectItemPrice>
                       ))
                     : null
                   }
@@ -836,9 +856,9 @@ const Tools = () => {
                         <span>
                           {item.name}
                         </span>
-                        <span>
+                        {/* <span>
                           £{item.price}
-                        </span>
+                        </span> */}
                         <div></div>
                       </TapItem>
                     ))
@@ -850,17 +870,23 @@ const Tools = () => {
                 {
                   myContext.thuchPadData != null ?
                     myContext.thuchPadData.items[myContext.TouchpadtabSelect].map((item, index) => (
-                      <SelectItem 
-                        key={index} 
-                        bgImg={item.selet}
-                        now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * myContext.TouchpadtabSelect + index }
-                        onClick={() => { 
-                          myContext.setTouchpad([myContext.TouchpadtabSelect, index]);
-                        }}
-                        // onMouseOver={() => myContext.setHoverImg(item.image)}
-                        onMouseLeave={() => myContext.setHoverImg(null)}
-                      ></SelectItem>
+                      <SelectItemPrice>
+
+                        <SelectItem 
+                          key={index} 
+                          bgImg={item.selet}
+                          now = { myContext.touchpad === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.touchpad[0] + myContext.touchpad[1]}
+                          me = { 10000 * myContext.snapIndex + 100 * myContext.TouchpadtabSelect + index }
+                          onClick={() => { 
+                            myContext.setTouchpad([myContext.TouchpadtabSelect, index]);
+                          }}
+                          onMouseOver={() => myContext.setHoverImg(item.image)}
+                          onMouseLeave={() => myContext.setHoverImg(null)}
+                        ></SelectItem>
+                        {
+                          '£'+item.price
+                        }
+                      </SelectItemPrice>
                     ))
                   : null
                 }
@@ -887,7 +913,7 @@ const Tools = () => {
                           now = { myContext.trim === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trim[0] + myContext.trim[1]}
                           me = { 10000 * myContext.snapIndex + 100 * myContext.TrimtabSelect + index }
                           onClick={() => myContext.setTrim([myContext.TrimtabSelect, index])}
-                          // onMouseOver={() => myContext.setHoverImg(item.image)}
+                          onMouseOver={() => myContext.setHoverImg(item.image)}
                           onMouseLeave={() => myContext.setHoverImg(null)}
                         ></SelectItem>
                         {
@@ -916,9 +942,9 @@ const Tools = () => {
                         <span>
                           {item.name}
                         </span>
-                        <span>
+                        {/* <span>
                           £{item.price}
-                        </span>
+                        </span> */}
                         <div></div>
                       </TapItem>
                     ))
@@ -930,12 +956,17 @@ const Tools = () => {
                 {
                   myContext.triggersData != null ?
                     myContext.triggersData.items[myContext.TriggertabSelect].map((item, index) => (
-                      <SelectItem
-                        key={index}
-                        bgImg={item.selet}
-                        now = { myContext.trigger === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
-                        me = { 10000 * myContext.snapIndex + 100 * myContext.TriggertabSelect + index }
-                        onClick={() => myContext.setTrigger([myContext.TriggertabSelect, index])}></SelectItem>
+                      <SelectItemPrice>
+                        <SelectItem
+                          key={index}
+                          bgImg={item.selet}
+                          now = { myContext.trigger === null ? -1 : 10000 * myContext.snapIndex + 100 * myContext.trigger[0] + myContext.trigger[1]}
+                          me = { 10000 * myContext.snapIndex + 100 * myContext.TriggertabSelect + index }
+                          onClick={() => myContext.setTrigger([myContext.TriggertabSelect, index])}></SelectItem>
+                          {
+                            '£'+item.price
+                          }
+                      </SelectItemPrice>
                     ))
                   : null
                 }
@@ -1776,14 +1807,14 @@ const Tools = () => {
           </TotalPrice>
           <Info>
             <div>
-              <span> Estimated Delivery Date </span>
+              <span> Delivery </span>
               <EDD>
                 04/04/2022
               </EDD>
             </div>
             <ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
               <img alt="no img"></img>
-              Add to Cart
+              Add
             </ATC>
           </Info>
         </div>
@@ -1828,11 +1859,13 @@ const TopDiv = styled.div`
       background: ${props => props.theme.ThemeColor};
       border: 0;
       border-radius: 20px;
+      box-shadow: 0px 4px 12px rgba(0, 205, 112, 0.58);
     }
     progress::-moz-progress-bar {
       background: ${props => props.theme.ThemeColor};
       border: 0;
       border-radius: 20px;
+      box-shadow: 0px 4px 12px rgba(0, 205, 112, 0.58);
     }
 
     progress::-webkit-progress-bar {
@@ -1913,7 +1946,6 @@ const TapItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   width: calc(80% / ${props => props.w});
   background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
   color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
@@ -1929,12 +1961,22 @@ const TapItem = styled.div`
     font-size: 13px;
     white-space: nowrap;
   }
+  ${props => {
+    if (props.keys === props.active) {
+      return css`box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.58);`
+    }
+  }}
   div {
     position: absolute;
-    background-color: ${props => props.key === props.active ? props.theme.ThemeColor : 'none'};
-    width: 80%;
+    background-color: ${props => props.keys === props.active ? props.theme.ThemeColor : 'none'};
+    width: 100%;
     height: 3px;
     bottom: 0;
+    ${props => {
+      if (props.keys === props.active) {
+        return css`box-shadow: 0px 4px 12px rgba(0, 205, 112, 0.58);`;
+      }
+    }}
   }
 `
 
@@ -2193,7 +2235,6 @@ const UploadImg = styled.div`
 
 // Chaing...
 const Hr = styled.div`
-  margin-top: 3px;
   height: 3px;
   width: 100%;
   background-color: #494B51;
@@ -2462,12 +2503,15 @@ const TotalPrice = styled.div`
   display: flex;
   flex-direction: column;
   & span:nth-child(1) {
-    font-size: 15px;
+    font-size: 16px;
     font-family: 'Rajdhani-Light';
   }
   & span:nth-child(2) {
+    font-size: 25px;
+    font-family: 'Rajdhani-Bold';
     font-size: 20px;
-    font-family: 'Rajdhani-Medium';
+    line-height: 30px;
+    color: ${props => props.theme.ThemeColor};
   }
 `
 
@@ -2486,8 +2530,11 @@ const Info = styled.div`
 `
 
 const EDD = styled.span`
-  font-size: 17px;
-  font-family: 'Rajdhani-Light';
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+  color: black;
+  font-family: 'Rajdhani-Bold';
 `
 
 const ATC = styled.button`
@@ -2501,6 +2548,9 @@ const ATC = styled.button`
   border: 0;
   border-radius: 20px;
   background-color: ${props => props.theme.ThemeColor};
+  border: 0.5px solid #00D578;
+  box-shadow: 0px 4px 12px rgba(0, 205, 112, 0.58);
+  border-radius: 6px;
   img {
     content: url(${props => props.theme.AtcIcon});
   }
@@ -2512,17 +2562,22 @@ const ATC = styled.button`
 
 const LocalFooter = styled.div`
   width: 100%;
-  position: absolute;
-  bottom: 0;
   @media screen and (max-width: 800px){
     /* bottom: 20px; */
   }
+  filter: drop-shadow(0px 0px 29px #00CE71);
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
   #info_div {
+    width: 90%;
+    border-radius: 6px;
+    border: 1px solid #00CE71;
     padding: 5px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 20px;
     background-color: white;
     margin-bottom: 10px;
     @media screen and (max-width:800px) {

@@ -86,3 +86,4 @@ export const ThumbL_APIED = [
     { name: 'Bullet', image: tl_1_17 },
   ]
 ]
+

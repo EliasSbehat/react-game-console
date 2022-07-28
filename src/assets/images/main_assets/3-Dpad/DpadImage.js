@@ -91,3 +91,4 @@ export const DPAD_APIED = [
     { name: 'Chameleon', image: d_2_7 },
   ]
 ]
+

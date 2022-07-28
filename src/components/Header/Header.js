@@ -45,7 +45,8 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: ${props => props.theme.bgColor};
-  border-bottom: 3px solid ${props => props.theme.HeaderButtom};
+  position: relative;
+  border-bottom: 5px solid ${props => props.theme.HeaderButtom};
 `
 
 const TopDiv = styled.div`
