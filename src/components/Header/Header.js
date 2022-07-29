@@ -10,6 +10,9 @@ const Header = (props) => {
         <RightDiv>
           <img alt="no img" ></img>
           <img alt="no img" onClick={() => props.modeChange()}></img>
+          <span>
+            Play Station 5 Controllers
+          </span>
         </RightDiv>
         <LeftDiv>
           {/* <SearchInput placeholder={'Search'} type="text" resflag={0}></SearchInput> */}
@@ -82,7 +85,7 @@ const RightDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: min-content;
+  width: max-content;
   img {
     margin-left: 30px;
   }
@@ -93,6 +96,16 @@ const RightDiv = styled.div`
 
   & img:nth-child(2) {
     content: url(${props => props.theme.Logo});
+  }
+
+  span {
+    margin-left: 30px;
+    font-size: 30px;
+    font-family: 'Rajdhani-Regular';
+    color: ${props => props.theme.color};
+    @media screen and (max-width: 400px) {
+      font-size: 20px;
+    }
   }
 `
 

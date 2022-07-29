@@ -96,7 +96,7 @@ const ViewArea = () => {
         <LocalHeader flag={myContext.sideflag}>
           <div>
             <span>
-              Play Station 5 Controller
+              
             </span>
           </div>
           <div>
@@ -452,14 +452,13 @@ const LocalHeader = styled.div`
     span {
       font-size: 30px;
       font-family: 'Rajdhani-Regular';
-      /* color: ${props => props.theme.color}; */
       color: '#333333';
-
       @media screen and (max-width: 400px) {
         font-size: 20px;
       }
     }
     img {
+      
       background-color: ${props => props.theme.HeadIconBgColor};
       padding: 10px;
       content: url(${props => props.theme.FlagIcon});
@@ -470,6 +469,7 @@ const LocalHeader = styled.div`
   & > div:nth-child(2) {
     position: absolute;
     right: 20px;
+    top: 20px;
     @media screen and (max-width: 800px) {
       display: none;
     }

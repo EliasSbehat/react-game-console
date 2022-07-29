@@ -17,6 +17,7 @@ import { FaTimes } from 'react-icons/fa';
 import { FiUpload } from 'react-icons/fi';
 import { AiOutlineStop } from 'react-icons/ai';
 import { MdOutlineDescription } from 'react-icons/md';
+import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 
 import { MarkImg, MarkHoverImg } from "../../assets/images";
 
@@ -517,10 +518,10 @@ const Tools = () => {
               <TbAlignLeft></TbAlignLeft>
             </span>
             <span className="prev" onClick={() => swiperPrev()}>
-              <img alt="no img" ></img>
+              <BsChevronLeft></BsChevronLeft>
             </span>
             <span className="next" onClick={() => swiperNext()}>
-              <img alt="no img" ></img>
+              <BsChevronRight></BsChevronRight>
             </span>
           </div>
         </div>
@@ -1909,30 +1910,32 @@ const TopDiv = styled.div`
       }
       & > span:nth-child(2) {
         color: ${props => props.theme.color};
-        font-size: 30px;
+        font-size: 25px;
         cursor: pointer;
       }
       & > span:nth-child(3) {
-        padding: 5px 12px;
+        padding: 5px 7px;
         border: ${props => props.theme.DirectIconBorder};
         background-color: ${props => props.theme.DirectIconBgColor};
         border-radius: 10px;
         height: 60%;
-        transform: scale(1.1);
-        img {
-          content: url(${props => props.theme.LeftDirectIconImg});
+        display: flex;
+        align-items: center;
+        svg {
+          color: ${props => props.theme.color};
         }
         cursor: pointer;
       }
       & > span:nth-child(4) {
-        padding: 5px 12px;
-        transform: scale(1.1);
+        padding: 5px 7px;
         height: 60%;
         border: ${props => props.theme.DirectIconBorder};
         background-color: ${props => props.theme.DirectIconBgColor};
         border-radius: 10px;
-        img {
-          content: url(${props => props.theme.RightDirectIconImg});
+        display: flex;
+        align-items: center;
+        svg {
+          color: ${props => props.theme.color};
         }
         cursor: pointer;
       }

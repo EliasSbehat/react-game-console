@@ -70,14 +70,14 @@ export const Design_APIED = [
     { name: 'Pinata', image: d_1_24 },
     { name: 'Dollar Bills', image: d_1_25 },
     { name: 'Carbon Fiber', image: d_1_26 },
-  ],
-  [
     { name: 'Gold Chrome', image: d_1_27 },
     { name: 'Blue Chrome', image: d_1_28 },
     { name: 'Red Chrome', image: d_1_29 },
     { name: 'Silver Chrome', image: d_1_30 },
     { name: 'Supernova', image: d_1_31 },
     { name: 'Chameleon', image: d_1_32 },
+  ],
+  [
     { name: 'Vampire Red', image: d_2_1 },
     { name: 'Sakura Pink', image: d_2_2 },
     { name: 'Soft Touch Purple', image: d_2_3 },
