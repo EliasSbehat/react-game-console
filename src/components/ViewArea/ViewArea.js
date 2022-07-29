@@ -286,7 +286,12 @@ const ViewArea = () => {
                           <HoverImg img={myContext.hoverImg} />
                       {/* } */}
                       {/* <AniImg i={myContext.aniImg !== null ? myContext.aniImg : 'null'} f={myContext.aniFlag}></AniImg> */}
-                      <SpecialArea sf={myContext.sideflag} si={myContext.snapIndex} id='specialArea'>
+                      <SpecialArea sf={myContext.sideflag} si={myContext.snapIndex} id='specialArea' onClick={() => {
+                        if (myContext.isText || myContext.isLogo) {
+                          myContext.setSnapIndex(13);
+                          myContext.swiper.slideTo(13, 300);
+                        }
+                      }}>
                         <div>
                           <div>
                             <TextMove></TextMove>

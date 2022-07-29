@@ -47,7 +47,7 @@ const Tools = () => {
     
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
-  const [swiper, setSwiper] = React.useState(0);
+  
   
   const [menuFlag, setMenuFlag] = React.useState(false);
 
@@ -61,20 +61,20 @@ const Tools = () => {
 
   const swiperTo = (ind) => {
     myContext.setSnapIndex(ind);
-    swiper.slideTo(ind, 300);
+    myContext.swiper.slideTo(ind, 300);
   }
 
   const swiperNext = () => {
     if (myContext.snapIndex >= 17) {
       myContext.setIsFinished(true);
     } else {
-      myContext.snapIndex === 10 && myContext.paddle !== null ? swiperTo(myContext.snapIndex+2) : swiper.slideNext();
+      myContext.snapIndex === 10 && myContext.paddle !== null ? swiperTo(myContext.snapIndex+2) : myContext.swiper.slideNext();
     }
   }
   
   const swiperPrev = () => {
     myContext.setIsFinished(false);
-    myContext.snapIndex === 12 && myContext.paddle !== null ? swiperTo(myContext.snapIndex-2) : swiper.slidePrev();
+    myContext.snapIndex === 12 && myContext.paddle !== null ? swiperTo(myContext.snapIndex-2) : myContext.swiper.slidePrev();
   }
 
   useEffect(() => {
@@ -258,8 +258,8 @@ const Tools = () => {
     }
     console.log('--------------------');
     console.log(totalData);
-    const res = await axios.post('https://game-server-deploy.herokuapp.com/add_product', totalData);
-    window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
+    // const res = await axios.post('https://game-server-deploy.herokuapp.com/add_product', totalData);
+    // window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
   }
 
 
@@ -536,7 +536,7 @@ const Tools = () => {
       <MediumDiv>
         <Swiper
           onSwiper={s=>{
-            setSwiper(s)
+            myContext.setSwiper(s)
           }}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={50}

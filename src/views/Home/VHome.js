@@ -1,4 +1,5 @@
 import React from "react";
+
 import styled from "styled-components";
 
 import { ThemeProvider } from "styled-components";
@@ -194,9 +195,13 @@ const VHome = () => {
   const [TrimtabSelect, TrimSetTabSelect] = React.useState(0);
   const [TriggertabSelect, TriggerSetTabSelect] = React.useState(0);
 
+  // ------------------- Swiper -------------------
+  const [swiper, setSwiper] = React.useState(0);
 
   const imageSetting = {
-    object_data,
+    swiper, 
+    setSwiper,
+
     object_data,
 
     designData,
