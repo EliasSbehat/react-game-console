@@ -579,7 +579,6 @@ const Viewer = styled.div`
         top: ${props => props.flag ? '0%' : '65%'};
         width: 50%;
         transform: ${props => props.flag ? 'scale(1.4)' : 'scale(0.5)'};
-        
         & > div:nth-child(1) {
           min-width: 100%;
           min-height: 100%;

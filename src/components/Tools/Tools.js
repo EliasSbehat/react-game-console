@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import styled, {css} from "styled-components";
 import html2canvas from 'html2canvas';
-import axios from "axios";
-
+import ReactTooltip from "react-tooltip";
 
 import ImageUploading from 'react-images-uploading';
 import {NotificationContainer } from 'react-notifications';
@@ -42,13 +41,12 @@ import AppContext from "../../context/context";
 import "swiper/css";
 
 const Tools = () => {
-  
-  // const [myContext.DpadtabSelect, myContext.DpadSetTabSelect] = React.useState(0);
     
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
   
-  
+  const middRef = useRef();
+
   const [menuFlag, setMenuFlag] = React.useState(false);
 
   const handleCaptureClick = async () => {
@@ -79,7 +77,7 @@ const Tools = () => {
 
   useEffect(() => {
     // console.log(myContext.design);
-  }, [myContext.design])
+  })
 
   const maxNumber = 69;
 
@@ -524,6 +522,46 @@ const Tools = () => {
               <BsChevronRight></BsChevronRight>
             </span>
           </div>
+          {/* <DescTooltip>
+            <h4>
+              {
+                myContext.snapIndex === 0 && myContext.designData !== null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].desc : null
+              }
+              {
+                myContext.snapIndex === 1 && myContext.abxyData !== null ? myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].desc : null                    
+              }
+              {
+                myContext.snapIndex === 2 && myContext.dpadData !== null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].desc : null                    
+              }
+              {
+                myContext.snapIndex === 3 && myContext.thubmLData !== null ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].desc : null                    
+              }
+              {
+                myContext.snapIndex === 4 && myContext.thubmRData !== null ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].desc : null
+              }
+              {
+                myContext.snapIndex === 5 && myContext.startBackData !== null ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].desc : null                    
+              }
+              {
+                myContext.snapIndex === 6 && myContext.thuchPadData !== null ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].desc : null                    
+              }
+              {
+                myContext.snapIndex === 7 && myContext.trimData !== null ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].desc : null
+              }
+              {
+                myContext.snapIndex === 8 && myContext.triggersData !== null ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].desc : null                    
+              }
+              {
+                myContext.snapIndex === 9 && myContext.razorBackData !== null && myContext.razorBack ? myContext.razorBackData.desc : null
+              }
+              {
+                myContext.snapIndex === 10 && myContext.esportsData !== null ? myContext.esportsData.values[myContext.esportsFlag].desc : null
+              }
+              {
+                myContext.snapIndex === 11 && myContext.rearDesignData !== null ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].desc : null
+              }
+            </h4>
+          </DescTooltip> */}
         </div>
       </TopDiv>
 
@@ -533,7 +571,7 @@ const Tools = () => {
        */}
 
       
-      <MediumDiv>
+      <MediumDiv ref = { middRef }>
         <Swiper
           onSwiper={s=>{
             myContext.setSwiper(s)
@@ -546,11 +584,11 @@ const Tools = () => {
           // }}
           simulateTouch={false}
           scrollbar={{ draggable: true }}
+          allowTouchMove={false}
           onSlideChange={async (event) => {
-            
             const ind = event.snapIndex;
             await myContext.setSnapIndex(ind);
-
+            middRef.current.scrollTop = 0;
             if (ind === 8 || ind === 9 || ind === 10 || ind === 11 || ind === 12) {
               await myContext.setSideflag(false);
             } else {
@@ -566,7 +604,7 @@ const Tools = () => {
              ██████╔╝███████╗███████║██║╚██████╔╝██║ ╚████║
              ╚═════╝ ╚══════╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
           */}
-            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}}>
+            <SwiperSlide style={{display: "flex", flexDirection: "column", alignItems: 'center'}} id="design">
               <TopItems>
                 {
                   myContext.designData !== null ?
@@ -579,7 +617,7 @@ const Tools = () => {
                             <span>
                               { item.name }
                             </span>
-                            {/* <span>
+                            {/* <span>  
                               £{ item.price }
                             </span> */}
                             <div></div>
@@ -591,7 +629,7 @@ const Tools = () => {
                 }
               </TopItems>
               <Hr></Hr>
-              <Selector>
+              <Selector id="design_topitems">
                 {
                   myContext.designData !== null ?
                     myContext.designData.items[myContext.DesigntabSelect].map((item, index) => (
@@ -615,7 +653,7 @@ const Tools = () => {
               </Selector>
             </SwiperSlide>
           {/*
-              █████╗  ██████╗ ██╗  ██╗██╗   ██╗
+               █████╗ ██████╗ ██╗  ██╗██╗   ██╗
               ██╔══██╗██╔══██╗╚██╗██╔╝╚██╗ ██╔╝
               ███████║██████╔╝ ╚███╔╝  ╚████╔╝ 
               ██╔══██║██╔══██╗ ██╔██╗   ╚██╔╝  
@@ -1594,7 +1632,7 @@ const Tools = () => {
                     {
                       myContext.isLogo ? (
                         <span>
-                          <TextDiv>
+                          <ImgDiv>
                             <UploadImg 
                               onClick={() => {
                                 myContext.setModalFlag(true);
@@ -1632,7 +1670,7 @@ const Tools = () => {
                               </UploadImg>
                             )}
                           </ImageUploading>
-                        </TextDiv>
+                        </ImgDiv>
                       </span>
                       ) : null
                     }
@@ -1780,6 +1818,45 @@ const Tools = () => {
         {/* <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button> */}
       {/* </ConfirmDiv> */}
       <LocalFooter>
+        <p>
+          <span>Part Selected : </span> 
+        {
+          myContext.snapIndex === 0 && myContext.designData !== null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].name : null
+        }
+        {
+          myContext.snapIndex === 1 && myContext.abxyData !== null ? myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].name : null                    
+        }
+        {
+          myContext.snapIndex === 2 && myContext.dpadData !== null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].name : null                    
+        }
+        {
+          myContext.snapIndex === 3 && myContext.thubmLData !== null ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].name : null                    
+        }
+        {
+          myContext.snapIndex === 4 && myContext.thubmRData !== null ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].name : null
+        }
+        {
+          myContext.snapIndex === 5 && myContext.startBackData !== null ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].name : null                    
+        }
+        {
+          myContext.snapIndex === 6 && myContext.thuchPadData !== null ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].name : null                    
+        }
+        {
+          myContext.snapIndex === 7 && myContext.trimData !== null ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].name : null
+        }
+        {
+          myContext.snapIndex === 8 && myContext.triggersData !== null ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].name : null                    
+        }
+        {
+          myContext.snapIndex === 9 && myContext.razorBackData !== null && myContext.razorBack ? myContext.razorBackData.name : null
+        }
+        {
+          myContext.snapIndex === 10 && myContext.esportsData !== null ? myContext.esportsData.values[myContext.esportsFlag].name : null
+        }
+        {
+          myContext.snapIndex === 11 && myContext.rearDesignData !== null ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].name : null
+        }
+        </p>
         <div id="info_div">
           <TotalPrice>
             <span>
@@ -1845,6 +1922,7 @@ const TopDiv = styled.div`
   @media screen and (max-width: 800px) {
     margin: 0;
   }
+  
   & > div:nth-child(1) {
     width: 100%;
     display: flex;
@@ -1882,6 +1960,7 @@ const TopDiv = styled.div`
     display: flex;
     padding: 0 10px;
     justify-content: space-between;
+    position: relative;
     & > div:nth-child(1) {
       display: flex;
       justify-content: center;
@@ -2056,6 +2135,8 @@ const MediumDiv = styled.div`
     border-radius: 10px;
     background-color: ${props => props.theme.ScrollBar};
   }
+
+  overflow: auto;
   /* height: 60%; */
 `
 
@@ -2184,7 +2265,7 @@ const LDominContainer = styled.div`
 const TextDiv = styled.div`
   margin: 10px;
   border: 1px solid ${props => props.theme.ThemeColor};
-  padding: 10px;
+  padding: 5px;
   color: ${props => props.theme.color};
   .added-text {
     color: ${props => props.theme.color};
@@ -2204,6 +2285,27 @@ const TextDiv = styled.div`
     background-color: ${props => props.theme.DirectIconBgColor};
     margin-bottom: 20px;
   }
+`
+
+const ImgDiv = styled.div`
+  margin: 10px 50px;
+  border: 1px solid ${props => props.theme.ThemeColor};
+  color: ${props => props.theme.color};
+  .added-text {
+    color: ${props => props.theme.color};
+    width: calc(100% - 2 * 50px);
+    outline: none;
+    border: ${props => props.theme.DirectIconBorder};
+    background-color: ${props => props.theme.HeadIconBgColor};
+  }
+  .font-type {
+    color: ${props => props.theme.color};
+    width: 100%;
+    outline: none;
+    border: ${props => props.theme.DirectIconBorder};
+    background-color: ${props => props.theme.DirectIconBgColor};
+  }
+  background-color: red;
 `
 
 const FontOption = styled.option`
@@ -2513,6 +2615,7 @@ const LocalHeader = styled.div`
 const TotalPrice = styled.div`
   display: flex;
   flex-direction: column;
+  padding-right: 10px;
   & span:nth-child(1) {
     font-size: 16px;
     font-family: 'Rajdhani-Light';
@@ -2530,13 +2633,18 @@ const Info = styled.div`
   text-align: right;
   display: flex;
   gap: 10px;
+  justify-content: space-between;
+  width: 80%;
   & > div:nth-child(1) {
+    padding-left: 10px;
     display: flex;
     flex-direction: column;
+    text-align: left;
     & > span:nth-child(1) {
       font-size: 15px;
       font-family: 'Rajdhani-Light';
     }
+    border-left: 1px solid lightgrey;
   }
 `
 
@@ -2573,6 +2681,19 @@ const ATC = styled.button`
 
 const LocalFooter = styled.div`
   width: 100%;
+  z-index: 600;
+  p {
+    width: 90%;
+    text-align: left;
+    padding: 0px 10px;
+    color: ${props => props.theme.color};
+    font-family: 'Rajdhani-Medium';
+    font-size: 20px;
+    span {
+      font-family: 'Rajdhani-Light';
+      font-size: 20px;
+    }
+  }
   @media screen and (max-width: 800px){
     /* bottom: 20px; */
   }
@@ -2580,7 +2701,8 @@ const LocalFooter = styled.div`
   position: absolute;
   bottom: 0;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   #info_div {
     width: 90%;
     border-radius: 6px;
@@ -2591,10 +2713,6 @@ const LocalFooter = styled.div`
     align-items: center;
     background-color: white;
     margin-bottom: 10px;
-    @media screen and (max-width:800px) {
-      border-radius: 0;
-      padding: 0;
-    }
   }
 `
 
@@ -2756,6 +2874,10 @@ const MobileSelector = styled.select`
   @media screen and (max-width: 800px) {
     display: block;
   }
+`
+
+const DescTooltip = styled.div`
+  
 `
 
 export default Tools;

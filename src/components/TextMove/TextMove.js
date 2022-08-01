@@ -2,14 +2,25 @@ import * as React from "react";
 import Moveable from "react-moveable";
 import styled from "styled-components";
 import AppContext from "../../context/context";
+import $ from 'jquery';
 
 export default function ImageMove() {
 	const myContext = React.useContext(AppContext);
   const [target, setTarget] = React.useState();
+	const [winWidth, setWinWidth] = React.useState(null);
   const [frame] = React.useState({
     translate: [0, 0],
     rotate: 0
   });
+
+	React.useEffect(() => {
+		window.addEventListener("resize", console.log('Hello'));
+	})
+
+	$(window).resize(function() {
+		setWinWidth(window.innerWidth);
+	});
+
   const moveableRef = React.useRef();
   React.useEffect(() => {
     const target = document.querySelector('.target1');
@@ -24,7 +35,7 @@ export default function ImageMove() {
 		}
   }, [myContext.fontSize, myContext.isText, myContext.textVal]);
   return (
-    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} onFocus={() => console.log('----------')}>
+    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth / 1600}>
       {
 				<div>
 					<h1 className="target1" id="txtmove">
@@ -114,5 +125,6 @@ const Wrapper = styled.div`
 			font-family: ${props => props.ff};
 			color: ${props => props.tc};
 		}
+		transform: scale(${props => props.width});
 	}
 `

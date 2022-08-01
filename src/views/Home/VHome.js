@@ -425,7 +425,7 @@ const VHome = () => {
                   name: design_step[design_step_keys[i]].title,
                   price: design_step[design_step_keys[i]].price,
                   is_default: design_step[design_step_keys[i]].extension_attributes['is_default'],
-                  option_type_id: design_step[design_step_keys[i]].option_type_id
+                  option_type_id: design_step[design_step_keys[i]].option_type_id,
                 }
 
                 if (temp.is_default) DesignSetTabSelect(i);
@@ -444,6 +444,7 @@ const VHome = () => {
                     is_default: design_step[design_step_keys[i]].childs[j]['extension_attributes'].is_default,
                     option_id: design_step[design_step_keys[i]].childs[j].option_id,
                     option_type_id: design_step[design_step_keys[i]].childs[j].option_type_id,
+                    desc: JSON.parse(design_step[design_step_keys[i]].childs[j].extension_attributes.description)[0].description
                   });
                   if (ltemp.is_default) {
                     setDesign([i, j])
@@ -486,6 +487,7 @@ const VHome = () => {
                     selet: base_url + image,
                     option_id: abxy_step[abxy_step_keys[i]].childs[j].option_id,
                     option_type_id: abxy_step[abxy_step_keys[i]].childs[j].option_type_id,
+                    desc: JSON.parse(abxy_step[abxy_step_keys[i]].childs[j].extension_attributes.description)[0].description
                   });
                 }
                 abxy.option_id = object_data[object_keys[1]].option_id;
@@ -527,6 +529,7 @@ const VHome = () => {
                     is_default: dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes'].is_default,
                     option_id: dpad_step[dpad_step_keys[i]].childs[j].option_id,
                     option_type_id: dpad_step[dpad_step_keys[i]].childs[j].option_type_id,
+                    desc: JSON.parse(dpad_step[dpad_step_keys[i]].childs[j].extension_attributes.description)[0].description
                   });
                 }
                 dpad.option_id = object_data[object_keys[2]].option_id;
@@ -552,7 +555,8 @@ const VHome = () => {
                   image: ThumbL_APIED[0][i].image,
                   is_default: temp['extension_attributes'].is_default,
                   option_id: object_data[object_keys[3]].option_id,
-                  option_type_id: temp.option_type_id
+                  option_type_id: temp.option_type_id,
+                  desc: JSON.parse(temp.extension_attributes.description)[0].description
                 });
               }
               thumbl.option_id = object_data[object_keys[3]].option_id;
@@ -574,7 +578,8 @@ const VHome = () => {
                   image: ThumbR_APIED[0][i].image,
                   is_default: temp['extension_attributes'].is_default,
                   option_id: object_data[object_keys[4]].option_id,
-                  option_type_id: temp.option_type_id
+                  option_type_id: temp.option_type_id,
+                  desc: JSON.parse(temp.extension_attributes.description)[0].description
                 });
               }
               thumbr.option_id = object_data[object_keys[4]].option_id;
@@ -607,6 +612,7 @@ const VHome = () => {
                     is_default: startback_step[startback_step_keys[i]].childs[j]['extension_attributes'].is_default,
                     option_id: startback_step[startback_step_keys[i]].childs[j].option_id,
                     option_type_id: startback_step[startback_step_keys[i]].childs[j].option_type_id,
+                    desc: JSON.parse(startback_step[startback_step_keys[i]].childs[j].extension_attributes.description)[0].description
                   });
                   if (startback_step[startback_step_keys[i]].childs[j]['extension_attributes'].is_default) {
                     setStartBtn([i, j]);
@@ -642,7 +648,6 @@ const VHome = () => {
                   let image = JSON.parse(touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
                   if (touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes'].is_default) {
                     setTouchpad([i, j]);
-                    console.log('--------------------');
                   }
                   ltemp.push({
                     name: touchpad_step[touchpad_step_keys[i]].childs[j].title,
@@ -652,6 +657,7 @@ const VHome = () => {
                     is_default: touchpad_step[touchpad_step_keys[i]].childs[j]['extension_attributes'].is_default,
                     option_id: touchpad_step[touchpad_step_keys[i]].childs[j].option_id,
                     option_type_id: touchpad_step[touchpad_step_keys[i]].childs[j].option_type_id,
+                    desc: JSON.parse(touchpad_step[touchpad_step_keys[i]].childs[j].extension_attributes.description)[0].description
                   });
                 }
                 touchpad.option_id = object_data[object_keys[6]].option_id;
@@ -675,7 +681,8 @@ const VHome = () => {
                 image_back: Trim_APIED[0][i].image_back,
                 is_default: temp['extension_attributes'].is_default,
                 option_id: object_data[object_keys[7]].option_id,
-                option_type_id: temp.option_type_id
+                option_type_id: temp.option_type_id,
+                desc: JSON.parse(temp.extension_attributes.description)[0].description
               });
             }
             trim.option_id = object_data[object_keys[7]].option_id;
@@ -712,6 +719,7 @@ const VHome = () => {
                   is_default: triggers_step[triggers_step_keys[i]].childs[j]['extension_attributes'].is_default,
                   option_id: triggers_step[triggers_step_keys[i]].childs[j].option_id,
                   option_type_id: triggers_step[triggers_step_keys[i]].childs[j].option_type_id,
+                  desc: JSON.parse(triggers_step[triggers_step_keys[i]].childs[j].extension_attributes.description)[0].description
                 });
               }
               triggers.option_id = object_data[object_keys[8]].option_id;
@@ -727,6 +735,7 @@ const VHome = () => {
           let razorbacks_keys = Object.keys(object_data[object_keys[9]].values);
           razorbacks.price = object_data[object_keys[9]].values[razorbacks_keys[0]].price;
           razorbacks.is_default = object_data[object_keys[9]].values[razorbacks_keys[0]].extension_attributes.is_default;
+          razorbacks.desc = JSON.parse(object_data[object_keys[9]].values[razorbacks_keys[0]].extension_attributes.description)[0].description;
           razorbacks.option_id = object_data[object_keys[9]].option_id;
           razorbacks.option_type_id = object_data[object_keys[9]].values[razorbacks_keys[0]].option_type_id
           setRazorBackData(razorbacks);
@@ -744,11 +753,11 @@ const VHome = () => {
           for (i = 0; i < tempEsportDataKeys.length; i++) {
             tempEsportData.values.push(
               {
-                option_type_id: esport.values[tempEsportDataKeys[i]].option_type_id
+                option_type_id: esport.values[tempEsportDataKeys[i]].option_type_id,
+                desc: JSON.parse(esport.values[tempEsportDataKeys[i]].extension_attributes.description)[0].description
               }
             )
           }
-          console.log(tempEsportData);
           setEsportsData(tempEsportData);
           let esport_keys = Object.keys(esport.values);
           // --------------- Paddle ---------------
@@ -766,10 +775,10 @@ const VHome = () => {
                   price: temp.childs[i].price,
                   selet: base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value,
                   image_back: Paddle_APIED[0][i].image_back,
+                  desc: JSON.parse(temp.childs[i].extension_attributes.description)[0].description
                 }
               )
             }
-            console.log(paddles);
             setPaddleData(paddles);
           // --------------- Paddle End ---------------
           // --------------- Domin8or Button ---------------
@@ -780,10 +789,11 @@ const VHome = () => {
             dominselect.items = [];
             for (i = 0; i < temp.childs.length / 2; i++) {
               let temp1 = {};
-              temp1.name = temp.childs[i].keys;
+              temp1.name = temp.childs[i].title;
               temp1.price = temp.childs[i].price;
               temp1.image = base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value;
               temp1.select = base_url + JSON.parse(temp.childs[i].extension_attributes.images_data)[0].value;
+              temp1.desc = JSON.parse(temp.childs[i].extension_attributes.description)[0].description;
               dominselect.items.push(temp1);
             }
             setDominselectData(dominselect);
@@ -802,10 +812,12 @@ const VHome = () => {
               price: temp.price,
               selet: base_url + JSON.parse(temp['extension_attributes']['images_data'])[0].value,
               image: RearDesign_APIED[0][i].image,
+              desc: JSON.parse(temp.extension_attributes.description)[0].description,
               image_back: RearDesign_APIED[0][i].image_back,
               is_default: temp['extension_attributes'].is_default,
               option_id: object_data[object_keys[11]].option_id,
-              option_type_id: temp.option_type_id
+              option_type_id: temp.option_type_id,
+              desc: JSON.parse(temp.extension_attributes.description)[0].description
             });
           }
           setRearDesignData(rearDesign);
