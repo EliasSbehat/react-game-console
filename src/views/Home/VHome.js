@@ -57,6 +57,7 @@ const VHome = () => {
   const [rdomin_2, setRdomin2] = React.useState(null);
 
   const [modal_flag, setModalFlag] = React.useState(false);
+  const [modal_desc, setModalDesc] = React.useState(false);
 
   const [aniFlag, setAniFlag] = React.useState(false);
   const [aniImg, setAniImg] = React.useState(null);
@@ -303,6 +304,8 @@ const VHome = () => {
     setFontSize,
     modal_flag,
     setModalFlag,
+    modal_desc,
+    setModalDesc,
 
     // Logo
     isLogo,
@@ -366,7 +369,6 @@ const VHome = () => {
           let json = await response.json();
           let object_data = {};
           let childs = {};
-          
           for (var i = 0; i <json.length; i++) {
             if (json[i].values !== undefined) {
               if (json[i].values[0]['extension_attributes'].dependency == undefined) {
@@ -376,6 +378,7 @@ const VHome = () => {
                 object_data['optId_'+json[i].option_id]['dependType'] = json[i].extension_attributes.dependency_type;
                 object_data['optId_'+json[i].option_id]['disabled'] = json[i].extension_attributes.disabled;
                 object_data['optId_'+json[i].option_id]['option_title_id'] = json[i].extension_attributes.option_title_id;
+                object_data['optId_'+json[i].option_id]['desc'] = JSON.parse(json[i].extension_attributes.description)[0].description;
                 object_data['optId_'+json[i].option_id]['values'] = new Object();
                 for (var j = 0; j < json[i].values.length; j++) {
                   object_data['optId_'+json[i].option_id]['values']["optTypeId_" + json[i].values[j].option_type_id] = json[i].values[j];
@@ -409,9 +412,7 @@ const VHome = () => {
               object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'].push(childs[childKeys[i]]);
             }
           }
-          
           const object_keys = Object.keys(object_data);
-          setObjectData(object_data);
           setObjectKeys(object_keys);
             // --------------- Design ---------------
               let design = {};
@@ -420,6 +421,7 @@ const VHome = () => {
               design.steps = [];
               design.items = [];
               design.name = object_data[object_keys[0]].title;
+              design.desc = object_data[object_keys[0]].desc;
               for (i = 0; i < design_step_keys.length; i++) {
                 let temp = {
                   name: design_step[design_step_keys[i]].title,
@@ -464,6 +466,7 @@ const VHome = () => {
               abxy.steps = [];
               abxy.items = [];
               abxy.name = object_data[object_keys[1]].title;
+              abxy.desc = object_data[object_keys[1]].desc;
               for (i = 0; i < abxy_step_keys.length; i++) {
                 let temp = {
                   name: abxy_step[abxy_step_keys[i]].title,
@@ -504,6 +507,7 @@ const VHome = () => {
               dpad.steps = [];
               dpad.items = [];
               dpad.name = object_data[object_keys[2]].title;
+              dpad.desc = object_data[object_keys[2]].desc;
               for (i = 0; i < dpad_step_keys.length; i++) {
                 let temp = {
                   name: dpad_step[dpad_step_keys[i]].title,
@@ -543,6 +547,7 @@ const VHome = () => {
               let thumbl = { steps: [''], items: [[]] };
               let thumbl_values = Object.keys(object_data[object_keys[3]].values);
               thumbl.name = object_data[object_keys[3]].title;
+              thumbl.desc = object_data[object_keys[3]].desc;
               for (i = 0; i < thumbl_values.length; i++) {
                 const temp = object_data[object_keys[3]].values[thumbl_values[i]];
                 if (temp['extension_attributes'].is_default) {
@@ -564,7 +569,7 @@ const VHome = () => {
             // --------------- ThumbL End ---------------
 
             // --------------- ThumbR --------------
-              let thumbr = { steps: [''], items: [[]], name: object_data[object_keys[4]].title };
+              let thumbr = { steps: [''], items: [[]], name: object_data[object_keys[4]].title, desc: object_data[object_keys[4]].desc };
               let thumbr_values = Object.keys(object_data[object_keys[4]].values);
               for (i = 0; i < thumbr_values.length; i++) {
                 const temp = object_data[object_keys[4]].values[thumbr_values[i]];
@@ -593,6 +598,7 @@ const VHome = () => {
               startback.steps = [];
               startback.items = [];
               startback.name = object_data[object_keys[5]].title;
+              startback.desc = object_data[object_keys[5]].desc;
               for (i = 0; i < startback_step_keys.length; i++) {
                 let temp = {
                   name: startback_step[startback_step_keys[i]].title,
@@ -633,6 +639,7 @@ const VHome = () => {
               touchpad.steps = [];
               touchpad.items = [];
               touchpad.name = object_data[object_keys[6]].title;
+              touchpad.desc = object_data[object_keys[6]].desc;
               for (i = 0; i < touchpad_step_keys.length; i++) {
                 let temp = {
                   name: touchpad_step[touchpad_step_keys[i]].title,
@@ -668,7 +675,7 @@ const VHome = () => {
           // --------------- Touchpad End ---------------
 
           // --------------- Trim --------------
-            let trim = { steps: [''], items: [[]], name: object_data[object_keys[7]].title };
+            let trim = { steps: [''], items: [[]], name: object_data[object_keys[7]].title, desc: object_data[object_keys[7]].desc };
             let trim_values = Object.keys(object_data[object_keys[7]].values);
             for (i = 0; i < trim_values.length; i++) {
               const temp = object_data[object_keys[7]].values[trim_values[i]];
@@ -696,6 +703,7 @@ const VHome = () => {
             triggers.steps = [];
             triggers.items = [];
             triggers.name = object_data[object_keys[8]].title;
+            triggers.desc = object_data[object_keys[8]].desc;
             for (i = 0; i < triggers_step_keys.length; i++) {
               let temp = {
                 name: triggers_step[triggers_step_keys[i]].title,
@@ -732,10 +740,9 @@ const VHome = () => {
           // setRazorbackData
           let razorbacks = {};
           razorbacks.name = object_data[object_keys[9]].title;
+          razorbacks.desc = object_data[object_keys[9]].desc;
           let razorbacks_keys = Object.keys(object_data[object_keys[9]].values);
-          razorbacks.price = object_data[object_keys[9]].values[razorbacks_keys[0]].price;
           razorbacks.is_default = object_data[object_keys[9]].values[razorbacks_keys[0]].extension_attributes.is_default;
-          razorbacks.desc = JSON.parse(object_data[object_keys[9]].values[razorbacks_keys[0]].extension_attributes.description)[0].description;
           razorbacks.option_id = object_data[object_keys[9]].option_id;
           razorbacks.option_type_id = object_data[object_keys[9]].values[razorbacks_keys[0]].option_type_id
           setRazorBackData(razorbacks);
@@ -747,6 +754,7 @@ const VHome = () => {
           let esport = object_data[object_keys[10]];
           let tempEsportData = {};
           tempEsportData.name = esport.title;
+          tempEsportData.desc = esport.desc;
           tempEsportData.option_id = esport.option_id;
           tempEsportData.values = [];
           let tempEsportDataKeys = Object.keys(esport.values);
@@ -804,6 +812,7 @@ const VHome = () => {
           let rearDesign = { steps: [''], items: [[]] };
           let rearDesign_values = Object.keys(object_data[object_keys[11]].values);
           rearDesign.name = object_data[object_keys[11]].title;
+          rearDesign.desc = object_data[object_keys[11]].desc;
           for (i = 0; i < rearDesign_values.length; i++) {
             const temp = object_data[object_keys[11]].values[rearDesign_values[i]];
             if (temp['extension_attributes'].is_default) setRearDesign([0, i]);
@@ -827,6 +836,7 @@ const VHome = () => {
         // const [dtriggersData, ]
           let dtriggers = {};
           dtriggers.name = object_data[object_keys[12]].title;
+          dtriggers.desc = object_data[object_keys[12]].desc;
           let dtriggers_keys = Object.keys(object_data[object_keys[12]].values);
           dtriggers.price = object_data[object_keys[12]].values[dtriggers_keys[1]].price;
           dtriggers.is_default = object_data[object_keys[12]].values[dtriggers_keys[1]].extension_attributes.is_default;
@@ -840,7 +850,8 @@ const VHome = () => {
 
         // --------------- Text and Logo ---------------
           const per = object_data[object_keys[13]];
-          setTextandlogoData({name: per.title});
+          console.log(per);
+          setTextandlogoData({ name: per.title, desc: per.desc });
           const per_value_keys = Object.keys(object_data[object_keys[13]].values);
           let names = [];
           names.push(per.title);
@@ -907,6 +918,67 @@ const VHome = () => {
                   Okay
                 </MoOkay>
                 <HideModal onClick={() => setModalFlag(false)}>
+                  <TiTimes></TiTimes>
+                </HideModal>
+              </div>
+            </Modal>
+            <Modal flag={ modal_desc }>
+              <div>
+                <h1>
+                </h1>
+                <MoConItem>
+                  <h1>
+                  {
+                    snapIndex === 0 && designData !== null ? designData.desc : null
+                  }
+                  {
+                    snapIndex === 1 && abxyData !== null ? abxyData.desc : null                    
+                  }
+                  {
+                    snapIndex === 2 && dpadData !== null ? dpadData.desc : null                    
+                  }
+                  {
+                    snapIndex === 3 && thubmLData !== null ? thubmLData.desc : null                    
+                  }
+                  {
+                    snapIndex === 4 && thubmRData !== null ? thubmRData.desc : null
+                  }
+                  {
+                    snapIndex === 5 && startBackData !== null ? startBackData.desc : null                    
+                  }
+                  {
+                    snapIndex === 6 && thuchPadData !== null ? thuchPadData.desc : null                    
+                  }
+                  {
+                    snapIndex === 7 && trimData !== null ? trimData.desc : null
+                  }
+                  {
+                    snapIndex === 8 && triggersData !== null ? triggersData.desc : null                    
+                  }
+                  {
+                    snapIndex === 9 && razorBackData !== null ? razorBackData.desc : null
+                  }
+                  {
+                    snapIndex === 10 && esportsData !== null ? esportsData.desc : null
+                  }
+                  {
+                    snapIndex === 11 && rearDesignData !== null ? rearDesignData.desc : null
+                  }
+                  {
+                    snapIndex === 12 && dtriggersData !== null ? dtriggersData.desc : null
+                  }
+                  {
+                    snapIndex === 13 && textandlogoData !== null ? textandlogoData.desc : null
+                  }
+                  {
+                    snapIndex === 14 ? 'Add product to cart' : null
+                  }
+                  </h1>
+                </MoConItem>
+                <MoOkay onClick={() => setModalDesc(false)}>
+                  Okay
+                </MoOkay>
+                <HideModal onClick={() => setModalDesc(false)}>
                   <TiTimes></TiTimes>
                 </HideModal>
               </div>

@@ -510,7 +510,7 @@ const Tools = () => {
           </div>
           <div>
             <span>
-              <MdOutlineDescription></MdOutlineDescription>
+              <MdOutlineDescription onClick={() => myContext.setModalDesc(true)}></MdOutlineDescription>
             </span>
             <span onClick={() => setMenuFlag(!menuFlag)}>
               <TbAlignLeft></TbAlignLeft>
@@ -2305,7 +2305,6 @@ const ImgDiv = styled.div`
     border: ${props => props.theme.DirectIconBorder};
     background-color: ${props => props.theme.DirectIconBgColor};
   }
-  background-color: red;
 `
 
 const FontOption = styled.option`
