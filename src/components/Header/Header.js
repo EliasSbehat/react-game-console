@@ -28,7 +28,6 @@ const Header = (props) => {
           <FeatherSpan><img alt="no img"></img><span>2</span></FeatherSpan>
         </TopDiv>
         <BotDiv>
-        <SearchInput placeholder="Search" type="text" resflag={1}></SearchInput>
         </BotDiv>
       </ResponContainer>
     </Wrapper>

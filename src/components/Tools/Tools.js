@@ -578,10 +578,6 @@ const Tools = () => {
           }}
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={50}
-          // navigation = {{
-          //   nextEl: '.next',
-          //   prevEl: '.prev',
-          // }}
           simulateTouch={false}
           scrollbar={{ draggable: true }}
           allowTouchMove={false}
@@ -1818,87 +1814,89 @@ const Tools = () => {
         {/* <button onClick={() => myContext.func_reset(myContext.snapIndex)}>Reset</button> */}
       {/* </ConfirmDiv> */}
       <LocalFooter>
-        <p>
-          <span>Part Selected : </span> 
-        {
-          myContext.snapIndex === 0 && myContext.designData !== null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].name : null
-        }
-        {
-          myContext.snapIndex === 1 && myContext.abxyData !== null ? myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].name : null                    
-        }
-        {
-          myContext.snapIndex === 2 && myContext.dpadData !== null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].name : null                    
-        }
-        {
-          myContext.snapIndex === 3 && myContext.thubmLData !== null ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].name : null                    
-        }
-        {
-          myContext.snapIndex === 4 && myContext.thubmRData !== null ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].name : null
-        }
-        {
-          myContext.snapIndex === 5 && myContext.startBackData !== null ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].name : null                    
-        }
-        {
-          myContext.snapIndex === 6 && myContext.thuchPadData !== null ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].name : null                    
-        }
-        {
-          myContext.snapIndex === 7 && myContext.trimData !== null ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].name : null
-        }
-        {
-          myContext.snapIndex === 8 && myContext.triggersData !== null ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].name : null                    
-        }
-        {
-          myContext.snapIndex === 9 && myContext.razorBackData !== null && myContext.razorBack ? myContext.razorBackData.name : null
-        }
-        {
-          myContext.snapIndex === 10 && myContext.esportsData !== null ? myContext.esportsData.values[myContext.esportsFlag].name : null
-        }
-        {
-          myContext.snapIndex === 11 && myContext.rearDesignData !== null ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].name : null
-        }
-        </p>
-        <div id="info_div">
-          <TotalPrice>
-            <span>
-              Total
-            </span>
-            <span>
-              £{
-                Math.round((myContext.initalPrice +
-                  Number(myContext.design !== null && myContext.designData != null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].price : 0) +
-                  Number(myContext.abxy !== null && myContext.anxyData != null ? myContext.anxyData.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
-                  Number(myContext.dpad !== null && myContext.dpadData != null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
-                  Number(myContext.thumbstickL !== null && myContext.thubmLData ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
-                  Number(myContext.thumbstickR !== null && myContext.thubmRData ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
-                  Number(myContext.startBtn !== null && myContext.startBackData ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
-                  Number(myContext.touchpad !== null && myContext.thuchPadData ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
-                  Number(myContext.trim !== null && myContext.trimData ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
-                  Number(myContext.trigger !== null && myContext.triggersData ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
-                  Number(myContext.rearDesign !== null && myContext.rearDesignData ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
-                  Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
-                  Number(myContext.paddle !== null && myContext.paddleData ? myContext.paddleData.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
-                  Number(myContext.ldomin_2 !== null && myContext.dominselectData ? Number(DominL.items[myContext.ldomin_2].price) + Number(myContext.dominselectData.items[myContext.ldomin_1].price) : 0) + 
-                  Number(myContext.rdomin_2 !== null && myContext.dominselectData ? Number(DominR.items[myContext.rdomin_2].price) + Number(myContext.dominselectData.items[myContext.rdomin_1].price) : 0) + 
-                  Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0) + 
-                  Number(myContext.isText ? myContext.textPrice : 0) + 
-                  Number(myContext.isLogo ? myContext.logoPrice : 0)
-                ) * 100
-                ) / 100
-              }
-            </span>
-          </TotalPrice>
-          <Info>
-            <div>
-              <span> Delivery </span>
-              <EDD>
-                04/04/2022
-              </EDD>
-            </div>
-            <ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
-              <img alt="no img"></img>
-              Add
-            </ATC>
-          </Info>
+        <div>
+					<p>
+						<span>Part Selected : </span> 
+					{
+						myContext.snapIndex === 0 && myContext.designData !== null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].name : null
+					}
+					{
+						myContext.snapIndex === 1 && myContext.abxyData !== null ? myContext.abxyData.items[myContext.abxy[0]][myContext.abxy[1]].name : null                    
+					}
+					{
+						myContext.snapIndex === 2 && myContext.dpadData !== null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].name : null                    
+					}
+					{
+						myContext.snapIndex === 3 && myContext.thubmLData !== null ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].name : null                    
+					}
+					{
+						myContext.snapIndex === 4 && myContext.thubmRData !== null ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].name : null
+					}
+					{
+						myContext.snapIndex === 5 && myContext.startBackData !== null ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].name : null                    
+					}
+					{
+						myContext.snapIndex === 6 && myContext.thuchPadData !== null ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].name : null                    
+					}
+					{
+						myContext.snapIndex === 7 && myContext.trimData !== null ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].name : null
+					}
+					{
+						myContext.snapIndex === 8 && myContext.triggersData !== null ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].name : null                    
+					}
+					{
+						myContext.snapIndex === 9 && myContext.razorBackData !== null && myContext.razorBack ? myContext.razorBackData.name : null
+					}
+					{
+						myContext.snapIndex === 10 && myContext.esportsData !== null ? myContext.esportsData.values[myContext.esportsFlag].name : null
+					}
+					{
+						myContext.snapIndex === 11 && myContext.rearDesignData !== null ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].name : null
+					}
+					</p>
+					<div id="info_div">
+						<TotalPrice>
+							<span>
+								Total
+							</span>
+							<span>
+								£{
+									Math.round((myContext.initalPrice +
+										Number(myContext.design !== null && myContext.designData != null ? myContext.designData.items[myContext.design[0]][myContext.design[1]].price : 0) +
+										Number(myContext.abxy !== null && myContext.anxyData != null ? myContext.anxyData.items[myContext.abxy[0]][myContext.abxy[1]].price : 0) +
+										Number(myContext.dpad !== null && myContext.dpadData != null ? myContext.dpadData.items[myContext.dpad[0]][myContext.dpad[1]].price : 0) + 
+										Number(myContext.thumbstickL !== null && myContext.thubmLData ? myContext.thubmLData.items[myContext.thumbstickL[0]][myContext.thumbstickL[1]].price : 0) +
+										Number(myContext.thumbstickR !== null && myContext.thubmRData ? myContext.thubmRData.items[myContext.thumbstickR[0]][myContext.thumbstickR[1]].price : 0) + 
+										Number(myContext.startBtn !== null && myContext.startBackData ? myContext.startBackData.items[myContext.startBtn[0]][myContext.startBtn[1]].price : 0) + 
+										Number(myContext.touchpad !== null && myContext.thuchPadData ? myContext.thuchPadData.items[myContext.touchpad[0]][myContext.touchpad[1]].price : 0) + 
+										Number(myContext.trim !== null && myContext.trimData ? myContext.trimData.items[myContext.trim[0]][myContext.trim[1]].price : 0) + 
+										Number(myContext.trigger !== null && myContext.triggersData ? myContext.triggersData.items[myContext.trigger[0]][myContext.trigger[1]].price : 0) + 
+										Number(myContext.rearDesign !== null && myContext.rearDesignData ? myContext.rearDesignData.items[myContext.rearDesign[0]][myContext.rearDesign[1]].price : 0) + 
+										Number(myContext.razorBack ? myContext.razorBackPrice : 0) + 
+										Number(myContext.paddle !== null && myContext.paddleData ? myContext.paddleData.items[myContext.paddle[0]][myContext.paddle[1]].price : 0) + 
+										Number(myContext.ldomin_2 !== null && myContext.dominselectData ? Number(DominL.items[myContext.ldomin_2].price) + Number(myContext.dominselectData.items[myContext.ldomin_1].price) : 0) + 
+										Number(myContext.rdomin_2 !== null && myContext.dominselectData ? Number(DominR.items[myContext.rdomin_2].price) + Number(myContext.dominselectData.items[myContext.rdomin_1].price) : 0) + 
+										Number(myContext.digital_trigger ? myContext.digital_trigger_price : 0) + 
+										Number(myContext.isText ? myContext.textPrice : 0) + 
+										Number(myContext.isLogo ? myContext.logoPrice : 0)
+									) * 100
+									) / 100
+								}
+							</span>
+						</TotalPrice>
+						<Info>
+							<div>
+								<span> Delivery </span>
+								<EDD>
+									04/04/2022
+								</EDD>
+							</div>
+							<ATC onClick={() => handleCaptureClick()} flag={myContext.isFinished}>
+								<img alt="no img"></img>
+								Add
+							</ATC>
+						</Info>
+					</div>
         </div>
       </LocalFooter>
     </Wrapper>
@@ -1912,7 +1910,7 @@ const Wrapper = styled.div`
   position: relative;
   @media screen and (max-width: 800px) {
     width: 100%;
-    height: 40%;
+    height: 60%;
   }
 `
 
@@ -2168,10 +2166,10 @@ const Selector = styled.div`
   justify-content: flex-start;
   align-content: flex-start;
   flex-wrap: wrap;
-  
   overflow-x: auto;
+  margin-bottom: 50px;
   @media screen and (max-width: 800px) {
-    flex-wrap: nowrap;
+    /* flex-wrap: nowrap; */
     padding: 10px 10px;
     height: 55%;
   }
@@ -2547,70 +2545,6 @@ const AddToCartDiv = styled.div`
   }
 `
 
-const LocalHeader = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  padding: 10px 0;
-  width: 100%;
-  & > div:nth-child(1) {
-    margin: 0 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    span {
-      font-size: 30px;
-      font-family: 'Rajdhani-Regular';
-      color: ${props => props.theme.color};
-    }
-    img {
-      background-color: ${props => props.theme.HeadIconBgColor};
-      padding: 10px;
-      content: url(${props => props.theme.FlagIcon});
-      border-radius: 15px;
-      border: ${props => props.theme.DirectIconBorder};
-    }
-  }
-  & > div:nth-child(2) {
-    position: absolute;
-    right: 20px;
-    & > div:nth-child(1) {
-      position: relative;
-      font-size: 15px;
-      font-family: 'Rajdhani-Medium';
-      span {
-        border-radius: 10px;
-        padding: 5px 10px;
-        cursor: pointer;
-      }
-      & > span:nth-child(1) {
-        color: ${props => props.flag ? props.theme.SwapFrontColor : props.theme.SwapBackColor};
-        background-color: ${props => props.flag ? props.theme.SwapFrontBgColor : props.theme.SwapBackBgColor};
-        padding-right: 30px;
-        border: ${props => props.theme.SwapBorder};
-      }
-      & > span:nth-child(2) {
-        color: ${props => !props.flag ? props.theme.SwapFrontColor : props.theme.SwapBackColor};
-        background-color: ${props => !props.flag ? props.theme.SwapFrontBgColor : props.theme.SwapBackBgColor};
-        border: ${props => props.theme.SwapBorder};
-      }
-  
-      & > span:nth-child(3) {
-        position: absolute;
-        top: -10px;
-        left: 35%;
-        padding: 10px;
-        background-color: ${props => props.theme.ThemeColor};
-        img {
-          content: url(${props => props.theme.SwapIcon});
-        }
-        /* box-shadow: 2px 2px 2px 2px #ccc; */
-      }
-    }
-  }
-`
-
 const TotalPrice = styled.div`
   display: flex;
   flex-direction: column;
@@ -2679,40 +2613,47 @@ const ATC = styled.button`
 
 
 const LocalFooter = styled.div`
-  width: 100%;
-  z-index: 600;
-  p {
-    width: 90%;
-    text-align: left;
-    padding: 0px 10px;
-    color: ${props => props.theme.color};
-    font-family: 'Rajdhani-Medium';
-    font-size: 20px;
-    span {
-      font-family: 'Rajdhani-Light';
-      font-size: 20px;
-    }
-  }
-  @media screen and (max-width: 800px){
-    /* bottom: 20px; */
-  }
-  filter: drop-shadow(0px 0px 29px #00CE71);
-  position: absolute;
-  bottom: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  #info_div {
-    width: 90%;
-    border-radius: 6px;
-    border: 1px solid #00CE71;
-    padding: 5px 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: white;
-    margin-bottom: 10px;
-  }
+	& > div:nth-child(1) {
+		width: 100%;
+		z-index: 600;
+		border-top: 1px solid #808080;
+		p {
+			width: 90%;
+			text-align: left;
+			padding: 0px 10px;
+			color: ${props => props.theme.color};
+			font-family: 'Rajdhani-Medium';
+			font-size: 20px;
+			span {
+				font-family: 'Rajdhani-Light';
+				font-size: 20px;
+			}
+	
+			@media screen and (max-width: 800px) {
+				text-align: center;
+			}
+		}
+		@media screen and (max-width: 800px){
+			/* bottom: 20px; */
+		}
+		filter: drop-shadow(0px 0px 29px #00CE71);
+		position: absolute;
+		bottom: 0;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		#info_div {
+			width: 90%;
+			border-radius: 6px;
+			border: 1px solid #00CE71;
+			padding: 5px 10px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			background-color: white;
+			margin-bottom: 10px;
+		}
+	}
 `
 
 const EsportsWrapper = styled.div`

@@ -739,6 +739,7 @@ const VHome = () => {
         // --------------- raborback ---------------
           // setRazorbackData
           let razorbacks = {};
+          console.log(object_data[object_keys[9]]);
           razorbacks.name = object_data[object_keys[9]].title;
           razorbacks.desc = object_data[object_keys[9]].desc;
           let razorbacks_keys = Object.keys(object_data[object_keys[9]].values);
@@ -746,7 +747,7 @@ const VHome = () => {
           razorbacks.option_id = object_data[object_keys[9]].option_id;
           razorbacks.option_type_id = object_data[object_keys[9]].values[razorbacks_keys[0]].option_type_id
           setRazorBackData(razorbacks);
-          setRazorBackPrice(razorbacks.price);
+          setRazorBackPrice(object_data[object_keys[9]].values[razorbacks_keys[0]].price);
           setRazorBack(razorbacks.is_default);
         // --------------- raborback end ---------------
 
@@ -999,7 +1000,7 @@ const MainDiv = styled.div`
   @media screen and (max-width: 800px) {
     flex-direction: column;
     justify-content: space-between;
-    height: calc(100vh - 124px);
+    height: calc(100vh - 66px);
   }
   position: relative;
 `
