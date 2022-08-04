@@ -24,8 +24,8 @@ const Header = (props) => {
       <ResponContainer>
         <TopDiv>
           <img alt="no img"></img>
-          <img  alt="no img" onClick={() => props.modeChange()}></img>
-          <FeatherSpan><img alt="no img"></img><span>2</span></FeatherSpan>
+          <img  alt="no img"></img>
+          <FeatherSpan><img alt="no img"></img></FeatherSpan>
         </TopDiv>
         <BotDiv>
         </BotDiv>
@@ -58,6 +58,7 @@ const TopDiv = styled.div`
     content: url(${props => props.theme.ResponIcon});
   }
   & img:nth-child(2) {
+    height: 50px;
     content: url(${props => props.theme.Logo});
   }
 `
@@ -94,6 +95,7 @@ const RightDiv = styled.div`
   }
 
   & img:nth-child(2) {
+    height: 50px;
     content: url(${props => props.theme.Logo});
   }
 

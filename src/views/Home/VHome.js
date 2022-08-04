@@ -1015,16 +1015,16 @@ const Modal = styled.div`
   display: ${props => props.flag ? 'flex':'none'};
   justify-content: center;
   align-items: center;
-  color: black;;
+  color: black;
   background-color: rgba(0, 0, 0, 0.3);
   & > div:nth-child(1) {
-    box-shadow: 2px 2px 2px 2px #aaa;
     border-radius: 20px;
     position: relative;
     font-family: 'Rajdhani-Regular';
-    background-color: rgba(240,248,248,0.8);
+    background-color: white;
     backdrop-filter: blur(100px);
-    -webkit-backdrop-filter: blur(20px); 
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 2px 2px 20px 3px ${props => props.theme.ThemeColor} ;
     max-width: 40vw;
     padding: 20px;
     h1 {
@@ -1068,9 +1068,19 @@ const HideModal = styled.div`
 
 const MoOkay = styled.div`
   font-family: 'Rajdhani-Bold';
-  font-size: 20px;
   margin: 20px 0 0 40px;
   cursor: pointer;
+  background-color: ${props => props.theme.ThemeColor};
+  color: ${props => props.theme.color};
+  width: 80px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 20px;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.1);
+  }
 `
 
 export default VHome;

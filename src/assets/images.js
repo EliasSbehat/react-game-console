@@ -31,6 +31,17 @@ import model_back from './images/model-back.png';
 import mark from './images/mark-dark.png';
 import mark_hover from './images/mark-hover.png';
 
+import Razorback from './images/main_assets/cateImg/razor.png';
+import RazorbackSelect from './images/main_assets/cateImg/maxfire-selection.png';
+
+import No from './images/main_assets/cateImg/no.png';
+
+export const NoImg = No;
+
+export const RazorbackImg = Razorback;
+export const RazorbackSelectImg = RazorbackSelect;
+
+
 export const MarkImg = mark;
 export const MarkHoverImg = mark_hover;
 

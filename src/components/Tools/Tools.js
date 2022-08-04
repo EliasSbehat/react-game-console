@@ -18,7 +18,7 @@ import { AiOutlineStop } from 'react-icons/ai';
 import { MdOutlineDescription } from 'react-icons/md';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 
-import { MarkImg, MarkHoverImg } from "../../assets/images";
+import { MarkImg, MarkHoverImg, RazorbackImg, RazorbackSelectImg, NoImg } from "../../assets/images";
 
 import { Design } from "../../assets/images/main_assets/1-DESIGN/DesignImage";
 import { Abxy } from "../../assets/images/main_assets/2-ABXY/AbxyImage";
@@ -413,7 +413,7 @@ const Tools = () => {
         </div>
         <div>
           <div>
-            <img alt="no img" src={CateImgs[myContext.snapIndex].image}></img>
+            <img alt="no img" src={CateImgs[myContext.snapIndex].image} style={{transform: 'scale(1.4)'}}></img>
             <span>
               <span>{CateImgs[myContext.snapIndex].name}</span>
               {/** Design */}
@@ -510,7 +510,8 @@ const Tools = () => {
           </div>
           <div>
             <span>
-              <MdOutlineDescription onClick={() => myContext.setModalDesc(true)}></MdOutlineDescription>
+              {/* <MdOutlineDescription onClick={() => myContext.setModalDesc(true)}></MdOutlineDescription> */}
+              <img alt="tooltip icon" onClick={() => myContext.setModalDesc(true)}></img>
             </span>
             <span onClick={() => setMenuFlag(!menuFlag)}>
               <TbAlignLeft></TbAlignLeft>
@@ -1027,12 +1028,14 @@ const Tools = () => {
               <RozorBack>
                 <div>
                   <RozorItem flag={!myContext.razorBack} onClick={() => myContext.setRazorBack(false)}>
-                    <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.12,30.31c-2.21-.67-6.03-1.46-6.19-1.49l-.49-.1-1.55,5.07,.56,.65c-.01,.05-.03,.12-.05,.19-.09,.34-.22,.9-.42,1.77-.32,1.48,2.69,3.18,4.83,3.86,1.15,.37,2.65,.65,3.92,.65,1.2,0,2.19-.25,2.47-.93,.35-.82,.56-1.36,.68-1.69l.07-.18,.83-.21,1.66-5.03-.44-.2c-.15-.07-3.67-1.69-5.89-2.36Z"></path><path d="M76.02,28.71l-.49,.1c-.16,.03-3.98,.82-6.19,1.49-2.22,.68-5.74,2.29-5.89,2.36l-.44,.2,1.66,5.03,.83,.21c.02,.05,.04,.11,.07,.18,.12,.33,.34,.86,.68,1.69,.29,.68,1.27,.93,2.47,.93,1.27,0,2.77-.28,3.92-.65,2.14-.68,5.15-2.38,4.83-3.86-.19-.87-.33-1.43-.41-1.77-.02-.07-.04-.13-.05-.19l.56-.65-1.55-5.07Z"></path></g></g></g></g></svg>
+                    {/* <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.12,30.31c-2.21-.67-6.03-1.46-6.19-1.49l-.49-.1-1.55,5.07,.56,.65c-.01,.05-.03,.12-.05,.19-.09,.34-.22,.9-.42,1.77-.32,1.48,2.69,3.18,4.83,3.86,1.15,.37,2.65,.65,3.92,.65,1.2,0,2.19-.25,2.47-.93,.35-.82,.56-1.36,.68-1.69l.07-.18,.83-.21,1.66-5.03-.44-.2c-.15-.07-3.67-1.69-5.89-2.36Z"></path><path d="M76.02,28.71l-.49,.1c-.16,.03-3.98,.82-6.19,1.49-2.22,.68-5.74,2.29-5.89,2.36l-.44,.2,1.66,5.03,.83,.21c.02,.05,.04,.11,.07,.18,.12,.33,.34,.86,.68,1.69,.29,.68,1.27,.93,2.47,.93,1.27,0,2.77-.28,3.92-.65,2.14-.68,5.15-2.38,4.83-3.86-.19-.87-.33-1.43-.41-1.77-.02-.07-.04-.13-.05-.19l.56-.65-1.55-5.07Z"></path></g></g></g></g></svg> */}
+                    <img alt='razor' src={RazorbackImg} style={{width: '90%'}}></img>
                     <h1>In (Default)</h1>
                     <span><BsCheck /></span>
                   </RozorItem>
-                  <RozorItem flag={myContext.razorBack}  onClick={() => myContext.setRazorBack(true)}>
-                    <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.74,41.41c-1.23,0-2.75-.25-4.07-.67-2.22-.71-5.58-2.54-5.16-4.44,.18-.83,.31-1.38,.4-1.73l-.57-.66,1.76-5.77,.93,.19s3.97,.82,6.24,1.5h0c2.25,.68,5.8,2.32,5.95,2.38l.85,.39-1.88,5.71-.85,.21c-.13,.34-.34,.86-.66,1.64-.35,.82-1.33,1.24-2.93,1.24Zm-8.28-7.74l.56,.64-.12,.44c-.09,.34-.22,.89-.41,1.75-.21,.97,2.24,2.56,4.49,3.28,1.21,.39,2.65,.63,3.77,.63s1.85-.23,2.01-.62c.34-.81,.55-1.34,.67-1.67l.16-.43,.82-.21,1.43-4.34-.04-.02c-.15-.07-3.64-1.67-5.83-2.34h0c-2.22-.68-6.11-1.47-6.15-1.48h-.04l-1.33,4.36Z"></path><path d="M68.72,41.41c-1.6,0-2.59-.42-2.93-1.24-.33-.78-.54-1.3-.67-1.64l-.85-.21-1.89-5.71,.85-.39c.38-.18,3.77-1.72,5.95-2.38,1.99-.6,5.25-1.3,6.2-1.5l.97-.2,1.76,5.77-.57,.66c.09,.35,.22,.9,.4,1.73,.42,1.9-2.95,3.73-5.16,4.44-1.32,.42-2.84,.67-4.07,.67Zm-3.67-3.93l.82,.2,.16,.43c.12,.33,.33,.86,.68,1.67,.16,.39,.92,.62,2.01,.62s2.56-.24,3.77-.63c2.25-.72,4.7-2.31,4.49-3.28-.19-.86-.32-1.42-.41-1.75l-.12-.44,.56-.64-1.33-4.37h-.04c-.97,.21-4.19,.9-6.15,1.49-2.12,.64-5.45,2.16-5.83,2.33l-.04,.02,1.43,4.34Z"></path></g></g></g></g></svg>
+                  <RozorItem flag={myContext.razorBack} onClick={() => myContext.setRazorBack(true)}>
+                    {/* <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.74,41.41c-1.23,0-2.75-.25-4.07-.67-2.22-.71-5.58-2.54-5.16-4.44,.18-.83,.31-1.38,.4-1.73l-.57-.66,1.76-5.77,.93,.19s3.97,.82,6.24,1.5h0c2.25,.68,5.8,2.32,5.95,2.38l.85,.39-1.88,5.71-.85,.21c-.13,.34-.34,.86-.66,1.64-.35,.82-1.33,1.24-2.93,1.24Zm-8.28-7.74l.56,.64-.12,.44c-.09,.34-.22,.89-.41,1.75-.21,.97,2.24,2.56,4.49,3.28,1.21,.39,2.65,.63,3.77,.63s1.85-.23,2.01-.62c.34-.81,.55-1.34,.67-1.67l.16-.43,.82-.21,1.43-4.34-.04-.02c-.15-.07-3.64-1.67-5.83-2.34h0c-2.22-.68-6.11-1.47-6.15-1.48h-.04l-1.33,4.36Z"></path><path d="M68.72,41.41c-1.6,0-2.59-.42-2.93-1.24-.33-.78-.54-1.3-.67-1.64l-.85-.21-1.89-5.71,.85-.39c.38-.18,3.77-1.72,5.95-2.38,1.99-.6,5.25-1.3,6.2-1.5l.97-.2,1.76,5.77-.57,.66c.09,.35,.22,.9,.4,1.73,.42,1.9-2.95,3.73-5.16,4.44-1.32,.42-2.84,.67-4.07,.67Zm-3.67-3.93l.82,.2,.16,.43c.12,.33,.33,.86,.68,1.67,.16,.39,.92,.62,2.01,.62s2.56-.24,3.77-.63c2.25-.72,4.7-2.31,4.49-3.28-.19-.86-.32-1.42-.41-1.75l-.12-.44,.56-.64-1.33-4.37h-.04c-.97,.21-4.19,.9-6.15,1.49-2.12,.64-5.45,2.16-5.83,2.33l-.04,.02,1.43,4.34Z"></path></g></g></g></g></svg> */}
+                    <img alt='razor selection' src={RazorbackSelectImg} style={{width: '90%'}}></img>
                     <h1>Out (No Vibration)</h1>
                     <h1>£{myContext.razorBackPrice}</h1>
                     <span><BsCheck /></span>
@@ -1114,10 +1117,6 @@ const Tools = () => {
                   {
                     myContext.esportsFlag === 1 ? (
                       <div>
-                        <div>
-                          <img alt="no img" src={PaddleImg}></img>
-                          Paddle
-                        </div>
                         <Selector>
                           {
                             myContext.paddleData != null ?
@@ -1534,7 +1533,8 @@ const Tools = () => {
                         myContext.setLogo(false);
                       }}>
                         <div>
-                          <AiOutlineStop></AiOutlineStop>
+                          {/* <AiOutlineStop></AiOutlineStop> */}
+                          <img alt='no' src={NoImg}></img>
                         </div>
                         <div>
                           {
@@ -1550,7 +1550,7 @@ const Tools = () => {
                         myContext.setLogo(false);
                       }}>
                         <div>
-                          <img alt="no img" src={TextImg} style={{width: '45px'}}></img>
+                          <img alt="no img" src={TextImg} style={{width: '45px', marginRight: '5px'}}></img>
                           {
                             myContext.personalizationData != null ? myContext.personalizationData[2].name : null
                           }
@@ -1569,7 +1569,7 @@ const Tools = () => {
                         myContext.setLogo(true);
                       }}>
                         <div>
-                          <img alt="no img" src={CateImgs[13].image}  style={{width: '45px'}}></img>
+                          <img alt="no img" src={CateImgs[13].image} style={{marginRight: '5px'}}></img>
                           {
                             myContext.personalizationData != null ? myContext.personalizationData[3].name : null
                           }
@@ -1596,6 +1596,7 @@ const Tools = () => {
                             }
                           }} placeholder={"Enter text here"}/>
                           <select className="font-type" onChange={(e) => myContext.setFamily(e.target.value)}>
+                            <FontOption value={0}>Font</FontOption>
                             {
                               myContext.fontFamiles.map((item, index) => (
                                 <FontOption family={item.family} key={index} value={index} >
@@ -1603,11 +1604,11 @@ const Tools = () => {
                                     item.name
                                   }
                                 </FontOption>
-                                
                               ))
                             }
                           </select>
                           <select className="font-type" onChange={(e) => myContext.setTextColor(e.target.value)} >
+                          <option value='black'>Font Colour</option>
                             <option value='black'>Black</option>
                             <option value='white'>White</option>
                             <option value='blue'>Blue</option>
@@ -1616,6 +1617,7 @@ const Tools = () => {
                             <option value='green'>Green</option>
                           </select>
                           <select className='font-type' onChange={(e) => myContext.setFontSize(e.target.value)}>
+                            <option value={30}>Font Size</option>
                             <option value={30}>Small</option>
                             <option value={40}>Medium</option>
                             <option value={50}>Large</option>
@@ -1886,7 +1888,7 @@ const Tools = () => {
 						</TotalPrice>
 						<Info>
 							<div>
-								<span> Delivery </span>
+								<span> Estimated Delivery </span>
 								<EDD>
 									04/04/2022
 								</EDD>
@@ -1983,7 +1985,10 @@ const TopDiv = styled.div`
       gap: 10px;
       & > span:nth-child(1) {
         color: white;
-        transform: scale(1.6);
+        img {
+          content: url(${props => props.theme.FlagIcon});
+          transform: scale(1.1);
+        }
       }
       & > span:nth-child(2) {
         color: ${props => props.theme.color};
@@ -2181,6 +2186,7 @@ const SelectItem = styled.div`
   min-height: 50px;
   border-radius: 20px;
   outline: ${props => props.now !== props.me ? '2px solid white' : `4px solid ${props.theme.ThemeColor}`};
+  box-shadow: ${props => props.now === props.me ? '0px 0px 13px 4px ' + props.theme.ThemeColor : null};
   color: white;
   background-image: url(${props => props.bgImg});
   background-repeat: no-repeat;
@@ -2410,8 +2416,7 @@ const MenuItem = styled.div`
     }
   }}
   img {
-    width: 62px;
-    height: 40px;
+    width: 46px;
     margin-right: 10px;
   }
   padding: 10px;
@@ -2453,8 +2458,8 @@ const RozorItem = styled.div`
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  font-family: 'Rajdhani-Light';
-  font-size: 10px;
+  font-family: 'sofiapro';
+  font-size: 8px;
   color: ${props => props.theme.color};
   text-align: center;
   width: 40%;
@@ -2550,8 +2555,9 @@ const TotalPrice = styled.div`
   flex-direction: column;
   padding-right: 10px;
   & span:nth-child(1) {
-    font-size: 16px;
-    font-family: 'Rajdhani-Light';
+    font-size: 14px;
+    font-family: 'sofiapro';
+    color: #999999;
   }
   & span:nth-child(2) {
     font-size: 25px;
@@ -2574,8 +2580,9 @@ const Info = styled.div`
     flex-direction: column;
     text-align: left;
     & > span:nth-child(1) {
-      font-size: 15px;
-      font-family: 'Rajdhani-Light';
+      font-size: 13px;
+      font-family: 'sofiapro';
+      color: #999999
     }
     border-left: 1px solid lightgrey;
   }
@@ -2590,7 +2597,19 @@ const EDD = styled.span`
 `
 
 const ATC = styled.button`
-  padding: 0 10px;
+  padding: 0 40px;
+  @media screen and (max-width: 1340px) {
+    padding: 0 30px;
+  }
+  @media screen and (max-width: 1165px) {
+    padding: 0 10px;
+  }
+  @media screen and (max-width: 800px) {
+    padding: 0 40px;
+  }
+  @media screen and (max-width: 800px) {
+    padding: 0 20px;
+  }
   /* display: ${props => props.flag ? 'flex' : 'none'}; */
   display: flex;
   align-items: center;
@@ -2606,8 +2625,9 @@ const ATC = styled.button`
   img {
     content: url(${props => props.theme.AtcIcon});
   }
-  @media screen and (max-width: 800px) {
-    
+  transition: all 0.1s;
+  &:hover {
+    transform: scale(1.1);
   }
 `
 
@@ -2617,16 +2637,17 @@ const LocalFooter = styled.div`
 		width: 100%;
 		z-index: 600;
 		border-top: 1px solid #808080;
+    background-color: #1E2025;
 		p {
 			width: 90%;
 			text-align: left;
 			padding: 0px 10px;
 			color: ${props => props.theme.color};
 			font-family: 'Rajdhani-Medium';
-			font-size: 20px;
+			font-size: 16px;
 			span {
 				font-family: 'Rajdhani-Light';
-				font-size: 20px;
+				font-size: 16x;
 			}
 	
 			@media screen and (max-width: 800px) {
@@ -2636,7 +2657,6 @@ const LocalFooter = styled.div`
 		@media screen and (max-width: 800px){
 			/* bottom: 20px; */
 		}
-		filter: drop-shadow(0px 0px 29px #00CE71);
 		position: absolute;
 		bottom: 0;
 		display: flex;
@@ -2652,6 +2672,7 @@ const LocalFooter = styled.div`
 			align-items: center;
 			background-color: white;
 			margin-bottom: 10px;
+      box-shadow: 1px 1px 18px 1px ${props => props.theme.ThemeColor};
 		}
 	}
 `
@@ -2685,30 +2706,19 @@ const EsportsContainer = styled.div`
   & > div:nth-child(2) {
     padding: 20px 20px;
     color: ${props => props.theme.color};
-    & > div:nth-child(1) {
-      display: flex;
-      align-items: center;
-      width: 120px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid ${props => props.theme.color};
-      img {
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-      }
-    }
   }
   gap: 4%;
 `
 
 const EsportItems = styled.div`
   width: 26%;
-  font-family: 'Rajdhani-Regular';
+  font-family: 'sofiapro';
   color: ${props => props.theme.color};
   position: relative;
-  font-size: 19px;
+  font-size: 15px;
   padding: 10px;
   border: ${props => props.theme.SwapBorder};
+  text-align: center;
   cursor: pointer;
   & > div:nth-child(1) {
     display: flex;
@@ -2731,6 +2741,9 @@ const EsportItems = styled.div`
     text-align: center;
     margin: 1 0px 0;
     white-space: nowrap;
+    color: ${props => props.flag ? props.theme.ThemeColor : props.theme.color};
+    font-family: 'Rajdhani-Regular';
+    font-size: 19px;
   }
 
   & > div:nth-child(3) {
@@ -2770,8 +2783,8 @@ const RemapDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: 'Rajdhani-Light';
-  font-size: 20px;
+  font-family: 'sofiapro';
+  font-size: 17px;
   font-weight: lighter;
 `
 
@@ -2803,7 +2816,9 @@ const UnderlinedDiv = styled.div`
 `
 
 const MobileSelector = styled.select`
-  border: 0;
+  border: 1px solid ${props => props.theme.ThemeColor};
+  box-shadow: 2px 2px 10px 1px ${props => props.theme.ThemeColor};
+  font-family: 'sofiapro';
   color: ${props => props.theme.ThemeColor};
   background-color: transparent;
   display: none;

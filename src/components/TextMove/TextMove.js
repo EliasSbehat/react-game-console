@@ -1,15 +1,14 @@
 import * as React from "react";
 import Moveable from "react-moveable";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import AppContext from "../../context/context";
 import $ from 'jquery';
 
 export default function ImageMove() {
 	const myContext = React.useContext(AppContext);
   const [target, setTarget] = React.useState();
-	const [winWidth, setWinWidth] = React.useState(null);
   const [frame] = React.useState({
-    translate: [0, 0],
+		translate: [0, 0],
     rotate: 0
   });
 
@@ -17,12 +16,20 @@ export default function ImageMove() {
 		window.addEventListener("resize", console.log('Hello'));
 	})
 
+	const [winWidth, setWinWidth] = React.useState(null);
 	$(window).resize(function() {
 		setWinWidth(window.innerWidth);
 	});
 
+	// React.useEffect(() => {
+	// 	if (winWidth <= 800) {
+	// 		myContext.setTxtStatus(false);
+	// 	}
+	// }, [winWidth]);
+
   const moveableRef = React.useRef();
-  React.useEffect(() => {
+  
+	React.useEffect(() => {
     const target = document.querySelector('.target1');
 		if (target !== null) {
 			setTarget(target);
@@ -33,7 +40,8 @@ export default function ImageMove() {
 				}, 2000);
 			});
 		}
-  }, [myContext.fontSize, myContext.isText, myContext.textVal]);
+  }, [myContext.fontSize, myContext.isText, myContext.textVal, winWidth]);
+
   return (
     <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth / 1600}>
       {
@@ -99,10 +107,11 @@ const Wrapper = styled.div`
   position: absolute;
   word-break: break-all;
   z-index: 101;
+	background: red;
 	display: ${props => props.display ? 'flex' : 'none'};
 	transition: all 1s;
-	/* width: 100%;
-	height: 100%; */
+	width: 100%;
+	height: 100%;
 	.moveable-control-box {
 		position: fixed !important;
 		top: unset;
@@ -125,6 +134,6 @@ const Wrapper = styled.div`
 			font-family: ${props => props.ff};
 			color: ${props => props.tc};
 		}
-		transform: scale(${props => props.width});
+		/* transform: scale(${props => props.width}); */
 	}
 `

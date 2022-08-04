@@ -60,6 +60,11 @@ p {
   src: url('./assets/fonts/bazooka/bazooka-r.otf');
 }
 
+@font-face {
+  font-family: 'sofiapro';
+  src: url('./assets/fonts/sofiapro/sofiapro-light.otf');
+}
+
 .lds-ripple {
   display: inline-block;
   position: relative;

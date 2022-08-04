@@ -109,7 +109,6 @@ const ViewArea = () => {
             </div>
           </div>
           <div>
-            <div><img alt="what is it?"/></div>
             <div onClick={() => myContext.setSideflag(!myContext.sideflag)}><img alt="what is it?"/></div>
           </div>
         </LocalHeader>
@@ -528,7 +527,7 @@ const LocalHeader = styled.div`
       border-radius: 10px;
       border-radius: 10px;
     }
-    & > div:nth-child(1) {
+    /* & > div:nth-child(1) {
       background-color: ${props => props.theme.SwapFrontColor};
       border: ${props => props.theme.SwapBorder};
       display: flex;
@@ -537,9 +536,9 @@ const LocalHeader = styled.div`
         transform: scale(0.6);
         content: url(${props => props.theme.FlagIcon});
       }
-    }
+    } */
 
-    & > div:nth-child(2) {
+    & > div:nth-child(1) {
       background-color: ${props => props.theme.ThemeColor};
       border: 0;
       margin-top: 10px;
@@ -623,7 +622,7 @@ const Viewer = styled.div`
           transform: ${props => props.flag ? 'scale(1.6)' : 'scale(0)'};
         }
         @media screen and (max-width: 400px) {
-          top: ${props => props.flag ? '20%' : '65%'};
+          top: ${props => props.flag ? '10%' : '65%'};
           transform: ${props => props.flag ? 'scale(2.1)' : 'scale(0)'};
         }
       }
@@ -669,7 +668,7 @@ const Viewer = styled.div`
           transform: ${props => !props.flag ? 'scale(1.6)' : 'scale(0)'};
         }
         @media screen and (max-width: 400px) {
-          top: ${props => !props.flag ? '20%' : '65%'};
+          top: ${props => !props.flag ? '10%' : '65%'};
           transform: ${props => !props.flag ? 'scale(2.1)' : 'scale(0)'};
         }
       }
