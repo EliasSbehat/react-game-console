@@ -898,7 +898,7 @@ const VHome = () => {
               <ViewArea />
               <Tools></Tools>
             </MainDiv>
-            <Modal flag={modal_flag}>
+            <Modal flag={modal_flag} flag1={true}>
               <div>
                 <h1>
                   Tips for uploading an image for controller logo
@@ -926,6 +926,52 @@ const VHome = () => {
             <Modal flag={ modal_desc }>
               <div>
                 <h1>
+                  {
+                    snapIndex === 0 && designData !== null ? designData.name : null
+                  }
+                  {
+                    snapIndex === 1 && abxyData !== null ? abxyData.name : null                    
+                  }
+                  {
+                    snapIndex === 2 && dpadData !== null ? dpadData.name : null                    
+                  }
+                  {
+                    snapIndex === 3 && thubmLData !== null ? thubmLData.name : null                    
+                  }
+                  {
+                    snapIndex === 4 && thubmRData !== null ? thubmRData.name : null
+                  }
+                  {
+                    snapIndex === 5 && startBackData !== null ? startBackData.name : null                    
+                  }
+                  {
+                    snapIndex === 6 && thuchPadData !== null ? thuchPadData.name : null                    
+                  }
+                  {
+                    snapIndex === 7 && trimData !== null ? trimData.name : null
+                  }
+                  {
+                    snapIndex === 8 && triggersData !== null ? triggersData.name : null                    
+                  }
+                  {
+                    snapIndex === 9 && razorBackData !== null ? razorBackData.name : null
+                  }
+                  {
+                    snapIndex === 10 && esportsData !== null ? esportsData.name : null
+                  }
+                  {
+                    snapIndex === 11 && rearDesignData !== null ? rearDesignData.name : null
+                  }
+                  {
+                    snapIndex === 12 && dtriggersData !== null ? dtriggersData.name : null
+                  }
+                  {
+                    snapIndex === 13 && textandlogoData !== null ? textandlogoData.name : null
+                  }
+                  {
+                    snapIndex === 14 ? 'Add product to cart' : null
+                  }
+                  category description
                 </h1>
                 <MoConItem>
                   <h1>
@@ -1020,23 +1066,28 @@ const Modal = styled.div`
   & > div:nth-child(1) {
     border-radius: 20px;
     position: relative;
-    font-family: 'Rajdhani-Regular';
+    
     background-color: white;
     backdrop-filter: blur(100px);
     -webkit-backdrop-filter: blur(20px);
     box-shadow: 2px 2px 20px 3px ${props => props.theme.ThemeColor} ;
     max-width: 40vw;
-    padding: 20px;
-    h1 {
+    padding: 20px 50px;
+    text-align: ${props => !props.flag1 ? 'center':'left'};
+    & > h1:nth-child(1) {
       margin-top: 30px;
+      font-size: 25px;
+      font-family: 'Rajdhani-Medium';
+      letter-spacing: 2px;
+      margin-bottom: 20px;
     }
   }
 `
 
 const MoConItem = styled.div`
-  
   h1 {
-    font-size: 25px;
+    font-family: 'sofiapro';
+    font-size: 17px;
     svg {
       width: 30px;
       height: 20px;
@@ -1067,8 +1118,9 @@ const HideModal = styled.div`
 `
 
 const MoOkay = styled.div`
-  font-family: 'Rajdhani-Bold';
-  margin: 20px 0 0 40px;
+  font-family: 'Rajdhani-Medium';
+  margin: auto;
+  margin-top: 20px;
   cursor: pointer;
   background-color: ${props => props.theme.ThemeColor};
   color: ${props => props.theme.color};
@@ -1081,6 +1133,7 @@ const MoOkay = styled.div`
   &:hover {
     transform: scale(1.1);
   }
+  letter-spacing: 2px;
 `
 
 export default VHome;

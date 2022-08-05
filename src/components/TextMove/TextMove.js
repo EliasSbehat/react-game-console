@@ -43,7 +43,7 @@ export default function ImageMove() {
   }, [myContext.fontSize, myContext.isText, myContext.textVal, winWidth]);
 
   return (
-    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth / 1600}>
+    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth}>
       {
 				<div>
 					<h1 className="target1" id="txtmove">
@@ -107,7 +107,6 @@ const Wrapper = styled.div`
   position: absolute;
   word-break: break-all;
   z-index: 101;
-	background: red;
 	display: ${props => props.display ? 'flex' : 'none'};
 	transition: all 1s;
 	width: 100%;
@@ -134,6 +133,6 @@ const Wrapper = styled.div`
 			font-family: ${props => props.ff};
 			color: ${props => props.tc};
 		}
-		/* transform: scale(${props => props.width}); */
+		transform: scale(${props => props.width});
 	}
 `

@@ -59,7 +59,7 @@ export const DarkMode = {
   SwapBorder: '1px solid #292C33',
   AtcIcon: AtcIconImg,
 
-  TapBgColor: '#24262B',
+  TapBgColor: '#393b40',
   TapColor: '#ffffff',
   TapSelectColor: '#292c33',
   TapSelectBgColor: '#ffffff'

@@ -455,7 +455,7 @@ const LocalHeader = styled.div`
     gap: 20px;
     span {
       font-size: 30px;
-      font-family: 'Rajdhani-Regular';
+      font-family: 'sofiapro';
       color: '#333333';
       @media screen and (max-width: 400px) {
         font-size: 20px;
@@ -479,12 +479,12 @@ const LocalHeader = styled.div`
     }
     & > div:nth-child(1) {
       position: relative;
-      font-size: 15px;
-      font-family: 'Rajdhani-Medium';
+      font-size: 12px;
+      font-family: 'sofiapro';
       flex-direction: column;
       span {
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 5px 12px;
         cursor: pointer;
       }
       & > span:nth-child(1) {

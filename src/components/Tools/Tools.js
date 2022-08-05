@@ -257,7 +257,7 @@ const Tools = () => {
     console.log('--------------------');
     console.log(totalData);
     // const res = await axios.post('https://game-server-deploy.herokuapp.com/add_product', totalData);
-    // window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
+    window.location.href = 'https://controllermodz.co.uk/checkout/cart/';
   }
 
 
@@ -1968,7 +1968,7 @@ const TopDiv = styled.div`
       align-items: center;
       color: ${props => props.theme.color};
       font-family: 'Rajdhani-Medium';
-      font-size: 20px;
+      font-size:20px;
       img {
         width: 30px;
       }
@@ -2043,15 +2043,15 @@ const TapItem = styled.div`
   background-color: ${props => props.keys === props.active ? props.theme.TapSelectBgColor : props.theme.TapBgColor};
   color: ${props => props.keys === props.active ? props.theme.TapSelectColor : props.theme.TapColor};
   border-radius: 5px;
-  font-family: 'Rajdhani-Medium';
+  font-family: 'sofiapro';
   position: relative;
-  padding: 10px 10px;
+  padding: 13px 13px;
   @media screen and (max-width: 800px) {
     padding: 2px 2px;
   }
   cursor: pointer;
   & > span:nth-child(1) {
-    font-size: 13px;
+    font-size: 15 px;
     white-space: nowrap;
   }
   ${props => {
