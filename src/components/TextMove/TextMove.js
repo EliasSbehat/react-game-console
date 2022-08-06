@@ -26,7 +26,6 @@ export default function ImageMove() {
 	// 		myContext.setTxtStatus(false);
 	// 	}
 	// }, [winWidth]);
-
   const moveableRef = React.useRef();
   
 	React.useEffect(() => {
@@ -44,7 +43,7 @@ export default function ImageMove() {
 
   return (
     <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth}>
-      {
+      		{
 				<div>
 					<h1 className="target1" id="txtmove">
 						{
@@ -54,7 +53,7 @@ export default function ImageMove() {
 				</div>
 			}
 			{
-				myContext.isText && myContext.sideflag && myContext.txtStatus ?
+				myContext.isText && myContext.sideflag && myContext.txtStatus && winWidth >= 800 ?
 					<Moveable
 						ref={moveableRef}
 						target={target}
@@ -118,9 +117,18 @@ const Wrapper = styled.div`
 		z-index	: 10;
 	}
 	div {
+		width: ${props => props.width < 800 ? '100%' : 'unset'};
 		/* width: 100%;
 		height: 100%; */
 		white-space: nowrap;
+		${props => {
+			if (props.width < 800) {
+				return css`
+					display: flex;
+					justify: center;
+				`;
+			}
+		}}
 		h1 {
 			display: flex;
 			justify-content: center;
@@ -132,7 +140,16 @@ const Wrapper = styled.div`
 			font-size: ${props => props.ts};
 			font-family: ${props => props.ff};
 			color: ${props => props.tc};
+			overflow: ${props => props.width < 800 ? 'visible' : 'hidden'};
 		}
-		transform: scale(${props => props.width});
+		@media screen and (max-width: 600px) {
+			transform: scale(0.5);
+		}
+		@media screen and (max-width: 500px) {
+			transform: scale(0.4);
+		}
+		@media screen and (max-width: 400px) {
+			transform: scale(0.3);
+		}
 	}
 `
