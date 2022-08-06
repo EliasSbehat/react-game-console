@@ -12,11 +12,12 @@ export default function ImageMove() {
     rotate: 0
   });
 
+	const [winWidth, setWinWidth] = React.useState(null);
 	React.useEffect(() => {
 		window.addEventListener("resize", console.log('Hello'));
-	})
+	}, [])
 
-	const [winWidth, setWinWidth] = React.useState(null);
+	
 	$(window).resize(function() {
 		setWinWidth(window.innerWidth);
 	});
@@ -30,6 +31,7 @@ export default function ImageMove() {
   
 	React.useEffect(() => {
     const target = document.querySelector('.target1');
+		setWinWidth(window.innerWidth);
 		if (target !== null) {
 			setTarget(target);
 	
