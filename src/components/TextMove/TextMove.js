@@ -45,7 +45,9 @@ export default function ImageMove() {
     <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth}>
       		{
 				<div>
-					<h1 className="target1" id="txtmove">
+					<h1 className="target1" id="txtmove" style={{
+						width: winWidth <= 800 ? '100% !important' : 'unset',
+					}}>
 						{
 							myContext.textVal
 						}
@@ -141,6 +143,14 @@ const Wrapper = styled.div`
 			font-family: ${props => props.ff};
 			color: ${props => props.tc};
 			overflow: ${props => props.width < 800 ? 'visible' : 'hidden'};
+			width: ${props => props.width < 800 ? '100%!important' : 'unset'};
+			${props => {
+			if (props.width < 800) {
+				return css`
+					transform: unset !important;
+				`;
+			}
+		}}
 		}
 		@media screen and (max-width: 600px) {
 			transform: scale(0.5);
