@@ -5,7 +5,10 @@ import AppContext from "../../context/context";
 import $ from 'jquery';
 
 export default function ImageMove() {
+	const font_zoom = [0.7, 0.7, 1, 0.4, 0.6, 0.6];
+
 	const myContext = React.useContext(AppContext);
+	const textRef = React.useRef();
   const [target, setTarget] = React.useState();
   const [frame] = React.useState({
 		translate: [0, 0],
@@ -20,6 +23,7 @@ export default function ImageMove() {
 	
 	$(window).resize(function() {
 		setWinWidth(window.innerWidth);
+		console.log(textRef);
 	});
 
 	// React.useEffect(() => {
@@ -44,10 +48,10 @@ export default function ImageMove() {
   }, [myContext.fontSize, myContext.isText, myContext.textVal, winWidth]);
 
   return (
-    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={myContext.fontSize+"px "} width={winWidth}>
+    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={Number(myContext.fontSize) * font_zoom[myContext.familyId]  +"px "} width={winWidth}>
       		{
 				<div>
-					<h1 className="target1" id="txtmove" style={{
+					<h1 ref={textRef} className="target1" id="txtmove" style={{
 						width: winWidth <= 800 ? '100% !important' : 'unset',
 					}}>
 						{

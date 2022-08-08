@@ -41,7 +41,11 @@ import AppContext from "../../context/context";
 import "swiper/css";
 
 const Tools = () => {
-    
+  
+
+  const font_zoom = [0.7, 0.7, 1, 0.7, 0.7, 0.7];
+  const [font_size, setFontSize] = React.useState(0);
+  
   const [RearDesigntabSelect, RearDesignSetTabSelect] = React.useState(0);
   const [PaddletabSelect, PaddleSetTabSelect] = React.useState(0);
   
@@ -77,7 +81,8 @@ const Tools = () => {
 
   useEffect(() => {
     // console.log(myContext.design);
-  })
+    setFontSize(20 / font_zoom[myContext.familyId]);
+  }, [])
 
   const maxNumber = 69;
 
@@ -1595,11 +1600,14 @@ const Tools = () => {
                               myContext.setTxtStatus(true);
                             }
                           }} placeholder={"Enter text here"}/>
-                          <select className="font-type" onChange={(e) => myContext.setFamily(e.target.value)}>
+                          <select className="font-type" onChange={(e) => {
+                            myContext.setFamily(e.target.value[0]);
+                            console.log(e.target.value[0]);
+                          }}>
                             <FontOption value={0}>Font</FontOption>
                             {
                               myContext.fontFamiles.map((item, index) => (
-                                <FontOption family={item.family} key={index} value={index} >
+                                <FontOption family={item.family} key={index} value={[index, font_zoom[index]]}>
                                   {
                                     item.name
                                   }
@@ -1616,11 +1624,13 @@ const Tools = () => {
                             <option value='yellow'>Yellow</option>
                             <option value='green'>Green</option>
                           </select>
-                          <select className='font-type' onChange={(e) => myContext.setFontSize(e.target.value)}>
-                            <option value={30}>Font Size</option>
-                            <option value={30}>Small</option>
-                            <option value={40}>Medium</option>
-                            <option value={50}>Large</option>
+                          <select className='font-type' onChange={(e) => {
+                              myContext.setFontSize(e.target.value)
+                            }}>
+                            <option value={ 15 }>Font Size</option>
+                            <option value={ 15 }>Small</option>
+                            <option value={ 20 }>Medium</option>
+                            <option value={ 30 }>Large</option>
                           </select>
                         </TextDiv>
                       )
@@ -2829,10 +2839,6 @@ const MobileSelector = styled.select`
   @media screen and (max-width: 800px) {
     display: block;
   }
-`
-
-const DescTooltip = styled.div`
-  
 `
 
 export default Tools;
