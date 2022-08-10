@@ -23,23 +23,18 @@ export default function ImageMove() {
 
 	$(window).resize(function() {
 		setWinWidth(window.innerWidth);
-		console.log(document.getElementById('borderedArea').clientWidth);
+		// console.log(document.getElementById('borderedArea').clientWidth);
 	});
 
 	React.useEffect(() => {
-		if (is_overflow()) {
-			setFontSize(font_size - 1);
 			if (is_overflow()) {
-				console.log('I WILL KILL YOU');
-				setFontSize(font_size - 1);
-				// if (is_overflow()) {
-				// 	setFontSize(font_size - 1);
-				// }
+				setFontSize(font_size - 2);
+			} else {
+				if(document.getElementById('borderedArea').clientWidth - textRef.current.clientWidth > font_size) {
+					setFontSize(font_size + 1);
+				}
 			}
-		} else {
-			// setFontSize(font_size + 2);
-		}
-	}, [myContext.textVal, myContext.familyId]);
+	}, [myContext.textVal, myContext.familyId, font_size]);
 
 	const is_overflow = () => {
 		console.log(textRef.current.clientWidth + "-" + document.getElementById('borderedArea').clientWidth);
