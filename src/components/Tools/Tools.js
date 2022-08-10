@@ -81,7 +81,7 @@ const Tools = () => {
 
   useEffect(() => {
     // console.log(myContext.design);
-    setFontSize(20 / font_zoom[myContext.familyId]);
+    setFontSize(30 / font_zoom[myContext.familyId]);
   }, [])
 
   const maxNumber = 69;
@@ -1624,14 +1624,6 @@ const Tools = () => {
                             <option value='yellow'>Yellow</option>
                             <option value='green'>Green</option>
                           </select>
-                          <select className='font-type' onChange={(e) => {
-                              myContext.setFontSize(e.target.value)
-                            }}>
-                            <option value={ 15 }>Font Size</option>
-                            <option value={ 15 }>Small</option>
-                            <option value={ 20 }>Medium</option>
-                            <option value={ 30 }>Large</option>
-                          </select>
                         </TextDiv>
                       )
                     } 
@@ -1999,11 +1991,19 @@ const TopDiv = styled.div`
           content: url(${props => props.theme.FlagIcon});
           transform: scale(1.1);
         }
+        transition: all 0.1s;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
       & > span:nth-child(2) {
         color: ${props => props.theme.color};
         font-size: 25px;
         cursor: pointer;
+        transition: all 0.1s;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
       & > span:nth-child(3) {
         padding: 5px 7px;
@@ -2017,6 +2017,10 @@ const TopDiv = styled.div`
           color: ${props => props.theme.color};
         }
         cursor: pointer;
+        transition: all 0.1s;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
       & > span:nth-child(4) {
         padding: 5px 7px;
@@ -2030,6 +2034,10 @@ const TopDiv = styled.div`
           color: ${props => props.theme.color};
         }
         cursor: pointer;
+        transition: all 0.1s;
+        &:hover {
+          transform: scale(1.1);
+        }
       }
     }
   }

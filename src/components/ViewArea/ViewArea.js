@@ -96,7 +96,6 @@ const ViewArea = () => {
         <LocalHeader flag={myContext.sideflag}>
           <div>
             <span>
-              
             </span>
           </div>
           <div>
@@ -292,7 +291,7 @@ const ViewArea = () => {
                         }
                       }}>
                         <div>
-                          <div>
+                          <div id="borderedArea">
                             <TextMove></TextMove>
                             <ImageMove id="imagemove"></ImageMove>
                           </div>
@@ -682,6 +681,7 @@ const HoverImg = styled.img`
 `
 
 const SpecialArea = styled.div`
+  background-color: red;
   position: absolute;
   height: 100%;
   width: 100%;

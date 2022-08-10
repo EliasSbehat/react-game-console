@@ -5,34 +5,49 @@ import AppContext from "../../context/context";
 import $ from 'jquery';
 
 export default function ImageMove() {
-	const font_zoom = [0.7, 0.7, 1, 0.4, 0.6, 0.6];
-
+	const font_zoom = [1, 1, 1.5, 0.7, 1, 0.9];
 	const myContext = React.useContext(AppContext);
 	const textRef = React.useRef();
   const [target, setTarget] = React.useState();
+	const [font_size, setFontSize] = React.useState(24);
   const [frame] = React.useState({
 		translate: [0, 0],
     rotate: 0
   });
 
 	const [winWidth, setWinWidth] = React.useState(null);
+	
 	React.useEffect(() => {
 		window.addEventListener("resize", console.log('Hello'));
 	}, [])
 
-	
 	$(window).resize(function() {
 		setWinWidth(window.innerWidth);
-		console.log(textRef);
+		console.log(document.getElementById('borderedArea').clientWidth);
 	});
 
-	// React.useEffect(() => {
-	// 	if (winWidth <= 800) {
-	// 		myContext.setTxtStatus(false);
-	// 	}
-	// }, [winWidth]);
+	React.useEffect(() => {
+		if (is_overflow()) {
+			setFontSize(font_size - 1);
+			if (is_overflow()) {
+				console.log('I WILL KILL YOU');
+				setFontSize(font_size - 1);
+				// if (is_overflow()) {
+				// 	setFontSize(font_size - 1);
+				// }
+			}
+		} else {
+			// setFontSize(font_size + 2);
+		}
+	}, [myContext.textVal, myContext.familyId]);
+
+	const is_overflow = () => {
+		console.log(textRef.current.clientWidth + "-" + document.getElementById('borderedArea').clientWidth);
+		return textRef.current.clientWidth > document.getElementById('borderedArea').clientWidth;
+	}
+
   const moveableRef = React.useRef();
-  
+
 	React.useEffect(() => {
     const target = document.querySelector('.target1');
 		setWinWidth(window.innerWidth);
@@ -48,15 +63,18 @@ export default function ImageMove() {
   }, [myContext.fontSize, myContext.isText, myContext.textVal, winWidth]);
 
   return (
-    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={Number(myContext.fontSize) * font_zoom[myContext.familyId]  +"px "} width={winWidth}>
+    <Wrapper className="container" display={myContext.isText} sideflag={myContext.sideflag} familyId={myContext.familyId}  ff={myContext.fontFamiles[myContext.familyId].family} tc={myContext.textColor} ts={Number(myContext.fontSize) * font_zoom[myContext.familyId]  +"px "} width={winWidth} len={myContext.textVal.length} fs={font_size * font_zoom[myContext.familyId]}>
       		{
 				<div>
-					<h1 ref={textRef} className="target1" id="txtmove" style={{
+					<h1 className="target1" id="txtmove" style={{
 						width: winWidth <= 800 ? '100% !important' : 'unset',
+						height: winWidth <= 800 ? '100% !important' : 'auto',
 					}}>
-						{
-							myContext.textVal
-						}
+						<span ref={textRef}>
+							{
+								myContext.textVal
+							}
+						</span>
 					</h1>
 				</div>
 			}
@@ -139,33 +157,27 @@ const Wrapper = styled.div`
 		}}
 		h1 {
 			display: flex;
+			font-size: ${props => props.fs + "px"};
 			justify-content: center;
 			align-items: center;
 			-webkit-user-select: none; /* Safari */
 			-ms-user-select: none; /* IE 10 and IE 11 */
 			user-select: none; /* Standard syntax */
 			overflow: hidden;
-			font-size: ${props => props.ts};
 			font-family: ${props => props.ff};
 			color: ${props => props.tc};
 			overflow: ${props => props.width < 800 ? 'visible' : 'hidden'};
 			width: ${props => props.width < 800 ? '100%!important' : 'unset'};
+			height: ${props => props.width < 800 ? '100%!important' : 'auto'};
 			${props => {
-			if (props.width < 800) {
-				return css`
-					transform: unset !important;
-				`;
-			}
-		}}
-		}
-		@media screen and (max-width: 600px) {
-			transform: scale(0.5);
-		}
-		@media screen and (max-width: 500px) {
-			transform: scale(0.4);
-		}
-		@media screen and (max-width: 400px) {
-			transform: scale(0.3);
+				if (props.width < 800) {
+					return css`
+						transform: unset !important;
+					`;
+				}
+			}}
+		// Font - ADJUSTMENT - START
+		// Font - ADJUSTMENT - END
 		}
 	}
 `
