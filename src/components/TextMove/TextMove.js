@@ -30,15 +30,15 @@ export default function ImageMove() {
 			if (is_overflow()) {
 				setFontSize(font_size - 2);
 			} else {
-				if(document.getElementById('borderedArea').clientWidth - textRef.current.clientWidth > font_size) {
+				if (document.getElementById('borderedArea').clientWidth - 10 - textRef.current.clientWidth > font_size && document.getElementById('borderedArea').clientHeight - textRef.current.clientHeight > font_size) {
+					// console.log(textRef.current.clientHeight + '-------------------' + document.getElementById('borderedArea').clientHeight);
 					setFontSize(font_size + 1);
 				}
 			}
 	}, [myContext.textVal, myContext.familyId, font_size]);
 
 	const is_overflow = () => {
-		console.log(textRef.current.clientWidth + "-" + document.getElementById('borderedArea').clientWidth);
-		return textRef.current.clientWidth > document.getElementById('borderedArea').clientWidth;
+		return textRef.current.clientWidth > document.getElementById('borderedArea').clientWidth - 10;
 	}
 
   const moveableRef = React.useRef();
