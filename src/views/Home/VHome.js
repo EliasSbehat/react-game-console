@@ -371,14 +371,15 @@ const VHome = () => {
           let childs = {};
           for (var i = 0; i <json.length; i++) {
             if (json[i].values !== undefined) {
-              if (json[i].values[0]['extension_attributes'].dependency == undefined) {
+              if (json[i].values[0]['extension_attributes'].dependency === undefined) {
                 object_data['optId_'+json[i].option_id] = {};
                 object_data['optId_'+json[i].option_id]['option_id'] = json[i].option_id;
                 object_data['optId_'+json[i].option_id]['title'] = json[i].title;
                 object_data['optId_'+json[i].option_id]['dependType'] = json[i].extension_attributes.dependency_type;
                 object_data['optId_'+json[i].option_id]['disabled'] = json[i].extension_attributes.disabled;
                 object_data['optId_'+json[i].option_id]['option_title_id'] = json[i].extension_attributes.option_title_id;
-                object_data['optId_'+json[i].option_id]['desc'] = JSON.parse(json[i].extension_attributes.description)[0].description;
+                if (json[i].extension_attributes.description === undefined) object_data['optId_'+json[i].option_id]['desc'] = '';
+                else object_data['optId_'+json[i].option_id]['desc'] = JSON.parse(json[i].extension_attributes.description)[0].description;
                 object_data['optId_'+json[i].option_id]['values'] = new Object();
                 for (var j = 0; j < json[i].values.length; j++) {
                   object_data['optId_'+json[i].option_id]['values']["optTypeId_" + json[i].values[j].option_type_id] = json[i].values[j];
@@ -386,7 +387,7 @@ const VHome = () => {
                 }
               } else {
                 // Childs
-                  for (var j = 0; j < json[i].values.length; j++) {
+                  for (j = 0; j < json[i].values.length; j++) {
                     childs['optId_'+json[i].values[j].option_type_id] = json[i].values[j];
                     childs['optId_'+json[i].values[j].option_type_id]['option_id'] = json[i].option_id;
                   }
@@ -403,9 +404,9 @@ const VHome = () => {
             }
           }
           const childKeys = Object.keys(childs);
-          for (var i = 0; i < childKeys.length; i++) {
+          for (i = 0; i < childKeys.length; i++) {
             const link = JSON.parse(childs[childKeys[i]]['extension_attributes'].dependency)[0];
-            if (object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'] != undefined) {
+            if (object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'] !== undefined) {
               object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'].push(childs[childKeys[i]]);
             } else {
               object_data['optId_' + link[0]].values['optTypeId_' + link[1]]['childs'] = [];
@@ -413,6 +414,9 @@ const VHome = () => {
             }
           }
           const object_keys = Object.keys(object_data);
+          console.log('------------------------');
+          console.log(object_data);
+          console.log('------------------------');
           setObjectKeys(object_keys);
             // --------------- Design ---------------
               let design = {};
@@ -520,7 +524,6 @@ const VHome = () => {
 
                 for (j = 0; j < dpad_step[dpad_step_keys[i]].childs.length; j++) {
                   let image = JSON.parse(dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes']['images_data'])[0]['value'];
-
                   if (dpad_step[dpad_step_keys[i]].childs[j]['extension_attributes'].is_default) {
                     setDpad([i, j]);
                   }
@@ -632,7 +635,6 @@ const VHome = () => {
             // --------------- Start Back End ---------------
 
             // --------------- Touchpad ---------------
-              console.log(object_data);
               let touchpad = {};
               let touchpad_step = object_data[object_keys[6]].values;
               let touchpad_step_keys = Object.keys(touchpad_step);
@@ -700,6 +702,7 @@ const VHome = () => {
             let triggers = {};
             let triggers_step = object_data[object_keys[8]].values;
             let triggers_step_keys = Object.keys(triggers_step);
+            console.log(triggers_step);
             triggers.steps = [];
             triggers.items = [];
             triggers.name = object_data[object_keys[8]].title;
@@ -739,7 +742,6 @@ const VHome = () => {
         // --------------- raborback ---------------
           // setRazorbackData
           let razorbacks = {};
-          console.log(object_data[object_keys[9]]);
           razorbacks.name = object_data[object_keys[9]].title;
           razorbacks.desc = object_data[object_keys[9]].desc;
           let razorbacks_keys = Object.keys(object_data[object_keys[9]].values);
@@ -851,7 +853,6 @@ const VHome = () => {
 
         // --------------- Text and Logo ---------------
           const per = object_data[object_keys[13]];
-          console.log(per);
           setTextandlogoData({ name: per.title, desc: per.desc });
           const per_value_keys = Object.keys(object_data[object_keys[13]].values);
           let names = [];
