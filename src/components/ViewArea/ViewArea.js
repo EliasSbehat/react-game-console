@@ -303,7 +303,7 @@ const ViewArea = () => {
 
               <div id="backend">
                 <div>
-                  <img src={Assets.ModelBackImg}></img>
+                  <img src={Assets.ModelBackImg} alt='img'></img>
                   {/* {
                     myContext.touchpad !== null ? (() => {
                       return (

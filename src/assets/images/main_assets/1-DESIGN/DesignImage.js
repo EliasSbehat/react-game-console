@@ -85,7 +85,4 @@ export const Design_APIED = [
     { name: 'Soft Touch Orange', image: d_2_5 },
     { name: 'Soft Touch Green', image: d_2_6 },
   ],
-  [
-    { name: 'test', image: d_2_1 },
-  ]
 ]

@@ -1119,7 +1119,7 @@ const HideModal = styled.div`
 `
 
 const MoOkay = styled.div`
-  font-family: 'Rajdhani-Medium';
+  font-family: 'sofiapro';
   margin: auto;
   margin-top: 20px;
   cursor: pointer;

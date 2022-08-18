@@ -31,7 +31,6 @@ export default function ImageMove() {
 				setFontSize(font_size - 2);
 			} else {
 				if (document.getElementById('borderedArea').clientWidth - 10 - textRef.current.clientWidth > font_size && document.getElementById('borderedArea').clientHeight - textRef.current.clientHeight > font_size) {
-					// console.log(textRef.current.clientHeight + '-------------------' + document.getElementById('borderedArea').clientHeight);
 					setFontSize(font_size + 1);
 				}
 			}
@@ -100,7 +99,7 @@ export default function ImageMove() {
 						onResize={({ target, width, height, drag }) => {
 							frame.translate = drag.beforeTranslate;
 							target.style.width = `${width}px`;
-							target.style.height = `${height}px`;
+							
 						}}
 						onRotateStart={({ set }) => {
 							set(frame.rotate);
