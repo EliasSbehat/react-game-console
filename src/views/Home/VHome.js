@@ -42,8 +42,6 @@ const VHome = () => {
   const [trigger, setTrigger] = React.useState(null);
   const [rearDesign, setRearDesign] = React.useState(null);
   const [razorBack, setRazorBack] = React.useState(false);
-  
-
   const [pad_esp_flag, setPad_esp_flag] = React.useState(true);
   const [paddle, setPaddle] = React.useState(null);
   const [sideflag, setSideflag] = React.useState(true);
@@ -76,7 +74,7 @@ const VHome = () => {
     const temp = document.getElementById('file_selector');
     setModalFlag(false);
     temp.click();
-  }  
+  }
 
   const func_reset = (ind) => {
     if (ind === 0) {
@@ -359,6 +357,14 @@ const VHome = () => {
       { name: 'BAZOOKA', family: 'bazooka' }
     ]
   }
+
+  // const [siteFlag, setSiteFlag] = React.useState(false);
+
+  // React.useEffect(() => {
+  //   setTimeout(() => {
+  //     setSiteFlag(true);
+  //   }, [6000])
+  // }, [])
 
   React.useEffect(() => {
     if (!apiFlag)
@@ -890,151 +896,158 @@ const VHome = () => {
     }
   }
   return (
-    <ThemeProvider theme={theme}>
-      <AppContext.Provider value={imageSetting}>
-        <>
-          <Wrapper>
-            <Header modeChange={modeChange} flag='1'></Header>
-            <MainDiv pl={h_header}>
-              <ViewArea />
-              <Tools></Tools>
-            </MainDiv>
-            <Modal flag={modal_flag} flag1={true}>
-              <div>
-                <h1>
-                  Tips for uploading an image for controller logo
-                </h1>
-                <MoConItem>
-                  <h1><BsCheckLg></BsCheckLg>File size</h1>
-                  <p>
-                    File size must be smaller than 2MB
-                  </p>
-                </MoConItem>
-                <MoConItem>
-                  <h1><BsCheckLg></BsCheckLg>File type</h1>
-                  <p>
-                    Only available Jpeg, Png, SVG
-                  </p>
-                </MoConItem>
-                <MoOkay onClick={func_file_select}>
-                  Okay
-                </MoOkay>
-                <HideModal onClick={() => setModalFlag(false)}>
-                  <TiTimes></TiTimes>
-                </HideModal>
-              </div>
-            </Modal>
-            <Modal flag={ modal_desc }>
-              <div>
-                <h1>
-                  {
-                    snapIndex === 0 && designData !== null ? designData.name : null
-                  }
-                  {
-                    snapIndex === 1 && abxyData !== null ? abxyData.name : null                    
-                  }
-                  {
-                    snapIndex === 2 && dpadData !== null ? dpadData.name : null                    
-                  }
-                  {
-                    snapIndex === 3 && thubmLData !== null ? thubmLData.name : null                    
-                  }
-                  {
-                    snapIndex === 4 && thubmRData !== null ? thubmRData.name : null
-                  }
-                  {
-                    snapIndex === 5 && startBackData !== null ? startBackData.name : null                    
-                  }
-                  {
-                    snapIndex === 6 && thuchPadData !== null ? thuchPadData.name : null                    
-                  }
-                  {
-                    snapIndex === 7 && trimData !== null ? trimData.name : null
-                  }
-                  {
-                    snapIndex === 8 && triggersData !== null ? triggersData.name : null                    
-                  }
-                  {
-                    snapIndex === 9 && razorBackData !== null ? razorBackData.name : null
-                  }
-                  {
-                    snapIndex === 10 && esportsData !== null ? esportsData.name : null
-                  }
-                  {
-                    snapIndex === 11 && rearDesignData !== null ? rearDesignData.name : null
-                  }
-                  {
-                    snapIndex === 12 && dtriggersData !== null ? dtriggersData.name : null
-                  }
-                  {
-                    snapIndex === 13 && textandlogoData !== null ? textandlogoData.name : null
-                  }
-                  {
-                    snapIndex === 14 ? 'Add product to cart' : null
-                  }
-                  category description
-                </h1>
-                <MoConItem>
+    designData === null ? (
+      <div id="preloader">
+        <div id="loader"></div>
+      </div>
+    ) : (
+      <ThemeProvider theme={theme}>
+        <AppContext.Provider value={imageSetting}>
+          <>
+            <Wrapper>
+              <Header modeChange={modeChange} flag='1'></Header>
+              <MainDiv pl={h_header}>
+                <ViewArea />
+                <Tools></Tools>
+              </MainDiv>
+              <Modal flag={modal_flag} flag1={true}>
+                <div>
                   <h1>
-                  {
-                    snapIndex === 0 && designData !== null ? designData.desc : null
-                  }
-                  {
-                    snapIndex === 1 && abxyData !== null ? abxyData.desc : null                    
-                  }
-                  {
-                    snapIndex === 2 && dpadData !== null ? dpadData.desc : null                    
-                  }
-                  {
-                    snapIndex === 3 && thubmLData !== null ? thubmLData.desc : null                    
-                  }
-                  {
-                    snapIndex === 4 && thubmRData !== null ? thubmRData.desc : null
-                  }
-                  {
-                    snapIndex === 5 && startBackData !== null ? startBackData.desc : null                    
-                  }
-                  {
-                    snapIndex === 6 && thuchPadData !== null ? thuchPadData.desc : null                    
-                  }
-                  {
-                    snapIndex === 7 && trimData !== null ? trimData.desc : null
-                  }
-                  {
-                    snapIndex === 8 && triggersData !== null ? triggersData.desc : null                    
-                  }
-                  {
-                    snapIndex === 9 && razorBackData !== null ? razorBackData.desc : null
-                  }
-                  {
-                    snapIndex === 10 && esportsData !== null ? esportsData.desc : null
-                  }
-                  {
-                    snapIndex === 11 && rearDesignData !== null ? rearDesignData.desc : null
-                  }
-                  {
-                    snapIndex === 12 && dtriggersData !== null ? dtriggersData.desc : null
-                  }
-                  {
-                    snapIndex === 13 && textandlogoData !== null ? textandlogoData.desc : null
-                  }
-                  {
-                    snapIndex === 14 ? 'Add product to cart' : null
-                  }
+                    Tips for uploading an image for controller logo
                   </h1>
-                </MoConItem>
-                <MoOkay onClick={() => setModalDesc(false)}>
-                  Okay
-                </MoOkay>
-                <HideModal onClick={() => setModalDesc(false)}>
-                  <TiTimes></TiTimes>
-                </HideModal>
-              </div>
-            </Modal>
-          </Wrapper>
-        </>
-      </AppContext.Provider>
-    </ThemeProvider>
+                  <MoConItem>
+                    <h1><BsCheckLg></BsCheckLg>File size</h1>
+                    <p>
+                      File size must be smaller than 2MB
+                    </p>
+                  </MoConItem>
+                  <MoConItem>
+                    <h1><BsCheckLg></BsCheckLg>File type</h1>
+                    <p>
+                      Only available Jpeg, Png, SVG
+                    </p>
+                  </MoConItem>
+                  <MoOkay onClick={func_file_select}>
+                    Okay
+                  </MoOkay>
+                  <HideModal onClick={() => setModalFlag(false)}>
+                    <TiTimes></TiTimes>
+                  </HideModal>
+                </div>
+              </Modal>
+              <Modal flag={ modal_desc }>
+                <div>
+                  <h1>
+                    {
+                      snapIndex === 0 && designData !== null ? designData.name : null
+                    }
+                    {
+                      snapIndex === 1 && abxyData !== null ? abxyData.name : null                    
+                    }
+                    {
+                      snapIndex === 2 && dpadData !== null ? dpadData.name : null                    
+                    }
+                    {
+                      snapIndex === 3 && thubmLData !== null ? thubmLData.name : null                    
+                    }
+                    {
+                      snapIndex === 4 && thubmRData !== null ? thubmRData.name : null
+                    }
+                    {
+                      snapIndex === 5 && startBackData !== null ? startBackData.name : null                    
+                    }
+                    {
+                      snapIndex === 6 && thuchPadData !== null ? thuchPadData.name : null                    
+                    }
+                    {
+                      snapIndex === 7 && trimData !== null ? trimData.name : null
+                    }
+                    {
+                      snapIndex === 8 && triggersData !== null ? triggersData.name : null                    
+                    }
+                    {
+                      snapIndex === 9 && razorBackData !== null ? razorBackData.name : null
+                    }
+                    {
+                      snapIndex === 10 && esportsData !== null ? esportsData.name : null
+                    }
+                    {
+                      snapIndex === 11 && rearDesignData !== null ? rearDesignData.name : null
+                    }
+                    {
+                      snapIndex === 12 && dtriggersData !== null ? dtriggersData.name : null
+                    }
+                    {
+                      snapIndex === 13 && textandlogoData !== null ? textandlogoData.name : null
+                    }
+                    {
+                      snapIndex === 14 ? 'Add product to cart' : null
+                    }
+                    category description
+                  </h1>
+                  <MoConItem>
+                    <h1>
+                    {
+                      snapIndex === 0 && designData !== null ? designData.desc : null
+                    }
+                    {
+                      snapIndex === 1 && abxyData !== null ? abxyData.desc : null                    
+                    }
+                    {
+                      snapIndex === 2 && dpadData !== null ? dpadData.desc : null                    
+                    }
+                    {
+                      snapIndex === 3 && thubmLData !== null ? thubmLData.desc : null                    
+                    }
+                    {
+                      snapIndex === 4 && thubmRData !== null ? thubmRData.desc : null
+                    }
+                    {
+                      snapIndex === 5 && startBackData !== null ? startBackData.desc : null                    
+                    }
+                    {
+                      snapIndex === 6 && thuchPadData !== null ? thuchPadData.desc : null                    
+                    }
+                    {
+                      snapIndex === 7 && trimData !== null ? trimData.desc : null
+                    }
+                    {
+                      snapIndex === 8 && triggersData !== null ? triggersData.desc : null                    
+                    }
+                    {
+                      snapIndex === 9 && razorBackData !== null ? razorBackData.desc : null
+                    }
+                    {
+                      snapIndex === 10 && esportsData !== null ? esportsData.desc : null
+                    }
+                    {
+                      snapIndex === 11 && rearDesignData !== null ? rearDesignData.desc : null
+                    }
+                    {
+                      snapIndex === 12 && dtriggersData !== null ? dtriggersData.desc : null
+                    }
+                    {
+                      snapIndex === 13 && textandlogoData !== null ? textandlogoData.desc : null
+                    }
+                    {
+                      snapIndex === 14 ? 'Add product to cart' : null
+                    }
+                    </h1>
+                  </MoConItem>
+                  <MoOkay onClick={() => setModalDesc(false)}>
+                    Okay
+                  </MoOkay>
+                  <HideModal onClick={() => setModalDesc(false)}>
+                    <TiTimes></TiTimes>
+                  </HideModal>
+                </div>
+              </Modal>
+            </Wrapper>
+          </>
+        </AppContext.Provider>
+      </ThemeProvider>
+
+    )
   )
 }
 

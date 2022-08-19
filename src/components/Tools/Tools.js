@@ -35,7 +35,7 @@ import { Paddle } from "../../assets/images/main_assets/paddle/Paddle";
 import { DominL } from "../../assets/images/main_assets/L Domin8or Button/DominL";
 import { DominR } from "../../assets/images/main_assets/R Domin8or Button/DominR";
 import { DominSelection } from "../../assets/images/main_assets/L Domin8or Button/DominL";
-import { CateImgs, PaddleImg, DominLimg, DominRImg, TextImg } from "../../assets/images/main_assets/cateImg/cate";
+import { CateImgs, PaddleImg, DominLimg, DominRImg, TextImg, DTriggerImg } from "../../assets/images/main_assets/cateImg/cate";
 
 import AppContext from "../../context/context";
 import "swiper/css";
@@ -287,7 +287,7 @@ const Tools = () => {
             ))
           } */}
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(0); }} me={0} curr={myContext.snapIndex} stat={myContext.design === null ? false : true}>
-            <img alt="no img" src={CateImgs[0].image}></img>
+            <img alt="no img" src={CateImgs[0].image} style={{transform: `scale(${CateImgs[0].zoom})`}} ></img>
             {
               myContext.designData ? myContext.designData.name : null
             }
@@ -295,7 +295,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(1); }} me={1} curr={myContext.snapIndex} stat={myContext.abxy === null ? false : true}>
-            <img alt="no img" src={CateImgs[1].image}></img>
+            <img alt="no img" src={CateImgs[1].image} style={{transform: `scale(${CateImgs[1].zoom})`}} ></img>
             {
               myContext.abxyData ? myContext.abxyData.name : null
             }
@@ -303,7 +303,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(2); }} me={2} curr={myContext.snapIndex} stat={myContext.dpad === null ? false : true}>
-            <img alt="no img" src={CateImgs[2].image}></img>
+            <img alt="no img" src={CateImgs[2].image}  style={{transform: `scale(${CateImgs[2].zoom})`}} ></img>
             {
               myContext.dpadData ? myContext.dpadData.name : null
             }
@@ -311,7 +311,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(3); }} me={3} curr={myContext.snapIndex} stat={myContext.thumbstickL === null ? false : true}>
-            <img alt="no img" src={CateImgs[3].image}></img>
+            <img alt="no img" src={CateImgs[3].image}  style={{transform: `scale(${CateImgs[3].zoom})`}} ></img>
             {
               myContext.thubmLData ? myContext.thubmLData.name : null
             }
@@ -319,7 +319,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(4); }} me={4} curr={myContext.snapIndex} stat={myContext.thumbstickR === null ? false : true}>
-            <img alt="no img" src={CateImgs[4].image}></img>
+            <img alt="no img" src={CateImgs[4].image}  style={{transform: `scale(${CateImgs[4].zoom})`}} ></img>
             {
               myContext.thubmRData ? myContext.thubmRData.name : null
             }
@@ -327,7 +327,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(5); }} me={5} curr={myContext.snapIndex} stat={myContext.startBtn === null ? false : true}>
-            <img alt="no img" src={CateImgs[5].image}></img>
+            <img alt="no img" src={CateImgs[5].image}  style={{transform: `scale(${CateImgs[5].zoom})`}} ></img>
             {
               myContext.startBackData ? myContext.startBackData.name : null
             }
@@ -335,7 +335,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(6); }} me={6} curr={myContext.snapIndex} stat={myContext.touchpad === null ? false : true}>
-            <img alt="no img" src={CateImgs[6].image}></img>
+            <img alt="no img" src={CateImgs[6].image}  style={{transform: `scale(${CateImgs[6].zoom})`}} ></img>
             {
               myContext.thuchPadData ? myContext.thuchPadData.name : null
             }
@@ -343,7 +343,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(7); }} me={7} curr={myContext.snapIndex} stat={myContext.trim === null ? false : true}>
-            <img alt="no img" src={CateImgs[7].image}></img>
+            <img alt="no img" src={CateImgs[7].image}  style={{transform: `scale(${CateImgs[7].zoom})`}} ></img>
             {
               myContext.trimData ? myContext.trimData.name : null
             }
@@ -351,7 +351,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(8); }} me={8} curr={myContext.snapIndex} stat={myContext.trigger === null ? false : true}>
-            <img alt="no img" src={CateImgs[8].image}></img>
+            <img alt="no img" src={CateImgs[8].image}  style={{transform: `scale(${CateImgs[8].zoom})`}} ></img>
             {
               myContext.triggersData ? myContext.triggersData.name : null
             }
@@ -359,7 +359,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(9); }} me={9} curr={myContext.snapIndex} stat={myContext.rearDesign === null ? false : true}>
-            <img alt="no img" src={CateImgs[9].image}></img>
+            <img alt="no img" src={CateImgs[9].image}  style={{transform: `scale(${CateImgs[9].zoom})`}} ></img>
             {
               myContext.razorBackData ? myContext.razorBackData.name : null
             }
@@ -367,7 +367,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(10); }} me={10} curr={myContext.snapIndex} stat={myContext.razorBack}>
-            <img alt="no img" src={CateImgs[10].image}></img>
+            <img alt="no img" src={CateImgs[10].image}  style={{transform: `scale(${CateImgs[10].zoom})`}} ></img>
             {
               myContext.esportsData ? myContext.esportsData.name : null
             }
@@ -375,7 +375,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(11); }} me={11} curr={myContext.snapIndex} stat={myContext.paddle !== null ? true : false}>
-            <img alt="no img" src={CateImgs[11].image}></img>
+            <img alt="no img" src={CateImgs[11].image}  style={{transform: `scale(${CateImgs[11].zoom})`}} ></img>
             {
               myContext.rearDesignData ? myContext.rearDesignData.name : null
             }
@@ -383,7 +383,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(12); }} me={12} curr={myContext.snapIndex} stat={myContext.ldomin_2 !== null ? true : false}>
-            <img alt="no img" src={CateImgs[12].image}></img>
+            <img alt="no img" src={CateImgs[12].image}  style={{transform: `scale(${CateImgs[12].zoom})`}} ></img>
             {
               myContext.dtriggersData ? myContext.dtriggersData.name : ''
             }
@@ -391,7 +391,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(13); }} me={13} curr={myContext.snapIndex} stat={myContext.rdomin_2 !== null ? true : false}>
-            <img alt="no img" src={CateImgs[13].image}></img>
+            <img alt="no img" src={CateImgs[13].image} style={{transform: `scale(${CateImgs[13].zoom})`}} ></img>
             {
               myContext.textandlogoData ? myContext.textandlogoData.name : null
             }
@@ -399,7 +399,7 @@ const Tools = () => {
           </MenuItem>
 
           <MenuItem onClick={async () => { await setMenuFlag(false); await swiperTo(14); }} me={14} curr={myContext.snapIndex} stat={myContext.digital_trigger}>
-            <img alt="no img" src={CateImgs[14].image}></img>
+            <img alt="no img" src={CateImgs[14].image}  style={{transform: `scale(${CateImgs[14].zoom})`}} ></img>
             {CateImgs[14].name}
             <SBsCheck></SBsCheck>
           </MenuItem>
@@ -418,7 +418,7 @@ const Tools = () => {
         </div>
         <div>
           <div>
-            <img alt="no img" src={CateImgs[myContext.snapIndex].image} style={{transform: 'scale(1.4)'}}></img>
+            <img alt="no img" src={CateImgs[myContext.snapIndex].image} style={{transform: `scale(${CateImgs[myContext.snapIndex].zoom + 0.4})`}}></img>
             <span>
               <span>{CateImgs[myContext.snapIndex].name}</span>
               {/** Design */}
@@ -427,7 +427,7 @@ const Tools = () => {
                   <MobileSelector onChange={(e) => myContext.DesignSetTabSelect(e.target.value)}>
                     {
                       // Design.steps.map((item, index) => 
-                      myContext.designData !== null? 
+                      myContext.designData !== null ? 
                         myContext.designData.steps.map((item, index) => 
                           <option key={index} value={index}>
                             { item.name }
@@ -1034,7 +1034,11 @@ const Tools = () => {
                 <div>
                   <RozorItem flag={!myContext.razorBack} onClick={() => myContext.setRazorBack(false)}>
                     {/* <svg viewBox="0 0 82.46 52" className="css-7wh13m"><g id="a"></g><g id="b"><g id="c"><g><path d="M74.11,52c-7.61,0-13.66-12.71-13.91-13.26l-.05-.12c-.02-.06-.38-.84-1.95-.84H24.25c-1.57,0-1.93,.78-1.96,.87l-.04,.09c-.25,.54-6.3,13.26-13.91,13.26-2.33,0-4.24-.88-5.67-2.62C-.03,46.11-.43,40.42,.37,36.22,1.36,31,8.89,7.39,11.69,4.59l.67-.68c2.16-2.19,3.86-3.92,7.53-3.92,2.3,0,4.33,.92,6.36,2.9,.28,.09,.92,.26,1.69,.26h26.59c.77,0,1.4-.17,1.69-.26,2.03-1.98,4.06-2.9,6.36-2.9,3.67,0,5.37,1.73,7.53,3.92l.67,.68c2.8,2.79,10.33,26.41,11.32,31.63,.8,4.2,.4,9.89-2.31,13.16-1.44,1.74-3.34,2.62-5.67,2.62Zm-12.09-14.08c.29,.61,5.88,12.08,12.09,12.08,1.73,0,3.08-.62,4.13-1.89,2.18-2.63,2.6-7.78,1.88-11.51-1.14-5.95-8.64-28.45-10.77-30.59l-.68-.69c-2.11-2.14-3.27-3.32-6.1-3.32-1.23,0-2.92,.28-5.11,2.47l-.14,.14-.18,.08c-.12,.05-1.17,.47-2.62,.47H27.93c-1.45,0-2.5-.43-2.62-.47l-.18-.08-.14-.14c-2.19-2.19-3.88-2.47-5.11-2.47-2.83,0-3.99,1.18-6.1,3.32l-.68,.69c-2.14,2.14-9.64,24.64-10.77,30.59-.71,3.73-.29,8.88,1.88,11.51,1.05,1.27,2.4,1.89,4.13,1.89,6.21,0,11.79-11.47,12.09-12.08,.18-.44,1.05-2.14,3.82-2.14H58.2c2.77,0,3.64,1.7,3.82,2.14Z"></path><g><path d="M13.12,30.31c-2.21-.67-6.03-1.46-6.19-1.49l-.49-.1-1.55,5.07,.56,.65c-.01,.05-.03,.12-.05,.19-.09,.34-.22,.9-.42,1.77-.32,1.48,2.69,3.18,4.83,3.86,1.15,.37,2.65,.65,3.92,.65,1.2,0,2.19-.25,2.47-.93,.35-.82,.56-1.36,.68-1.69l.07-.18,.83-.21,1.66-5.03-.44-.2c-.15-.07-3.67-1.69-5.89-2.36Z"></path><path d="M76.02,28.71l-.49,.1c-.16,.03-3.98,.82-6.19,1.49-2.22,.68-5.74,2.29-5.89,2.36l-.44,.2,1.66,5.03,.83,.21c.02,.05,.04,.11,.07,.18,.12,.33,.34,.86,.68,1.69,.29,.68,1.27,.93,2.47,.93,1.27,0,2.77-.28,3.92-.65,2.14-.68,5.15-2.38,4.83-3.86-.19-.87-.33-1.43-.41-1.77-.02-.07-.04-.13-.05-.19l.56-.65-1.55-5.07Z"></path></g></g></g></g></svg> */}
-                    <img alt='razor' src={RazorbackImg} style={{width: '90%'}}></img>
+                    {/* <img alt='razor' src={RazorbackImg} style={{width: '90%'}}></img>*/}
+                    <AiOutlineStop style={{
+                      height: '100px',
+                      width: '90%'
+                    }}></AiOutlineStop>
                     <h1>In (Default)</h1>
                     <span><BsCheck /></span>
                   </RozorItem>
@@ -1088,7 +1092,7 @@ const Tools = () => {
                       myContext.setEsportsFlag(1);
                     }}>
                       <div>
-                        <img alt="no img" src={PaddleImg}></img>
+                        <img alt="no img" src={PaddleImg} style={{width: '60px'}}></img>
                         Paddles
                       </div>
                       <div>
@@ -1165,7 +1169,7 @@ const Tools = () => {
                       <div>
                         <UnderlinedDiv>
                           <img alt="no img" src={DominLimg}></img>
-                          LDominBtn
+                          Left DominBtn
                         </UnderlinedDiv>
                         <Selector>
                           {
@@ -1216,7 +1220,7 @@ const Tools = () => {
                         {/* RDominBtn */}
                         <UnderlinedDiv>
                           <img alt="no img" src={DominRImg}></img>
-                          RDominBtn
+                          Right DominBtn
                         </UnderlinedDiv>
                         <Selector>
                           {
@@ -1504,16 +1508,20 @@ const Tools = () => {
                   <span>Digital Triggers{"  "}(£{myContext.digital_trigger_price})</span>
                   <label>
                     <div>
-
                     </div>
                   </label>
                 </RazorDiv> */}
                 <TextOptionDiv>
                   <TextOption stat = {!myContext.digital_trigger} onClick={() => myContext.setDigital_trigger(false)}>
+                    <AiOutlineStop style={{
+                      width: '55px',
+                      height: '36px'
+                    }}></AiOutlineStop>
                     <h1>No (Default)</h1>
                     <BsCheck></BsCheck>
                   </TextOption>
                   <TextOption stat = {myContext.digital_trigger} onClick={() => myContext.setDigital_trigger(true)}>
+                    <img src={DTriggerImg} alt="img"></img>
                     <h1>Add Digital Trigger</h1>
                     <BsCheck></BsCheck>
                   </TextOption>
@@ -1973,6 +1981,8 @@ const TopDiv = styled.div`
       font-size:20px;
       img {
         width: 30px;
+        margin: 0 5px;
+        margin-left: 8px;
       }
       & > span:nth-child(2) {
         display: flex;
@@ -2526,8 +2536,10 @@ const TextOptionDiv = styled.div`
 const TextOption = styled.div`
   width: 40%;
   display: flex;
+  flex-direction: column;
   text-align: center;
   justify-content: center;
+  align-items: center;
   border: ${props => props.theme.SwapBorder};
   color: ${props => props.theme.color};
   font-size: 10px;
@@ -2535,7 +2547,12 @@ const TextOption = styled.div`
   padding: 30px 10px;
   font-family: 'Rajdhani-Light';
   cursor: pointer;
-  svg {
+  & :nth-child(1) {
+    /* width: 50px;
+    height: 50px; */
+    margin-bottom: 20px;
+  }
+  & svg:nth-child(3) {
     position: absolute;
     top: 10px;
     right: 10px;
