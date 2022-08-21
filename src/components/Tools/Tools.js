@@ -487,7 +487,7 @@ const Tools = () => {
                 myContext.snapIndex === 6 ? (
                   <MobileSelector onChange={(e) => myContext.TouchpadSetTabSelect(e.target.value)}>
                     {
-                      Dpad.steps.map((item, index) => 
+                      myContext.dpadData.steps.map((item, index) => 
                         <option key={index} value={index}>
                           { item.name }
                         </option>
@@ -502,7 +502,7 @@ const Tools = () => {
                 myContext.snapIndex === 8 ? (
                   <MobileSelector onChange={(e) => myContext.TriggerSetTabSelect(e.target.value)}>
                     {
-                      Dpad.steps.map((item, index) => 
+                      myContext.dpadData.steps.map((item, index) => 
                         <option key={index} value={index}>
                           { item.name }
                         </option>
@@ -980,7 +980,7 @@ const Tools = () => {
                 {
                   myContext.triggersData != null ? 
                     myContext.triggersData.steps.map((item, index) => (
-                      <TapItem w={Trigger.steps.length} key={ index } keys = { index } active={myContext.TriggertabSelect} onClick = {() => myContext.TriggerSetTabSelect(index)}>
+                      <TapItem w={ myContext.triggersData.steps.length} key={ index } keys = { index } active={myContext.TriggertabSelect} onClick = {() => myContext.TriggerSetTabSelect(index)}>
                         <span>
                           {item.name}
                         </span>
